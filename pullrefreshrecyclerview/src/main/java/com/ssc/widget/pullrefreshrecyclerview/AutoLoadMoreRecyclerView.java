@@ -7,7 +7,7 @@ import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
+import android.widget.ProgressBar;
 
 
 // 1. [X] pull to refresh
@@ -53,7 +53,7 @@ public class AutoLoadMoreRecyclerView extends android.support.v7.widget.Recycler
                     lastVisiableVisiableItem + 1 == mAdapter.getItemCount() &&
                     !loadingMore) {
 
-                    loadingMore = true;
+                    setLoadingMore(true);
                     mListener.onLoadMore();
                 }
 
@@ -70,6 +70,7 @@ public class AutoLoadMoreRecyclerView extends android.support.v7.widget.Recycler
 
     public void setLoadingMore(boolean loadingMore) {
         this.loadingMore = loadingMore;
+        mAdapter.setFooterAnimation(loadingMore);
     }
 
 
@@ -84,6 +85,7 @@ public class AutoLoadMoreRecyclerView extends android.support.v7.widget.Recycler
         private boolean isFooterEnable;
 
         private int mHeaderResId;
+        private FooterViewHolder mFooterView;
 
         public Adapter(RecyclerView.Adapter adapter) {
             mInternalAdapter = adapter;
@@ -108,19 +110,32 @@ public class AutoLoadMoreRecyclerView extends android.support.v7.widget.Recycler
         @Override
         public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
             if (viewType == TYPE_HEADER) {
-                return new HeaderViewHolder(LayoutInflater.from(parent.getContext()).inflate(mHeaderResId, parent, false));
+                return new HeaderViewHolder(
+                    LayoutInflater.from(parent.getContext()).inflate(
+                        mHeaderResId, parent, false));
             } else if (viewType == TYPE_FOOTER) {
-                return new FooterViewHolder(new TextView(parent.getContext()));
+                return mFooterView = new FooterViewHolder(
+                    LayoutInflater.from(parent.getContext()).inflate(
+                        R.layout.footerview_layout, parent, false));
+//                return new FooterViewHolder(new TextView(parent.getContext()));
             } else { // type normal
                 return mInternalAdapter.onCreateViewHolder(parent, viewType);
             }
         }
 
+        public void setFooterAnimation(boolean loadingMore) {
+//            mFooterView.mProgressBar.
+        }
+
         public class FooterViewHolder extends RecyclerView.ViewHolder {
+
+            private final ProgressBar mProgressBar;
 
             public FooterViewHolder(View itemView) {
                 super(itemView);
+                mProgressBar = (ProgressBar) itemView.findViewById(R.id.footer_view_progressbar);
             }
+
         }
 
         public class HeaderViewHolder extends RecyclerView.ViewHolder {
@@ -136,7 +151,7 @@ public class AutoLoadMoreRecyclerView extends android.support.v7.widget.Recycler
             if (type == TYPE_HEADER) {
 //                ((TextView)holder.itemView).setText("I'm header View");
             } else if (type == TYPE_FOOTER) {
-                ((TextView)holder.itemView).setText("I'm footer View");
+//                ((TextView)holder.itemView).setText("I'm footer View");
             } else {
                 mInternalAdapter.onBindViewHolder(holder, position - (isHeaderEnable ? 1 : 0));
             }
