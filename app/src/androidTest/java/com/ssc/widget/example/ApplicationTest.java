@@ -1,4 +1,4 @@
-package com.ssc.widget.pullrefreshrecyclerview;
+package com.ssc.widget.example;
 
 import android.app.Application;
 import android.test.ApplicationTestCase;
