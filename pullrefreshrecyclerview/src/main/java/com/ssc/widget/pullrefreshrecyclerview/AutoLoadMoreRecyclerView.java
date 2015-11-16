@@ -4,6 +4,9 @@ package com.ssc.widget.pullrefreshrecyclerview;
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.util.AttributeSet;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.TextView;
 
 // 1. pull to refresh
 // 2. auto loadmore
@@ -11,9 +14,7 @@ import android.util.AttributeSet;
 // 4. init with status refreshing
 public class AutoLoadMoreRecyclerView extends android.support.v7.widget.RecyclerView {
 
-    public static abstract class Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
-
-    }
+    private Adapter mAdapter;
 
     public AutoLoadMoreRecyclerView(Context context) {
         super(context);
@@ -29,5 +30,109 @@ public class AutoLoadMoreRecyclerView extends android.support.v7.widget.Recycler
 
 
 
+    public static class Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+        private final static int TYPE_NORMAL = 0;
+        private final static int TYPE_HEADER = 1;
+        private final static int TYPE_FOOTER = 2;
+
+        private final RecyclerView.Adapter mInternalAdapter;
+
+        private boolean isHeaderEnable;
+        private boolean isFooterEnable;
+
+        private int mHeaderResId;
+
+        public Adapter(RecyclerView.Adapter adapter) {
+            mInternalAdapter = adapter;
+            isHeaderEnable = false;
+            isFooterEnable = false;
+        }
+
+        @Override
+        public int getItemViewType(int position) {
+            int headerPosition = 0;
+            int footerPosition = getItemCount();
+
+            if (headerPosition == position && isHeaderEnable) {
+                return TYPE_HEADER;
+            }
+            if (footerPosition == position && isFooterEnable) {
+                return TYPE_FOOTER;
+            }
+            return TYPE_NORMAL;
+        }
+
+        @Override
+        public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+            if (viewType == TYPE_HEADER) {
+                return new HeaderViewHolder(new TextView(parent.getContext()));
+            } else if (viewType == TYPE_FOOTER) {
+                return null;
+            } else { // type normal
+                return mInternalAdapter.onCreateViewHolder(parent, viewType);
+            }
+        }
+
+        public class HeaderViewHolder extends RecyclerView.ViewHolder {
+
+            public HeaderViewHolder(View itemView) {
+                super(itemView);
+            }
+        }
+
+        @Override
+        public void onBindViewHolder(ViewHolder holder, int position) {
+            int type =getItemViewType(position);
+            if (type == TYPE_HEADER) {
+                ((TextView)holder.itemView).setText("I'm header View");
+            } else if (type == TYPE_FOOTER) {
+
+            } else {
+                mInternalAdapter.onBindViewHolder(holder, position - (isHeaderEnable ? 1 : 0));
+            }
+        }
+
+
+        @Override
+        public int getItemCount() {
+            int count = mInternalAdapter.getItemCount();
+            if (isHeaderEnable) count++;
+            if (isFooterEnable) count++;
+
+            return count;
+        }
+
+        public void setHeaderEnable(boolean b, int layout_resid) {
+            isHeaderEnable = b;
+            mHeaderResId = layout_resid;
+        }
+    }
+
+    @Override
+    public void setAdapter(RecyclerView.Adapter adapter) {
+        if (adapter != null) {
+            mAdapter = createWrapHeader(adapter);
+        }
+        super.setAdapter(mAdapter);
+    }
+
+    private Adapter createWrapHeader(RecyclerView.Adapter adapter) {
+        return new Adapter(adapter);
+    }
+
+    private boolean isAutoLoadmore = false;
+
+    public void setAutoLoadMore(boolean autoLoadMore) {
+        isAutoLoadmore = autoLoadMore;
+
+        if (this.getAdapter() != null) {
+            this.getAdapter().notifyDataSetChanged();
+        }
+    }
+
+    public void setHeaderLayout(int layout_resid) {
+        mAdapter.setHeaderEnable(true, layout_resid);
+        mAdapter.notifyDataSetChanged();
+    }
 
 }

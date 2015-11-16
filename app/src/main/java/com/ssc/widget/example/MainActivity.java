@@ -69,6 +69,8 @@ public class MainActivity extends AppCompatActivity {
 
             mPullRefreshRecyclerView = (PullRefreshRecyclerView) this.findViewById(R.id.recyclerview);
             mPullRefreshRecyclerView.setAdapter(mAdapter = new MyAdapter());
+            mPullRefreshRecyclerView.setAutoLoadMore(true);
+            mPullRefreshRecyclerView.setHeaderLayout(11);
             mPullRefreshRecyclerView.setListener(new PullRefreshRecyclerView.PullRefreshRecyclerViewListener() {
                 @Override
                 public void onRefresh() {
@@ -76,6 +78,7 @@ public class MainActivity extends AppCompatActivity {
                         @Override
                         public void run() {
                             mAdapter.refresh();
+                            mPullRefreshRecyclerView.notifyDateSetChanged();
                             mPullRefreshRecyclerView.setRefreshing(false);
                         }
                     }, 2000);
@@ -85,11 +88,12 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public static class MyAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+        private final static int Bundle_Size = 40;
         LinkedList<Integer> mDatas = new LinkedList<>();
 
         public MyAdapter() {
             mDatas.clear();
-            for (int i = 0; i < 20; i++) {
+            for (int i = 0; i < Bundle_Size; i++) {
                 mDatas.add(Integer.valueOf(i));
             }
         }
@@ -114,10 +118,9 @@ public class MainActivity extends AppCompatActivity {
         public void refresh() {
             int start = mDatas.get(0) - 1;
             mDatas.clear();
-            for (int i = start; i < start + 20; i++) {
+            for (int i = start; i < start + Bundle_Size; i++) {
                 mDatas.add(Integer.valueOf(i));
             }
-            this.notifyDataSetChanged();
         }
 
         public static class ViewHolder extends RecyclerView.ViewHolder {

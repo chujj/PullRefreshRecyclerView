@@ -12,6 +12,7 @@ public class PullRefreshRecyclerView extends SwipeRefreshLayout {
     private AutoLoadMoreRecyclerView mAutoLoadMoreRecyclerView;
     private PullRefreshRecyclerViewListener mListener;
 
+
     public PullRefreshRecyclerView(Context context) {
         super(context);
         init(context);
@@ -39,12 +40,24 @@ public class PullRefreshRecyclerView extends SwipeRefreshLayout {
         mAutoLoadMoreRecyclerView.setLayoutManager(new LinearLayoutManager(this.getContext()));
     }
 
+    public void setAutoLoadMore(boolean autoLoadMore) {
+        mAutoLoadMoreRecyclerView.setAutoLoadMore(autoLoadMore);
+    }
+
+    public void setHeaderLayout(int i) {
+        mAutoLoadMoreRecyclerView.setHeaderLayout(i);
+    }
+
+    public void notifyDateSetChanged() {
+        mAutoLoadMoreRecyclerView.getAdapter().notifyDataSetChanged();
+    }
+
     public static interface PullRefreshRecyclerViewListener extends SwipeRefreshLayout.OnRefreshListener {
 
     }
 
-    public static abstract class Adapter extends AutoLoadMoreRecyclerView.Adapter {
-
-    }
+//    public static abstract class Adapter extends AutoLoadMoreRecyclerView.Adapter {
+//
+//    }
 
 }
