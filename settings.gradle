@@ -1,1 +1,1 @@
-include ':app', ':pullrefreshrecyclerview'
+include ':sample', ':pullrefreshrecyclerview'

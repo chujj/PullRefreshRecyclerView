@@ -1,33 +1,75 @@
 package com.ssc.widget.pullrefreshrecyclerview;
 
-
 import android.content.Context;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.AttributeSet;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-// 1. pull to refresh
-// 2. auto loadmore
-// 3. sticky header
+
+// 1. [X] pull to refresh
+// 2. [X] auto loadmore
+// 3. [X] sticky header
 // 4. init with status refreshing
 public class AutoLoadMoreRecyclerView extends android.support.v7.widget.RecyclerView {
 
     private Adapter mAdapter;
+    private PullRefreshRecyclerView.PullRefreshRecyclerViewListener mListener;
+    private boolean loadingMore;
+    private LinearLayoutManager mLayoutManager;
 
     public AutoLoadMoreRecyclerView(Context context) {
         super(context);
+        init(context);
     }
 
     public AutoLoadMoreRecyclerView(Context context, AttributeSet attrs) {
         super(context, attrs);
+        init(context);
     }
 
     public AutoLoadMoreRecyclerView(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
+        init(context);
     }
 
+    private void init(Context context) {
+        this.setLayoutManager(mLayoutManager = new LinearLayoutManager(context));
+    }
+
+    public void setAutoLoadMoreListener(PullRefreshRecyclerView.PullRefreshRecyclerViewListener listener) {
+        mListener = listener;
+
+        this.addOnScrollListener(new OnScrollListener() {
+            private int lastVisiableVisiableItem;
+
+            @Override
+            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
+                super.onScrollStateChanged(recyclerView, newState);
+                if (newState == RecyclerView.SCROLL_STATE_IDLE &&
+                    lastVisiableVisiableItem + 1 == mAdapter.getItemCount() &&
+                    !loadingMore) {
+
+                    loadingMore = true;
+                    mListener.onLoadMore();
+                }
+
+            }
+
+            @Override
+            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+                lastVisiableVisiableItem = mLayoutManager.findLastVisibleItemPosition();
+            }
+        });
+
+    }
+
+    public void setLoadingMore(boolean loadingMore) {
+        this.loadingMore = loadingMore;
+    }
 
 
     public static class Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
@@ -51,7 +93,7 @@ public class AutoLoadMoreRecyclerView extends android.support.v7.widget.Recycler
         @Override
         public int getItemViewType(int position) {
             int headerPosition = 0;
-            int footerPosition = getItemCount();
+            int footerPosition = getItemCount() - 1;
 
             if (headerPosition == position && isHeaderEnable) {
                 return TYPE_HEADER;
@@ -67,9 +109,16 @@ public class AutoLoadMoreRecyclerView extends android.support.v7.widget.Recycler
             if (viewType == TYPE_HEADER) {
                 return new HeaderViewHolder(new TextView(parent.getContext()));
             } else if (viewType == TYPE_FOOTER) {
-                return null;
+                return new FooterViewHolder(new TextView(parent.getContext()));
             } else { // type normal
                 return mInternalAdapter.onCreateViewHolder(parent, viewType);
+            }
+        }
+
+        public class FooterViewHolder extends RecyclerView.ViewHolder {
+
+            public FooterViewHolder(View itemView) {
+                super(itemView);
             }
         }
 
@@ -86,7 +135,7 @@ public class AutoLoadMoreRecyclerView extends android.support.v7.widget.Recycler
             if (type == TYPE_HEADER) {
                 ((TextView)holder.itemView).setText("I'm header View");
             } else if (type == TYPE_FOOTER) {
-
+                ((TextView)holder.itemView).setText("I'm footer View");
             } else {
                 mInternalAdapter.onBindViewHolder(holder, position - (isHeaderEnable ? 1 : 0));
             }
@@ -106,6 +155,10 @@ public class AutoLoadMoreRecyclerView extends android.support.v7.widget.Recycler
             isHeaderEnable = b;
             mHeaderResId = layout_resid;
         }
+
+        public void setFooterEnable(boolean autoLoadMore) {
+            isFooterEnable = autoLoadMore;
+        }
     }
 
     @Override
@@ -120,14 +173,9 @@ public class AutoLoadMoreRecyclerView extends android.support.v7.widget.Recycler
         return new Adapter(adapter);
     }
 
-    private boolean isAutoLoadmore = false;
-
-    public void setAutoLoadMore(boolean autoLoadMore) {
-        isAutoLoadmore = autoLoadMore;
-
-        if (this.getAdapter() != null) {
-            this.getAdapter().notifyDataSetChanged();
-        }
+    public void setAutoLoadMoreEnable(boolean autoLoadMore) {
+        mAdapter.setFooterEnable(autoLoadMore);
+        mAdapter.notifyDataSetChanged();
     }
 
     public void setHeaderLayout(int layout_resid) {

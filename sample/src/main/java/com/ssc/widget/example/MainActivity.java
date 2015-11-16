@@ -69,9 +69,25 @@ public class MainActivity extends AppCompatActivity {
 
             mPullRefreshRecyclerView = (PullRefreshRecyclerView) this.findViewById(R.id.recyclerview);
             mPullRefreshRecyclerView.setAdapter(mAdapter = new MyAdapter());
-            mPullRefreshRecyclerView.setAutoLoadMore(true);
+            mPullRefreshRecyclerView.setAutoLoadMoreEnable(true);
             mPullRefreshRecyclerView.setHeaderLayout(11);
             mPullRefreshRecyclerView.setListener(new PullRefreshRecyclerView.PullRefreshRecyclerViewListener() {
+
+                @Override
+                public void onLoadMore() {
+                    new Handler(Looper.getMainLooper()).postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            mAdapter.loadmore();
+                            mPullRefreshRecyclerView.notifyDateSetChanged();
+                            mPullRefreshRecyclerView.setLoadingMore(false);
+                            if (mAdapter.getItemCount() > 300) {
+                                mPullRefreshRecyclerView.setAutoLoadMoreEnable(false);
+                            }
+                        }
+                    }, 2000);
+                }
+
                 @Override
                 public void onRefresh() {
                     new Handler(Looper.getMainLooper()).postDelayed(new Runnable() {
@@ -119,6 +135,13 @@ public class MainActivity extends AppCompatActivity {
             int start = mDatas.get(0) - 1;
             mDatas.clear();
             for (int i = start; i < start + Bundle_Size; i++) {
+                mDatas.add(Integer.valueOf(i));
+            }
+        }
+
+        public void loadmore() {
+            int start = mDatas.get(mDatas.size() - 1);
+            for (int i = start+1; i < start+1 + Bundle_Size; i++) {
                 mDatas.add(Integer.valueOf(i));
             }
         }

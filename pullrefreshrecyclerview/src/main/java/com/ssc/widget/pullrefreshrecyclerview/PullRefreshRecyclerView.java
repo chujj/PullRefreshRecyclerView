@@ -2,7 +2,6 @@ package com.ssc.widget.pullrefreshrecyclerview;
 
 import android.content.Context;
 import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.AttributeSet;
 
@@ -10,8 +9,6 @@ import android.util.AttributeSet;
 public class PullRefreshRecyclerView extends SwipeRefreshLayout {
 
     private AutoLoadMoreRecyclerView mAutoLoadMoreRecyclerView;
-    private PullRefreshRecyclerViewListener mListener;
-
 
     public PullRefreshRecyclerView(Context context) {
         super(context);
@@ -29,19 +26,17 @@ public class PullRefreshRecyclerView extends SwipeRefreshLayout {
         this.addView(mAutoLoadMoreRecyclerView, lp);
     }
 
-
     public void setListener(PullRefreshRecyclerViewListener listener) {
         this.setOnRefreshListener(listener);
-
+        mAutoLoadMoreRecyclerView.setAutoLoadMoreListener(listener);
     }
 
     public void setAdapter(RecyclerView.Adapter adapter) {
         mAutoLoadMoreRecyclerView.setAdapter(adapter);
-        mAutoLoadMoreRecyclerView.setLayoutManager(new LinearLayoutManager(this.getContext()));
     }
 
-    public void setAutoLoadMore(boolean autoLoadMore) {
-        mAutoLoadMoreRecyclerView.setAutoLoadMore(autoLoadMore);
+    public void setAutoLoadMoreEnable(boolean autoLoadMore) {
+        mAutoLoadMoreRecyclerView.setAutoLoadMoreEnable(autoLoadMore);
     }
 
     public void setHeaderLayout(int i) {
@@ -52,12 +47,12 @@ public class PullRefreshRecyclerView extends SwipeRefreshLayout {
         mAutoLoadMoreRecyclerView.getAdapter().notifyDataSetChanged();
     }
 
-    public static interface PullRefreshRecyclerViewListener extends SwipeRefreshLayout.OnRefreshListener {
-
+    public void setLoadingMore(boolean loadingMore) {
+        mAutoLoadMoreRecyclerView.setLoadingMore(loadingMore);
     }
 
-//    public static abstract class Adapter extends AutoLoadMoreRecyclerView.Adapter {
-//
-//    }
+    public static interface PullRefreshRecyclerViewListener extends SwipeRefreshLayout.OnRefreshListener {
+        public abstract void onLoadMore();
+    }
 
 }
