@@ -70,7 +70,7 @@ public class MainActivity extends AppCompatActivity {
             mPullRefreshRecyclerView = (PullRefreshRecyclerView) this.findViewById(R.id.recyclerview);
             mPullRefreshRecyclerView.setAdapter(mAdapter = new MyAdapter());
             mPullRefreshRecyclerView.setAutoLoadMoreEnable(true);
-            mPullRefreshRecyclerView.setHeaderLayout(11);
+            mPullRefreshRecyclerView.setHeaderLayout(R.layout.sticky_header_layout);
             mPullRefreshRecyclerView.setListener(new PullRefreshRecyclerView.PullRefreshRecyclerViewListener() {
 
                 @Override

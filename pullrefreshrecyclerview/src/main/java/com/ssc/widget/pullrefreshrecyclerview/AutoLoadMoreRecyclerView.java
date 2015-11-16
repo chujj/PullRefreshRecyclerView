@@ -4,6 +4,7 @@ import android.content.Context;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.AttributeSet;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
@@ -107,7 +108,7 @@ public class AutoLoadMoreRecyclerView extends android.support.v7.widget.Recycler
         @Override
         public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
             if (viewType == TYPE_HEADER) {
-                return new HeaderViewHolder(new TextView(parent.getContext()));
+                return new HeaderViewHolder(LayoutInflater.from(parent.getContext()).inflate(mHeaderResId, parent, false));
             } else if (viewType == TYPE_FOOTER) {
                 return new FooterViewHolder(new TextView(parent.getContext()));
             } else { // type normal
@@ -133,7 +134,7 @@ public class AutoLoadMoreRecyclerView extends android.support.v7.widget.Recycler
         public void onBindViewHolder(ViewHolder holder, int position) {
             int type =getItemViewType(position);
             if (type == TYPE_HEADER) {
-                ((TextView)holder.itemView).setText("I'm header View");
+//                ((TextView)holder.itemView).setText("I'm header View");
             } else if (type == TYPE_FOOTER) {
                 ((TextView)holder.itemView).setText("I'm footer View");
             } else {
