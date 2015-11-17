@@ -13,7 +13,7 @@ ext {
     siteUrl = 'https://github.com/chujj/PullRefreshRecyclerView'
     gitUrl = 'https://github.com/chujj/PullRefreshRecyclerView'
 
-    libraryVersion = '0.0.1'
+    libraryVersion = '0.0.2'
 
     developerId = 'com.github.chujj'
     developerName = 'chujj'
