@@ -50,16 +50,16 @@ public class PullRefreshRecyclerView extends SwipeRefreshLayout {
         mAutoLoadMoreRecyclerView.setAutoLoadMoreEnable(autoLoadMore);
     }
 
+    public void setLoadingMore(boolean loadingMore) {
+        mAutoLoadMoreRecyclerView.setLoadingMore(loadingMore);
+    }
+
     public void setHeaderLayout(int i) {
         mAutoLoadMoreRecyclerView.setHeaderLayout(i);
     }
 
-    public void notifyDateSetChanged() {
-        mAutoLoadMoreRecyclerView.getAdapter().notifyDataSetChanged();
-    }
-
-    public void setLoadingMore(boolean loadingMore) {
-        mAutoLoadMoreRecyclerView.setLoadingMore(loadingMore);
+    public void setSelection(int adapterPos) {
+        mAutoLoadMoreRecyclerView.smoothScrollToPosition(adapterPos);
     }
 
     public static interface PullRefreshRecyclerViewListener extends SwipeRefreshLayout.OnRefreshListener {

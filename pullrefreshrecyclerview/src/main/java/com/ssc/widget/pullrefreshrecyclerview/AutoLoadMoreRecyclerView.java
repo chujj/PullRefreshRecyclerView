@@ -184,6 +184,13 @@ public class AutoLoadMoreRecyclerView extends android.support.v7.widget.Recycler
     public void setAdapter(RecyclerView.Adapter adapter) {
         if (adapter != null) {
             mAdapter = createWrapHeader(adapter);
+            adapter.registerAdapterDataObserver(new AdapterDataObserver() {
+                @Override
+                public void onChanged() {
+                    mAdapter.notifyDataSetChanged();
+                }
+            });
+
         }
         super.setAdapter(mAdapter);
     }
@@ -193,6 +200,7 @@ public class AutoLoadMoreRecyclerView extends android.support.v7.widget.Recycler
     }
 
     public void setAutoLoadMoreEnable(boolean autoLoadMore) {
+        setLoadingMore(false);
         mAdapter.setFooterEnable(autoLoadMore);
         mAdapter.notifyDataSetChanged();
     }

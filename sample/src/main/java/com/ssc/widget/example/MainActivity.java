@@ -33,6 +33,7 @@ public class MainActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                mPullRefreshRecyclerView.setSelection(0);
                 Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                     .setAction("Action", null).show();
             }
@@ -79,7 +80,7 @@ public class MainActivity extends AppCompatActivity {
                         @Override
                         public void run() {
                             mAdapter.loadmore();
-                            mPullRefreshRecyclerView.notifyDateSetChanged();
+                            mAdapter.notifyDataSetChanged();
                             mPullRefreshRecyclerView.setLoadingMore(false);
                             if (mAdapter.getItemCount() > 300) {
                                 mPullRefreshRecyclerView.setAutoLoadMoreEnable(false);
@@ -100,7 +101,7 @@ public class MainActivity extends AppCompatActivity {
                         @Override
                         public void run() {
                             mAdapter.refresh();
-                            mPullRefreshRecyclerView.notifyDateSetChanged();
+                            mAdapter.notifyDataSetChanged();
                             mPullRefreshRecyclerView.setRefreshing(false);
                         }
                     }, 2000);
