@@ -78,9 +78,9 @@ public class AutoLoadMoreRecyclerView extends android.support.v7.widget.Recycler
 
 
     public static class Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
-        private final static int TYPE_NORMAL = 0;
-        private final static int TYPE_HEADER = 1;
-        private final static int TYPE_FOOTER = 2;
+        public  final static int TYPE_NORMAL_START = 0;
+        private final static int TYPE_HEADER = -1;
+        private final static int TYPE_FOOTER = -2;
 
         private final RecyclerView.Adapter mInternalAdapter;
 
@@ -107,7 +107,7 @@ public class AutoLoadMoreRecyclerView extends android.support.v7.widget.Recycler
             if (footerPosition == position && isFooterEnable) {
                 return TYPE_FOOTER;
             }
-            return TYPE_NORMAL;
+            return mInternalAdapter.getItemViewType(position - (isHeaderEnable ? 1 : 0));
         }
 
         @Override
