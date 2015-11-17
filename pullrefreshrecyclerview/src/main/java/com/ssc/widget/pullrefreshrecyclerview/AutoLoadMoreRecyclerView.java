@@ -77,7 +77,6 @@ public class AutoLoadMoreRecyclerView extends android.support.v7.widget.Recycler
         mAdapter.setFooterAnimation(loadingMore);
     }
 
-
     public static class Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         public  final static int TYPE_NORMAL_START = 0;
         private final static int TYPE_HEADER = -1;
@@ -89,6 +88,8 @@ public class AutoLoadMoreRecyclerView extends android.support.v7.widget.Recycler
         private boolean isFooterEnable;
 
         private int mHeaderResId;
+        private View mHeaderView;
+
         private FooterViewHolder mFooterView;
 
         public Adapter(RecyclerView.Adapter adapter) {
@@ -114,6 +115,9 @@ public class AutoLoadMoreRecyclerView extends android.support.v7.widget.Recycler
         @Override
         public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
             if (viewType == TYPE_HEADER) {
+                if (mHeaderView != null) {
+                    return new HeaderViewHolder(mHeaderView);
+                }
                 return new HeaderViewHolder(
                     LayoutInflater.from(parent.getContext()).inflate(
                         mHeaderResId, parent, false));
@@ -176,6 +180,11 @@ public class AutoLoadMoreRecyclerView extends android.support.v7.widget.Recycler
             mHeaderResId = layout_resid;
         }
 
+        public void setHeaderEnable(boolean b, View v) {
+            isHeaderEnable = b;
+            mHeaderView = v;
+        }
+
         public void setFooterEnable(boolean autoLoadMore) {
             isFooterEnable = autoLoadMore;
         }
@@ -208,6 +217,11 @@ public class AutoLoadMoreRecyclerView extends android.support.v7.widget.Recycler
 
     public void setHeaderLayout(int layout_resid) {
         mAdapter.setHeaderEnable(true, layout_resid);
+        mAdapter.notifyDataSetChanged();
+    }
+
+    public void setHeaderLayout(View v) {
+        mAdapter.setHeaderEnable(true, v);
         mAdapter.notifyDataSetChanged();
     }
 

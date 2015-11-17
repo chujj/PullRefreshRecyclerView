@@ -4,6 +4,7 @@ import android.content.Context;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.RecyclerView;
 import android.util.AttributeSet;
+import android.view.View;
 import android.view.ViewTreeObserver;
 
 
@@ -56,6 +57,10 @@ public class PullRefreshRecyclerView extends SwipeRefreshLayout {
 
     public void setHeaderLayout(int i) {
         mAutoLoadMoreRecyclerView.setHeaderLayout(i);
+    }
+
+    public void setHeaderLayout(View v) {
+        mAutoLoadMoreRecyclerView.setHeaderLayout(v);
     }
 
     public void setSelection(int adapterPos) {
