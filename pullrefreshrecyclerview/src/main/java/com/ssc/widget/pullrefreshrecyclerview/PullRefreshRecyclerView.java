@@ -62,6 +62,10 @@ public class PullRefreshRecyclerView extends SwipeRefreshLayout {
         mAutoLoadMoreRecyclerView.smoothScrollToPosition(adapterPos);
     }
 
+    public RecyclerView asRecyclerView() {
+        return mAutoLoadMoreRecyclerView;
+    }
+
     public static interface PullRefreshRecyclerViewListener extends SwipeRefreshLayout.OnRefreshListener {
         public void onLoadMore();
         public void onViewReady();
