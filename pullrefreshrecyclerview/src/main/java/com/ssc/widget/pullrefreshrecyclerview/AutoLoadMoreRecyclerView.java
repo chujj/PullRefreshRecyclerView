@@ -52,7 +52,8 @@ public class AutoLoadMoreRecyclerView extends android.support.v7.widget.Recycler
             @Override
             public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
                 super.onScrollStateChanged(recyclerView, newState);
-                if (newState == RecyclerView.SCROLL_STATE_IDLE &&
+                if (mAdapter.isFooterEnable &&
+                    newState == RecyclerView.SCROLL_STATE_IDLE &&
                     lastVisiableVisiableItem + 1 == mAdapter.getItemCount() &&
                     !loadingMore) {
 
