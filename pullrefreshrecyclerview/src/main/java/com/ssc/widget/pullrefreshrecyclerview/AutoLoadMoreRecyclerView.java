@@ -13,7 +13,7 @@ import android.widget.ProgressBar;
 // 1. [X] pull to refresh
 // 2. [X] auto loadmore
 // 3. [X] sticky header
-// 4. init with status refreshing
+// 4. [X] init with status refreshing
 public class AutoLoadMoreRecyclerView extends android.support.v7.widget.RecyclerView {
 
     private Adapter mAdapter;
@@ -40,6 +40,9 @@ public class AutoLoadMoreRecyclerView extends android.support.v7.widget.Recycler
         this.setLayoutManager(mLayoutManager = new LinearLayoutManager(context));
     }
 
+    protected PullRefreshRecyclerView.PullRefreshRecyclerViewListener getListener() {
+        return mListener;
+    }
     public void setAutoLoadMoreListener(PullRefreshRecyclerView.PullRefreshRecyclerViewListener listener) {
         mListener = listener;
 

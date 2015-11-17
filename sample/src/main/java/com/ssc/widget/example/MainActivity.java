@@ -89,6 +89,12 @@ public class MainActivity extends AppCompatActivity {
                 }
 
                 @Override
+                public void onViewReady() {
+                    mPullRefreshRecyclerView.setRefreshing(true);
+                    onRefresh();
+                }
+
+                @Override
                 public void onRefresh() {
                     new Handler(Looper.getMainLooper()).postDelayed(new Runnable() {
                         @Override
@@ -100,6 +106,9 @@ public class MainActivity extends AppCompatActivity {
                     }, 2000);
                 }
             });
+
+
+
         }
     }
 

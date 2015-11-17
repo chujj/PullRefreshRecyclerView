@@ -4,6 +4,7 @@ import android.content.Context;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.RecyclerView;
 import android.util.AttributeSet;
+import android.view.ViewTreeObserver;
 
 
 public class PullRefreshRecyclerView extends SwipeRefreshLayout {
@@ -24,6 +25,16 @@ public class PullRefreshRecyclerView extends SwipeRefreshLayout {
         mAutoLoadMoreRecyclerView = new AutoLoadMoreRecyclerView(context);
         LayoutParams lp = new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT);
         this.addView(mAutoLoadMoreRecyclerView, lp);
+        this.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+            @Override
+            public void onGlobalLayout() {
+                if (mAutoLoadMoreRecyclerView.getListener() != null) {
+                    mAutoLoadMoreRecyclerView.getListener().onViewReady();
+                }
+
+                PullRefreshRecyclerView.this.getViewTreeObserver().removeGlobalOnLayoutListener(this);
+            }
+        });
     }
 
     public void setListener(PullRefreshRecyclerViewListener listener) {
@@ -52,7 +63,8 @@ public class PullRefreshRecyclerView extends SwipeRefreshLayout {
     }
 
     public static interface PullRefreshRecyclerViewListener extends SwipeRefreshLayout.OnRefreshListener {
-        public abstract void onLoadMore();
+        public void onLoadMore();
+        public void onViewReady();
     }
 
 }
