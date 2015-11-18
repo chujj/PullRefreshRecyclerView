@@ -55,12 +55,8 @@ public class PullRefreshRecyclerView extends SwipeRefreshLayout {
         mAutoLoadMoreRecyclerView.setLoadingMore(loadingMore);
     }
 
-    public void setHeaderLayout(int i) {
-        mAutoLoadMoreRecyclerView.setHeaderLayout(i);
-    }
-
-    public void setHeaderLayout(View v) {
-        mAutoLoadMoreRecyclerView.setHeaderLayout(v);
+    public void setHeaderLayout(AutoLoadMoreRecyclerView.HeaderProvider headerProvider) {
+        mAutoLoadMoreRecyclerView.setHeaderLayout(headerProvider);
     }
 
     public void setSelection(int adapterPos) {

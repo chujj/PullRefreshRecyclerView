@@ -13,6 +13,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+
+import com.ssc.widget.pullrefreshrecyclerview.AutoLoadMoreRecyclerView;
 import com.ssc.widget.pullrefreshrecyclerview.PullRefreshRecyclerView;
 
 import java.util.LinkedList;
@@ -71,7 +73,17 @@ public class MainActivity extends AppCompatActivity {
             mPullRefreshRecyclerView = (PullRefreshRecyclerView) this.findViewById(R.id.recyclerview);
             mPullRefreshRecyclerView.setAdapter(mAdapter = new MyAdapter());
             mPullRefreshRecyclerView.setAutoLoadMoreEnable(true);
-            mPullRefreshRecyclerView.setHeaderLayout(R.layout.sticky_header_layout);
+            mPullRefreshRecyclerView.setHeaderLayout(new AutoLoadMoreRecyclerView.HeaderProvider() {
+                @Override
+                public int getResId() {
+                    return R.layout.sticky_header_layout;
+                }
+
+                @Override
+                public void afterInflated(View itemView) {
+
+                }
+            });
             mPullRefreshRecyclerView.setListener(new PullRefreshRecyclerView.PullRefreshRecyclerViewListener() {
 
                 @Override
