@@ -11,13 +11,20 @@ import android.widget.EditText;
 
 import com.ssc.weipan.R;
 import com.ssc.weipan.R2;
+import com.ssc.weipan.api.ServerAPI;
+import com.ssc.weipan.api.sms.SmsApi;
+import com.ssc.weipan.base.BaseActivity;
 import com.ssc.weipan.base.BaseFragment;
 import com.ssc.weipan.base.CommonUtils;
 import com.ssc.weipan.base.Topbar;
+import com.ssc.weipan.model.BaseModel;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import retrofit.Callback;
+import retrofit.RetrofitError;
+import retrofit.client.Response;
 
 /**
  * Created by zhujj on 17-10-17.
@@ -69,11 +76,36 @@ public class Step1PhoneNumInputFragment extends BaseFragment {
 
     @OnClick(R2.id.next)
     public void clickNext() {
-        String phoneNum = mPhone.getText().toString();
+        final String phoneNum = mPhone.getText().toString();
         // TODO add request
 
-        // success
-        ((LoginActivity)getActivity()).switchToStep2SMSCode(phoneNum);
+        ((BaseActivity)getActivity()).showLoadingDialog("加载中", true);
+
+        SmsApi.ISMS iSms = ServerAPI.getInterface(SmsApi.ISMS.class);
+        iSms.requereSMSCode("7", phoneNum, new Callback<BaseModel>() {
+            @Override
+            public void success(BaseModel baseModel, Response response) {
+
+                if (baseModel.code == 0) {
+                    // success
+                    ((LoginActivity)getActivity()).switchToStep2SMSCode(phoneNum);
+                }
+                dissmiss();
+            }
+
+            @Override
+            public void failure(RetrofitError error) {
+
+                dissmiss();
+            }
+
+            private void dissmiss() {
+                ((BaseActivity)getActivity()).dismissLoadingDialog();
+            }
+        });
+
+
+
     }
 
 }
