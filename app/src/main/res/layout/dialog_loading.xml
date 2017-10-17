@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@drawable/bg_loading_dialog"
+    android:gravity="center"
+    android:orientation="vertical"
+    android:padding="12dp">
+
+    <com.husor.beibei.views.loading.LoadingView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:id="@+id/text_loading"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:ellipsize="end"
+        android:maxEms="6"
+        android:maxLines="1"
+        android:textColor="#8f8f8f"
+        android:textSize="11dp"
+        android:visibility="gone"
+        tools:text="加载中..."
+        tools:visibility="visible" />
+
+</LinearLayout>
