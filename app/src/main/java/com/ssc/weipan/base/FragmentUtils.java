@@ -19,6 +19,10 @@ public class FragmentUtils {
     }
 
     public static void switchFragment(FragmentManager fg, Context context, String key, Bundle bundle) {
+        switchFragment(fg, context, key, bundle, false);
+    }
+
+    public static void switchFragment(FragmentManager fg, Context context, String key, Bundle bundle, boolean addBackStack) {
         Fragment fragment = fg.findFragmentByTag(key);
         if(fragment == null) {
             fragment = Fragment.instantiate(context, key, bundle);
@@ -26,6 +30,10 @@ public class FragmentUtils {
 
         FragmentTransaction ft = fg.beginTransaction();
         ft.replace(R.id.ll_main, fragment, key);
+
+        if(addBackStack) {
+            ft.addToBackStack((String)null);
+        }
 
         ft.commitAllowingStateLoss();
         fg.executePendingTransactions();

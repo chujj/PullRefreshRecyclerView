@@ -72,7 +72,8 @@ public class Step1PhoneNumInputFragment extends BaseFragment {
         String phoneNum = mPhone.getText().toString();
         // TODO add request
 
-
-
+        // success
+        ((LoginActivity)getActivity()).switchToStep2SMSCode(phoneNum);
     }
+
 }

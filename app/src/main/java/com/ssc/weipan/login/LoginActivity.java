@@ -1,5 +1,6 @@
 package com.ssc.weipan.login;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 
@@ -31,4 +32,23 @@ public class LoginActivity extends BaseActivity {
     }
 
 
+    public void switchToStep2SMSCode(String phoneNum) {
+        Bundle bundle = getIntent().getExtras();
+        if (bundle == null) {
+            bundle = new Bundle();
+        }
+
+        bundle.putString("phone_num", phoneNum);
+
+        FragmentUtils.switchFragment(
+                getSupportFragmentManager(),
+                this,
+                Step2SMSCodeFragment.class.getName(), bundle, true);
+    }
+
+    public void switchToStep3Recommend() {
+        Intent it = new Intent(this, RecommendInputActivity.class);
+        startActivity(it);
+        finish();
+    }
 }

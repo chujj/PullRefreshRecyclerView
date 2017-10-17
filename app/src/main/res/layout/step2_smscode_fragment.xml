@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FF1F1F1F">
+
+    <include layout="@layout/topbar_layout"/>
+
+    <TextView
+        android:id="@+id/phone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:layout_gravity="center_horizontal"
+        android:text="验证码已发送到 186 5880 0888"
+        android:textColor="#FF999999"
+        android:textSize="16sp"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_marginTop="30dp"
+        android:orientation="horizontal"
+        >
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="3dp"
+            android:layout_weight="1"/>
+
+        <TextView
+            android:id="@+id/t1"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:gravity="center"
+            android:textColor="#FFFFFFFF"
+            android:textSize="48sp"
+            tools:text="8"
+            android:background="#FF444444"
+            />
+
+
+        <TextView
+            android:id="@+id/t2"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:gravity="center"
+            android:textColor="#FFFFFFFF"
+            android:textSize="48sp"
+            android:background="#FF444444"
+            android:layout_marginLeft="10dp"
+            />
+
+        <TextView
+            android:id="@+id/t3"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:gravity="center"
+            android:textColor="#FFFFFFFF"
+            android:textSize="48sp"
+            android:background="#FF444444"
+            android:layout_marginLeft="10dp"
+            />
+
+        <TextView
+            android:id="@+id/t4"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:gravity="center"
+            android:textColor="#FFFFFFFF"
+            android:textSize="48sp"
+            android:background="#FF444444"
+            android:layout_marginLeft="10dp"
+            />
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="3dp"
+            android:layout_weight="1"/>
+
+    </LinearLayout>
+
+
+    <TextView
+        android:id="@+id/count_down"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="60dp"
+        android:layout_gravity="center_horizontal"
+        android:text="重新获取59s"
+        android:textColor="#FFEBAD33"
+        android:textSize="28sp"
+        />
+
+    <EditText
+        android:id="@+id/debug_sms"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:text="smscode"
+        android:textColor="#fff"/>
+
+
+</LinearLayout>

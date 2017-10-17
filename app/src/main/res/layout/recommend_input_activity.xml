@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FF1F1F1F">
+
+    <include layout="@layout/topbar_layout"/>
+
+
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="44dp"
+        android:layout_marginTop="23dp"
+        android:gravity="center_vertical"
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp"
+        android:background="#FF444444">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="推荐码"
+            android:textColor="#FFCCCCCC"
+            android:textSize="16sp"
+            />
+
+        <EditText
+            android:id="@+id/phone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="numberDecimal"
+            android:layout_marginLeft="20dp"
+            android:background="@null"
+            android:hint="请输入推荐码"
+            android:textColorHint="#FF999999"
+            android:textColor="#FFCCCCCC"
+            android:textSize="16sp"
+            />
+
+    </LinearLayout>
+
+
+    <TextView
+        android:id="@+id/next"
+        android:layout_width="match_parent"
+        android:layout_height="38.5dp"
+        android:layout_marginTop="19dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:background="@drawable/round_btn_bg"
+        android:gravity="center"
+        android:text="提交"
+        android:textColor="#FF000000"
+        android:textSize="18sp"/>
+
+
+    <TextView
+        android:id="@+id/ignore"
+        android:layout_width="match_parent"
+        android:layout_height="38.5dp"
+        android:layout_marginTop="19dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:gravity="center"
+        android:text="跳过"
+        android:textColor="#FFEBAD33"
+        android:textSize="18sp"/>
+
+
+
+</LinearLayout>
