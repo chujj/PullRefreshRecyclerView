@@ -2,6 +2,7 @@ package com.ssc.weipan.login;
 
 import android.graphics.Color;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.text.Editable;
 import android.text.SpannableString;
@@ -101,7 +102,12 @@ public class Step2SMSCodeFragment extends BaseFragment {
                 mInput.setTextColor(0x00ffffff);
             }
 
-            CommonUtils.showSoftKeyboard(mInput, getContext());
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    CommonUtils.showSoftKeyboard(mInput, getContext());
+                }
+            }, 1000);
             mInput.addTextChangedListener(new TextWatcher() {
                 @Override
                 public void beforeTextChanged(CharSequence s, int start, int count, int after) {

@@ -85,14 +85,14 @@ public class Step1PhoneNumInputFragment extends BaseFragment {
         iSms.requereSMSCode("7", phoneNum, new Callback<BaseModel>() {
             @Override
             public void success(BaseModel baseModel, Response response) {
+                dissmiss();
 
                 if (baseModel.code == 0) {
-                    // success
+//                    // success
                     ((LoginActivity)getActivity()).switchToStep2SMSCode(phoneNum);
                 } else {
                     ToastHelper.showToast(baseModel.message);
                 }
-                dissmiss();
             }
 
             @Override

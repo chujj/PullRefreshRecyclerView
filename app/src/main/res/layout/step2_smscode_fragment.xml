@@ -110,6 +110,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         tools:text="smscode"
+        android:inputType="number"
         android:textColor="#fff"/>
 
 
