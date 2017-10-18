@@ -33,11 +33,11 @@ public class SplashActivity extends AppCompatActivity {
             @Override
             public void handleMessage(Message msg) {
                 switch (msg.what) {
+                    case 0x14d:
+//                        switchToRegister();
+//                        break;
                     case 0x13d:
                         switchToMain();
-                        break;
-                    case 0x14d:
-                        switchToRegister();
                         break;
 
                 }
