@@ -7,7 +7,9 @@ import android.view.ViewGroup;
 import com.ssc.weipan.R;
 import com.ssc.weipan.R2;
 import com.ssc.weipan.base.BaseActivity;
+import com.ssc.weipan.base.FragmentUtils;
 
+import butterknife.BindView;
 import butterknife.BindViews;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -18,9 +20,18 @@ import butterknife.OnClick;
 public class HomeActivity extends BaseActivity {
 
 
+    @BindView(R2.id.container)
+    ViewGroup mContainer;
 
     @BindViews({R2.id.home_icon_1, R2.id.home_icon_2 , R2.id.home_icon_3 , R2.id.home_icon_4})
     ViewGroup[] mHomeButtons;
+
+    private String[] mFragmentNames = new String[] {
+            TradeHomeFragment.class.getName(),
+            TradeHomeFragment.class.getName(),
+            TradeHomeFragment.class.getName(),
+            TradeHomeFragment.class.getName(),
+    };
 
     private int mIndex = 0; // default 0
 
@@ -36,7 +47,6 @@ public class HomeActivity extends BaseActivity {
     }
 
     private void switchToIndex(int index) {
-
         mIndex = index;
 
 
@@ -45,6 +55,9 @@ public class HomeActivity extends BaseActivity {
                 mHomeButtons[i].getChildAt(j).setSelected(i == mIndex);
             }
         }
+
+        FragmentUtils.switchFragment(getSupportFragmentManager(), this,
+                mFragmentNames[mIndex], null);
 
     }
 
