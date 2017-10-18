@@ -5,11 +5,13 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.squareup.okhttp.OkHttpClient;
 import com.ssc.weipan.base.CommonUtils;
+import com.ssc.weipan.base.ToastHelper;
 
 import java.util.HashMap;
 
 import retrofit.RestAdapter;
 import retrofit.RestAdapter.LogLevel;
+import retrofit.RetrofitError;
 import retrofit.client.OkClient;
 import retrofit.converter.GsonConverter;
 
@@ -80,6 +82,12 @@ public class ServerAPI {
         okHttpClient.networkInterceptors().add(new StethoInterceptor());
 
         return new OkClient(okHttpClient);
+    }
+
+
+    public static void HandlerException(RetrofitError e) {
+        ToastHelper.showToast("网络错误" + (CommonUtils.isDebugBuild() ? e.getMessage() : ""));
+        e.printStackTrace();
     }
 
 

@@ -77,7 +77,6 @@ public class Step1PhoneNumInputFragment extends BaseFragment {
     @OnClick(R2.id.next)
     public void clickNext() {
         final String phoneNum = mPhone.getText().toString();
-        // TODO add request
 
         ((BaseActivity)getActivity()).showLoadingDialog("加载中", true);
 
@@ -95,7 +94,7 @@ public class Step1PhoneNumInputFragment extends BaseFragment {
 
             @Override
             public void failure(RetrofitError error) {
-
+                ServerAPI.HandlerException(error);
                 dissmiss();
             }
 
