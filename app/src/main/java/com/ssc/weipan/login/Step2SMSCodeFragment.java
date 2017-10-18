@@ -2,8 +2,6 @@ package com.ssc.weipan.login;
 
 import android.graphics.Color;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Looper;
 import android.support.annotation.Nullable;
 import android.text.Editable;
 import android.text.SpannableString;
@@ -19,14 +17,20 @@ import android.widget.TextView;
 
 import com.ssc.weipan.R;
 import com.ssc.weipan.R2;
+import com.ssc.weipan.api.ServerAPI;
+import com.ssc.weipan.api.login.LoginApi;
 import com.ssc.weipan.base.BaseActivity;
 import com.ssc.weipan.base.BaseFragment;
 import com.ssc.weipan.base.CommonUtils;
+import com.ssc.weipan.base.ToastHelper;
 import com.ssc.weipan.base.Topbar;
 
 import butterknife.BindView;
 import butterknife.BindViews;
 import butterknife.ButterKnife;
+import retrofit.Callback;
+import retrofit.RetrofitError;
+import retrofit.client.Response;
 
 /**
  * Created by zhujj on 17-10-17.
@@ -41,7 +45,7 @@ public class Step2SMSCodeFragment extends BaseFragment {
     @BindView(R2.id.debug_sms)
     EditText mInput;
 
-    @BindViews({R2.id.t1, R2.id.t2, R2.id.t3, R2.id.t4})
+    @BindViews({R2.id.t1, R2.id.t2, R2.id.t3, R2.id.t4, R2.id.t5})
     TextView[] mSmscodes;
 
 
@@ -149,19 +153,37 @@ public class Step2SMSCodeFragment extends BaseFragment {
 
 
     private void verifySMSCode(String smsCode) {
-        // TODO send request
+
+        String phone = getArguments().getString("phone_num", "");
 
         ((BaseActivity) getActivity()).showLoadingDialog("加载中", false);
 
-        new Handler(Looper.getMainLooper()).postDelayed(new Runnable() {
+
+        LoginApi.ILogin iLogin = ServerAPI.getInterface(LoginApi.ILogin.class);
+
+        iLogin.login(phone, smsCode, phone, new Callback<LoginApi.LoginResp>() {
             @Override
-            public void run() {
+            public void success(LoginApi.LoginResp baseModel, Response response) {
+
+                if (baseModel.code == 0) {
+                    if (true) {
+                        ((LoginActivity)getActivity()).switchToStep3Recommend();
+                    } else {
+
+                        // TODO go home
+                    }
+                    getActivity().finish();
+                } else {
+                    ToastHelper.showToast(baseModel.message);
+                }
                 ((BaseActivity) getActivity()).dismissLoadingDialog();
-
-                ((LoginActivity)getActivity()).switchToStep3Recommend();
             }
-        }, 2000);
 
+            @Override
+            public void failure(RetrofitError error) {
+                ServerAPI.HandlerException(error);
+            }
+        });
 
     }
 

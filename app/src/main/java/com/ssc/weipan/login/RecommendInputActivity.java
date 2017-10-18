@@ -74,6 +74,6 @@ public class RecommendInputActivity extends BaseActivity {
 
 
     public void openHome() {
-        // TODO
+        // TODO go home
     }
 }

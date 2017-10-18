@@ -75,6 +75,17 @@
             android:layout_marginLeft="10dp"
             />
 
+        <TextView
+            android:id="@+id/t5"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:gravity="center"
+            android:textColor="#FFFFFFFF"
+            android:textSize="48sp"
+            android:background="#FF444444"
+            android:layout_marginLeft="10dp"
+            />
+
         <View
             android:layout_width="0dp"
             android:layout_height="3dp"

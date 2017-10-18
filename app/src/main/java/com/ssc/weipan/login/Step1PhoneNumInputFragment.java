@@ -16,6 +16,7 @@ import com.ssc.weipan.api.sms.SmsApi;
 import com.ssc.weipan.base.BaseActivity;
 import com.ssc.weipan.base.BaseFragment;
 import com.ssc.weipan.base.CommonUtils;
+import com.ssc.weipan.base.ToastHelper;
 import com.ssc.weipan.base.Topbar;
 import com.ssc.weipan.model.BaseModel;
 
@@ -88,6 +89,8 @@ public class Step1PhoneNumInputFragment extends BaseFragment {
                 if (baseModel.code == 0) {
                     // success
                     ((LoginActivity)getActivity()).switchToStep2SMSCode(phoneNum);
+                } else {
+                    ToastHelper.showToast(baseModel.message);
                 }
                 dissmiss();
             }
