@@ -3,7 +3,8 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="#FF181818">
 
 
     <ScrollView
@@ -30,6 +31,14 @@
                 android:background="#FF3C3C3C"/>
 
 
+
+
+            <com.ssc.weipan.base.WrapContentViewPager
+                android:id="@+id/viewpager"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+            </com.ssc.weipan.base.WrapContentViewPager>
 
 
 

@@ -8,6 +8,7 @@ import com.ssc.weipan.R;
 import com.ssc.weipan.R2;
 import com.ssc.weipan.base.BaseActivity;
 import com.ssc.weipan.base.FragmentUtils;
+import com.ssc.weipan.base.Topbar;
 
 import butterknife.BindView;
 import butterknife.BindViews;
@@ -20,7 +21,9 @@ import butterknife.OnClick;
 public class HomeActivity extends BaseActivity {
 
 
-    @BindView(R2.id.container)
+    @BindView(R2.id.topbar)
+    Topbar mTopbar;
+    @BindView(R2.id.ll_main)
     ViewGroup mContainer;
 
     @BindViews({R2.id.home_icon_1, R2.id.home_icon_2 , R2.id.home_icon_3 , R2.id.home_icon_4})
@@ -42,6 +45,8 @@ public class HomeActivity extends BaseActivity {
         this.setContentView(R.layout.home_activity);
 
         ButterKnife.bind(this, this);
+
+        mTopbar.setTitle("时间盘");
 
         switchToIndex(mIndex);
     }
