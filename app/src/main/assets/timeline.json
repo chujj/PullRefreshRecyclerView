@@ -1,0 +1,4202 @@
+[
+  {
+    "amount": 3,
+    "date": 1315730106,
+    "price": 34.59,
+    "tid": 5001,
+    "type": "buy"
+  },
+  {
+    "amount": 2.83,
+    "date": 1315730170,
+    "price": 35,
+    "tid": 5002,
+    "type": "buy"
+  },
+  {
+    "amount": 0.297,
+    "date": 1315730953,
+    "price": 33.01,
+    "tid": 5003,
+    "type": "sell"
+  },
+  {
+    "amount": 1.004,
+    "date": 1315739726,
+    "price": 33.02,
+    "tid": 5004,
+    "type": "sell"
+  },
+  {
+    "amount": 1,
+    "date": 1315740373,
+    "price": 35.98,
+    "tid": 5005,
+    "type": "buy"
+  },
+  {
+    "amount": 1.7,
+    "date": 1315746570,
+    "price": 34.98,
+    "tid": 5006,
+    "type": "sell"
+  },
+  {
+    "amount": 0.255,
+    "date": 1315747469,
+    "price": 33.13,
+    "tid": 5007,
+    "type": "sell"
+  },
+  {
+    "amount": 2.27,
+    "date": 1315749674,
+    "price": 34.97,
+    "tid": 5008,
+    "type": "buy"
+  },
+  {
+    "amount": 3.526,
+    "date": 1315749674,
+    "price": 35.95,
+    "tid": 5009,
+    "type": "buy"
+  },
+  {
+    "amount": 2.204,
+    "date": 1315749674,
+    "price": 35.97,
+    "tid": 5010,
+    "type": "buy"
+  },
+  {
+    "amount": 11.729,
+    "date": 1315749815,
+    "price": 35.97,
+    "tid": 5011,
+    "type": "buy"
+  },
+  {
+    "amount": 0.271,
+    "date": 1315749815,
+    "price": 35.98,
+    "tid": 5012,
+    "type": "buy"
+  },
+  {
+    "amount": 3.729,
+    "date": 1315749846,
+    "price": 35.98,
+    "tid": 5013,
+    "type": "buy"
+  },
+  {
+    "amount": 1.271,
+    "date": 1315749846,
+    "price": 36,
+    "tid": 5014,
+    "type": "buy"
+  },
+  {
+    "amount": 0.529,
+    "date": 1315749873,
+    "price": 36,
+    "tid": 5015,
+    "type": "buy"
+  },
+  {
+    "amount": 1,
+    "date": 1315750083,
+    "price": 39,
+    "tid": 5016,
+    "type": "buy"
+  },
+  {
+    "amount": 2,
+    "date": 1315750190,
+    "price": 41,
+    "tid": 5017,
+    "type": "buy"
+  },
+  {
+    "amount": 3.01,
+    "date": 1315750247,
+    "price": 41,
+    "tid": 5018,
+    "type": "buy"
+  },
+  {
+    "amount": 9.79,
+    "date": 1315750738,
+    "price": 41,
+    "tid": 5019,
+    "type": "buy"
+  },
+  {
+    "amount": 1,
+    "date": 1315750760,
+    "price": 42,
+    "tid": 5020,
+    "type": "buy"
+  },
+  {
+    "amount": 0.5,
+    "date": 1315751118,
+    "price": 43.95,
+    "tid": 5021,
+    "type": "buy"
+  },
+  {
+    "amount": 0.01,
+    "date": 1315751118,
+    "price": 43.96,
+    "tid": 5022,
+    "type": "buy"
+  },
+  {
+    "amount": 0.49,
+    "date": 1315751118,
+    "price": 43.97,
+    "tid": 5023,
+    "type": "buy"
+  },
+  {
+    "amount": 0.001,
+    "date": 1315751148,
+    "price": 33.3,
+    "tid": 5024,
+    "type": "sell"
+  },
+  {
+    "amount": 0.51,
+    "date": 1315751149,
+    "price": 43.97,
+    "tid": 5025,
+    "type": "buy"
+  },
+  {
+    "amount": 1,
+    "date": 1315751175,
+    "price": 45,
+    "tid": 5026,
+    "type": "buy"
+  },
+  {
+    "amount": 1.994,
+    "date": 1315751175,
+    "price": 45,
+    "tid": 5027,
+    "type": "buy"
+  },
+  {
+    "amount": 0.933,
+    "date": 1315751175,
+    "price": 45,
+    "tid": 5028,
+    "type": "buy"
+  },
+  {
+    "amount": 8.002,
+    "date": 1315751175,
+    "price": 45,
+    "tid": 5029,
+    "type": "buy"
+  },
+  {
+    "amount": 0.001,
+    "date": 1315751847,
+    "price": 33.15,
+    "tid": 5030,
+    "type": "sell"
+  },
+  {
+    "amount": 5,
+    "date": 1315752468,
+    "price": 41,
+    "tid": 5031,
+    "type": "buy"
+  },
+  {
+    "amount": 0.1,
+    "date": 1315755656,
+    "price": 38.05,
+    "tid": 5032,
+    "type": "sell"
+  },
+  {
+    "amount": 4.368,
+    "date": 1315756067,
+    "price": 43.68,
+    "tid": 5033,
+    "type": "buy"
+  },
+  {
+    "amount": 3.396,
+    "date": 1315756167,
+    "price": 43.96,
+    "tid": 5034,
+    "type": "buy"
+  },
+  {
+    "amount": 1.95,
+    "date": 1315756871,
+    "price": 44.49,
+    "tid": 5035,
+    "type": "buy"
+  },
+  {
+    "amount": 1.9,
+    "date": 1315757256,
+    "price": 38.05,
+    "tid": 5036,
+    "type": "sell"
+  },
+  {
+    "amount": 4.49,
+    "date": 1315757256,
+    "price": 38.05,
+    "tid": 5037,
+    "type": "sell"
+  },
+  {
+    "amount": 3,
+    "date": 1315758798,
+    "price": 38.05,
+    "tid": 5038,
+    "type": "sell"
+  },
+  {
+    "amount": 0.75,
+    "date": 1315761103,
+    "price": 41.95,
+    "tid": 5039,
+    "type": "buy"
+  },
+  {
+    "amount": 7.7,
+    "date": 1315763244,
+    "price": 41,
+    "tid": 5040,
+    "type": "buy"
+  },
+  {
+    "amount": 1,
+    "date": 1315764211,
+    "price": 41,
+    "tid": 5041,
+    "type": "buy"
+  },
+  {
+    "amount": 2.5,
+    "date": 1315770661,
+    "price": 41,
+    "tid": 5042,
+    "type": "buy"
+  },
+  {
+    "amount": 0.13,
+    "date": 1315770784,
+    "price": 41,
+    "tid": 5043,
+    "type": "buy"
+  },
+  {
+    "amount": 0.5,
+    "date": 1315773457,
+    "price": 41.98,
+    "tid": 5044,
+    "type": "buy"
+  },
+  {
+    "amount": 1,
+    "date": 1315773457,
+    "price": 41.99,
+    "tid": 5045,
+    "type": "buy"
+  },
+  {
+    "amount": 1,
+    "date": 1315773457,
+    "price": 41.99,
+    "tid": 5046,
+    "type": "buy"
+  },
+  {
+    "amount": 0.45,
+    "date": 1315787930,
+    "price": 37.51,
+    "tid": 5047,
+    "type": "sell"
+  },
+  {
+    "amount": 1.5,
+    "date": 1315792496,
+    "price": 43.49,
+    "tid": 5048,
+    "type": "buy"
+  },
+  {
+    "amount": 1,
+    "date": 1315795170,
+    "price": 43,
+    "tid": 5049,
+    "type": "buy"
+  },
+  {
+    "amount": 1.6,
+    "date": 1315798250,
+    "price": 40.01,
+    "tid": 5050,
+    "type": "sell"
+  },
+  {
+    "amount": 1.42,
+    "date": 1315798268,
+    "price": 40,
+    "tid": 5051,
+    "type": "sell"
+  },
+  {
+    "amount": 0.05,
+    "date": 1315798956,
+    "price": 40,
+    "tid": 5052,
+    "type": "sell"
+  },
+  {
+    "amount": 0.21,
+    "date": 1315801236,
+    "price": 42,
+    "tid": 5053,
+    "type": "buy"
+  },
+  {
+    "amount": 0.5,
+    "date": 1315801236,
+    "price": 43.39,
+    "tid": 5054,
+    "type": "buy"
+  },
+  {
+    "amount": 0.29,
+    "date": 1315801236,
+    "price": 43.4,
+    "tid": 5055,
+    "type": "buy"
+  },
+  {
+    "amount": 0.7,
+    "date": 1315802705,
+    "price": 40,
+    "tid": 5056,
+    "type": "sell"
+  },
+  {
+    "amount": 1,
+    "date": 1315805002,
+    "price": 40.12,
+    "tid": 5057,
+    "type": "sell"
+  },
+  {
+    "amount": 0.9,
+    "date": 1315805002,
+    "price": 40.11,
+    "tid": 5058,
+    "type": "sell"
+  },
+  {
+    "amount": 1,
+    "date": 1315805002,
+    "price": 40.05,
+    "tid": 5059,
+    "type": "sell"
+  },
+  {
+    "amount": 0.288,
+    "date": 1315805002,
+    "price": 40,
+    "tid": 5060,
+    "type": "sell"
+  },
+  {
+    "amount": 1,
+    "date": 1315805118,
+    "price": 40.01,
+    "tid": 5061,
+    "type": "sell"
+  },
+  {
+    "amount": 2.542,
+    "date": 1315805118,
+    "price": 40,
+    "tid": 5062,
+    "type": "sell"
+  },
+  {
+    "amount": 1.458,
+    "date": 1315805118,
+    "price": 40,
+    "tid": 5063,
+    "type": "sell"
+  },
+  {
+    "amount": 0.5,
+    "date": 1315805899,
+    "price": 40.05,
+    "tid": 5064,
+    "type": "sell"
+  },
+  {
+    "amount": 0.5,
+    "date": 1315806012,
+    "price": 40.05,
+    "tid": 5065,
+    "type": "sell"
+  },
+  {
+    "amount": 0.011,
+    "date": 1315806347,
+    "price": 40.01,
+    "tid": 5066,
+    "type": "sell"
+  },
+  {
+    "amount": 0.888,
+    "date": 1315811252,
+    "price": 40.17,
+    "tid": 5067,
+    "type": "sell"
+  },
+  {
+    "amount": 0.888,
+    "date": 1315811252,
+    "price": 40.16,
+    "tid": 5068,
+    "type": "sell"
+  },
+  {
+    "amount": 2,
+    "date": 1315811252,
+    "price": 40.15,
+    "tid": 5069,
+    "type": "sell"
+  },
+  {
+    "amount": 0.162,
+    "date": 1315811252,
+    "price": 40.11,
+    "tid": 5070,
+    "type": "sell"
+  },
+  {
+    "amount": 0.888,
+    "date": 1315812251,
+    "price": 40.21,
+    "tid": 5071,
+    "type": "sell"
+  },
+  {
+    "amount": 0.232,
+    "date": 1315812251,
+    "price": 40.2,
+    "tid": 5072,
+    "type": "sell"
+  },
+  {
+    "amount": 0.01,
+    "date": 1315814712,
+    "price": 40.3,
+    "tid": 5073,
+    "type": "sell"
+  },
+  {
+    "amount": 0.09,
+    "date": 1315815375,
+    "price": 40.3,
+    "tid": 5074,
+    "type": "sell"
+  },
+  {
+    "amount": 0.3,
+    "date": 1315815466,
+    "price": 40.21,
+    "tid": 5075,
+    "type": "sell"
+  },
+  {
+    "amount": 1.2,
+    "date": 1315815970,
+    "price": 40.21,
+    "tid": 5076,
+    "type": "sell"
+  },
+  {
+    "amount": 0.768,
+    "date": 1315815991,
+    "price": 40.2,
+    "tid": 5077,
+    "type": "sell"
+  },
+  {
+    "amount": 0.726,
+    "date": 1315816016,
+    "price": 40.11,
+    "tid": 5078,
+    "type": "sell"
+  },
+  {
+    "amount": 0.166,
+    "date": 1315816033,
+    "price": 40.05,
+    "tid": 5079,
+    "type": "sell"
+  },
+  {
+    "amount": 0.834,
+    "date": 1315817407,
+    "price": 40.05,
+    "tid": 5080,
+    "type": "sell"
+  },
+  {
+    "amount": 0.09,
+    "date": 1315817474,
+    "price": 40,
+    "tid": 5081,
+    "type": "sell"
+  },
+  {
+    "amount": 0.997,
+    "date": 1315821092,
+    "price": 40.05,
+    "tid": 5082,
+    "type": "sell"
+  },
+  {
+    "amount": 2,
+    "date": 1315821250,
+    "price": 40.2,
+    "tid": 5083,
+    "type": "buy"
+  },
+  {
+    "amount": 0.005,
+    "date": 1315825028,
+    "price": 40.2,
+    "tid": 5084,
+    "type": "sell"
+  },
+  {
+    "amount": 0.003,
+    "date": 1315825164,
+    "price": 40.05,
+    "tid": 5085,
+    "type": "sell"
+  },
+  {
+    "amount": 0.167,
+    "date": 1315825164,
+    "price": 40.05,
+    "tid": 5086,
+    "type": "sell"
+  },
+  {
+    "amount": 0.001,
+    "date": 1315826339,
+    "price": 40.11,
+    "tid": 5087,
+    "type": "buy"
+  },
+  {
+    "amount": 1,
+    "date": 1315826339,
+    "price": 40.79,
+    "tid": 5088,
+    "type": "buy"
+  },
+  {
+    "amount": 0.999,
+    "date": 1315826339,
+    "price": 40.8,
+    "tid": 5089,
+    "type": "buy"
+  },
+  {
+    "amount": 0.001,
+    "date": 1315826480,
+    "price": 40.79,
+    "tid": 5090,
+    "type": "buy"
+  },
+  {
+    "amount": 0.888,
+    "date": 1315827404,
+    "price": 41.1,
+    "tid": 5091,
+    "type": "buy"
+  },
+  {
+    "amount": 0.001,
+    "date": 1315827404,
+    "price": 41.11,
+    "tid": 5092,
+    "type": "buy"
+  },
+  {
+    "amount": 0.176,
+    "date": 1315827921,
+    "price": 40.11,
+    "tid": 5093,
+    "type": "sell"
+  },
+  {
+    "amount": 0.824,
+    "date": 1315828182,
+    "price": 40.11,
+    "tid": 5094,
+    "type": "sell"
+  },
+  {
+    "amount": 0.04,
+    "date": 1315828308,
+    "price": 40.1,
+    "tid": 5095,
+    "type": "sell"
+  },
+  {
+    "amount": 0.833,
+    "date": 1315828308,
+    "price": 40.05,
+    "tid": 5096,
+    "type": "sell"
+  },
+  {
+    "amount": 0.117,
+    "date": 1315828308,
+    "price": 40.05,
+    "tid": 5097,
+    "type": "sell"
+  },
+  {
+    "amount": 0.888,
+    "date": 1315829086,
+    "price": 41.47,
+    "tid": 5098,
+    "type": "buy"
+  },
+  {
+    "amount": 1,
+    "date": 1315829086,
+    "price": 41.47,
+    "tid": 5099,
+    "type": "buy"
+  },
+  {
+    "amount": 1.79,
+    "date": 1315829086,
+    "price": 41.48,
+    "tid": 5100,
+    "type": "buy"
+  },
+  {
+    "amount": 1.322,
+    "date": 1315829086,
+    "price": 41.5,
+    "tid": 5101,
+    "type": "buy"
+  },
+  {
+    "amount": 0.888,
+    "date": 1315829153,
+    "price": 41.49,
+    "tid": 5102,
+    "type": "buy"
+  },
+  {
+    "amount": 0.79,
+    "date": 1315829153,
+    "price": 41.5,
+    "tid": 5103,
+    "type": "buy"
+  },
+  {
+    "amount": 0.888,
+    "date": 1315829204,
+    "price": 41.49,
+    "tid": 5104,
+    "type": "buy"
+  },
+  {
+    "amount": 0.888,
+    "date": 1315829284,
+    "price": 41.49,
+    "tid": 5105,
+    "type": "buy"
+  },
+  {
+    "amount": 0.888,
+    "date": 1315829284,
+    "price": 41.5,
+    "tid": 5106,
+    "type": "buy"
+  },
+  {
+    "amount": 0.888,
+    "date": 1315829574,
+    "price": 42.39,
+    "tid": 5107,
+    "type": "buy"
+  },
+  {
+    "amount": 0.632,
+    "date": 1315829574,
+    "price": 42.4,
+    "tid": 5108,
+    "type": "buy"
+  },
+  {
+    "amount": 0.09,
+    "date": 1315833594,
+    "price": 40.06,
+    "tid": 5109,
+    "type": "sell"
+  },
+  {
+    "amount": 0.4,
+    "date": 1315834465,
+    "price": 40.06,
+    "tid": 5110,
+    "type": "sell"
+  },
+  {
+    "amount": 0.4,
+    "date": 1315838811,
+    "price": 40.07,
+    "tid": 5111,
+    "type": "sell"
+  },
+  {
+    "amount": 0.11,
+    "date": 1315839144,
+    "price": 41.06,
+    "tid": 5112,
+    "type": "sell"
+  },
+  {
+    "amount": 0.25,
+    "date": 1315839144,
+    "price": 41.05,
+    "tid": 5113,
+    "type": "sell"
+  },
+  {
+    "amount": 0.14,
+    "date": 1315839318,
+    "price": 40.24,
+    "tid": 5114,
+    "type": "buy"
+  },
+  {
+    "amount": 0.16,
+    "date": 1315841263,
+    "price": 40.07,
+    "tid": 5115,
+    "type": "sell"
+  },
+  {
+    "amount": 1,
+    "date": 1315846270,
+    "price": 40.07,
+    "tid": 5116,
+    "type": "sell"
+  },
+  {
+    "amount": 0.51,
+    "date": 1315849873,
+    "price": 40.08,
+    "tid": 5117,
+    "type": "sell"
+  },
+  {
+    "amount": 0.49,
+    "date": 1315854293,
+    "price": 40.08,
+    "tid": 5118,
+    "type": "sell"
+  },
+  {
+    "amount": 4,
+    "date": 1315854293,
+    "price": 40.07,
+    "tid": 5119,
+    "type": "sell"
+  },
+  {
+    "amount": 1,
+    "date": 1315854293,
+    "price": 40.06,
+    "tid": 5120,
+    "type": "sell"
+  },
+  {
+    "amount": 1,
+    "date": 1315854293,
+    "price": 40.05,
+    "tid": 5121,
+    "type": "sell"
+  },
+  {
+    "amount": 5.51,
+    "date": 1315854293,
+    "price": 40.01,
+    "tid": 5122,
+    "type": "sell"
+  },
+  {
+    "amount": 0.49,
+    "date": 1315854331,
+    "price": 40.01,
+    "tid": 5123,
+    "type": "sell"
+  },
+  {
+    "amount": 0.499,
+    "date": 1315854331,
+    "price": 40.01,
+    "tid": 5124,
+    "type": "sell"
+  },
+  {
+    "amount": 9.99,
+    "date": 1315854355,
+    "price": 40,
+    "tid": 5125,
+    "type": "sell"
+  },
+  {
+    "amount": 1,
+    "date": 1315859278,
+    "price": 40.01,
+    "tid": 5126,
+    "type": "sell"
+  },
+  {
+    "amount": 2.462,
+    "date": 1315859278,
+    "price": 40,
+    "tid": 5127,
+    "type": "sell"
+  },
+  {
+    "amount": 1,
+    "date": 1315859278,
+    "price": 40,
+    "tid": 5128,
+    "type": "sell"
+  },
+  {
+    "amount": 0.05,
+    "date": 1315859278,
+    "price": 40,
+    "tid": 5129,
+    "type": "sell"
+  },
+  {
+    "amount": 2,
+    "date": 1315859278,
+    "price": 40,
+    "tid": 5130,
+    "type": "sell"
+  },
+  {
+    "amount": 7.5,
+    "date": 1315859278,
+    "price": 40,
+    "tid": 5131,
+    "type": "sell"
+  },
+  {
+    "amount": 3,
+    "date": 1315859278,
+    "price": 40,
+    "tid": 5132,
+    "type": "sell"
+  },
+  {
+    "amount": 1,
+    "date": 1315859278,
+    "price": 39.5,
+    "tid": 5133,
+    "type": "sell"
+  },
+  {
+    "amount": 0.703,
+    "date": 1315859278,
+    "price": 39,
+    "tid": 5134,
+    "type": "sell"
+  },
+  {
+    "amount": 2.55,
+    "date": 1315862007,
+    "price": 37.51,
+    "tid": 5135,
+    "type": "sell"
+  },
+  {
+    "amount": 3,
+    "date": 1315862007,
+    "price": 37.5,
+    "tid": 5136,
+    "type": "sell"
+  },
+  {
+    "amount": 0.49,
+    "date": 1315870145,
+    "price": 36.67,
+    "tid": 5137,
+    "type": "sell"
+  },
+  {
+    "amount": 1.036,
+    "date": 1315890941,
+    "price": 37.01,
+    "tid": 5138,
+    "type": "sell"
+  },
+  {
+    "amount": 0.074,
+    "date": 1315890941,
+    "price": 37,
+    "tid": 5139,
+    "type": "sell"
+  },
+  {
+    "amount": 1,
+    "date": 1315891048,
+    "price": 37.01,
+    "tid": 5140,
+    "type": "sell"
+  },
+  {
+    "amount": 0.036,
+    "date": 1315891109,
+    "price": 37.01,
+    "tid": 5141,
+    "type": "sell"
+  },
+  {
+    "amount": 0.226,
+    "date": 1315891109,
+    "price": 37,
+    "tid": 5142,
+    "type": "sell"
+  },
+  {
+    "amount": 0.098,
+    "date": 1315891109,
+    "price": 37,
+    "tid": 5143,
+    "type": "sell"
+  },
+  {
+    "amount": 2,
+    "date": 1315897634,
+    "price": 40,
+    "tid": 5144,
+    "type": "buy"
+  },
+  {
+    "amount": 2,
+    "date": 1315898185,
+    "price": 38,
+    "tid": 5145,
+    "type": "sell"
+  },
+  {
+    "amount": 0.5,
+    "date": 1315898207,
+    "price": 37.22,
+    "tid": 5146,
+    "type": "sell"
+  },
+  {
+    "amount": 1,
+    "date": 1315898441,
+    "price": 37.21,
+    "tid": 5147,
+    "type": "sell"
+  },
+  {
+    "amount": 0.1,
+    "date": 1315899144,
+    "price": 37.22,
+    "tid": 5148,
+    "type": "buy"
+  },
+  {
+    "amount": 0.503,
+    "date": 1315901094,
+    "price": 38,
+    "tid": 5149,
+    "type": "sell"
+  },
+  {
+    "amount": 3.522,
+    "date": 1315903296,
+    "price": 38,
+    "tid": 5150,
+    "type": "sell"
+  },
+  {
+    "amount": 0.44,
+    "date": 1315904180,
+    "price": 38,
+    "tid": 5151,
+    "type": "sell"
+  },
+  {
+    "amount": 0.535,
+    "date": 1315904905,
+    "price": 38,
+    "tid": 5152,
+    "type": "sell"
+  },
+  {
+    "amount": 5,
+    "date": 1315904905,
+    "price": 38,
+    "tid": 5153,
+    "type": "sell"
+  },
+  {
+    "amount": 0.6,
+    "date": 1315905428,
+    "price": 39.99,
+    "tid": 5154,
+    "type": "buy"
+  },
+  {
+    "amount": 0.4,
+    "date": 1315905428,
+    "price": 40,
+    "tid": 5155,
+    "type": "buy"
+  },
+  {
+    "amount": 1.6,
+    "date": 1315905644,
+    "price": 40,
+    "tid": 5156,
+    "type": "buy"
+  },
+  {
+    "amount": 2.7,
+    "date": 1315905939,
+    "price": 40.01,
+    "tid": 5157,
+    "type": "sell"
+  },
+  {
+    "amount": 1.016,
+    "date": 1315907037,
+    "price": 40.01,
+    "tid": 5158,
+    "type": "sell"
+  },
+  {
+    "amount": 1,
+    "date": 1315907596,
+    "price": 40.01,
+    "tid": 5159,
+    "type": "sell"
+  },
+  {
+    "amount": 2.684,
+    "date": 1315907611,
+    "price": 40.01,
+    "tid": 5160,
+    "type": "sell"
+  },
+  {
+    "amount": 1,
+    "date": 1315912588,
+    "price": 40,
+    "tid": 5161,
+    "type": "sell"
+  },
+  {
+    "amount": 1.036,
+    "date": 1315912809,
+    "price": 40,
+    "tid": 5162,
+    "type": "sell"
+  },
+  {
+    "amount": 1.036,
+    "date": 1315912871,
+    "price": 40,
+    "tid": 5163,
+    "type": "sell"
+  },
+  {
+    "amount": 1.036,
+    "date": 1315912924,
+    "price": 40,
+    "tid": 5164,
+    "type": "sell"
+  },
+  {
+    "amount": 0.892,
+    "date": 1315913000,
+    "price": 40,
+    "tid": 5165,
+    "type": "sell"
+  },
+  {
+    "amount": 0.01,
+    "date": 1315913699,
+    "price": 40,
+    "tid": 5166,
+    "type": "buy"
+  },
+  {
+    "amount": 0.134,
+    "date": 1315913836,
+    "price": 40,
+    "tid": 5167,
+    "type": "buy"
+  },
+  {
+    "amount": 1.866,
+    "date": 1315913836,
+    "price": 40.01,
+    "tid": 5168,
+    "type": "buy"
+  },
+  {
+    "amount": 0.03,
+    "date": 1315913861,
+    "price": 40.01,
+    "tid": 5169,
+    "type": "buy"
+  },
+  {
+    "amount": 0.02,
+    "date": 1315913936,
+    "price": 40,
+    "tid": 5170,
+    "type": "buy"
+  },
+  {
+    "amount": 0.002,
+    "date": 1315913997,
+    "price": 40.01,
+    "tid": 5171,
+    "type": "buy"
+  },
+  {
+    "amount": 0.02,
+    "date": 1315914401,
+    "price": 40,
+    "tid": 5172,
+    "type": "sell"
+  },
+  {
+    "amount": 0.136,
+    "date": 1315914559,
+    "price": 38,
+    "tid": 5173,
+    "type": "sell"
+  },
+  {
+    "amount": 0.45,
+    "date": 1315919416,
+    "price": 38,
+    "tid": 5174,
+    "type": "sell"
+  },
+  {
+    "amount": 0.44,
+    "date": 1315923006,
+    "price": 38.01,
+    "tid": 5175,
+    "type": "sell"
+  },
+  {
+    "amount": 0.5,
+    "date": 1315928677,
+    "price": 38.02,
+    "tid": 5176,
+    "type": "sell"
+  },
+  {
+    "amount": 1.036,
+    "date": 1315928705,
+    "price": 38.01,
+    "tid": 5177,
+    "type": "sell"
+  },
+  {
+    "amount": 0.754,
+    "date": 1315928766,
+    "price": 38.01,
+    "tid": 5178,
+    "type": "sell"
+  },
+  {
+    "amount": 0.282,
+    "date": 1315928940,
+    "price": 38.01,
+    "tid": 5179,
+    "type": "buy"
+  },
+  {
+    "amount": 0.5,
+    "date": 1315928940,
+    "price": 38.02,
+    "tid": 5180,
+    "type": "buy"
+  },
+  {
+    "amount": 2,
+    "date": 1315940461,
+    "price": 37.5,
+    "tid": 5181,
+    "type": "sell"
+  },
+  {
+    "amount": 1,
+    "date": 1315957807,
+    "price": 37.61,
+    "tid": 5182,
+    "type": "sell"
+  },
+  {
+    "amount": 0.899,
+    "date": 1315957807,
+    "price": 37.6,
+    "tid": 5183,
+    "type": "sell"
+  },
+  {
+    "amount": 1,
+    "date": 1315958756,
+    "price": 37.61,
+    "tid": 5184,
+    "type": "sell"
+  },
+  {
+    "amount": 0.901,
+    "date": 1315958756,
+    "price": 37.6,
+    "tid": 5185,
+    "type": "sell"
+  },
+  {
+    "amount": 3.14,
+    "date": 1315958796,
+    "price": 37.58,
+    "tid": 5186,
+    "type": "sell"
+  },
+  {
+    "amount": 3.86,
+    "date": 1315958815,
+    "price": 37.58,
+    "tid": 5187,
+    "type": "sell"
+  },
+  {
+    "amount": 0.006,
+    "date": 1315958881,
+    "price": 37.5,
+    "tid": 5188,
+    "type": "sell"
+  },
+  {
+    "amount": 0.3,
+    "date": 1315958881,
+    "price": 37.5,
+    "tid": 5189,
+    "type": "sell"
+  },
+  {
+    "amount": 0.3,
+    "date": 1315958929,
+    "price": 37.3,
+    "tid": 5190,
+    "type": "sell"
+  },
+  {
+    "amount": 0.224,
+    "date": 1315958929,
+    "price": 37.3,
+    "tid": 5191,
+    "type": "sell"
+  },
+  {
+    "amount": 0.71,
+    "date": 1315959628,
+    "price": 37.3,
+    "tid": 5192,
+    "type": "sell"
+  },
+  {
+    "amount": 1.766,
+    "date": 1315960453,
+    "price": 37.3,
+    "tid": 5193,
+    "type": "sell"
+  },
+  {
+    "amount": 0.234,
+    "date": 1315960453,
+    "price": 37.22,
+    "tid": 5194,
+    "type": "sell"
+  },
+  {
+    "amount": 1,
+    "date": 1315960675,
+    "price": 39.94,
+    "tid": 5195,
+    "type": "buy"
+  },
+  {
+    "amount": 0.5,
+    "date": 1315960860,
+    "price": 39.98,
+    "tid": 5196,
+    "type": "buy"
+  },
+  {
+    "amount": 1,
+    "date": 1315960860,
+    "price": 39.98,
+    "tid": 5197,
+    "type": "buy"
+  },
+  {
+    "amount": 2.3,
+    "date": 1315960901,
+    "price": 40,
+    "tid": 5198,
+    "type": "buy"
+  },
+  {
+    "amount": 0.72,
+    "date": 1315960901,
+    "price": 40,
+    "tid": 5199,
+    "type": "buy"
+  },
+  {
+    "amount": 0.102,
+    "date": 1315961017,
+    "price": 40.01,
+    "tid": 5200,
+    "type": "buy"
+  },
+  {
+    "amount": 1,
+    "date": 1315961346,
+    "price": 39.96,
+    "tid": 5201,
+    "type": "sell"
+  },
+  {
+    "amount": 1,
+    "date": 1315961346,
+    "price": 39.95,
+    "tid": 5202,
+    "type": "sell"
+  },
+  {
+    "amount": 0.25,
+    "date": 1315969333,
+    "price": 39.93,
+    "tid": 5203,
+    "type": "buy"
+  },
+  {
+    "amount": 1,
+    "date": 1315972859,
+    "price": 39.93,
+    "tid": 5204,
+    "type": "buy"
+  },
+  {
+    "amount": 1,
+    "date": 1315978752,
+    "price": 38.01,
+    "tid": 5205,
+    "type": "sell"
+  },
+  {
+    "amount": 1,
+    "date": 1315978752,
+    "price": 38,
+    "tid": 5206,
+    "type": "sell"
+  },
+  {
+    "amount": 0.718,
+    "date": 1315981877,
+    "price": 37.32,
+    "tid": 5207,
+    "type": "sell"
+  },
+  {
+    "amount": 1,
+    "date": 1315983137,
+    "price": 37.31,
+    "tid": 5208,
+    "type": "sell"
+  },
+  {
+    "amount": 4,
+    "date": 1315983137,
+    "price": 37.3,
+    "tid": 5209,
+    "type": "sell"
+  },
+  {
+    "amount": 0.766,
+    "date": 1315983137,
+    "price": 37.22,
+    "tid": 5210,
+    "type": "sell"
+  },
+  {
+    "amount": 0.046,
+    "date": 1315983137,
+    "price": 37.22,
+    "tid": 5211,
+    "type": "sell"
+  },
+  {
+    "amount": 0.254,
+    "date": 1315985217,
+    "price": 37.22,
+    "tid": 5212,
+    "type": "sell"
+  },
+  {
+    "amount": 0.02,
+    "date": 1315985217,
+    "price": 37.12,
+    "tid": 5213,
+    "type": "sell"
+  },
+  {
+    "amount": 0.2,
+    "date": 1315985217,
+    "price": 37.12,
+    "tid": 5214,
+    "type": "sell"
+  },
+  {
+    "amount": 0.026,
+    "date": 1315985217,
+    "price": 37,
+    "tid": 5215,
+    "type": "sell"
+  },
+  {
+    "amount": 0.274,
+    "date": 1315990267,
+    "price": 37,
+    "tid": 5216,
+    "type": "sell"
+  },
+  {
+    "amount": 0.15,
+    "date": 1315990267,
+    "price": 37,
+    "tid": 5217,
+    "type": "sell"
+  },
+  {
+    "amount": 0.02,
+    "date": 1315990267,
+    "price": 37,
+    "tid": 5218,
+    "type": "sell"
+  },
+  {
+    "amount": 0.556,
+    "date": 1315990267,
+    "price": 37,
+    "tid": 5219,
+    "type": "sell"
+  },
+  {
+    "amount": 1,
+    "date": 1315990723,
+    "price": 37,
+    "tid": 5220,
+    "type": "sell"
+  },
+  {
+    "amount": 2.67,
+    "date": 1315992601,
+    "price": 37,
+    "tid": 5221,
+    "type": "sell"
+  },
+  {
+    "amount": 2,
+    "date": 1316000380,
+    "price": 37.01,
+    "tid": 5222,
+    "type": "sell"
+  },
+  {
+    "amount": 0.879,
+    "date": 1316000380,
+    "price": 37,
+    "tid": 5223,
+    "type": "sell"
+  },
+  {
+    "amount": 1.4,
+    "date": 1316000511,
+    "price": 37,
+    "tid": 5224,
+    "type": "sell"
+  },
+  {
+    "amount": 0.27,
+    "date": 1316002654,
+    "price": 39.28,
+    "tid": 5225,
+    "type": "buy"
+  },
+  {
+    "amount": 3.495,
+    "date": 1316003148,
+    "price": 37,
+    "tid": 5226,
+    "type": "sell"
+  },
+  {
+    "amount": 1.026,
+    "date": 1316003148,
+    "price": 37,
+    "tid": 5227,
+    "type": "sell"
+  },
+  {
+    "amount": 1,
+    "date": 1316003179,
+    "price": 36.81,
+    "tid": 5228,
+    "type": "sell"
+  },
+  {
+    "amount": 0.52,
+    "date": 1316003201,
+    "price": 36.8,
+    "tid": 5229,
+    "type": "sell"
+  },
+  {
+    "amount": 0.2,
+    "date": 1316003223,
+    "price": 36.69,
+    "tid": 5230,
+    "type": "sell"
+  },
+  {
+    "amount": 0.2,
+    "date": 1316003223,
+    "price": 36.68,
+    "tid": 5231,
+    "type": "sell"
+  },
+  {
+    "amount": 4,
+    "date": 1316003287,
+    "price": 36.61,
+    "tid": 5232,
+    "type": "sell"
+  },
+  {
+    "amount": 0.317,
+    "date": 1316003309,
+    "price": 36.6,
+    "tid": 5233,
+    "type": "sell"
+  },
+  {
+    "amount": 0.48,
+    "date": 1316003648,
+    "price": 36.78,
+    "tid": 5234,
+    "type": "sell"
+  },
+  {
+    "amount": 1.14,
+    "date": 1316007379,
+    "price": 36.78,
+    "tid": 5235,
+    "type": "sell"
+  },
+  {
+    "amount": 0.151,
+    "date": 1316008207,
+    "price": 36.78,
+    "tid": 5236,
+    "type": "sell"
+  },
+  {
+    "amount": 0.62,
+    "date": 1316013743,
+    "price": 36.8,
+    "tid": 5237,
+    "type": "sell"
+  },
+  {
+    "amount": 1.38,
+    "date": 1316017346,
+    "price": 36.8,
+    "tid": 5238,
+    "type": "sell"
+  },
+  {
+    "amount": 0.005,
+    "date": 1316017346,
+    "price": 36.8,
+    "tid": 5239,
+    "type": "sell"
+  },
+  {
+    "amount": 0.6,
+    "date": 1316023018,
+    "price": 36.79,
+    "tid": 5240,
+    "type": "sell"
+  },
+  {
+    "amount": 0.729,
+    "date": 1316023018,
+    "price": 36.78,
+    "tid": 5241,
+    "type": "sell"
+  },
+  {
+    "amount": 0.5,
+    "date": 1316026268,
+    "price": 36.61,
+    "tid": 5242,
+    "type": "sell"
+  },
+  {
+    "amount": 0.3,
+    "date": 1316026268,
+    "price": 36.61,
+    "tid": 5243,
+    "type": "sell"
+  },
+  {
+    "amount": 4.698,
+    "date": 1316026268,
+    "price": 36.6,
+    "tid": 5244,
+    "type": "sell"
+  },
+  {
+    "amount": 0.1,
+    "date": 1316026268,
+    "price": 36.6,
+    "tid": 5245,
+    "type": "sell"
+  },
+  {
+    "amount": 7,
+    "date": 1316026268,
+    "price": 36.58,
+    "tid": 5246,
+    "type": "sell"
+  },
+  {
+    "amount": 5.122,
+    "date": 1316026268,
+    "price": 36.5,
+    "tid": 5247,
+    "type": "sell"
+  },
+  {
+    "amount": 3,
+    "date": 1316030025,
+    "price": 36.51,
+    "tid": 5248,
+    "type": "sell"
+  },
+  {
+    "amount": 23.51,
+    "date": 1316030025,
+    "price": 36.5,
+    "tid": 5249,
+    "type": "sell"
+  },
+  {
+    "amount": 20.668,
+    "date": 1316033742,
+    "price": 36.5,
+    "tid": 5250,
+    "type": "sell"
+  },
+  {
+    "amount": 2,
+    "date": 1316033742,
+    "price": 36.5,
+    "tid": 5251,
+    "type": "sell"
+  },
+  {
+    "amount": 0.6,
+    "date": 1316036614,
+    "price": 36.79,
+    "tid": 5252,
+    "type": "buy"
+  },
+  {
+    "amount": 0.29,
+    "date": 1316050154,
+    "price": 36.1,
+    "tid": 5253,
+    "type": "sell"
+  },
+  {
+    "amount": 1,
+    "date": 1316052102,
+    "price": 38.27,
+    "tid": 5254,
+    "type": "buy"
+  },
+  {
+    "amount": 0.21,
+    "date": 1316054242,
+    "price": 36.1,
+    "tid": 5255,
+    "type": "sell"
+  },
+  {
+    "amount": 0.23,
+    "date": 1316054787,
+    "price": 36.1,
+    "tid": 5256,
+    "type": "buy"
+  },
+  {
+    "amount": 10,
+    "date": 1316060465,
+    "price": 36.08,
+    "tid": 5257,
+    "type": "sell"
+  },
+  {
+    "amount": 10,
+    "date": 1316060465,
+    "price": 36.03,
+    "tid": 5258,
+    "type": "sell"
+  },
+  {
+    "amount": 1,
+    "date": 1316060465,
+    "price": 36.02,
+    "tid": 5259,
+    "type": "sell"
+  },
+  {
+    "amount": 4,
+    "date": 1316060465,
+    "price": 36.02,
+    "tid": 5260,
+    "type": "sell"
+  },
+  {
+    "amount": 8.333,
+    "date": 1316060465,
+    "price": 36,
+    "tid": 5261,
+    "type": "sell"
+  },
+  {
+    "amount": 1,
+    "date": 1316060465,
+    "price": 36,
+    "tid": 5262,
+    "type": "sell"
+  },
+  {
+    "amount": 2,
+    "date": 1316060465,
+    "price": 36,
+    "tid": 5263,
+    "type": "sell"
+  },
+  {
+    "amount": 0.06,
+    "date": 1316060465,
+    "price": 36,
+    "tid": 5264,
+    "type": "sell"
+  },
+  {
+    "amount": 1,
+    "date": 1316060465,
+    "price": 36,
+    "tid": 5265,
+    "type": "sell"
+  },
+  {
+    "amount": 1,
+    "date": 1316060465,
+    "price": 36,
+    "tid": 5266,
+    "type": "sell"
+  },
+  {
+    "amount": 1,
+    "date": 1316060465,
+    "price": 36,
+    "tid": 5267,
+    "type": "sell"
+  },
+  {
+    "amount": 0.36,
+    "date": 1316061663,
+    "price": 35.5,
+    "tid": 5268,
+    "type": "sell"
+  },
+  {
+    "amount": 1.006,
+    "date": 1316065740,
+    "price": 35.01,
+    "tid": 5269,
+    "type": "sell"
+  },
+  {
+    "amount": 1.005,
+    "date": 1316065740,
+    "price": 35.01,
+    "tid": 5270,
+    "type": "sell"
+  },
+  {
+    "amount": 0.989,
+    "date": 1316065740,
+    "price": 35.01,
+    "tid": 5271,
+    "type": "sell"
+  },
+  {
+    "amount": 0.011,
+    "date": 1316065801,
+    "price": 35.01,
+    "tid": 5272,
+    "type": "sell"
+  },
+  {
+    "amount": 0.2,
+    "date": 1316065801,
+    "price": 35,
+    "tid": 5273,
+    "type": "sell"
+  },
+  {
+    "amount": 1.065,
+    "date": 1316065801,
+    "price": 35,
+    "tid": 5274,
+    "type": "sell"
+  },
+  {
+    "amount": 2,
+    "date": 1316066294,
+    "price": 35,
+    "tid": 5275,
+    "type": "sell"
+  },
+  {
+    "amount": 0.268,
+    "date": 1316067089,
+    "price": 35,
+    "tid": 5276,
+    "type": "sell"
+  },
+  {
+    "amount": 9.732,
+    "date": 1316067089,
+    "price": 35,
+    "tid": 5277,
+    "type": "sell"
+  },
+  {
+    "amount": 0.268,
+    "date": 1316068298,
+    "price": 35,
+    "tid": 5278,
+    "type": "sell"
+  },
+  {
+    "amount": 1,
+    "date": 1316068298,
+    "price": 35,
+    "tid": 5279,
+    "type": "sell"
+  },
+  {
+    "amount": 1,
+    "date": 1316068298,
+    "price": 35,
+    "tid": 5280,
+    "type": "sell"
+  },
+  {
+    "amount": 1.43,
+    "date": 1316068677,
+    "price": 34.81,
+    "tid": 5281,
+    "type": "sell"
+  },
+  {
+    "amount": 2.15,
+    "date": 1316070615,
+    "price": 35.18,
+    "tid": 5282,
+    "type": "sell"
+  },
+  {
+    "amount": 0.405,
+    "date": 1316071591,
+    "price": 35.18,
+    "tid": 5283,
+    "type": "sell"
+  },
+  {
+    "amount": 1.22,
+    "date": 1316071591,
+    "price": 34.81,
+    "tid": 5284,
+    "type": "sell"
+  },
+  {
+    "amount": 1.038,
+    "date": 1316071784,
+    "price": 35,
+    "tid": 5285,
+    "type": "buy"
+  },
+  {
+    "amount": 2.34,
+    "date": 1316071967,
+    "price": 35,
+    "tid": 5286,
+    "type": "buy"
+  },
+  {
+    "amount": 0.1,
+    "date": 1316072420,
+    "price": 35,
+    "tid": 5287,
+    "type": "buy"
+  },
+  {
+    "amount": 0.522,
+    "date": 1316073090,
+    "price": 35,
+    "tid": 5288,
+    "type": "buy"
+  },
+  {
+    "amount": 0.75,
+    "date": 1316082477,
+    "price": 34.81,
+    "tid": 5289,
+    "type": "sell"
+  },
+  {
+    "amount": 1.5,
+    "date": 1316083726,
+    "price": 34.81,
+    "tid": 5290,
+    "type": "sell"
+  },
+  {
+    "amount": 1,
+    "date": 1316086426,
+    "price": 35.99,
+    "tid": 5291,
+    "type": "buy"
+  },
+  {
+    "amount": 0.46,
+    "date": 1316089752,
+    "price": 34.83,
+    "tid": 5292,
+    "type": "sell"
+  },
+  {
+    "amount": 1,
+    "date": 1316091508,
+    "price": 35,
+    "tid": 5293,
+    "type": "sell"
+  },
+  {
+    "amount": 9,
+    "date": 1316092005,
+    "price": 34.83,
+    "tid": 5294,
+    "type": "sell"
+  },
+  {
+    "amount": 0.54,
+    "date": 1316092164,
+    "price": 34.83,
+    "tid": 5295,
+    "type": "sell"
+  },
+  {
+    "amount": 0.2,
+    "date": 1316092421,
+    "price": 34.81,
+    "tid": 5296,
+    "type": "sell"
+  },
+  {
+    "amount": 3,
+    "date": 1316092445,
+    "price": 34.81,
+    "tid": 5297,
+    "type": "sell"
+  },
+  {
+    "amount": 0.153,
+    "date": 1316092453,
+    "price": 34.81,
+    "tid": 5298,
+    "type": "sell"
+  },
+  {
+    "amount": 1,
+    "date": 1316093674,
+    "price": 35.49,
+    "tid": 5299,
+    "type": "buy"
+  },
+  {
+    "amount": 1.036,
+    "date": 1316093775,
+    "price": 34.99,
+    "tid": 5300,
+    "type": "buy"
+  },
+  {
+    "amount": 3.964,
+    "date": 1316093775,
+    "price": 35,
+    "tid": 5301,
+    "type": "buy"
+  },
+  {
+    "amount": 1.036,
+    "date": 1316093873,
+    "price": 34.99,
+    "tid": 5302,
+    "type": "buy"
+  },
+  {
+    "amount": 3.964,
+    "date": 1316093873,
+    "price": 35,
+    "tid": 5303,
+    "type": "buy"
+  },
+  {
+    "amount": 1.036,
+    "date": 1316094512,
+    "price": 34.99,
+    "tid": 5304,
+    "type": "buy"
+  },
+  {
+    "amount": 0.964,
+    "date": 1316094512,
+    "price": 35,
+    "tid": 5305,
+    "type": "buy"
+  },
+  {
+    "amount": 1.747,
+    "date": 1316094760,
+    "price": 34.81,
+    "tid": 5306,
+    "type": "sell"
+  },
+  {
+    "amount": 1.5,
+    "date": 1316094776,
+    "price": 34.8,
+    "tid": 5307,
+    "type": "sell"
+  },
+  {
+    "amount": 1.036,
+    "date": 1316094790,
+    "price": 34.99,
+    "tid": 5308,
+    "type": "buy"
+  },
+  {
+    "amount": 10,
+    "date": 1316094797,
+    "price": 34.72,
+    "tid": 5309,
+    "type": "sell"
+  },
+  {
+    "amount": 0.21,
+    "date": 1316096119,
+    "price": 35,
+    "tid": 5310,
+    "type": "buy"
+  },
+  {
+    "amount": 0.898,
+    "date": 1316096765,
+    "price": 35,
+    "tid": 5311,
+    "type": "buy"
+  },
+  {
+    "amount": 1.102,
+    "date": 1316096765,
+    "price": 35,
+    "tid": 5312,
+    "type": "buy"
+  },
+  {
+    "amount": 1,
+    "date": 1316098112,
+    "price": 35,
+    "tid": 5313,
+    "type": "buy"
+  },
+  {
+    "amount": 1.8,
+    "date": 1316104403,
+    "price": 33.95,
+    "tid": 5314,
+    "type": "sell"
+  },
+  {
+    "amount": 0.2,
+    "date": 1316106569,
+    "price": 33.95,
+    "tid": 5315,
+    "type": "sell"
+  },
+  {
+    "amount": 0.147,
+    "date": 1316106606,
+    "price": 33.88,
+    "tid": 5316,
+    "type": "sell"
+  },
+  {
+    "amount": 0.29,
+    "date": 1316109435,
+    "price": 33.88,
+    "tid": 5317,
+    "type": "sell"
+  },
+  {
+    "amount": 1.863,
+    "date": 1316112652,
+    "price": 33.88,
+    "tid": 5318,
+    "type": "sell"
+  },
+  {
+    "amount": 6,
+    "date": 1316112652,
+    "price": 33.66,
+    "tid": 5319,
+    "type": "sell"
+  },
+  {
+    "amount": 10,
+    "date": 1316112652,
+    "price": 33.58,
+    "tid": 5320,
+    "type": "sell"
+  },
+  {
+    "amount": 10,
+    "date": 1316112652,
+    "price": 33.51,
+    "tid": 5321,
+    "type": "sell"
+  },
+  {
+    "amount": 2,
+    "date": 1316112652,
+    "price": 33.5,
+    "tid": 5322,
+    "type": "sell"
+  },
+  {
+    "amount": 3,
+    "date": 1316112652,
+    "price": 33.5,
+    "tid": 5323,
+    "type": "sell"
+  },
+  {
+    "amount": 0.49,
+    "date": 1316112697,
+    "price": 33.33,
+    "tid": 5324,
+    "type": "sell"
+  },
+  {
+    "amount": 0.31,
+    "date": 1316112697,
+    "price": 33.22,
+    "tid": 5325,
+    "type": "sell"
+  },
+  {
+    "amount": 0.69,
+    "date": 1316114016,
+    "price": 33.22,
+    "tid": 5326,
+    "type": "sell"
+  },
+  {
+    "amount": 2,
+    "date": 1316114035,
+    "price": 33.2,
+    "tid": 5327,
+    "type": "sell"
+  },
+  {
+    "amount": 3.767,
+    "date": 1316114076,
+    "price": 33.11,
+    "tid": 5328,
+    "type": "sell"
+  },
+  {
+    "amount": 17.233,
+    "date": 1316114694,
+    "price": 33.11,
+    "tid": 5329,
+    "type": "sell"
+  },
+  {
+    "amount": 3,
+    "date": 1316114694,
+    "price": 33,
+    "tid": 5330,
+    "type": "sell"
+  },
+  {
+    "amount": 1,
+    "date": 1316114694,
+    "price": 33,
+    "tid": 5331,
+    "type": "sell"
+  },
+  {
+    "amount": 10,
+    "date": 1316114694,
+    "price": 33,
+    "tid": 5332,
+    "type": "sell"
+  },
+  {
+    "amount": 2.277,
+    "date": 1316114694,
+    "price": 33,
+    "tid": 5333,
+    "type": "sell"
+  },
+  {
+    "amount": 1.723,
+    "date": 1316120733,
+    "price": 33,
+    "tid": 5334,
+    "type": "sell"
+  },
+  {
+    "amount": 6,
+    "date": 1316120733,
+    "price": 32.98,
+    "tid": 5335,
+    "type": "sell"
+  },
+  {
+    "amount": 1.583,
+    "date": 1316120733,
+    "price": 32.8,
+    "tid": 5336,
+    "type": "sell"
+  },
+  {
+    "amount": 2.694,
+    "date": 1316120733,
+    "price": 32.5,
+    "tid": 5337,
+    "type": "sell"
+  },
+  {
+    "amount": 0.306,
+    "date": 1316120764,
+    "price": 32.5,
+    "tid": 5338,
+    "type": "sell"
+  },
+  {
+    "amount": 3,
+    "date": 1316125614,
+    "price": 35,
+    "tid": 5339,
+    "type": "buy"
+  },
+  {
+    "amount": 4.898,
+    "date": 1316126632,
+    "price": 35,
+    "tid": 5340,
+    "type": "buy"
+  },
+  {
+    "amount": 1,
+    "date": 1316131806,
+    "price": 32.11,
+    "tid": 5341,
+    "type": "sell"
+  },
+  {
+    "amount": 0.001,
+    "date": 1316132463,
+    "price": 32,
+    "tid": 5342,
+    "type": "sell"
+  },
+  {
+    "amount": 2,
+    "date": 1316132463,
+    "price": 32,
+    "tid": 5343,
+    "type": "sell"
+  },
+  {
+    "amount": 1,
+    "date": 1316132463,
+    "price": 32,
+    "tid": 5344,
+    "type": "sell"
+  },
+  {
+    "amount": 0.429,
+    "date": 1316132482,
+    "price": 31.5,
+    "tid": 5345,
+    "type": "sell"
+  },
+  {
+    "amount": 1.571,
+    "date": 1316136670,
+    "price": 31.5,
+    "tid": 5346,
+    "type": "sell"
+  },
+  {
+    "amount": 10,
+    "date": 1316136670,
+    "price": 31.5,
+    "tid": 5347,
+    "type": "sell"
+  },
+  {
+    "amount": 1.036,
+    "date": 1316141126,
+    "price": 34.95,
+    "tid": 5348,
+    "type": "buy"
+  },
+  {
+    "amount": 1.036,
+    "date": 1316141208,
+    "price": 34.95,
+    "tid": 5349,
+    "type": "buy"
+  },
+  {
+    "amount": 1.164,
+    "date": 1316141208,
+    "price": 34.96,
+    "tid": 5350,
+    "type": "buy"
+  },
+  {
+    "amount": 8.867,
+    "date": 1316142951,
+    "price": 33.99,
+    "tid": 5351,
+    "type": "buy"
+  },
+  {
+    "amount": 0.303,
+    "date": 1316143008,
+    "price": 33.99,
+    "tid": 5352,
+    "type": "buy"
+  },
+  {
+    "amount": 0.14,
+    "date": 1316143008,
+    "price": 34,
+    "tid": 5353,
+    "type": "buy"
+  },
+  {
+    "amount": 8,
+    "date": 1316143513,
+    "price": 32,
+    "tid": 5354,
+    "type": "sell"
+  },
+  {
+    "amount": 29.86,
+    "date": 1316144340,
+    "price": 34,
+    "tid": 5355,
+    "type": "buy"
+  },
+  {
+    "amount": 2.548,
+    "date": 1316144676,
+    "price": 32.98,
+    "tid": 5356,
+    "type": "sell"
+  },
+  {
+    "amount": 1.231,
+    "date": 1316147704,
+    "price": 32.12,
+    "tid": 5357,
+    "type": "sell"
+  },
+  {
+    "amount": 2,
+    "date": 1316147965,
+    "price": 32,
+    "tid": 5358,
+    "type": "sell"
+  },
+  {
+    "amount": 3.5,
+    "date": 1316148855,
+    "price": 31.62,
+    "tid": 5359,
+    "type": "sell"
+  },
+  {
+    "amount": 3.49,
+    "date": 1316148855,
+    "price": 31.62,
+    "tid": 5360,
+    "type": "sell"
+  },
+  {
+    "amount": 0.11,
+    "date": 1316150379,
+    "price": 31.62,
+    "tid": 5361,
+    "type": "sell"
+  },
+  {
+    "amount": 5.4,
+    "date": 1316151967,
+    "price": 31.62,
+    "tid": 5362,
+    "type": "sell"
+  },
+  {
+    "amount": 0.004,
+    "date": 1316151967,
+    "price": 31.61,
+    "tid": 5363,
+    "type": "sell"
+  },
+  {
+    "amount": 2.409,
+    "date": 1316151967,
+    "price": 31.6,
+    "tid": 5364,
+    "type": "sell"
+  },
+  {
+    "amount": 6,
+    "date": 1316151967,
+    "price": 31.5,
+    "tid": 5365,
+    "type": "sell"
+  },
+  {
+    "amount": 2.632,
+    "date": 1316151967,
+    "price": 31.5,
+    "tid": 5366,
+    "type": "sell"
+  },
+  {
+    "amount": 3.2,
+    "date": 1316151967,
+    "price": 31.12,
+    "tid": 5367,
+    "type": "sell"
+  },
+  {
+    "amount": 0.355,
+    "date": 1316151967,
+    "price": 31.09,
+    "tid": 5368,
+    "type": "sell"
+  },
+  {
+    "amount": 5,
+    "date": 1316153336,
+    "price": 31.1,
+    "tid": 5369,
+    "type": "sell"
+  },
+  {
+    "amount": 2.574,
+    "date": 1316153500,
+    "price": 31.09,
+    "tid": 5370,
+    "type": "sell"
+  },
+  {
+    "amount": 7.071,
+    "date": 1316155670,
+    "price": 31.09,
+    "tid": 5371,
+    "type": "sell"
+  },
+  {
+    "amount": 1,
+    "date": 1316155697,
+    "price": 31.08,
+    "tid": 5372,
+    "type": "sell"
+  },
+  {
+    "amount": 1.929,
+    "date": 1316155729,
+    "price": 31.07,
+    "tid": 5373,
+    "type": "sell"
+  },
+  {
+    "amount": 1,
+    "date": 1316157636,
+    "price": 32.08,
+    "tid": 5374,
+    "type": "buy"
+  },
+  {
+    "amount": 1,
+    "date": 1316161440,
+    "price": 31.56,
+    "tid": 5375,
+    "type": "sell"
+  },
+  {
+    "amount": 0.05,
+    "date": 1316161482,
+    "price": 31.56,
+    "tid": 5376,
+    "type": "sell"
+  },
+  {
+    "amount": 1.992,
+    "date": 1316161482,
+    "price": 31.5,
+    "tid": 5377,
+    "type": "sell"
+  },
+  {
+    "amount": 1,
+    "date": 1316163218,
+    "price": 32.08,
+    "tid": 5378,
+    "type": "buy"
+  },
+  {
+    "amount": 0.332,
+    "date": 1316165023,
+    "price": 32.08,
+    "tid": 5379,
+    "type": "buy"
+  },
+  {
+    "amount": 1.8,
+    "date": 1316165161,
+    "price": 32.12,
+    "tid": 5380,
+    "type": "buy"
+  },
+  {
+    "amount": 0.15,
+    "date": 1316165225,
+    "price": 32.12,
+    "tid": 5381,
+    "type": "buy"
+  },
+  {
+    "amount": 2.329,
+    "date": 1316171551,
+    "price": 31.61,
+    "tid": 5382,
+    "type": "sell"
+  },
+  {
+    "amount": 1.97,
+    "date": 1316174979,
+    "price": 32,
+    "tid": 5383,
+    "type": "buy"
+  },
+  {
+    "amount": 4.03,
+    "date": 1316174979,
+    "price": 32.12,
+    "tid": 5384,
+    "type": "buy"
+  },
+  {
+    "amount": 2,
+    "date": 1316175153,
+    "price": 32.12,
+    "tid": 5385,
+    "type": "buy"
+  },
+  {
+    "amount": 0.12,
+    "date": 1316176150,
+    "price": 32.12,
+    "tid": 5386,
+    "type": "buy"
+  },
+  {
+    "amount": 0.005,
+    "date": 1316176238,
+    "price": 32.12,
+    "tid": 5387,
+    "type": "buy"
+  },
+  {
+    "amount": 0.634,
+    "date": 1316177463,
+    "price": 32.12,
+    "tid": 5388,
+    "type": "buy"
+  },
+  {
+    "amount": 2,
+    "date": 1316178533,
+    "price": 32.12,
+    "tid": 5389,
+    "type": "sell"
+  },
+  {
+    "amount": 1,
+    "date": 1316181545,
+    "price": 32.17,
+    "tid": 5390,
+    "type": "sell"
+  },
+  {
+    "amount": 0.1,
+    "date": 1316181545,
+    "price": 32.16,
+    "tid": 5391,
+    "type": "sell"
+  },
+  {
+    "amount": 1,
+    "date": 1316181990,
+    "price": 34.6,
+    "tid": 5392,
+    "type": "buy"
+  },
+  {
+    "amount": 3.97,
+    "date": 1316182814,
+    "price": 33.66,
+    "tid": 5393,
+    "type": "buy"
+  },
+  {
+    "amount": 0.46,
+    "date": 1316183181,
+    "price": 32.17,
+    "tid": 5394,
+    "type": "sell"
+  },
+  {
+    "amount": 2.162,
+    "date": 1316185480,
+    "price": 34.61,
+    "tid": 5395,
+    "type": "buy"
+  },
+  {
+    "amount": 1.074,
+    "date": 1316186205,
+    "price": 34.8,
+    "tid": 5396,
+    "type": "buy"
+  },
+  {
+    "amount": 0.1,
+    "date": 1316192396,
+    "price": 32.17,
+    "tid": 5397,
+    "type": "sell"
+  },
+  {
+    "amount": 0.44,
+    "date": 1316195154,
+    "price": 32.17,
+    "tid": 5398,
+    "type": "sell"
+  },
+  {
+    "amount": 0.75,
+    "date": 1316195154,
+    "price": 32.17,
+    "tid": 5399,
+    "type": "sell"
+  },
+  {
+    "amount": 0.21,
+    "date": 1316195154,
+    "price": 32.16,
+    "tid": 5400,
+    "type": "sell"
+  },
+  {
+    "amount": 2.258,
+    "date": 1316222956,
+    "price": 33.06,
+    "tid": 5401,
+    "type": "sell"
+  },
+  {
+    "amount": 0.4,
+    "date": 1316222956,
+    "price": 33,
+    "tid": 5402,
+    "type": "sell"
+  },
+  {
+    "amount": 1,
+    "date": 1316222956,
+    "price": 32.22,
+    "tid": 5403,
+    "type": "sell"
+  },
+  {
+    "amount": 3,
+    "date": 1316222956,
+    "price": 32.22,
+    "tid": 5404,
+    "type": "sell"
+  },
+  {
+    "amount": 1.182,
+    "date": 1316222956,
+    "price": 32.21,
+    "tid": 5405,
+    "type": "sell"
+  },
+  {
+    "amount": 0.19,
+    "date": 1316224317,
+    "price": 32.21,
+    "tid": 5406,
+    "type": "sell"
+  },
+  {
+    "amount": 1,
+    "date": 1316225712,
+    "price": 32.27,
+    "tid": 5407,
+    "type": "sell"
+  },
+  {
+    "amount": 1.02,
+    "date": 1316225712,
+    "price": 32.26,
+    "tid": 5408,
+    "type": "sell"
+  },
+  {
+    "amount": 6.6,
+    "date": 1316225712,
+    "price": 32.21,
+    "tid": 5409,
+    "type": "sell"
+  },
+  {
+    "amount": 1,
+    "date": 1316230455,
+    "price": 34.36,
+    "tid": 5410,
+    "type": "buy"
+  },
+  {
+    "amount": 1,
+    "date": 1316237988,
+    "price": 32.28,
+    "tid": 5411,
+    "type": "sell"
+  },
+  {
+    "amount": 1,
+    "date": 1316238066,
+    "price": 32.28,
+    "tid": 5412,
+    "type": "sell"
+  },
+  {
+    "amount": 4,
+    "date": 1316238066,
+    "price": 32.27,
+    "tid": 5413,
+    "type": "sell"
+  },
+  {
+    "amount": 1,
+    "date": 1316238098,
+    "price": 32.27,
+    "tid": 5414,
+    "type": "sell"
+  },
+  {
+    "amount": 1,
+    "date": 1316238098,
+    "price": 32.25,
+    "tid": 5415,
+    "type": "sell"
+  },
+  {
+    "amount": 2.499,
+    "date": 1316239593,
+    "price": 32.28,
+    "tid": 5416,
+    "type": "sell"
+  },
+  {
+    "amount": 0.601,
+    "date": 1316241709,
+    "price": 32.28,
+    "tid": 5417,
+    "type": "sell"
+  },
+  {
+    "amount": 1,
+    "date": 1316241709,
+    "price": 32.28,
+    "tid": 5418,
+    "type": "sell"
+  },
+  {
+    "amount": 2.1,
+    "date": 1316241709,
+    "price": 32.28,
+    "tid": 5419,
+    "type": "sell"
+  },
+  {
+    "amount": 3.299,
+    "date": 1316241709,
+    "price": 32.25,
+    "tid": 5420,
+    "type": "sell"
+  },
+  {
+    "amount": 0.2,
+    "date": 1316243623,
+    "price": 32.25,
+    "tid": 5421,
+    "type": "sell"
+  },
+  {
+    "amount": 0.874,
+    "date": 1316244916,
+    "price": 32.25,
+    "tid": 5422,
+    "type": "sell"
+  },
+  {
+    "amount": 4,
+    "date": 1316247612,
+    "price": 32.25,
+    "tid": 5423,
+    "type": "sell"
+  },
+  {
+    "amount": 1,
+    "date": 1316248207,
+    "price": 34,
+    "tid": 5424,
+    "type": "buy"
+  },
+  {
+    "amount": 1,
+    "date": 1316248381,
+    "price": 34,
+    "tid": 5425,
+    "type": "buy"
+  },
+  {
+    "amount": 0.7,
+    "date": 1316248742,
+    "price": 34,
+    "tid": 5426,
+    "type": "buy"
+  },
+  {
+    "amount": 0.4,
+    "date": 1316248742,
+    "price": 34.34,
+    "tid": 5427,
+    "type": "buy"
+  },
+  {
+    "amount": 2,
+    "date": 1316249036,
+    "price": 33,
+    "tid": 5428,
+    "type": "sell"
+  },
+  {
+    "amount": 2,
+    "date": 1316252010,
+    "price": 33.12,
+    "tid": 5429,
+    "type": "sell"
+  },
+  {
+    "amount": 2,
+    "date": 1316252046,
+    "price": 33.12,
+    "tid": 5430,
+    "type": "sell"
+  },
+  {
+    "amount": 0.28,
+    "date": 1316253578,
+    "price": 33.12,
+    "tid": 5431,
+    "type": "sell"
+  },
+  {
+    "amount": 0.72,
+    "date": 1316254194,
+    "price": 33.12,
+    "tid": 5432,
+    "type": "sell"
+  },
+  {
+    "amount": 0.47,
+    "date": 1316254305,
+    "price": 32.4,
+    "tid": 5433,
+    "type": "sell"
+  },
+  {
+    "amount": 2,
+    "date": 1316258608,
+    "price": 33.01,
+    "tid": 5434,
+    "type": "sell"
+  },
+  {
+    "amount": 1,
+    "date": 1316258656,
+    "price": 33.01,
+    "tid": 5435,
+    "type": "sell"
+  },
+  {
+    "amount": 2.97,
+    "date": 1316260118,
+    "price": 33.69,
+    "tid": 5436,
+    "type": "buy"
+  },
+  {
+    "amount": 1,
+    "date": 1316261886,
+    "price": 33.71,
+    "tid": 5437,
+    "type": "sell"
+  },
+  {
+    "amount": 10,
+    "date": 1316261886,
+    "price": 33.7,
+    "tid": 5438,
+    "type": "sell"
+  },
+  {
+    "amount": 1,
+    "date": 1316262572,
+    "price": 33.71,
+    "tid": 5439,
+    "type": "sell"
+  },
+  {
+    "amount": 0.03,
+    "date": 1316262615,
+    "price": 33.7,
+    "tid": 5440,
+    "type": "sell"
+  },
+  {
+    "amount": 1.05,
+    "date": 1316266556,
+    "price": 33.02,
+    "tid": 5441,
+    "type": "sell"
+  },
+  {
+    "amount": 7,
+    "date": 1316266556,
+    "price": 33.01,
+    "tid": 5442,
+    "type": "sell"
+  },
+  {
+    "amount": 5,
+    "date": 1316267028,
+    "price": 32.4,
+    "tid": 5443,
+    "type": "sell"
+  },
+  {
+    "amount": 4.948,
+    "date": 1316267028,
+    "price": 32.3,
+    "tid": 5444,
+    "type": "sell"
+  },
+  {
+    "amount": 0.052,
+    "date": 1316270295,
+    "price": 32.3,
+    "tid": 5445,
+    "type": "sell"
+  },
+  {
+    "amount": 0.627,
+    "date": 1316270315,
+    "price": 32.25,
+    "tid": 5446,
+    "type": "sell"
+  },
+  {
+    "amount": 0.143,
+    "date": 1316270315,
+    "price": 32.25,
+    "tid": 5447,
+    "type": "sell"
+  },
+  {
+    "amount": 2.052,
+    "date": 1316270315,
+    "price": 32.25,
+    "tid": 5448,
+    "type": "sell"
+  },
+  {
+    "amount": 0.746,
+    "date": 1316270337,
+    "price": 32.24,
+    "tid": 5449,
+    "type": "sell"
+  },
+  {
+    "amount": 4,
+    "date": 1316277807,
+    "price": 32.24,
+    "tid": 5450,
+    "type": "sell"
+  },
+  {
+    "amount": 3,
+    "date": 1316283050,
+    "price": 33.2,
+    "tid": 5451,
+    "type": "buy"
+  },
+  {
+    "amount": 3.254,
+    "date": 1316290435,
+    "price": 32.24,
+    "tid": 5452,
+    "type": "sell"
+  },
+  {
+    "amount": 15.4,
+    "date": 1316290435,
+    "price": 32.23,
+    "tid": 5453,
+    "type": "sell"
+  },
+  {
+    "amount": 0.46,
+    "date": 1316304858,
+    "price": 32,
+    "tid": 5454,
+    "type": "sell"
+  },
+  {
+    "amount": 0.12,
+    "date": 1316307396,
+    "price": 32,
+    "tid": 5455,
+    "type": "sell"
+  },
+  {
+    "amount": 0.42,
+    "date": 1316315827,
+    "price": 32,
+    "tid": 5456,
+    "type": "sell"
+  },
+  {
+    "amount": 0.58,
+    "date": 1316315827,
+    "price": 32,
+    "tid": 5457,
+    "type": "sell"
+  },
+  {
+    "amount": 0.165,
+    "date": 1316319243,
+    "price": 32.99,
+    "tid": 5458,
+    "type": "buy"
+  },
+  {
+    "amount": 0.49,
+    "date": 1316319243,
+    "price": 32.99,
+    "tid": 5459,
+    "type": "buy"
+  },
+  {
+    "amount": 0.345,
+    "date": 1316319243,
+    "price": 33,
+    "tid": 5460,
+    "type": "buy"
+  },
+  {
+    "amount": 3,
+    "date": 1316319368,
+    "price": 32.5,
+    "tid": 5461,
+    "type": "sell"
+  },
+  {
+    "amount": 0.4,
+    "date": 1316322342,
+    "price": 33,
+    "tid": 5462,
+    "type": "buy"
+  },
+  {
+    "amount": 0.06,
+    "date": 1316322425,
+    "price": 32.99,
+    "tid": 5463,
+    "type": "buy"
+  },
+  {
+    "amount": 0.006,
+    "date": 1316322446,
+    "price": 32.99,
+    "tid": 5464,
+    "type": "buy"
+  },
+  {
+    "amount": 0.055,
+    "date": 1316323833,
+    "price": 32.99,
+    "tid": 5465,
+    "type": "buy"
+  },
+  {
+    "amount": 39.255,
+    "date": 1316323833,
+    "price": 33,
+    "tid": 5466,
+    "type": "buy"
+  },
+  {
+    "amount": 3.69,
+    "date": 1316323833,
+    "price": 33,
+    "tid": 5467,
+    "type": "buy"
+  },
+  {
+    "amount": 0.496,
+    "date": 1316324610,
+    "price": 32.01,
+    "tid": 5468,
+    "type": "sell"
+  },
+  {
+    "amount": 2.904,
+    "date": 1316324610,
+    "price": 32.01,
+    "tid": 5469,
+    "type": "sell"
+  },
+  {
+    "amount": 0.01,
+    "date": 1316325572,
+    "price": 33,
+    "tid": 5470,
+    "type": "buy"
+  },
+  {
+    "amount": 0.99,
+    "date": 1316325572,
+    "price": 33.96,
+    "tid": 5471,
+    "type": "buy"
+  },
+  {
+    "amount": 1.051,
+    "date": 1316325629,
+    "price": 32.01,
+    "tid": 5472,
+    "type": "sell"
+  },
+  {
+    "amount": 0.01,
+    "date": 1316327204,
+    "price": 33.96,
+    "tid": 5473,
+    "type": "buy"
+  },
+  {
+    "amount": 0.495,
+    "date": 1316327204,
+    "price": 33.96,
+    "tid": 5474,
+    "type": "buy"
+  },
+  {
+    "amount": 1,
+    "date": 1316327204,
+    "price": 33.97,
+    "tid": 5475,
+    "type": "buy"
+  },
+  {
+    "amount": 0.44,
+    "date": 1316327204,
+    "price": 34.34,
+    "tid": 5476,
+    "type": "buy"
+  },
+  {
+    "amount": 0.055,
+    "date": 1316327204,
+    "price": 34.78,
+    "tid": 5477,
+    "type": "buy"
+  },
+  {
+    "amount": 0.138,
+    "date": 1316329100,
+    "price": 33.34,
+    "tid": 5478,
+    "type": "sell"
+  },
+  {
+    "amount": 0.462,
+    "date": 1316329100,
+    "price": 33.33,
+    "tid": 5479,
+    "type": "sell"
+  },
+  {
+    "amount": 4.936,
+    "date": 1316330723,
+    "price": 33.07,
+    "tid": 5480,
+    "type": "sell"
+  },
+  {
+    "amount": 0.064,
+    "date": 1316335162,
+    "price": 33.07,
+    "tid": 5481,
+    "type": "sell"
+  },
+  {
+    "amount": 0.037,
+    "date": 1316335162,
+    "price": 33.07,
+    "tid": 5482,
+    "type": "sell"
+  },
+  {
+    "amount": 0.634,
+    "date": 1316340901,
+    "price": 33.98,
+    "tid": 5483,
+    "type": "buy"
+  },
+  {
+    "amount": 1,
+    "date": 1316341056,
+    "price": 34,
+    "tid": 5484,
+    "type": "buy"
+  },
+  {
+    "amount": 0.73,
+    "date": 1316343146,
+    "price": 34.01,
+    "tid": 5485,
+    "type": "sell"
+  },
+  {
+    "amount": 0.31,
+    "date": 1316346093,
+    "price": 34.01,
+    "tid": 5486,
+    "type": "sell"
+  },
+  {
+    "amount": 1.1,
+    "date": 1316346828,
+    "price": 34.01,
+    "tid": 5487,
+    "type": "sell"
+  },
+  {
+    "amount": 0.11,
+    "date": 1316348117,
+    "price": 34.01,
+    "tid": 5488,
+    "type": "sell"
+  },
+  {
+    "amount": 2.34,
+    "date": 1316348620,
+    "price": 34.01,
+    "tid": 5489,
+    "type": "sell"
+  },
+  {
+    "amount": 2.41,
+    "date": 1316349250,
+    "price": 34.01,
+    "tid": 5490,
+    "type": "sell"
+  },
+  {
+    "amount": 2.45,
+    "date": 1316349250,
+    "price": 33.99,
+    "tid": 5491,
+    "type": "sell"
+  },
+  {
+    "amount": 0.48,
+    "date": 1316351897,
+    "price": 33.99,
+    "tid": 5492,
+    "type": "sell"
+  },
+  {
+    "amount": 0.446,
+    "date": 1316352065,
+    "price": 33.99,
+    "tid": 5493,
+    "type": "sell"
+  },
+  {
+    "amount": 0.23,
+    "date": 1316352549,
+    "price": 33.99,
+    "tid": 5494,
+    "type": "sell"
+  },
+  {
+    "amount": 0.76,
+    "date": 1316354300,
+    "price": 33.99,
+    "tid": 5495,
+    "type": "sell"
+  },
+  {
+    "amount": 2.94,
+    "date": 1316354300,
+    "price": 33.9,
+    "tid": 5496,
+    "type": "sell"
+  },
+  {
+    "amount": 0.651,
+    "date": 1316354362,
+    "price": 33.1,
+    "tid": 5497,
+    "type": "sell"
+  },
+  {
+    "amount": 1,
+    "date": 1316354362,
+    "price": 33.05,
+    "tid": 5498,
+    "type": "sell"
+  },
+  {
+    "amount": 0.649,
+    "date": 1316386979,
+    "price": 34.44,
+    "tid": 5499,
+    "type": "buy"
+  },
+  {
+    "amount": 0.68,
+    "date": 1316386979,
+    "price": 34.69,
+    "tid": 5500,
+    "type": "buy"
+  },
+  {
+    "amount": 5,
+    "date": 1316386979,
+    "price": 34.7,
+    "tid": 5501,
+    "type": "buy"
+  },
+  {
+    "amount": 2.381,
+    "date": 1316386979,
+    "price": 34.76,
+    "tid": 5502,
+    "type": "buy"
+  },
+  {
+    "amount": 3.29,
+    "date": 1316386979,
+    "price": 34.78,
+    "tid": 5503,
+    "type": "buy"
+  },
+  {
+    "amount": 6.655,
+    "date": 1316387656,
+    "price": 34.78,
+    "tid": 5504,
+    "type": "buy"
+  },
+  {
+    "amount": 5.24,
+    "date": 1316387714,
+    "price": 34.98,
+    "tid": 5505,
+    "type": "buy"
+  },
+  {
+    "amount": 10,
+    "date": 1316389656,
+    "price": 33.58,
+    "tid": 5506,
+    "type": "sell"
+  },
+  {
+    "amount": 3.333,
+    "date": 1316393245,
+    "price": 34.98,
+    "tid": 5507,
+    "type": "buy"
+  },
+  {
+    "amount": 0.11,
+    "date": 1316393309,
+    "price": 34.98,
+    "tid": 5508,
+    "type": "buy"
+  },
+  {
+    "amount": 0.4,
+    "date": 1316394307,
+    "price": 33.66,
+    "tid": 5509,
+    "type": "sell"
+  },
+  {
+    "amount": 0.399,
+    "date": 1316399256,
+    "price": 34.44,
+    "tid": 5510,
+    "type": "buy"
+  },
+  {
+    "amount": 2.36,
+    "date": 1316399852,
+    "price": 34.49,
+    "tid": 5511,
+    "type": "buy"
+  },
+  {
+    "amount": 0.601,
+    "date": 1316399934,
+    "price": 34.45,
+    "tid": 5512,
+    "type": "sell"
+  },
+  {
+    "amount": 0.669,
+    "date": 1316401637,
+    "price": 33.8,
+    "tid": 5513,
+    "type": "sell"
+  },
+  {
+    "amount": 2.441,
+    "date": 1316401637,
+    "price": 33.71,
+    "tid": 5514,
+    "type": "sell"
+  },
+  {
+    "amount": 0.6,
+    "date": 1316403523,
+    "price": 33.76,
+    "tid": 5515,
+    "type": "sell"
+  },
+  {
+    "amount": 0.19,
+    "date": 1316403916,
+    "price": 33.76,
+    "tid": 5516,
+    "type": "buy"
+  },
+  {
+    "amount": 0.399,
+    "date": 1316403916,
+    "price": 34.45,
+    "tid": 5517,
+    "type": "buy"
+  },
+  {
+    "amount": 0.6,
+    "date": 1316403916,
+    "price": 34.45,
+    "tid": 5518,
+    "type": "buy"
+  },
+  {
+    "amount": 0.811,
+    "date": 1316403916,
+    "price": 34.48,
+    "tid": 5519,
+    "type": "buy"
+  },
+  {
+    "amount": 0.189,
+    "date": 1316405868,
+    "price": 34.48,
+    "tid": 5520,
+    "type": "buy"
+  },
+  {
+    "amount": 10,
+    "date": 1316405868,
+    "price": 34.5,
+    "tid": 5521,
+    "type": "buy"
+  },
+  {
+    "amount": 1.811,
+    "date": 1316405868,
+    "price": 34.5,
+    "tid": 5522,
+    "type": "buy"
+  },
+  {
+    "amount": 0.667,
+    "date": 1316406586,
+    "price": 34.49,
+    "tid": 5523,
+    "type": "buy"
+  },
+  {
+    "amount": 0.589,
+    "date": 1316406586,
+    "price": 34.5,
+    "tid": 5524,
+    "type": "buy"
+  },
+  {
+    "amount": 38.926,
+    "date": 1316406586,
+    "price": 34.9,
+    "tid": 5525,
+    "type": "buy"
+  },
+  {
+    "amount": 2.683,
+    "date": 1316408768,
+    "price": 34.96,
+    "tid": 5526,
+    "type": "buy"
+  },
+  {
+    "amount": 2.323,
+    "date": 1316408768,
+    "price": 34.98,
+    "tid": 5527,
+    "type": "buy"
+  },
+  {
+    "amount": 2,
+    "date": 1316408768,
+    "price": 34.99,
+    "tid": 5528,
+    "type": "buy"
+  },
+  {
+    "amount": 1,
+    "date": 1316408768,
+    "price": 34.99,
+    "tid": 5529,
+    "type": "buy"
+  },
+  {
+    "amount": 0.77,
+    "date": 1316408768,
+    "price": 35,
+    "tid": 5530,
+    "type": "buy"
+  },
+  {
+    "amount": 2.224,
+    "date": 1316408768,
+    "price": 35,
+    "tid": 5531,
+    "type": "buy"
+  },
+  {
+    "amount": 2.818,
+    "date": 1316409454,
+    "price": 34.9,
+    "tid": 5532,
+    "type": "sell"
+  },
+  {
+    "amount": 2,
+    "date": 1316410790,
+    "price": 34.9,
+    "tid": 5533,
+    "type": "buy"
+  },
+  {
+    "amount": 2.8,
+    "date": 1316414214,
+    "price": 34.49,
+    "tid": 5534,
+    "type": "buy"
+  },
+  {
+    "amount": 2,
+    "date": 1316414557,
+    "price": 34.9,
+    "tid": 5535,
+    "type": "buy"
+  },
+  {
+    "amount": 0.681,
+    "date": 1316414659,
+    "price": 33.8,
+    "tid": 5536,
+    "type": "sell"
+  },
+  {
+    "amount": 2,
+    "date": 1316414659,
+    "price": 33.75,
+    "tid": 5537,
+    "type": "sell"
+  },
+  {
+    "amount": 0.01,
+    "date": 1316414659,
+    "price": 33.71,
+    "tid": 5538,
+    "type": "sell"
+  },
+  {
+    "amount": 2,
+    "date": 1316414659,
+    "price": 33.68,
+    "tid": 5539,
+    "type": "sell"
+  },
+  {
+    "amount": 0.3,
+    "date": 1316414769,
+    "price": 33.52,
+    "tid": 5540,
+    "type": "sell"
+  },
+  {
+    "amount": 2.81,
+    "date": 1316414769,
+    "price": 33.51,
+    "tid": 5541,
+    "type": "sell"
+  },
+  {
+    "amount": 3.1,
+    "date": 1316414802,
+    "price": 33.51,
+    "tid": 5542,
+    "type": "sell"
+  },
+  {
+    "amount": 1,
+    "date": 1316414863,
+    "price": 33.68,
+    "tid": 5543,
+    "type": "buy"
+  },
+  {
+    "amount": 1.2,
+    "date": 1316414900,
+    "price": 33.68,
+    "tid": 5544,
+    "type": "buy"
+  },
+  {
+    "amount": 1.606,
+    "date": 1316418833,
+    "price": 34.9,
+    "tid": 5545,
+    "type": "buy"
+  },
+  {
+    "amount": 0.14,
+    "date": 1316418833,
+    "price": 34.9,
+    "tid": 5546,
+    "type": "buy"
+  },
+  {
+    "amount": 0.55,
+    "date": 1316418833,
+    "price": 34.9,
+    "tid": 5547,
+    "type": "buy"
+  },
+  {
+    "amount": 0.704,
+    "date": 1316419685,
+    "price": 34.91,
+    "tid": 5548,
+    "type": "sell"
+  },
+  {
+    "amount": 0.36,
+    "date": 1316426530,
+    "price": 33.52,
+    "tid": 5549,
+    "type": "sell"
+  },
+  {
+    "amount": 0.13,
+    "date": 1316434209,
+    "price": 34.5,
+    "tid": 5550,
+    "type": "buy"
+  },
+  {
+    "amount": 0.598,
+    "date": 1316434669,
+    "price": 34.5,
+    "tid": 5551,
+    "type": "buy"
+  },
+  {
+    "amount": 0.402,
+    "date": 1316434669,
+    "price": 34.56,
+    "tid": 5552,
+    "type": "buy"
+  },
+  {
+    "amount": 2.776,
+    "date": 1316436029,
+    "price": 34,
+    "tid": 5553,
+    "type": "sell"
+  },
+  {
+    "amount": 1,
+    "date": 1316437052,
+    "price": 34,
+    "tid": 5554,
+    "type": "sell"
+  },
+  {
+    "amount": 0.5,
+    "date": 1316437143,
+    "price": 34,
+    "tid": 5555,
+    "type": "sell"
+  },
+  {
+    "amount": 0.724,
+    "date": 1316437243,
+    "price": 34,
+    "tid": 5556,
+    "type": "sell"
+  },
+  {
+    "amount": 0.766,
+    "date": 1316437297,
+    "price": 34,
+    "tid": 5557,
+    "type": "buy"
+  },
+  {
+    "amount": 0.231,
+    "date": 1316437308,
+    "price": 34.01,
+    "tid": 5558,
+    "type": "sell"
+  },
+  {
+    "amount": 1.2,
+    "date": 1316437609,
+    "price": 33.52,
+    "tid": 5559,
+    "type": "sell"
+  },
+  {
+    "amount": 0.038,
+    "date": 1316439558,
+    "price": 33.52,
+    "tid": 5560,
+    "type": "sell"
+  },
+  {
+    "amount": 0.422,
+    "date": 1316439558,
+    "price": 33.52,
+    "tid": 5561,
+    "type": "sell"
+  },
+  {
+    "amount": 1,
+    "date": 1316446988,
+    "price": 33.53,
+    "tid": 5562,
+    "type": "sell"
+  },
+  {
+    "amount": 0.248,
+    "date": 1316447042,
+    "price": 33.52,
+    "tid": 5563,
+    "type": "sell"
+  },
+  {
+    "amount": 1.271,
+    "date": 1316448928,
+    "price": 34.5,
+    "tid": 5564,
+    "type": "buy"
+  },
+  {
+    "amount": 0.18,
+    "date": 1316448928,
+    "price": 34.79,
+    "tid": 5565,
+    "type": "buy"
+  },
+  {
+    "amount": 0.549,
+    "date": 1316449278,
+    "price": 34.8,
+    "tid": 5566,
+    "type": "sell"
+  },
+  {
+    "amount": 0.11,
+    "date": 1316450666,
+    "price": 34.51,
+    "tid": 5567,
+    "type": "sell"
+  },
+  {
+    "amount": 2,
+    "date": 1316451857,
+    "price": 34.89,
+    "tid": 5568,
+    "type": "buy"
+  },
+  {
+    "amount": 2.272,
+    "date": 1316456911,
+    "price": 34.89,
+    "tid": 5569,
+    "type": "buy"
+  },
+  {
+    "amount": 2.728,
+    "date": 1316456911,
+    "price": 34.9,
+    "tid": 5570,
+    "type": "buy"
+  },
+  {
+    "amount": 1,
+    "date": 1316471770,
+    "price": 35,
+    "tid": 5571,
+    "type": "buy"
+  },
+  {
+    "amount": 3.265,
+    "date": 1316471770,
+    "price": 35,
+    "tid": 5572,
+    "type": "buy"
+  },
+  {
+    "amount": 0.735,
+    "date": 1316474709,
+    "price": 35,
+    "tid": 5573,
+    "type": "buy"
+  },
+  {
+    "amount": 1,
+    "date": 1316474709,
+    "price": 36,
+    "tid": 5574,
+    "type": "buy"
+  },
+  {
+    "amount": 0.265,
+    "date": 1316475700,
+    "price": 36,
+    "tid": 5575,
+    "type": "sell"
+  },
+  {
+    "amount": 1,
+    "date": 1316478134,
+    "price": 36.97,
+    "tid": 5576,
+    "type": "buy"
+  },
+  {
+    "amount": 0.997,
+    "date": 1316484195,
+    "price": 36.31,
+    "tid": 5577,
+    "type": "sell"
+  },
+  {
+    "amount": 0.003,
+    "date": 1316485987,
+    "price": 35.76,
+    "tid": 5578,
+    "type": "sell"
+  },
+  {
+    "amount": 1.126,
+    "date": 1316485987,
+    "price": 35.75,
+    "tid": 5579,
+    "type": "sell"
+  },
+  {
+    "amount": 0.12,
+    "date": 1316486157,
+    "price": 35.76,
+    "tid": 5580,
+    "type": "sell"
+  },
+  {
+    "amount": 1,
+    "date": 1316486492,
+    "price": 36.79,
+    "tid": 5581,
+    "type": "buy"
+  },
+  {
+    "amount": 1,
+    "date": 1316486579,
+    "price": 36.8,
+    "tid": 5582,
+    "type": "sell"
+  },
+  {
+    "amount": 0.123,
+    "date": 1316486851,
+    "price": 36.8,
+    "tid": 5583,
+    "type": "sell"
+  },
+  {
+    "amount": 0.51,
+    "date": 1316487416,
+    "price": 36.8,
+    "tid": 5584,
+    "type": "sell"
+  },
+  {
+    "amount": 0.367,
+    "date": 1316487805,
+    "price": 36.8,
+    "tid": 5585,
+    "type": "sell"
+  },
+  {
+    "amount": 0.88,
+    "date": 1316487927,
+    "price": 35.81,
+    "tid": 5586,
+    "type": "sell"
+  },
+  {
+    "amount": 1,
+    "date": 1316488004,
+    "price": 35.81,
+    "tid": 5587,
+    "type": "sell"
+  },
+  {
+    "amount": 0.496,
+    "date": 1316488004,
+    "price": 35.8,
+    "tid": 5588,
+    "type": "sell"
+  },
+  {
+    "amount": 0.238,
+    "date": 1316488004,
+    "price": 35.8,
+    "tid": 5589,
+    "type": "sell"
+  },
+  {
+    "amount": 1,
+    "date": 1316488667,
+    "price": 36.89,
+    "tid": 5590,
+    "type": "buy"
+  },
+  {
+    "amount": 0.732,
+    "date": 1316488667,
+    "price": 36.9,
+    "tid": 5591,
+    "type": "buy"
+  },
+  {
+    "amount": 1,
+    "date": 1316488667,
+    "price": 36.9,
+    "tid": 5592,
+    "type": "buy"
+  },
+  {
+    "amount": 2.361,
+    "date": 1316488667,
+    "price": 36.98,
+    "tid": 5593,
+    "type": "buy"
+  },
+  {
+    "amount": 1,
+    "date": 1316488667,
+    "price": 37.89,
+    "tid": 5594,
+    "type": "buy"
+  },
+  {
+    "amount": 5.907,
+    "date": 1316488667,
+    "price": 37.9,
+    "tid": 5595,
+    "type": "buy"
+  },
+  {
+    "amount": 0.1,
+    "date": 1316490462,
+    "price": 36.21,
+    "tid": 5596,
+    "type": "sell"
+  },
+  {
+    "amount": 0.9,
+    "date": 1316493152,
+    "price": 36.76,
+    "tid": 5597,
+    "type": "sell"
+  },
+  {
+    "amount": 0.488,
+    "date": 1316493732,
+    "price": 36.76,
+    "tid": 5598,
+    "type": "buy"
+  },
+  {
+    "amount": 0.5,
+    "date": 1316493794,
+    "price": 36.76,
+    "tid": 5599,
+    "type": "buy"
+  },
+  {
+    "amount": 0.226,
+    "date": 1316493866,
+    "price": 36.76,
+    "tid": 5600,
+    "type": "buy"
+  }
+]

@@ -34,4 +34,6 @@ dependencies {
     compile 'com.squareup.okhttp:okhttp:2.3.0'
     compile 'com.facebook.stetho:stetho:1.0.1'
     compile 'com.facebook.stetho:stetho-okhttp:1.0.1'
+
+    compile 'com.wordplat:ikvStockChart:0.1.5'
 }
