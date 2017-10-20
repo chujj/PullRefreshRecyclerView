@@ -122,7 +122,8 @@ public class TradeFragment extends BaseFragment {
         }
 
 
-        mKlineEntrySet_5.addEntries(entrySet.getEntryList().subList(0, 20));
+        mKlineEntrySet_5.addEntries(entrySet.getEntryList().subList(5500, 6000));
+        mKlineEntrySet_5.computeStockIndex();
 
         mTimelineView.notifyDataSetChanged();
     }
