@@ -18,6 +18,7 @@ import com.wordplat.ikvstockchart.entry.EntrySet;
 import com.wordplat.ikvstockchart.render.TimeLineRender;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.List;
 
@@ -32,8 +33,20 @@ public class TradeFragment extends BaseFragment {
     @BindView(R2.id.timeLineView)
     InteractiveKLineView mTimelineView;
 
-    private final EntrySet entrySet = new EntrySet();
+    private EntrySet timeLineEntrySet = new EntrySet();
+    private EntrySet mKlineEntrySet_5 = new EntrySet();
+    private EntrySet mKlineEntrySet_10 = new EntrySet();
+    private boolean mKLineTest;
 
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        if (getArguments() != null) {
+            mKLineTest = getArguments().getBoolean("is_keyline_test", false);
+        }
+    }
 
     @Nullable
     @Override
@@ -46,22 +59,76 @@ public class TradeFragment extends BaseFragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-
         ButterKnife.bind(this, view);
 
-        mTimelineView.setEntrySet(entrySet);
-        mTimelineView.setRender(new TimeLineRender());
+        if (mKLineTest) {
+            mTimelineView.setEntrySet(mKlineEntrySet_5);
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    onKLineDataChanged();
+                }
+            }, 2000);
+        } else {
+            mTimelineView.setEntrySet(timeLineEntrySet);
+            mTimelineView.setRender(new TimeLineRender());
 
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                onDataChanged();
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    onTimelineDataChanged();
+                }
+            }, 2000);
+        }
+
+    }
+
+    private void onKLineDataChanged() {
+
+        String data = "";
+        EntrySet entrySet = new EntrySet();
+        {
+            String kLineData = "";
+            try {
+                InputStream in = getResources().getAssets().open("kline1.txt");
+                int length = in.available();
+                byte[] buffer = new byte[length];
+                in.read(buffer);
+                kLineData = new String(buffer, "UTF-8");
+            } catch (Exception e) {
+                e.printStackTrace();
             }
-        }, 2000);
+            data = kLineData;
+        }
+
+
+        {
+            entrySet = new EntrySet();
+
+            final String[] candleDatas = data.split(",");
+
+            for (String candleData : candleDatas) {
+                String[] v = candleData.split("[|]");
+
+                float open = Float.parseFloat(v[0]);
+                float high = Float.parseFloat(v[1]);
+                float low = Float.parseFloat(v[2]);
+                float close = Float.parseFloat(v[3]);
+
+                int volume = Integer.parseInt(v[4]);
+
+                entrySet.addEntry(new Entry(open, high, low, close, volume, v[5]));
+            }
+        }
+
+
+        mKlineEntrySet_5.addEntries(entrySet.getEntryList().subList(0, 20));
+
+        mTimelineView.notifyDataSetChanged();
     }
 
 
-    public void onDataChanged() {
+    public void onTimelineDataChanged() {
         List<BtcBean>  beans = null;
         try {
             beans = new Gson().fromJson(new InputStreamReader(getContext().getAssets().open("timeline.json")),
@@ -77,11 +144,11 @@ public class TradeFragment extends BaseFragment {
 
         for (BtcBean btcBean : beans ) {
             Entry entry = new Entry(btcBean.price, (int) btcBean.amount, "");
-            entrySet.addEntry(entry);
+            timeLineEntrySet.addEntry(entry);
         }
-        entrySet.getEntryList().get(0).setXLabel("09:30");
-        entrySet.getEntryList().get(2).setXLabel("11:30/13:00");
-        entrySet.getEntryList().get(4).setXLabel("15:00");
+        timeLineEntrySet.getEntryList().get(0).setXLabel("09:30");
+        timeLineEntrySet.getEntryList().get(2).setXLabel("11:30/13:00");
+        timeLineEntrySet.getEntryList().get(4).setXLabel("15:00");
 
         mTimelineView.notifyDataSetChanged();
     }

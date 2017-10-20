@@ -47,16 +47,19 @@ public class TradeHomeFragment extends BaseFragment {
 
             @Override
             public Fragment getItem(int position) {
-                return Fragment.instantiate(getContext(), TradeFragment.class.getName());
+                if (position <= 1) {
+                    return Fragment.instantiate(getContext(), TradeFragment.class.getName());
+                } else {
+                    Bundle args = new Bundle();
+                    args.putBoolean("is_keyline_test", true);
+                    return Fragment.instantiate(getContext(), TradeFragment.class.getName(), args);
+                }
             }
 
             @Override
             public int getCount() {
                 return 3;
             }
-
-
-
         });
 
 
