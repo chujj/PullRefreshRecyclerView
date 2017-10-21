@@ -191,6 +191,7 @@
         android:orientation="horizontal">
 
         <LinearLayout
+            android:id="@+id/buy_up"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -213,7 +214,7 @@
                 android:layout_width="13dp"
                 android:layout_height="13dp"
                 android:layout_marginLeft="4dp"
-                android:background="#f00"/>
+                android:background="#FFF35833"/>
 
         </LinearLayout>
 
@@ -224,6 +225,7 @@
             />
 
         <LinearLayout
+            android:id="@+id/buy_down"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"

@@ -258,4 +258,15 @@ public class TradeFragment extends BaseFragment {
 
     }
 
+
+    @OnClick(R2.id.buy_up)
+    public void clickBuyUp() {
+
+    }
+
+    @OnClick(R2.id.buy_down)
+    public void clickBuyDown() {
+
+    }
+
 }
