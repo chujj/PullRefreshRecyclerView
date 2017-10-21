@@ -2,12 +2,14 @@ package com.ssc.weipan.home;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.view.ViewGroup;
 
 import com.ssc.weipan.R;
 import com.ssc.weipan.R2;
 import com.ssc.weipan.base.BaseActivity;
-import com.ssc.weipan.base.FragmentUtils;
 import com.ssc.weipan.base.Topbar;
 
 import butterknife.BindView;
@@ -31,9 +33,9 @@ public class HomeActivity extends BaseActivity {
 
     private String[] mFragmentNames = new String[] {
             TradeHomeFragment.class.getName(),
-            TradeHomeFragment.class.getName(),
-            TradeHomeFragment.class.getName(),
-            TradeHomeFragment.class.getName(),
+            EmptyFragment.class.getName(),
+            EmptyFragment.class.getName(),
+            EmptyFragment.class.getName(),
     };
 
     private int mIndex = 0; // default 0
@@ -51,6 +53,8 @@ public class HomeActivity extends BaseActivity {
         switchToIndex(mIndex);
     }
 
+
+    private String mLastFragmentKey = null;
     private void switchToIndex(int index) {
         mIndex = index;
 
@@ -61,9 +65,27 @@ public class HomeActivity extends BaseActivity {
             }
         }
 
-        FragmentUtils.switchFragment(getSupportFragmentManager(), this,
-                mFragmentNames[mIndex], null);
 
+        String key = mFragmentNames[mIndex];
+        FragmentManager fg = getSupportFragmentManager();
+        FragmentTransaction ft = fg.beginTransaction();
+
+        if (mLastFragmentKey != null) {
+            ft.hide(fg.findFragmentByTag(mLastFragmentKey));
+        }
+
+        Fragment fragment = fg.findFragmentByTag(key);
+        if(fragment == null) {
+            fragment = Fragment.instantiate(this, key, null);
+            ft.add(R.id.ll_main, fragment, key);
+        } else {
+            ft.show(fragment);
+        }
+
+        mLastFragmentKey = key;
+
+        ft.commitAllowingStateLoss();
+        fg.executePendingTransactions();
     }
 
 
