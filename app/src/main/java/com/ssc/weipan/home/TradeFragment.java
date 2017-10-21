@@ -99,6 +99,8 @@ public class TradeFragment extends BaseFragment {
 
                 InteractiveKLineView klineView = CommonUtils.findView(mKLineViews[i], R.id.timeLineView);
                 klineView.setEntrySet(mEntrySets[i]);
+                klineView.setEnableLeftRefresh(false);
+                klineView.setEnableRightRefresh(false);
                 klineView.setRender(new TimeLineRender());
             } else {
                 newView = (ViewGroup) inflater.inflate(R.layout.trade_kline_layout, mKlineContainer, false);
@@ -107,6 +109,8 @@ public class TradeFragment extends BaseFragment {
 
                 InteractiveKLineView klineView = CommonUtils.findView(mKLineViews[i], R.id.timeLineView);
                 klineView.setEntrySet(mEntrySets[i]);
+                klineView.setEnableLeftRefresh(false);
+                klineView.setEnableRightRefresh(false);
 //                klineView.setRender(new TimeLineRender());
             }
 

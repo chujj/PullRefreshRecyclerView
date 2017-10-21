@@ -5,6 +5,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -135,7 +136,7 @@ public class TradeHomeFragment extends BaseFragment {
                 } else {
 
 
-                    mAssets.setText(accountResp.asset);
+                    mAssets.setText((TextUtils.isEmpty(accountResp.asset) ? 0 : accountResp.asset) + "元");
                 }
             }
 
