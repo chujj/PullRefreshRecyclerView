@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import com.ssc.weipan.R;
 import com.ssc.weipan.R2;
 import com.ssc.weipan.base.BaseFragment;
+import com.viewpagerindicator.PageIndicator;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -24,6 +25,8 @@ public class TradeHomeFragment extends BaseFragment {
 
     @BindView(R2.id.viewpager)
     ViewPager mViewPager;
+    @BindView(R2.id.indicator)
+    PageIndicator mIndicator;
 
 
 
@@ -57,10 +60,31 @@ public class TradeHomeFragment extends BaseFragment {
             }
 
             @Override
+            public CharSequence getPageTitle(int position) {
+                String title = "";
+                switch (position) {
+                    case 0:
+                        title = "美元兑日元";
+                        break;
+                    case 1:
+                        title = "现货黄金";
+                        break;
+                    case 2:
+                        title = "奥贵银";
+                        break;
+                }
+
+                return title;
+            }
+
+            @Override
             public int getCount() {
                 return 3;
             }
         });
+
+
+        mIndicator.setViewPager(mViewPager);
 
 
     }

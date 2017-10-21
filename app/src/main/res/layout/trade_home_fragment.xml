@@ -30,7 +30,10 @@
                 android:layout_height="1dp"
                 android:background="#FF3C3C3C"/>
 
-
+            <com.viewpagerindicator.TitlePageIndicator
+                android:id="@+id/indicator"
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent" />
 
 
             <com.ssc.weipan.base.WrapContentViewPager
