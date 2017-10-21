@@ -28,6 +28,8 @@ public class GoodsApi {
     public static class GoodsModel extends BaseModel {
         public Map<String, GoodName> names;
         public List<Good> goods;
+
+        public List<Charts> charts;
     }
 
 
@@ -42,6 +44,18 @@ public class GoodsApi {
         public float open;
         public float high;
         public float low;
+    }
+
+    public static class Charts extends BaseModel {
+        public String label;
+
+        public List<ChartData> list;
+    }
+
+    public static class ChartData extends BaseModel {
+        public String name;
+
+        public List<Object> data;
     }
 
 }

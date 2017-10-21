@@ -50,11 +50,15 @@ public class TradeFragment extends BaseFragment {
     @BindView(R2.id.low_text)
     TextView mLowText;
 
+    @BindViews({R2.id.line_1, R2.id.line_2, R2.id.line_3, R2.id.line_4})
+    ViewGroup[] mLinesIndicator;
+    @BindViews({R2.id.line_detail_1, R2.id.line_detail_2, R2.id.line_detail_3, R2.id.line_detail_4,})
+    TextView[] mLinesDetail;
+
 
     @BindView(R2.id.kline_container)
     ViewGroup mKlineContainer;
-    @BindViews({R2.id.line_1, R2.id.line_2, R2.id.line_3, R2.id.line_4})
-    ViewGroup[] mLinesIndicator;
+
 
     ViewGroup[] mKLineViews;
     EntrySet[] mEntrySets;
@@ -63,6 +67,8 @@ public class TradeFragment extends BaseFragment {
     private final static int ViewSize = 4;
 
     private String mKey;
+
+    private List<GoodsApi.ChartData> mChardata;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -132,13 +138,59 @@ public class TradeFragment extends BaseFragment {
         }
 
 
+        // 初始化表单
+        for (int i = 0; i < Data.sData.charts.size(); i++) {
+            if (TextUtils.equals(Data.sData.charts.get(i).label, mKey)) {
+                mChardata = Data.sData.charts.get(i).list;
+                break;
+            }
+        }
+
+        for (int i = 0; i < mLinesDetail.length; i++) {
+            if (i > (mChardata.size() -1)) {
+                mLinesIndicator[i].setVisibility(View.GONE);
+            } else {
+                mLinesDetail[i].setText(mChardata.get(i).name);
+
+                // load data into set
+
+                boolean isTimelineChart = (mChardata.get(i).data.get(0) instanceof Double);
+
+
+                if (isTimelineChart) {
+                    for (int j = 0; j < mChardata.get(i).data.size(); j++) {
+                        Entry entry = new Entry(((Double) mChardata.get(i).data.get(j)).floatValue(), 0, "");
+                        mEntrySets[i].addEntry(entry);
+
+                    }
+                } else {
+                    for (int j = 0; j < mChardata.get(i).data.size(); j++) {
+                        List _data = (List) mChardata.get(i).data.get(j);
+
+                        float open = ((Double)_data.get(0)).floatValue();
+                        float high = ((Double)_data.get(2)).floatValue();
+                        float low =  ((Double)_data.get(3)).floatValue();
+                        float close =((Double)_data.get(1)).floatValue();
+                        mEntrySets[i].addEntry(new Entry(open, high, low, close, 0, ""));
+
+                    }
+
+                    mEntrySets[i].computeStockIndex();
+
+                }
+
+            }
+        }
+
+
+
 
         clickTime60();
         clickLine1();
 
 
-        loadData();
-
+//        loadData();
+        onDataReady();
     }
 
     private void loadData() {
