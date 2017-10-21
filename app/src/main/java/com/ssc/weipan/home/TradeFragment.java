@@ -39,6 +39,9 @@ public class TradeFragment extends BaseFragment {
     @BindView(R2.id.kline_container)
     ViewGroup mContainer;
 
+    @BindViews({R2.id.time_180, R2.id.time_60, R2.id.time_300})
+    ViewGroup[] mTimes;
+
 
     @BindViews({R2.id.line_1, R2.id.line_2, R2.id.line_3, R2.id.line_4})
     ViewGroup[] mLinesIndicator;
@@ -70,6 +73,10 @@ public class TradeFragment extends BaseFragment {
 
         ButterKnife.bind(this, view);
 
+
+        clickTime60();
+        clickLine1();
+
         if (mKLineTest) {
             mTimelineView.setEntrySet(mKlineEntrySet_5);
             new Handler().postDelayed(new Runnable() {
@@ -92,6 +99,27 @@ public class TradeFragment extends BaseFragment {
 
     }
 
+
+    @OnClick(R2.id.time_180)
+    public void clickTime180() {
+        setTimeSelected(0);
+    }
+
+    @OnClick(R2.id.time_60)
+    public void clickTime60() {
+        setTimeSelected(1);
+    }
+
+    @OnClick(R2.id.time_300)
+    public void clickTime300() {
+        setTimeSelected(2);
+    }
+
+    private void setTimeSelected(int index) {
+        for (int i = 0; i < mTimes.length; i++) {
+            mTimes[i].setSelected(index == i);
+        }
+    }
 
     @OnClick(R2.id.line_1)
     public void clickLine1() {
