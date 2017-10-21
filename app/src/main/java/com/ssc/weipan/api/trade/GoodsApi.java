@@ -37,6 +37,7 @@ public class GoodsApi {
         public String goods_name;
         public int goods_id;
         public String[] point;
+        public List<String> chip;
     }
 
     public static class Good extends BaseModel {

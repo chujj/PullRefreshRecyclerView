@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.ssc.weipan.home.BuyTradeView
+    android:id="@+id/buytradeview"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#88705726"
+    >
+
+
+    <LinearLayout
+        android:id="@+id/handel_click"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        android:orientation="vertical"
+        android:background="#FF1F1F1F"
+        >
+
+
+        <include layout="@layout/topbar_layout"/>
+
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#FF3C3C3C"
+            />
+
+        <com.ssc.weipan.home.ChipLabelsLayout
+            android:id="@+id/chips"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:layout_marginBottom="12dp"
+            />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#FF3C3C3C"
+            />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:orientation="horizontal">
+
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="手续费：20元"
+                    android:textColor="#FFCCCCCC"
+                    android:textSize="14sp"
+                    />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:text="合约：红木"
+                    android:textColor="#FFCCCCCC"
+                    android:textSize="14sp"
+                    />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:text="订单方向：买跌"
+                    android:textColor="#FFCCCCCC"
+                    android:textSize="14sp"
+                    />
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="预期收入：360元"
+                    android:textColor="#FFCCCCCC"
+                    android:textSize="14sp"
+                    />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:text="结算周期：60秒"
+                    android:textColor="#FFCCCCCC"
+                    android:textSize="14sp"
+                    />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:text="当前价格：11106.3"
+                    android:textColor="#FFCCCCCC"
+                    android:textSize="14sp"
+                    />
+
+            </LinearLayout>
+        </LinearLayout>
+
+
+
+        <!-- btns -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:orientation="horizontal">
+
+
+
+            <TextView
+                android:id="@+id/cancel"
+                android:layout_width="0dp"
+                android:layout_height="38dp"
+                android:layout_weight="3"
+                android:gravity="center"
+                android:text="取消"
+                android:textColor="#FFCCCCCC"
+                android:textSize="14sp"
+                android:background="@drawable/trade_buy_chip_item"
+                />
+
+
+            <TextView
+                android:id="@+id/ok"
+                android:layout_width="0dp"
+                android:layout_height="38dp"
+                android:layout_marginLeft="10dp"
+                android:gravity="center"
+                android:layout_weight="5"
+                android:text="确认"
+                android:textColor="#FFCCCCCC"
+                android:textSize="14sp"
+                android:background="@drawable/trade_buy_chip_item"
+                />
+        </LinearLayout>
+
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            android:layout_marginBottom="20dp"
+            android:text="温馨提示：收盘时对于未成交订单将自动撤单，合约定金全额返还"
+            android:textColor="#FF999999"
+            android:textSize="10sp"
+            />
+
+
+
+    </LinearLayout>
+
+</com.ssc.weipan.home.BuyTradeView>

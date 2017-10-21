@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.FrameLayout;
 
 /**
  * Created by zhujj on 17-10-17.
@@ -29,5 +30,19 @@ public class CommonUtils {
             imm.showSoftInput(view, InputMethodManager.SHOW_IMPLICIT);
         }
     }
+
+    public static void addToActivity(Activity activity, View v) {
+        FrameLayout contentView = (FrameLayout) activity.getWindow().getDecorView().findViewById(android.R.id.content);
+
+        if (contentView != null) {
+            contentView.addView(v);
+        }
+    }
+
+    public static int dip2px(Context context, float dpValue) {
+        final float scale = context.getResources().getDisplayMetrics().density;
+        return (int) (dpValue * scale + 0.5f);
+    }    //dp转px
+
 
 }
