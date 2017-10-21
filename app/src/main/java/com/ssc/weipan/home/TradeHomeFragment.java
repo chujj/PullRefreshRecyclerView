@@ -50,7 +50,7 @@ public class TradeHomeFragment extends BaseFragment {
 
             @Override
             public Fragment getItem(int position) {
-                if (position <= 1) {
+                if (position < 1) {
                     return Fragment.instantiate(getContext(), TradeFragment.class.getName());
                 } else {
                     Bundle args = new Bundle();

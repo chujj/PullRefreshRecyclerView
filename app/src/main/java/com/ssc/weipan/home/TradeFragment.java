@@ -2,6 +2,7 @@ package com.ssc.weipan.home;
 
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.Looper;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,6 +14,7 @@ import com.google.gson.reflect.TypeToken;
 import com.ssc.weipan.R;
 import com.ssc.weipan.R2;
 import com.ssc.weipan.base.BaseFragment;
+import com.ssc.weipan.base.CommonUtils;
 import com.wordplat.ikvstockchart.InteractiveKLineView;
 import com.wordplat.ikvstockchart.entry.Entry;
 import com.wordplat.ikvstockchart.entry.EntrySet;
@@ -35,30 +37,18 @@ public class TradeFragment extends BaseFragment {
 
     @BindView(R2.id.timeLineView)
     InteractiveKLineView mTimelineView;
-
-    @BindView(R2.id.kline_container)
-    ViewGroup mContainer;
-
     @BindViews({R2.id.time_180, R2.id.time_60, R2.id.time_300})
     ViewGroup[] mTimes;
-
-
+    @BindView(R2.id.kline_container)
+    ViewGroup mKlineContainer;
     @BindViews({R2.id.line_1, R2.id.line_2, R2.id.line_3, R2.id.line_4})
     ViewGroup[] mLinesIndicator;
 
-    private EntrySet timeLineEntrySet = new EntrySet();
-    private EntrySet mKlineEntrySet_5 = new EntrySet();
-    private EntrySet mKlineEntrySet_10 = new EntrySet();
-    private boolean mKLineTest;
+    ViewGroup[] mKLineViews;
+    EntrySet[] mEntrySets;
 
-    @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
 
-        if (getArguments() != null) {
-            mKLineTest = getArguments().getBoolean("is_keyline_test", false);
-        }
-    }
+    private final static int ViewSize = 4;
 
     @Nullable
     @Override
@@ -73,30 +63,78 @@ public class TradeFragment extends BaseFragment {
 
         ButterKnife.bind(this, view);
 
+        mEntrySets = new EntrySet[ViewSize];
+        for (int i = 0; i < mEntrySets.length; i++) {
+            mEntrySets[i] = new EntrySet();
+        }
+
+        mKLineViews = new ViewGroup[ViewSize];
+        LayoutInflater inflater = LayoutInflater.from(getContext());
+        for (int i = 0; i < mKLineViews.length; i++) {
+            ViewGroup newView = null;
+            if (i == 0) {
+                newView = (ViewGroup) inflater.inflate(R.layout.trade_timeline_layout, mKlineContainer, false);
+                mKlineContainer.addView(newView);
+                mKLineViews[i] = newView;
+
+                InteractiveKLineView klineView = CommonUtils.findView(mKLineViews[i], R.id.timeLineView);
+                klineView.setEntrySet(mEntrySets[i]);
+                klineView.setRender(new TimeLineRender());
+            } else {
+                newView = (ViewGroup) inflater.inflate(R.layout.trade_kline_layout, mKlineContainer, false);
+                mKlineContainer.addView(newView);
+                mKLineViews[i] = newView;
+
+                InteractiveKLineView klineView = CommonUtils.findView(mKLineViews[i], R.id.timeLineView);
+                klineView.setEntrySet(mEntrySets[i]);
+//                klineView.setRender(new TimeLineRender());
+            }
+
+            mKLineViews[i].setVisibility(View.GONE);
+        }
 
         clickTime60();
         clickLine1();
 
-        if (mKLineTest) {
-            mTimelineView.setEntrySet(mKlineEntrySet_5);
-            new Handler().postDelayed(new Runnable() {
-                @Override
-                public void run() {
-                    onKLineDataChanged();
-                }
-            }, 2000);
-        } else {
-            mTimelineView.setEntrySet(timeLineEntrySet);
-            mTimelineView.setRender(new TimeLineRender());
 
-            new Handler().postDelayed(new Runnable() {
-                @Override
-                public void run() {
-                    onTimelineDataChanged();
+        loadData();
+
+    }
+
+    private void loadData() {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+
+                for (int i = 0; i < mEntrySets.length; i++) {
+                    if (i == 0) {
+                        mEntrySets[i].getEntryList().clear();
+                        mEntrySets[i].getEntryList().addAll(onTimelineDataChanged().getEntryList());
+                    } else {
+                        mEntrySets[i].getEntryList().clear();
+                        mEntrySets[i].getEntryList().addAll(onKLineDataChanged().getEntryList());
+                        mEntrySets[i].computeStockIndex();
+                    }
                 }
-            }, 2000);
+
+
+                new Handler(Looper.getMainLooper()).post(new Runnable() {
+                    @Override
+                    public void run() {
+                        onDataReady();
+                    }
+                });
+
+            }
+        }).start();
+    }
+
+
+    public void onDataReady() {
+        for (int i = 0; i < mKLineViews.length; i++) {
+            InteractiveKLineView kLineView = CommonUtils.findView(mKLineViews[i], R.id.timeLineView);
+            kLineView.notifyDataSetChanged();
         }
-
     }
 
 
@@ -152,11 +190,16 @@ public class TradeFragment extends BaseFragment {
                     view.setVisibility( index == i ? View.VISIBLE : View.INVISIBLE);
                 }
             }
+
+
+            mKLineViews[i].setVisibility(index == i ? View.VISIBLE : View.GONE);
         }
 
     }
 
-    private void onKLineDataChanged() {
+    private EntrySet onKLineDataChanged() {
+        EntrySet timeLineEntrySet = new EntrySet();
+
 
         String data = "";
         EntrySet entrySet = new EntrySet();
@@ -195,14 +238,17 @@ public class TradeFragment extends BaseFragment {
         }
 
 
-        mKlineEntrySet_5.addEntries(entrySet.getEntryList().subList(5500, 6000));
-        mKlineEntrySet_5.computeStockIndex();
+        timeLineEntrySet.addEntries(entrySet.getEntryList().subList(5500, 6000));
+        timeLineEntrySet.computeStockIndex();
 
-        mTimelineView.notifyDataSetChanged();
+        return timeLineEntrySet;
     }
 
 
-    public void onTimelineDataChanged() {
+    public EntrySet onTimelineDataChanged() {
+        EntrySet timeLineEntrySet = new EntrySet();
+
+
         List<BtcBean>  beans = null;
         try {
             beans = new Gson().fromJson(new InputStreamReader(getContext().getAssets().open("timeline.json")),
@@ -213,7 +259,7 @@ public class TradeFragment extends BaseFragment {
         }
 
         if (beans == null) {
-            return;
+            return timeLineEntrySet;
         }
 
         for (BtcBean btcBean : beans ) {
@@ -224,6 +270,6 @@ public class TradeFragment extends BaseFragment {
         timeLineEntrySet.getEntryList().get(2).setXLabel("11:30/13:00");
         timeLineEntrySet.getEntryList().get(4).setXLabel("15:00");
 
-        mTimelineView.notifyDataSetChanged();
+        return timeLineEntrySet;
     }
 }
