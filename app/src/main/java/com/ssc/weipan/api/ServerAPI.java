@@ -4,9 +4,12 @@ import com.facebook.stetho.okhttp.StethoInterceptor;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.squareup.okhttp.OkHttpClient;
+import com.ssc.weipan.account.AccountHelper;
 import com.ssc.weipan.base.CommonUtils;
 import com.ssc.weipan.base.ToastHelper;
 
+import java.net.CookieManager;
+import java.net.CookiePolicy;
 import java.util.HashMap;
 
 import retrofit.RestAdapter;
@@ -76,9 +79,9 @@ public class ServerAPI {
     private static OkClient createDumpContentOKClient() {
         OkHttpClient okHttpClient = new OkHttpClient();
 
-//        CookieManager cm = new CookieManager(AccountHelper.getCookieStore(), CookiePolicy.ACCEPT_ALL);
+        CookieManager cm = new CookieManager(AccountHelper.getCookieStore(), CookiePolicy.ACCEPT_ALL);
 ////        cm = new CookieManager();
-//        okHttpClient.setCookieHandler(cm);
+        okHttpClient.setCookieHandler(cm);
         okHttpClient.networkInterceptors().add(new StethoInterceptor());
 
         return new OkClient(okHttpClient);

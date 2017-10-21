@@ -13,14 +13,16 @@ import retrofit.http.POST;
 public class LoginApi {
 
 
+    public final static String LOGIN_PATH = "/customer/login";
+
     // https://www.showdoc.cc/1676150?page_id=15434277
     public static interface ILogin {
 
         @FormUrlEncoded
-        @POST("/customer/login")
+        @POST(LOGIN_PATH)
         public void login(@Field("mobile") String mobile,
                           @Field("smsCode") String smsCode,
-                          @Field("password") String password, // TODO 没有password输入交互
+//                          @Field("password") String password,
                           Callback<LoginResp> cb);
     }
 
@@ -34,6 +36,12 @@ public class LoginApi {
         public String nickname; // ": "昵称",
         public String mobile; // ": "13889898989",
         public String headPortrait; // ": "头像地址",
+        public int brokerId;
 //        brokerId	long	推荐人ID
+
+
+        public boolean needShowInputBroker () {
+            return brokerId == 0;
+        }
     }
 }

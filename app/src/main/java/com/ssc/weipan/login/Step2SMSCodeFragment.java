@@ -167,12 +167,13 @@ public class Step2SMSCodeFragment extends BaseFragment {
 
         LoginApi.ILogin iLogin = ServerAPI.getInterface(LoginApi.ILogin.class);
 
-        iLogin.login(phone, smsCode, phone, new Callback<LoginApi.LoginResp>() {
+        iLogin.login(phone, smsCode,/* phone,*/ new Callback<LoginApi.LoginResp>() {
             @Override
             public void success(LoginApi.LoginResp baseModel, Response response) {
 
                 if (baseModel.code == 0) {
-                    if (true) {
+
+                    if (baseModel.data.needShowInputBroker()) {
                         ((LoginActivity)getActivity()).switchToStep3Recommend();
                     } else {
 
