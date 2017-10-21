@@ -261,19 +261,34 @@ public class TradeFragment extends BaseFragment {
 
     @OnClick(R2.id.buy_up)
     public void clickBuyUp() {
-
-        View root = LayoutInflater.from(getContext()).inflate(R.layout.trade_buy_layout, null, false);
-        BuyTradeView btv = CommonUtils.findView(root, R.id.buytradeview);
-        btv.setKey(mKey);
-        btv.setUpDown(true);
-        btv.initUI();
-
-        CommonUtils.addToActivity(getActivity(), root);
+        showBuyLayout(true);
     }
 
     @OnClick(R2.id.buy_down)
     public void clickBuyDown() {
+        showBuyLayout(false);
+    }
 
+    private void showBuyLayout(boolean up) {
+
+        View root = LayoutInflater.from(getContext()).inflate(R.layout.trade_buy_layout, null, false);
+        BuyTradeView btv = CommonUtils.findView(root, R.id.buytradeview);
+        btv.setKey(mKey);
+        btv.setUpDown(up);
+        btv.setTimeIntervalProvider(new BuyTradeView.TimeIntervalProvider() {
+            @Override
+            public String timeInterval() {
+                for (int i = 0; i < mTimes.length; i++) {
+                    if (mTimes[i].isSelected()) {
+                        return mTimeDetail[i].getText().toString();
+                    }
+                }
+                return "";
+            }
+        });
+        btv.initUI();
+
+        CommonUtils.addToActivity(getActivity(), root);
     }
 
 }

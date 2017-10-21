@@ -57,6 +57,7 @@
                 android:orientation="vertical">
 
                 <TextView
+                    android:id="@+id/service_fee"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="手续费：20元"
@@ -65,6 +66,7 @@
                     />
 
                 <TextView
+                    android:id="@+id/good_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
@@ -74,6 +76,7 @@
                     />
 
                 <TextView
+                    android:id="@+id/buy_up"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
@@ -92,6 +95,7 @@
                 android:orientation="vertical">
 
                 <TextView
+                    android:id="@+id/return_goods"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="预期收入：360元"
@@ -100,6 +104,7 @@
                     />
 
                 <TextView
+                    android:id="@+id/time_interval"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
@@ -109,6 +114,7 @@
                     />
 
                 <TextView
+                    android:id="@+id/price_now"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"

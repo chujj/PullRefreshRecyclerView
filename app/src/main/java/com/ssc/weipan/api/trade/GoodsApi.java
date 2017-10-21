@@ -35,7 +35,7 @@ public class GoodsApi {
 
     public static class GoodName extends BaseModel {
         public String goods_name;
-        public int goods_id;
+        public float serviceFee;
         public String[] point;
         public List<String> chip;
     }
@@ -45,6 +45,7 @@ public class GoodsApi {
         public float open;
         public float high;
         public float low;
+        public float newPrice;
     }
 
     public static class Charts extends BaseModel {

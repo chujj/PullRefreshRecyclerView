@@ -19,6 +19,8 @@ import java.util.List;
 public class ChipLabelsLayout extends WrapLabelLayout<String> {
 
 
+    private OnChipSelected mListener;
+
     public ChipLabelsLayout(Context context) {
         super(context);
     }
@@ -35,7 +37,7 @@ public class ChipLabelsLayout extends WrapLabelLayout<String> {
     private List<View> toggles = new ArrayList<View>();
 
     @Override
-    public View getItemView(String s) {
+    public View getItemView(final String s) {
 
         LayoutInflater inflater = LayoutInflater.from(getContext());
         View itemRoot = inflater.inflate(R.layout.trade_buy_chip_item, null, false);
@@ -49,12 +51,24 @@ public class ChipLabelsLayout extends WrapLabelLayout<String> {
             public void onClick(View v) {
                 for(View view : toggles) {
                     view.setSelected(view == v);
-
                     view.findViewById(R.id.chip).setSelected(view == v);
+
+                    if (view == v && mListener != null) {
+                        mListener.onChipSelected(Integer.parseInt(s));
+                    }
                 }
             }
         });
 
         return itemRoot;
+    }
+
+
+    public static interface OnChipSelected {
+        public void onChipSelected(int chip);
+    }
+    public void setOnChipSelected(OnChipSelected listener) {
+
+        mListener = listener;
     }
 }
