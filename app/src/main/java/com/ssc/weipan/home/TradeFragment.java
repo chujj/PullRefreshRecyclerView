@@ -35,8 +35,6 @@ import butterknife.OnClick;
  */
 public class TradeFragment extends BaseFragment {
 
-    @BindView(R2.id.timeLineView)
-    InteractiveKLineView mTimelineView;
     @BindViews({R2.id.time_180, R2.id.time_60, R2.id.time_300})
     ViewGroup[] mTimes;
     @BindView(R2.id.kline_container)
