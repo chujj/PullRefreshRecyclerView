@@ -32,7 +32,7 @@ public class LoginApi {
     }
 
     public static class LoginData extends BaseModel {
-        //public int id": "1",
+        public int id; // ": "1",
         public String nickname; // ": "昵称",
         public String mobile; // ": "13889898989",
         public String headPortrait; // ": "头像地址",

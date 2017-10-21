@@ -24,6 +24,7 @@ import com.ssc.weipan.api.login.LoginApi;
 import com.ssc.weipan.base.BaseActivity;
 import com.ssc.weipan.base.BaseFragment;
 import com.ssc.weipan.base.CommonUtils;
+import com.ssc.weipan.base.PreferencesUtil;
 import com.ssc.weipan.base.ToastHelper;
 import com.ssc.weipan.base.Topbar;
 
@@ -174,6 +175,7 @@ public class Step2SMSCodeFragment extends BaseFragment {
 
                 if (baseModel.code == 0) {
 
+                    PreferencesUtil.putString(getContext(), AccountManager.PREF_USER_ID, baseModel.data.id + "");
                     if (baseModel.data.needShowInputBroker()) {
                         ((LoginActivity)getActivity()).switchToStep3Recommend();
                     } else {
