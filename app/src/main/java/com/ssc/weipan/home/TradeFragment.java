@@ -1,8 +1,6 @@
 package com.ssc.weipan.home;
 
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Looper;
 import android.support.annotation.Nullable;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
@@ -10,8 +8,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 import com.ssc.weipan.R;
 import com.ssc.weipan.R2;
 import com.ssc.weipan.api.trade.GoodsApi;
@@ -22,9 +18,6 @@ import com.wordplat.ikvstockchart.entry.Entry;
 import com.wordplat.ikvstockchart.entry.EntrySet;
 import com.wordplat.ikvstockchart.render.TimeLineRender;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.util.List;
 
 import butterknife.BindView;
@@ -182,45 +175,11 @@ public class TradeFragment extends BaseFragment {
             }
         }
 
-
-
-
         clickTime60();
         clickLine1();
 
-
-//        loadData();
         onDataReady();
     }
-
-    private void loadData() {
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-
-                for (int i = 0; i < mEntrySets.length; i++) {
-                    if (i == 0) {
-                        mEntrySets[i].getEntryList().clear();
-                        mEntrySets[i].getEntryList().addAll(onTimelineDataChanged().getEntryList());
-                    } else {
-                        mEntrySets[i].getEntryList().clear();
-                        mEntrySets[i].getEntryList().addAll(onKLineDataChanged().getEntryList());
-                        mEntrySets[i].computeStockIndex();
-                    }
-                }
-
-
-                new Handler(Looper.getMainLooper()).post(new Runnable() {
-                    @Override
-                    public void run() {
-                        onDataReady();
-                    }
-                });
-
-            }
-        }).start();
-    }
-
 
     public void onDataReady() {
         for (int i = 0; i < mKLineViews.length; i++) {
@@ -289,79 +248,4 @@ public class TradeFragment extends BaseFragment {
 
     }
 
-    private EntrySet onKLineDataChanged() {
-        EntrySet timeLineEntrySet = new EntrySet();
-
-
-        String data = "";
-        EntrySet entrySet = new EntrySet();
-        {
-            String kLineData = "";
-            try {
-                InputStream in = getResources().getAssets().open("kline1.txt");
-                int length = in.available();
-                byte[] buffer = new byte[length];
-                in.read(buffer);
-                kLineData = new String(buffer, "UTF-8");
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-            data = kLineData;
-        }
-
-
-        {
-            entrySet = new EntrySet();
-
-            final String[] candleDatas = data.split(",");
-
-            for (String candleData : candleDatas) {
-                String[] v = candleData.split("[|]");
-
-                float open = Float.parseFloat(v[0]);
-                float high = Float.parseFloat(v[1]);
-                float low = Float.parseFloat(v[2]);
-                float close = Float.parseFloat(v[3]);
-
-                int volume = Integer.parseInt(v[4]);
-
-                entrySet.addEntry(new Entry(open, high, low, close, volume, v[5]));
-            }
-        }
-
-
-        timeLineEntrySet.addEntries(entrySet.getEntryList().subList(5500, 6000));
-        timeLineEntrySet.computeStockIndex();
-
-        return timeLineEntrySet;
-    }
-
-
-    public EntrySet onTimelineDataChanged() {
-        EntrySet timeLineEntrySet = new EntrySet();
-
-
-        List<BtcBean>  beans = null;
-        try {
-            beans = new Gson().fromJson(new InputStreamReader(getContext().getAssets().open("timeline.json")),
-                    new TypeToken<List<BtcBean>>() {}.getType());
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        if (beans == null) {
-            return timeLineEntrySet;
-        }
-
-        for (BtcBean btcBean : beans ) {
-            Entry entry = new Entry(btcBean.price, (int) btcBean.amount, "");
-            timeLineEntrySet.addEntry(entry);
-        }
-        timeLineEntrySet.getEntryList().get(0).setXLabel("09:30");
-        timeLineEntrySet.getEntryList().get(2).setXLabel("11:30/13:00");
-        timeLineEntrySet.getEntryList().get(4).setXLabel("15:00");
-
-        return timeLineEntrySet;
-    }
 }
