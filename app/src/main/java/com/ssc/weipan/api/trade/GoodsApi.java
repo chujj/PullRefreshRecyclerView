@@ -55,6 +55,8 @@ public class GoodsApi {
     public static class ChartData extends BaseModel {
         public String name;
 
+
+        public List<Long> xAxis;
         public List<Object> data;
     }
 

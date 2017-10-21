@@ -18,6 +18,8 @@ import com.wordplat.ikvstockchart.entry.Entry;
 import com.wordplat.ikvstockchart.entry.EntrySet;
 import com.wordplat.ikvstockchart.render.TimeLineRender;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import butterknife.BindView;
@@ -156,7 +158,9 @@ public class TradeFragment extends BaseFragment {
 
                 if (isTimelineChart) {
                     for (int j = 0; j < mChardata.get(i).data.size(); j++) {
-                        Entry entry = new Entry(((Double) mChardata.get(i).data.get(j)).floatValue(), 0, "");
+                        String xLabel = (new SimpleDateFormat("HH:mm")).format(new Date(mChardata.get(i).xAxis.get(j).longValue()));
+
+                        Entry entry = new Entry(((Double) mChardata.get(i).data.get(j)).floatValue(), 0, xLabel);
                         mEntrySets[i].addEntry(entry);
 
                     }
@@ -168,7 +172,9 @@ public class TradeFragment extends BaseFragment {
                         float high = ((Double)_data.get(2)).floatValue();
                         float low =  ((Double)_data.get(3)).floatValue();
                         float close =((Double)_data.get(1)).floatValue();
-                        mEntrySets[i].addEntry(new Entry(open, high, low, close, 0, ""));
+
+                        String xLabel = (new SimpleDateFormat("HH:mm")).format(new Date(mChardata.get(i).xAxis.get(j).longValue()));
+                        mEntrySets[i].addEntry(new Entry(open, high, low, close, 0, xLabel));
 
                     }
 
