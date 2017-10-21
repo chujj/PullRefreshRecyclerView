@@ -8,14 +8,22 @@ import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.ssc.weipan.R;
 import com.ssc.weipan.R2;
+import com.ssc.weipan.api.ServerAPI;
+import com.ssc.weipan.api.user.UserApi;
 import com.ssc.weipan.base.BaseFragment;
+import com.ssc.weipan.base.ToastHelper;
 import com.viewpagerindicator.PageIndicator;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import retrofit.Callback;
+import retrofit.RetrofitError;
+import retrofit.client.Response;
 
 /**
  * Created by zhujj on 17-10-18.
@@ -27,6 +35,11 @@ public class TradeHomeFragment extends BaseFragment {
     ViewPager mViewPager;
     @BindView(R2.id.indicator)
     PageIndicator mIndicator;
+
+    @BindView(R2.id.avatar)
+    ImageView mAvatar;
+    @BindView(R2.id.assets)
+    TextView mAssets;
 
 
 
@@ -87,6 +100,29 @@ public class TradeHomeFragment extends BaseFragment {
         mIndicator.setViewPager(mViewPager);
 
 
+        requireUserInfo();
+    }
+
+
+    private void requireUserInfo() {
+        UserApi.IUser iUser = ServerAPI.getInterface(UserApi.IUser.class);
+        iUser.account(new Callback<UserApi.AccountResp>() {
+            @Override
+            public void success(UserApi.AccountResp accountResp, Response response) {
+                if (accountResp.code != 0) {
+                    ToastHelper.showToast(accountResp.message);
+                } else {
+
+
+                    mAssets.setText(accountResp.asset);
+                }
+            }
+
+            @Override
+            public void failure(RetrofitError error) {
+
+            }
+        });
     }
 
 
