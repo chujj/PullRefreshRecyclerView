@@ -6,6 +6,7 @@ import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -23,7 +24,9 @@ import java.io.InputStreamReader;
 import java.util.List;
 
 import butterknife.BindView;
+import butterknife.BindViews;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 /**
  * Created by zhujj on 17-10-18.
@@ -33,11 +36,17 @@ public class TradeFragment extends BaseFragment {
     @BindView(R2.id.timeLineView)
     InteractiveKLineView mTimelineView;
 
+    @BindView(R2.id.kline_container)
+    ViewGroup mContainer;
+
+
+    @BindViews({R2.id.line_1, R2.id.line_2, R2.id.line_3, R2.id.line_4})
+    ViewGroup[] mLinesIndicator;
+
     private EntrySet timeLineEntrySet = new EntrySet();
     private EntrySet mKlineEntrySet_5 = new EntrySet();
     private EntrySet mKlineEntrySet_10 = new EntrySet();
     private boolean mKLineTest;
-
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -79,6 +88,42 @@ public class TradeFragment extends BaseFragment {
                     onTimelineDataChanged();
                 }
             }, 2000);
+        }
+
+    }
+
+
+    @OnClick(R2.id.line_1)
+    public void clickLine1() {
+        selectLineIndex(0);
+    }
+
+    @OnClick(R2.id.line_2)
+    public void clickLine2() {
+        selectLineIndex(1);
+    }
+
+    @OnClick(R2.id.line_3)
+    public void clickLine3() {
+        selectLineIndex(2);
+    }
+
+    @OnClick(R2.id.line_4)
+    public void clickLine4() {
+        selectLineIndex(3);
+    }
+
+    private void selectLineIndex(int index) {
+        for (int i = 0; i < mLinesIndicator.length; i++) {
+            for (int j = 0; j < mLinesIndicator[i].getChildCount(); j++) {
+                View view = mLinesIndicator[i].getChildAt(j);
+                if (view instanceof TextView) {
+
+                    ((TextView)view).setTextColor(index == i ? 0xFFEBAD33 : 0xFFCCCCCC);
+                } else if (view instanceof View) {
+                    view.setVisibility( index == i ? View.VISIBLE : View.INVISIBLE);
+                }
+            }
         }
 
     }
