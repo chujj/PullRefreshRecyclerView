@@ -1,12 +1,17 @@
 package com.ssc.weipan.api;
 
+import android.content.Intent;
+
 import com.facebook.stetho.okhttp.StethoInterceptor;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.squareup.okhttp.OkHttpClient;
 import com.ssc.weipan.account.AccountHelper;
+import com.ssc.weipan.base.BaseApp;
 import com.ssc.weipan.base.CommonUtils;
 import com.ssc.weipan.base.ToastHelper;
+import com.ssc.weipan.home.PasswordSetupActivity;
+import com.ssc.weipan.model.BaseModel;
 
 import java.net.CookieManager;
 import java.net.CookiePolicy;
@@ -94,4 +99,13 @@ public class ServerAPI {
     }
 
 
+    public static void handleCodeError(BaseModel baseModel) {
+        if (baseModel.code == 3000) {
+
+            Intent it = new Intent(BaseApp.getApp(), PasswordSetupActivity.class);
+            BaseApp.getApp().startActivity(it);
+        } else {
+
+        }
+    }
 }

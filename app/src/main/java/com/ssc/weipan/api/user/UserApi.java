@@ -3,7 +3,10 @@ package com.ssc.weipan.api.user;
 import com.ssc.weipan.model.BaseModel;
 
 import retrofit.Callback;
+import retrofit.http.Field;
+import retrofit.http.FormUrlEncoded;
 import retrofit.http.GET;
+import retrofit.http.POST;
 
 /**
  * Created by zhujj on 17-10-21.
@@ -18,6 +21,11 @@ public class UserApi {
 
         @GET("/customer/user_account")
         public void account(Callback<AccountResp> cb);
+
+
+        @FormUrlEncoded
+        @POST("/customer/init_password")
+        public void initPassword(@Field("password") String pwd, Callback<BaseModel> cb);
     }
 
 

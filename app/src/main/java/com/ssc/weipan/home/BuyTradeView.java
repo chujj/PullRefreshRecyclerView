@@ -12,6 +12,7 @@ import com.ssc.weipan.R;
 import com.ssc.weipan.R2;
 import com.ssc.weipan.api.ServerAPI;
 import com.ssc.weipan.api.trade.GoodsApi;
+import com.ssc.weipan.base.BaseActivity;
 import com.ssc.weipan.base.CommonUtils;
 import com.ssc.weipan.base.ToastHelper;
 import com.ssc.weipan.base.Topbar;
@@ -61,6 +62,7 @@ public class BuyTradeView extends RelativeLayout {
     private TimeIntervalProvider mProvider;
 
     private Map<String, Object> mBuyArgs = new HashMap<>();
+    private BaseActivity mBaseActivity;
 
     public BuyTradeView(Context context) {
         super(context);
@@ -170,6 +172,9 @@ public class BuyTradeView extends RelativeLayout {
     @OnClick(R2.id.ok)
     public void clickOK() {
 
+
+        mBaseActivity.showLoadingDialog("加载中", false);
+
         GoodsApi.IGood iGood = ServerAPI.getInterface(GoodsApi.IGood.class);
         iGood.buyTrade(
                 (int) mBuyArgs.get("up_down_type"),
@@ -180,18 +185,28 @@ public class BuyTradeView extends RelativeLayout {
                 new Callback<BaseModel>() {
                     @Override
                     public void success(BaseModel baseModel, Response response) {
+                        mBaseActivity.dismissLoadingDialog();
                         if (baseModel.code != 0) {
                             ToastHelper.showToast(baseModel.message);
+                            ServerAPI.handleCodeError(baseModel);
                         } else {
+                            close();
+
+
 
                         }
                     }
 
                     @Override
                     public void failure(RetrofitError error) {
+                        mBaseActivity.dismissLoadingDialog();
                         ServerAPI.HandlerException(error);
                     }
                 });
+    }
+
+    public void setActivity(BaseActivity activity) {
+        mBaseActivity = activity;
     }
 
     public static interface  TimeIntervalProvider {

@@ -11,6 +11,7 @@ import android.widget.TextView;
 import com.ssc.weipan.R;
 import com.ssc.weipan.R2;
 import com.ssc.weipan.api.trade.GoodsApi;
+import com.ssc.weipan.base.BaseActivity;
 import com.ssc.weipan.base.BaseFragment;
 import com.ssc.weipan.base.CommonUtils;
 import com.wordplat.ikvstockchart.InteractiveKLineView;
@@ -274,6 +275,7 @@ public class TradeFragment extends BaseFragment {
         View root = LayoutInflater.from(getContext()).inflate(R.layout.trade_buy_layout, null, false);
         BuyTradeView btv = CommonUtils.findView(root, R.id.buytradeview);
         btv.setKey(mKey);
+        btv.setActivity((BaseActivity) getActivity());
         btv.setUpDown(up);
         btv.setTimeIntervalProvider(new BuyTradeView.TimeIntervalProvider() {
             @Override
