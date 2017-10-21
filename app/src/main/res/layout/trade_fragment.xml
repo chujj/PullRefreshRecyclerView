@@ -19,6 +19,7 @@
 
 
         <TextView
+            android:id="@+id/open_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="今开：8410.16"
@@ -32,6 +33,7 @@
             android:layout_weight="1"/>
 
         <TextView
+            android:id="@+id/high_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="最高：8422.49"
@@ -45,6 +47,7 @@
             android:layout_weight="1"/>
 
         <TextView
+            android:id="@+id/low_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="最低：8369.72"
@@ -89,6 +92,7 @@
                 />
 
             <TextView
+                android:id="@+id/time1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
@@ -126,6 +130,7 @@
                 />
 
             <TextView
+                android:id="@+id/time2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
@@ -162,6 +167,7 @@
                 />
 
             <TextView
+                android:id="@+id/time3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"

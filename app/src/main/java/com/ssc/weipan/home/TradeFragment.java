@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.support.annotation.Nullable;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +14,7 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.ssc.weipan.R;
 import com.ssc.weipan.R2;
+import com.ssc.weipan.api.trade.GoodsApi;
 import com.ssc.weipan.base.BaseFragment;
 import com.ssc.weipan.base.CommonUtils;
 import com.wordplat.ikvstockchart.InteractiveKLineView;
@@ -37,6 +39,18 @@ public class TradeFragment extends BaseFragment {
 
     @BindViews({R2.id.time_180, R2.id.time_60, R2.id.time_300})
     ViewGroup[] mTimes;
+    @BindViews({R2.id.time1, R2.id.time2, R2.id.time3, })
+    TextView[] mTimeDetail;
+
+
+    @BindView(R2.id.open_text)
+    TextView mOpenText;
+    @BindView(R2.id.high_text)
+    TextView mHighText;
+    @BindView(R2.id.low_text)
+    TextView mLowText;
+
+
     @BindView(R2.id.kline_container)
     ViewGroup mKlineContainer;
     @BindViews({R2.id.line_1, R2.id.line_2, R2.id.line_3, R2.id.line_4})
@@ -47,6 +61,15 @@ public class TradeFragment extends BaseFragment {
 
 
     private final static int ViewSize = 4;
+
+    private String mKey;
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        mKey = getArguments().getString("key");
+    }
 
     @Nullable
     @Override
@@ -90,6 +113,25 @@ public class TradeFragment extends BaseFragment {
 
             mKLineViews[i].setVisibility(View.GONE);
         }
+
+
+        // 时间初始化
+        for (int i = 0; i < mTimeDetail.length; i++) {
+            GoodsApi.GoodName gName = Data.sData.names.get(mKey);
+            mTimeDetail[i].setText(String.format("%s秒", i > (gName.point.length - 1) ? 0 : gName.point[i]));
+        }
+
+        // 高低价初始化
+        for (int i = 0; i < Data.sData.goods.size(); i++) {
+            if (TextUtils.equals(Data.sData.goods.get(i).label, mKey)) {
+                mOpenText.setText(String.format("今开：%.2f", Data.sData.goods.get(i).open));
+                mHighText.setText(String.format("最高：%.2f", Data.sData.goods.get(i).high));
+                mLowText.setText(String.format("最低：%.2f", Data.sData.goods.get(i).low));
+                break;
+            }
+        }
+
+
 
         clickTime60();
         clickLine1();

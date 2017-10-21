@@ -14,10 +14,13 @@ import android.widget.TextView;
 import com.ssc.weipan.R;
 import com.ssc.weipan.R2;
 import com.ssc.weipan.api.ServerAPI;
+import com.ssc.weipan.api.trade.GoodsApi;
 import com.ssc.weipan.api.user.UserApi;
 import com.ssc.weipan.base.BaseFragment;
 import com.ssc.weipan.base.ToastHelper;
 import com.viewpagerindicator.PageIndicator;
+
+import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -57,50 +60,68 @@ public class TradeHomeFragment extends BaseFragment {
 
         ButterKnife.bind(this, view);
 
+        requireGoodsInfo();
+
+        requireUserInfo();
+    }
+
+
+    private void requireGoodsInfo() {
+        GoodsApi.IGood iGood = ServerAPI.getInterface(GoodsApi.IGood.class);
+        iGood.goods(new Callback<GoodsApi.GoodsResp>() {
+            @Override
+            public void success(GoodsApi.GoodsResp goodsResp, Response response) {
+                if (goodsResp.code != 0) {
+                    ToastHelper.showToast(goodsResp.message);
+                } else {
+                    updateViewPager(goodsResp.data);
+                }
+
+            }
+
+            @Override
+            public void failure(RetrofitError error) {
+
+            }
+        });
+    }
+
+
+    private void updateViewPager(GoodsApi.GoodsModel data) {
+
+        Data.sData = data;
+
+        final Map<String, GoodsApi.GoodName> names = data.names;
+        Object[] temp = names.keySet().toArray();
+
+        final String[] keys = new String[temp.length];
+        for (int i = 0; i < temp.length; i++) {
+            keys[i] = (String) temp[i];
+        }
 
         mViewPager.setOffscreenPageLimit(3);
         mViewPager.setAdapter(new FragmentPagerAdapter(getChildFragmentManager()) {
 
             @Override
             public Fragment getItem(int position) {
-                if (position < 1) {
-                    return Fragment.instantiate(getContext(), TradeFragment.class.getName());
-                } else {
-                    Bundle args = new Bundle();
-                    args.putBoolean("is_keyline_test", true);
-                    return Fragment.instantiate(getContext(), TradeFragment.class.getName(), args);
-                }
+                Bundle args = new Bundle();
+                args.putString("key", keys[position]);
+                return Fragment.instantiate(getContext(), TradeFragment.class.getName(), args);
             }
 
             @Override
             public CharSequence getPageTitle(int position) {
-                String title = "";
-                switch (position) {
-                    case 0:
-                        title = "美元兑日元";
-                        break;
-                    case 1:
-                        title = "现货黄金";
-                        break;
-                    case 2:
-                        title = "奥贵银";
-                        break;
-                }
-
-                return title;
+                return names.get(keys[position]).goods_name;
             }
 
             @Override
             public int getCount() {
-                return 3;
+                return keys.length;
             }
         });
 
 
         mIndicator.setViewPager(mViewPager);
-
-
-        requireUserInfo();
     }
 
 
