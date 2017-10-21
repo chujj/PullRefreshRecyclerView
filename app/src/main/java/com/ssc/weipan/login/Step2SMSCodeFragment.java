@@ -18,6 +18,7 @@ import android.widget.TextView;
 
 import com.ssc.weipan.R;
 import com.ssc.weipan.R2;
+import com.ssc.weipan.SplashActivity;
 import com.ssc.weipan.api.ServerAPI;
 import com.ssc.weipan.api.login.LoginApi;
 import com.ssc.weipan.base.BaseActivity;
@@ -176,8 +177,7 @@ public class Step2SMSCodeFragment extends BaseFragment {
                     if (baseModel.data.needShowInputBroker()) {
                         ((LoginActivity)getActivity()).switchToStep3Recommend();
                     } else {
-
-                        // TODO go home
+                        SplashActivity.switchToMain(getContext());
                     }
                     getActivity().finish();
                 } else {

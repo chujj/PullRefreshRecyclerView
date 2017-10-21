@@ -6,6 +6,7 @@ import android.widget.EditText;
 
 import com.ssc.weipan.R;
 import com.ssc.weipan.R2;
+import com.ssc.weipan.SplashActivity;
 import com.ssc.weipan.base.BaseActivity;
 import com.ssc.weipan.base.CommonUtils;
 import com.ssc.weipan.base.ToastHelper;
@@ -74,6 +75,6 @@ public class RecommendInputActivity extends BaseActivity {
 
 
     public void openHome() {
-        // TODO go home
+        SplashActivity.switchToMain(this);
     }
 }

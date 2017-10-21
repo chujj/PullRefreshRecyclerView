@@ -1,5 +1,6 @@
 package com.ssc.weipan;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -37,7 +38,7 @@ public class SplashActivity extends AppCompatActivity {
                         switchToRegister();
                         break;
                     case 0x13d:
-                        switchToMain();
+                        switchToMain(SplashActivity.this);
                         break;
 
                 }
@@ -51,8 +52,8 @@ public class SplashActivity extends AppCompatActivity {
         startActivity(it);
     }
 
-    private void switchToMain() {
-        Intent it = new Intent(this, HomeActivity.class);
-        startActivity(it);
+    public static void switchToMain(Context context) {
+        Intent it = new Intent(context, HomeActivity.class);
+        context.startActivity(it);
     }
 }
