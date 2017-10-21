@@ -13,7 +13,8 @@
         app:xLabelColor="#FFCCCCCC"
         app:yLabelColor="#FFCCCCCC"
         app:timeLineColor="#FFCCCCCC"
-        app:timeLineMaxCount="50"
+        app:timeLineMaxCount="35"
+        app:xLabelSize="8dp"
         />
 
 </LinearLayout>

@@ -12,6 +12,8 @@
         android:layout_height="300dp"
         app:xLabelColor="#FFCCCCCC"
         app:yLabelColor="#FFCCCCCC"
+        app:portraitDefaultVisibleCount="35"
+        app:xLabelSize="8dp"
         />
 
 </LinearLayout>
