@@ -1,7 +1,6 @@
 package com.ssc.weipan.home;
 
 import android.content.Context;
-import android.support.v4.media.MediaMetadataCompat;
 import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.view.View;
@@ -11,14 +10,22 @@ import android.widget.TextView;
 
 import com.ssc.weipan.R;
 import com.ssc.weipan.R2;
+import com.ssc.weipan.api.ServerAPI;
+import com.ssc.weipan.api.trade.GoodsApi;
 import com.ssc.weipan.base.CommonUtils;
+import com.ssc.weipan.base.ToastHelper;
 import com.ssc.weipan.base.Topbar;
+import com.ssc.weipan.model.BaseModel;
 
-import org.w3c.dom.Text;
+import java.util.HashMap;
+import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import retrofit.Callback;
+import retrofit.RetrofitError;
+import retrofit.client.Response;
 
 /**
  * Created by zhujj on 17-10-21.
@@ -52,6 +59,8 @@ public class BuyTradeView extends RelativeLayout {
     private String mKey;
     private boolean mUp;
     private TimeIntervalProvider mProvider;
+
+    private Map<String, Object> mBuyArgs = new HashMap<>();
 
     public BuyTradeView(Context context) {
         super(context);
@@ -97,6 +106,10 @@ public class BuyTradeView extends RelativeLayout {
 
             @Override
             public void run() {
+                mBuyArgs.put("goods_id", Data.sData.names.get(mKey).goods_id);
+                mBuyArgs.put("up_down_type", mUp ? 0 : 1);
+                mBuyArgs.put("secs", Integer.parseInt(mProvider.timeInterval().replaceAll("秒", "")));
+
                 mGoodName.setText(String.format("合约：%s", Data.sData.names.get(mKey).goods_name));
                 mTimeInterval.setText(String.format("结算周期：%s", mProvider.timeInterval()));
                 mBuyUp.setText(String.format("订单方向：买%s", mUp ? "涨" : "跌"));
@@ -114,6 +127,8 @@ public class BuyTradeView extends RelativeLayout {
                 mChipsLayout.setOnChipSelected(new ChipLabelsLayout.OnChipSelected() {
                     @Override
                     public void onChipSelected(int chip) {
+                        mBuyArgs.put("chip", chip);
+
                         mServiceFee.setText(
                                 String.format("手续费：%.2f元", chip * Data.sData.names.get(mKey).serviceFee));
                         mReturnGoods.setText(
@@ -155,8 +170,29 @@ public class BuyTradeView extends RelativeLayout {
     @OnClick(R2.id.ok)
     public void clickOK() {
 
-    }
+        GoodsApi.IGood iGood = ServerAPI.getInterface(GoodsApi.IGood.class);
+        iGood.buyTrade(
+                (int) mBuyArgs.get("up_down_type"),
+                (int) mBuyArgs.get("goods_id"),
+                (int) mBuyArgs.get("chip"),
+                1,
+                (int) mBuyArgs.get("secs"),
+                new Callback<BaseModel>() {
+                    @Override
+                    public void success(BaseModel baseModel, Response response) {
+                        if (baseModel.code != 0) {
+                            ToastHelper.showToast(baseModel.message);
+                        } else {
 
+                        }
+                    }
+
+                    @Override
+                    public void failure(RetrofitError error) {
+                        ServerAPI.HandlerException(error);
+                    }
+                });
+    }
 
     public static interface  TimeIntervalProvider {
         public String timeInterval();
