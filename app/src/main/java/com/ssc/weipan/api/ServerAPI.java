@@ -34,12 +34,14 @@ public class ServerAPI {
     private HashMap<String, Object> mInterefaceMap;
     private RestAdapter mRestAdapter;
 
+    public OkHttpClient mOKClient;
+
     public static synchronized <T> T cacheInsterface(Class<T> aInterface) {
         return getInstance().getCachedInterface(aInterface.getName(),
                 aInterface);
     }
 
-    private static synchronized ServerAPI getInstance() {
+    public static synchronized ServerAPI getInstance() {
         if (sInstance == null) {
             sInstance = new ServerAPI();
         }
@@ -73,17 +75,18 @@ public class ServerAPI {
 //            }
 //        })
         .create();
-        
+
+        mOKClient = createDumpContentOKClient();
         mRestAdapter = new RestAdapter.Builder().setEndpoint(HOST)
                 .setLogLevel(CommonUtils.isDebugBuild() ? LogLevel.FULL : LogLevel.NONE)
                 // .setClient(new TrustAllSSLConnectionClient())
                 .setConverter(new GsonConverter(gson))
-                .setClient(createDumpContentOKClient()).build();
+                .setClient(new OkClient(mOKClient)).build();
 
         mInterefaceMap = new HashMap<String, Object>();
     }
 
-    private static OkClient createDumpContentOKClient() {
+    private static OkHttpClient createDumpContentOKClient() {
         OkHttpClient okHttpClient = new OkHttpClient();
 
         CookieManager cm = new CookieManager(AccountHelper.getCookieStore(), CookiePolicy.ACCEPT_ALL);
@@ -91,7 +94,7 @@ public class ServerAPI {
         okHttpClient.setCookieHandler(cm);
         okHttpClient.networkInterceptors().add(new StethoInterceptor());
 
-        return new OkClient(okHttpClient);
+        return okHttpClient;
     }
 
 

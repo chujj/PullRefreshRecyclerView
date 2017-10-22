@@ -1,5 +1,8 @@
 package com.ssc.weipan.home;
 
+import android.content.Intent;
+import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.text.SpannableString;
@@ -10,16 +13,22 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.google.gson.Gson;
+import com.squareup.okhttp.Call;
+import com.squareup.okhttp.Request;
 import com.ssc.weipan.R;
 import com.ssc.weipan.R2;
 import com.ssc.weipan.api.ServerAPI;
 import com.ssc.weipan.api.trade.GoodsApi;
 import com.ssc.weipan.base.BaseActivity;
+import com.ssc.weipan.base.ClosureMethod;
 import com.ssc.weipan.base.CommonUtils;
 import com.ssc.weipan.base.ToastHelper;
 import com.ssc.weipan.base.Topbar;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.BindViews;
@@ -70,6 +79,134 @@ public class ChongZhiActivity extends BaseActivity {
         requireData();
     }
 
+    private String mChipSelected;
+
+
+    private Map<String, Object> mInMoneyMethodMap = new HashMap<String, Object>() {
+        {
+            put("scan_98pay", new ClosureMethod() {
+                @Override
+                public Object[] run(Object... args) {
+
+                    LayoutInflater inflater = (LayoutInflater) args[0];
+                    ViewGroup parent = (ViewGroup) args[1];
+                    GoodsApi.Channel channel = (GoodsApi.Channel) args[2];
+
+                    View _itemRoot = inflater.inflate(R.layout.in_money_channel, parent, false);
+
+                    ((TextView) CommonUtils.findView(_itemRoot, R.id.name))
+                            .setText(channel.name);
+
+
+                    _itemRoot.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            ToastHelper.showToast("qrcode");
+                        }
+                    });
+
+                    return new Object[] {_itemRoot};
+                }
+            });
+            put("unionpay", new ClosureMethod() {
+                @Override
+                public Object[] run(Object... args) {
+                    LayoutInflater inflater = (LayoutInflater) args[0];
+                    ViewGroup parent = (ViewGroup) args[1];
+                    GoodsApi.Channel channel = (GoodsApi.Channel) args[2];
+
+                    View _itemRoot = inflater.inflate(R.layout.in_money_channel, parent, false);
+
+                    ((TextView) CommonUtils.findView(_itemRoot, R.id.name))
+                            .setText(channel.name);
+
+
+                    _itemRoot.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            ToastHelper.showToast("银联");
+                        }
+                    });
+
+                    return new Object[] {_itemRoot};
+                }
+            });
+            put("nonebank_unionpay", new ClosureMethod() {
+                @Override
+                public Object[] run(Object... args) {
+                    LayoutInflater inflater = (LayoutInflater) args[0];
+                    ViewGroup parent = (ViewGroup) args[1];
+                    final GoodsApi.Channel channel = (GoodsApi.Channel) args[2];
+
+                    View _itemRoot = inflater.inflate(R.layout.in_money_channel, parent, false);
+
+                    ((TextView) CommonUtils.findView(_itemRoot, R.id.name))
+                            .setText(channel.name);
+
+
+                    _itemRoot.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+
+                            String url = channel.url;
+                            if (url.indexOf("?") > 0) {
+                                url += ("&tranAmt=" +mChipSelected);
+                            } else {
+                                url += ("?tranAmt=" +mChipSelected);
+                            }
+                            final String f_url = url;
+
+                            new AsyncTask<Void, Void, Void>() {
+
+                                com.squareup.okhttp.Response response;
+                                GoodsApi.WeChatPayResp wcpr = null;
+
+                                @Override
+                                protected Void doInBackground(Void... params) {
+
+                                    try {
+                                        Request request = new Request.Builder().url(f_url).get().build();
+                                        Call call = ServerAPI.getInstance().mOKClient.newCall(request);
+                                        response = call.execute();
+
+                                        wcpr = new Gson().fromJson(response.body().string(), GoodsApi.WeChatPayResp.class);
+
+                                    } catch (Exception e) {
+                                        ServerAPI.HandlerException(RetrofitError.unexpectedError(f_url, e));
+                                    }
+                                    return null;
+                                }
+
+                                @Override
+                                protected void onPostExecute(Void aVoid) {
+                                    super.onPostExecute(aVoid);
+
+                                    if (wcpr == null) {
+                                        ToastHelper.showToast("数据错误");
+                                        return;
+                                    }
+
+                                    if (wcpr.code != 0) {
+                                        ServerAPI.handleCodeError(wcpr);
+                                        ToastHelper.showToast(wcpr.message);
+                                    } else {
+                                        Uri uri = Uri.parse(wcpr.data.gateway);
+                                        Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+                                        ChongZhiActivity.this.startActivity(intent);
+                                    }
+
+                                }
+                            }.execute();
+
+                        }
+                    });
+
+                    return new Object[] {_itemRoot};
+                }
+            });
+        }
+    };
+
 
     private GoodsApi.InMoneyUIInfo mInMoneyUIInfo;
     private List<GoodsApi.Channel> mInMoneyChannels;
@@ -91,7 +228,7 @@ public class ChongZhiActivity extends BaseActivity {
                     mChips.setOnChipSelected(new ChipLabelsLayout.OnChipSelected() {
                         @Override
                         public void onChipSelected(String chip) {
-
+                            mChipSelected = chip;
                         }
                     });
 
@@ -115,10 +252,14 @@ public class ChongZhiActivity extends BaseActivity {
                 mChannelContainer.removeAllViews();
                 LayoutInflater inflater = LayoutInflater.from(ChongZhiActivity.this);
                 for (int i = 0; i < mInMoneyChannels.size(); i++) {
-                    View _itemRoot = inflater.inflate(R.layout.in_money_channel, mChannelContainer, false);
-                    ((TextView) CommonUtils.findView(_itemRoot, R.id.name))
-                            .setText(mInMoneyChannels.get(i).name);
-                    mChannelContainer.addView(_itemRoot);
+
+                    String type = mInMoneyChannels.get(i).type;
+
+                    Object[] retval =
+                            ((ClosureMethod) mInMoneyMethodMap.get(type)).run(
+                                    inflater, mChannelContainer, mInMoneyChannels.get(i));
+
+                    mChannelContainer.addView((View) retval[0]);
                 }
 
                 mContainer.setVisibility(View.VISIBLE);

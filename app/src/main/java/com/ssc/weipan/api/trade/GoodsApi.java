@@ -40,6 +40,7 @@ public class GoodsApi {
 
         @GET("/asset/pay_type_list")
         public void igetInMoneyChannelList(Callback<InMoneyChannelListResp> cb);
+
     }
 
     ///////////////////////// goods /////////////////////
@@ -154,4 +155,12 @@ public class GoodsApi {
     }
 
 
+    public static class WeChatPayResp extends BaseModel {
+
+        public WeChatGateWay data;
+    }
+
+    public static class WeChatGateWay extends BaseModel {
+        public String gateway;
+    }
 }
