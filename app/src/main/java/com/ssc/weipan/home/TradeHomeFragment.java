@@ -1,5 +1,6 @@
 package com.ssc.weipan.home;
 
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -9,6 +10,9 @@ import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.WebSettings;
+import android.webkit.WebView;
+import android.webkit.WebViewClient;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -46,6 +50,8 @@ public class TradeHomeFragment extends BaseFragment {
     TextView mAssets;
 
 
+    @BindView(R2.id.ws_callback)
+    WebView mWSWebview;
 
     @Nullable
     @Override
@@ -61,9 +67,42 @@ public class TradeHomeFragment extends BaseFragment {
 
         ButterKnife.bind(this, view);
 
+        setupWebView();
+
         requireGoodsInfo();
 
         requireUserInfo();
+    }
+
+    private void setupWebView() {
+        WebSettings setting = mWSWebview.getSettings();
+        setting.setBuiltInZoomControls(false);
+        setting.setSupportZoom(false);
+        setting.setAllowFileAccess(true);
+        setting.setJavaScriptCanOpenWindowsAutomatically(true);
+        setting.setJavaScriptEnabled(true);
+        setting.setTextSize(WebSettings.TextSize.NORMAL);
+        setting.setDatabaseEnabled(true);
+        setting.setDomStorageEnabled(true);
+
+        mWSWebview.addJavascriptInterface(new WebApi(), "WebAPI");
+        mWSWebview.setWebViewClient(new WebViewClient() {
+            @Override
+            public void onPageStarted(WebView view, String url, Bitmap favicon) {
+                super.onPageStarted(view, url, favicon);
+            }
+
+            @Override
+            public void onPageFinished(WebView view, String url) {
+                super.onPageFinished(view, url);
+                mWSWebview.loadUrl("javascript:WebAPI.userID=3");
+                mWSWebview.loadUrl("javascript:nativeCompleted()");
+            }
+        });
+
+
+        mWSWebview.loadUrl("http://time.168zhibo.cn/customer/futures_trade/internal");
+//        mWSWebview.loadUrl("http://192.168.43.124:8000/test.html");
     }
 
 
@@ -78,7 +117,7 @@ public class TradeHomeFragment extends BaseFragment {
                     updateViewPager(goodsResp.data);
                 }
 
-            }
+    }
 
             @Override
             public void failure(RetrofitError error) {
