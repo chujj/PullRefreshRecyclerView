@@ -35,7 +35,7 @@ public class HomeActivity extends BaseActivity {
             TradeHomeFragment.class.getName(),
             EmptyFragment.class.getName(),
             EmptyFragment.class.getName(),
-            EmptyFragment.class.getName(),
+            MineFragment.class.getName(),
     };
 
     private int mIndex = 0; // default 0
