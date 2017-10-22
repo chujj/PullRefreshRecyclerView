@@ -87,10 +87,9 @@ public class ChongZhiActivity extends BaseActivity {
             put("scan_98pay", new ClosureMethod() {
                 @Override
                 public Object[] run(Object... args) {
-
                     LayoutInflater inflater = (LayoutInflater) args[0];
                     ViewGroup parent = (ViewGroup) args[1];
-                    GoodsApi.Channel channel = (GoodsApi.Channel) args[2];
+                    final GoodsApi.Channel channel = (GoodsApi.Channel) args[2];
 
                     View _itemRoot = inflater.inflate(R.layout.in_money_channel, parent, false);
 
@@ -101,7 +100,57 @@ public class ChongZhiActivity extends BaseActivity {
                     _itemRoot.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-                            ToastHelper.showToast("qrcode");
+
+                            String url = channel.url;
+                            if (url.indexOf("?") > 0) {
+                                url += ("&money=" +mChipSelected);
+                            } else {
+                                url += ("?money=" +mChipSelected);
+                            }
+                            final String f_url = url;
+
+                            new AsyncTask<Void, Void, Void>() {
+
+                                com.squareup.okhttp.Response response;
+                                GoodsApi.QRCodePayResp wcpr = null;
+
+                                @Override
+                                protected Void doInBackground(Void... params) {
+
+                                    try {
+                                        Request request = new Request.Builder().url(f_url).get().build();
+                                        Call call = ServerAPI.getInstance().mOKClient.newCall(request);
+                                        response = call.execute();
+
+                                        wcpr = new Gson().fromJson(response.body().string(), GoodsApi.QRCodePayResp.class);
+
+                                    } catch (Exception e) {
+                                        ServerAPI.HandlerException(RetrofitError.unexpectedError(f_url, e));
+                                    }
+                                    return null;
+                                }
+
+                                @Override
+                                protected void onPostExecute(Void aVoid) {
+                                    super.onPostExecute(aVoid);
+
+                                    if (wcpr == null) {
+                                        ToastHelper.showToast("数据错误");
+                                        return;
+                                    }
+
+                                    if (wcpr.code != 0) {
+                                        ServerAPI.handleCodeError(wcpr);
+                                        ToastHelper.showToast(wcpr.message);
+                                    } else {
+                                        Uri uri = Uri.parse(wcpr.data);
+                                        Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+                                        ChongZhiActivity.this.startActivity(intent);
+                                    }
+
+                                }
+                            }.execute();
+
                         }
                     });
 

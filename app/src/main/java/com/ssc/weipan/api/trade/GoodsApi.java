@@ -163,4 +163,9 @@ public class GoodsApi {
     public static class WeChatGateWay extends BaseModel {
         public String gateway;
     }
+
+
+    public static class QRCodePayResp extends BaseModel {
+        public String data;
+    }
 }
