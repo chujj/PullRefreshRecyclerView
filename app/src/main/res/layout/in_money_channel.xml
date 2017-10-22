@@ -3,22 +3,26 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="horizontal"
     android:layout_width="match_parent"
-    android:layout_height="40dp">
-
-
+    android:layout_height="40dp"
+    android:background="#FF444444"
+    android:gravity="center_vertical"
+    >
 
     <ImageView
         android:layout_width="30dp"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="10dp"/>
-
+        android:layout_marginLeft="10dp"
+        android:src="@drawable/trade_home_user_header_tixian"
+        />
 
     <TextView
-        android:layout_width="55px"
-        android:layout_height="18px"
+        android:id="@+id/name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
         android:text="微信支付"
         android:textColor="#FFCCCCCC"
-        android:textSize="14px"
+        android:textSize="14sp"
         />
 
 

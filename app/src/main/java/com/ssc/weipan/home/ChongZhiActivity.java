@@ -15,6 +15,7 @@ import com.ssc.weipan.R2;
 import com.ssc.weipan.api.ServerAPI;
 import com.ssc.weipan.api.trade.GoodsApi;
 import com.ssc.weipan.base.BaseActivity;
+import com.ssc.weipan.base.CommonUtils;
 import com.ssc.weipan.base.ToastHelper;
 import com.ssc.weipan.base.Topbar;
 
@@ -113,10 +114,11 @@ public class ChongZhiActivity extends BaseActivity {
                 mChannelContainer.removeAllViews();
                 LayoutInflater inflater = LayoutInflater.from(ChongZhiActivity.this);
                 for (int i = 0; i < mInMoneyChannels.size(); i++) {
-                    inflater.inflate(R.layout.in_money_channel, mChannelContainer, false);
-//                    mInMoneyChannels.get(i).name
+                    View _itemRoot = inflater.inflate(R.layout.in_money_channel, mChannelContainer, false);
+                    ((TextView) CommonUtils.findView(_itemRoot, R.id.name))
+                            .setText(mInMoneyChannels.get(i).name);
+                    mChannelContainer.addView(_itemRoot);
                 }
-
 
                 mContainer.setVisibility(View.VISIBLE);
             }
