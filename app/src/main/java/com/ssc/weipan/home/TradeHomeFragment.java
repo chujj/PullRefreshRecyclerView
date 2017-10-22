@@ -1,5 +1,6 @@
 package com.ssc.weipan.home;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -32,6 +33,7 @@ import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import retrofit.Callback;
 import retrofit.RetrofitError;
 import retrofit.client.Response;
@@ -190,6 +192,13 @@ public class TradeHomeFragment extends BaseFragment {
 
             }
         });
+    }
+
+
+    @OnClick(R2.id.chongzhi)
+    public void clickChongZhi() {
+        Intent it = new Intent(getContext(), ChongZhiActivity.class);
+        startActivity(it);
     }
 
 

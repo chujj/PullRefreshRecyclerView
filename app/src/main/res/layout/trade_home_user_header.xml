@@ -57,6 +57,7 @@
 
 
             <LinearLayout
+                android:id="@+id/tixian"
                 android:layout_width="80dp"
                 android:layout_height="30dp"
                 android:paddingLeft="14dp"
@@ -86,6 +87,7 @@
 
 
             <LinearLayout
+                android:id="@+id/chongzhi"
                 android:layout_width="80dp"
                 android:layout_height="30dp"
                 android:layout_marginLeft="10dp"

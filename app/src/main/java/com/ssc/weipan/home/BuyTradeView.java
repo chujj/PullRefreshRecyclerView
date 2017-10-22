@@ -129,7 +129,8 @@ public class BuyTradeView extends RelativeLayout {
 
                 mChipsLayout.setOnChipSelected(new ChipLabelsLayout.OnChipSelected() {
                     @Override
-                    public void onChipSelected(int chip) {
+                    public void onChipSelected(String chipOri) {
+                        int chip = Integer.parseInt(chipOri);
                         mBuyArgs.put("chip", chip);
 
                         mServiceFee.setText(

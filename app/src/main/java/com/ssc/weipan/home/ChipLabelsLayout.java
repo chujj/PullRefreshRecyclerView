@@ -54,7 +54,7 @@ public class ChipLabelsLayout extends WrapLabelLayout<String> {
                     view.findViewById(R.id.chip).setSelected(view == v);
 
                     if (view == v && mListener != null) {
-                        mListener.onChipSelected(Integer.parseInt(s));
+                        mListener.onChipSelected(s);
                     }
                 }
             }
@@ -65,7 +65,7 @@ public class ChipLabelsLayout extends WrapLabelLayout<String> {
 
 
     public static interface OnChipSelected {
-        public void onChipSelected(int chip);
+        public void onChipSelected(String chip);
     }
     public void setOnChipSelected(OnChipSelected listener) {
 

@@ -34,8 +34,13 @@ public class GoodsApi {
         @POST("/customer/account_trade_list")
         public void getTradeHistory(Callback<BaseModel> cb);
 
-    }
 
+        @GET("/asset/account_asset_pay_prepare")
+        public void getInMoneyUIInfo(Callback<InMoneyUIInfoResp> cb);
+
+        @GET("/asset/pay_type_list")
+        public void igetInMoneyChannelList(Callback<InMoneyChannelListResp> cb);
+    }
 
     ///////////////////////// goods /////////////////////
 
@@ -125,5 +130,28 @@ public class GoodsApi {
         public int leftTime;
         public float serve_price;
     }
+
+
+    //////////////////////// input money ////////////////
+    public static class InMoneyUIInfoResp extends BaseModel {
+        public InMoneyUIInfo data;
+    }
+
+    public static class InMoneyUIInfo extends BaseModel {
+        public String cashInFee;
+        public List<String> pays;
+    }
+    public static class InMoneyChannelListResp extends BaseModel {
+        public List<Channel> data;
+    }
+
+    public static class Channel extends BaseModel {
+        public String name;
+        public String icon;
+        public String bank_url;
+        public String type;
+        public String url;
+    }
+
 
 }

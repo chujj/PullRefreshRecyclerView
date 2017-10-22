@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FF1F1F1F">
+
+
+    <include layout="@layout/topbar_layout"/>
+
+    <include layout="@layout/trade_home_user_header"/>
+
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#FF3C3C3C"/>
+
+
+    <LinearLayout
+        android:id="@+id/container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:orientation="vertical"
+        >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="22dp"
+            android:text="充值金额"
+            android:textColor="#FFCCCCCC"
+            android:textSize="14sp"
+            />
+
+
+        <com.ssc.weipan.home.ChipLabelsLayout
+            android:id="@+id/chips"
+            android:layout_marginTop="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+
+        <LinearLayout
+            android:id="@+id/channel_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/service_fee"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="每笔充值收取 2% 的手续费"
+            android:textColor="#FFCCCCCC"
+            android:textSize="14sp"
+            />
+        
+        
+        <TextView
+            android:id="@+id/confirm"
+            android:layout_width="match_parent"
+            android:layout_height="38.5dp"
+            android:layout_marginTop="20dp"
+            android:gravity="center"
+            android:text="充 值"
+            android:textColor="#FF000000"
+            android:textSize="18sp"
+            android:background="@drawable/round_btn_bg"
+            />
+
+    </LinearLayout>
+
+</LinearLayout>
