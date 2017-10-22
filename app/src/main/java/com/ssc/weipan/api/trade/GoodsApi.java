@@ -30,6 +30,10 @@ public class GoodsApi {
                              @Field("stop_win_percent") int secs,
                              Callback<BuyTradeResponse> cb);
 
+
+        @POST("/customer/account_trade_list")
+        public void getTradeHistory(Callback<BaseModel> cb);
+
     }
 
 

@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FF1F1F1F">
+
+
+    <include layout="@layout/topbar_layout"/>
+
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:padding="1dp"
+        android:background="#FFEBAD33"
+        android:layout_marginTop="7dp"
+        android:layout_marginBottom="7dp"
+        android:orientation="horizontal">
+
+
+        <TextView
+            android:id="@+id/tab_1"
+            android:layout_width="75dp"
+            android:layout_height="30dp"
+            android:gravity="center"
+            android:text="持仓明细"
+            android:background="@drawable/trade_history_title_textcolor_bg"
+            android:textColor="@color/trade_history_title_textcolor"
+            android:textSize="14sp"
+            />
+
+        <TextView
+            android:id="@+id/tab_2"
+            android:layout_width="75dp"
+            android:layout_height="30dp"
+            android:layout_marginLeft="1dp"
+            android:gravity="center"
+            android:text="今日成交"
+            android:background="@drawable/trade_history_title_textcolor_bg"
+            android:textColor="@color/trade_history_title_textcolor"
+            android:textSize="14sp"
+            />
+
+
+        <TextView
+            android:id="@+id/tab_3"
+            android:layout_width="75dp"
+            android:layout_height="30dp"
+            android:gravity="center"
+            android:layout_marginLeft="1dp"
+            android:text="今日成交"
+            android:background="@drawable/trade_history_title_textcolor_bg"
+            android:textColor="@color/trade_history_title_textcolor"
+            android:textSize="14sp"
+            />
+
+    </LinearLayout>
+
+
+
+
+
+</LinearLayout>

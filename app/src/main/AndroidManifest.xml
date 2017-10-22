@@ -42,9 +42,11 @@
             android:name=".home.ConfirmPwdActivity"
             android:windowSoftInputMode="adjustResize"/>
 
-
         <activity
             android:name=".home.BankCardActivity"/>
+
+        <activity
+            android:name=".home.TradeHistoryActivity"/>
 
 
     </application>
