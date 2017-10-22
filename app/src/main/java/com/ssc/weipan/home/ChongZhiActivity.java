@@ -169,7 +169,7 @@ public class ChongZhiActivity extends BaseActivity {
 
     @OnClick(R2.id.confirm)
     public void clickConfirm() {
-        
+
     }
 
 }
