@@ -89,6 +89,7 @@ public class TradeHomeFragment extends BaseFragment {
         setting.setDomStorageEnabled(true);
 
 
+
         final String userID = PreferencesUtil.getString(BaseApp.getApp(), AccountManager.PREF_USER_ID, "");
         mWSWebview.addJavascriptInterface(new WebApi(), "WebAPI");
         mWSWebview.setWebViewClient(new WebViewClient() {
@@ -101,7 +102,7 @@ public class TradeHomeFragment extends BaseFragment {
             public void onPageFinished(WebView view, String url) {
                 super.onPageFinished(view, url);
                 mWSWebview.loadUrl("javascript:WebAPI.userID=" + userID);
-                mWSWebview.loadUrl("javascript:nativeCompleted()");
+                mWSWebview.loadUrl("javascript:nativeCompleted()"); // TODO 联调 WEBView
             }
         });
 

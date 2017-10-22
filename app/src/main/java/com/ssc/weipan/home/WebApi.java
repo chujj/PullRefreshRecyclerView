@@ -14,5 +14,4 @@ public class WebApi {
         Log.e(TAG, json + " | " + type);
     }
 
-
 }
