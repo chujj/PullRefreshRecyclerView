@@ -43,6 +43,10 @@
             android:windowSoftInputMode="adjustResize"/>
 
 
+        <activity
+            android:name=".home.BankCardActivity"/>
+
+
     </application>
 
 

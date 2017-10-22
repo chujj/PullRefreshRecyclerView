@@ -1,5 +1,6 @@
 package com.ssc.weipan.home;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
@@ -60,7 +61,9 @@ public class MineFragment extends BaseFragment {
                         new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
-
+                                Intent it = new Intent(MineFragment.this.getContext(),
+                                        BankCardActivity.class);
+                                MineFragment.this.startActivity(it);
                             }
                         }
                 });

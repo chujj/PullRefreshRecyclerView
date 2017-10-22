@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FF1F1F1F">
+
+
+
+    <include layout="@layout/topbar_layout"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginTop="16dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:background="@drawable/bankcard_card_bg">
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingLeft="11dp"
+            android:paddingRight="11dp"
+            android:layout_marginTop="20dp"
+            android:text="工商银行"
+            android:textColor="#FFF2F2F2"
+            android:textSize="16sp"
+            />
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingLeft="11dp"
+            android:paddingRight="11dp"
+            android:layout_marginTop="7dp"
+            android:text="＊＊＊＊  ＊＊＊＊  ＊＊＊＊  1501"
+            android:textColor="#FFF2F2F2"
+            android:textSize="16sp"
+            />
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="35dp"
+            android:paddingLeft="11dp"
+            android:paddingRight="11dp"
+            android:layout_marginTop="17dp"
+            android:background="@drawable/bankcard_card_bg_sub"
+            android:text="持卡人  梁朝伟"
+            android:textColor="#FFF2F2F2"
+            android:gravity="center_vertical"
+            android:textSize="12sp"
+            />
+
+    </LinearLayout>
+
+</LinearLayout>
