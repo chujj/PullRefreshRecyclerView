@@ -104,12 +104,23 @@ public class TradeHomeFragment extends BaseFragment {
             public void onPageFinished(WebView view, String url) {
                 super.onPageFinished(view, url);
                 mWSWebview.loadUrl("javascript:WebAPI.userID=" + userID);
-                mWSWebview.loadUrl("javascript:nativeCompleted()"); // TODO 联调 WEBView
+                mWSWebview.loadUrl("javascript:document.dispatchEvent(new Event(\"readyApp\"))");
             }
         });
+//        mWSWebview.setWebChromeClient(new WebChromeClient() {
+//            @Override
+//            public boolean onJsAlert(WebView view, String url, String message, JsResult result) {
+//                Log.e(WebApi.TAG, message);
+////                return super.onJsAlert(view, url, message, result);
+//
+//                return false;
+//            }
+//
+//        });
 
 
         mWSWebview.loadUrl("http://time.168zhibo.cn/customer/futures_trade/internal");
+//        mWSWebview.loadUrl("http://192.168.43.242:9004/customer/futures_trade/internal");
 //        mWSWebview.loadUrl("http://192.168.43.124:8000/test.html");
     }
 

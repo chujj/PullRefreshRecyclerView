@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="40dp">
+
+
+
+    <ImageView
+        android:layout_width="30dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"/>
+
+
+    <TextView
+        android:layout_width="55px"
+        android:layout_height="18px"
+        android:text="微信支付"
+        android:textColor="#FFCCCCCC"
+        android:textSize="14px"
+        />
+
+
+
+
+
+
+</LinearLayout>

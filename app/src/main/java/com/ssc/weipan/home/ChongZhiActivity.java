@@ -5,6 +5,7 @@ import android.support.annotation.Nullable;
 import android.text.SpannableString;
 import android.text.Spanned;
 import android.text.style.ForegroundColorSpan;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
@@ -106,6 +107,14 @@ public class ChongZhiActivity extends BaseActivity {
                             (prefix + mInMoneyUIInfo.cashInFee).length(),
                             Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
                     mServiceFee.setText(ss);
+                }
+
+
+                mChannelContainer.removeAllViews();
+                LayoutInflater inflater = LayoutInflater.from(ChongZhiActivity.this);
+                for (int i = 0; i < mInMoneyChannels.size(); i++) {
+                    inflater.inflate(R.layout.in_money_channel, mChannelContainer, false);
+//                    mInMoneyChannels.get(i).name
                 }
 
 
