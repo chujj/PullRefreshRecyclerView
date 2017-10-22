@@ -183,9 +183,9 @@ public class BuyTradeView extends RelativeLayout {
                 (int) mBuyArgs.get("chip"),
                 1,
                 (int) mBuyArgs.get("secs"),
-                new Callback<BaseModel>() {
+                new Callback<GoodsApi.BuyTradeResponse>() {
                     @Override
-                    public void success(BaseModel baseModel, Response response) {
+                    public void success(GoodsApi.BuyTradeResponse baseModel, Response response) {
                         mBaseActivity.dismissLoadingDialog();
                         if (baseModel.code != 0) {
                             ToastHelper.showToast(baseModel.message);
@@ -193,7 +193,7 @@ public class BuyTradeView extends RelativeLayout {
                         } else {
                             close();
 
-                            showCounterdownText(13);
+                            showCounterdownText(baseModel);
                         }
                     }
 
@@ -206,16 +206,16 @@ public class BuyTradeView extends RelativeLayout {
     }
 
 
-    private void showCounterdownText (float openPrice) {
+    private void showCounterdownText (GoodsApi.BuyTradeResponse resp) {
         View viewRoot = LayoutInflater.from(getContext()).inflate(R.layout.trading_popup_layout, null, false);
         TradingPopupView tpv = CommonUtils.findView(viewRoot, R.id.trading_popup_view);
-        tpv.getStatus().goods_name = Data.sData.names.get(mKey).goods_name;
-        tpv.getStatus().buyUp = ((int) mBuyArgs.get("up_down_type") == 0);
-        tpv.getStatus().open_price = openPrice;
-        tpv.getStatus().close_price = openPrice + 1;
+        tpv.getStatus().goods_name = resp.data.goods_name; // Data.sData.names.get(mKey).goods_name;
+        tpv.getStatus().buyUp = resp.data.up_down_type == 0;
+        tpv.getStatus().open_price = resp.data.open_price; // openPrice;
+        tpv.getStatus().close_price = resp.data.close_price; // openPrice + 1;
         tpv.getStatus().status_finished = false;
-        tpv.getStatus().count_down_secs =  (int) mBuyArgs.get("secs");
-        tpv.getStatus().service_fee =  ((int) mBuyArgs.get("chip") * Data.sData.names.get(mKey).serviceFee);
+        tpv.getStatus().count_down_secs =  resp.data.leftTime; // (int) mBuyArgs.get("secs");
+        tpv.getStatus().service_fee =  resp.data.serve_price; // ((int) mBuyArgs.get("chip") * Data.sData.names.get(mKey).serviceFee);
         tpv.updateUI();
 
         CommonUtils.addToActivity(mBaseActivity, viewRoot);

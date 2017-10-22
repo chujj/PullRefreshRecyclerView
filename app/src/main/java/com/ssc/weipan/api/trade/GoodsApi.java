@@ -28,10 +28,12 @@ public class GoodsApi {
                              @Field("chip") int chip,
                              @Field("amount") int amount,
                              @Field("stop_win_percent") int secs,
-                             Callback<BaseModel> cb);
+                             Callback<BuyTradeResponse> cb);
 
     }
 
+
+    ///////////////////////// goods /////////////////////
 
     public static class GoodsResp extends BaseModel {
 
@@ -74,6 +76,50 @@ public class GoodsApi {
 
         public List<Long> xAxis;
         public List<Object> data;
+    }
+
+
+    ////////////////////////// trades ///////////////////
+//    {
+//	"code": 0,
+//	"message": "交易成功",
+//	"data": {
+//		"trade_status": 0,
+//		"trade_id": 682,
+//		"label": "trade_btc",
+//		"goods_id": 2,
+//		"goods_name": "红木",
+//		"open_price": 19400,
+//		"open_time": "2017-10-22 14:06:15",
+//		"open_time_interval": 0,
+//		"chip": "100",
+//		"amount": 1,
+//		"up_down_type": 0,
+//		"stop_loss_percent": 60,
+//		"stop_win_percent": 60,
+//		"leftTime": 60,
+//		"close_price": null,
+//		"close_type": null,
+//		"close_time": null,
+//		"serve_price": "10",
+//		"win_money": "0",
+//		"pay_type": 0
+//	}
+//}
+
+    public static class BuyTradeResponse extends BaseModel {
+
+        public BuyTradeData data;
+    }
+
+    public static class BuyTradeData extends BaseModel {
+        public int trade_id;
+        public String goods_name;
+        public int up_down_type;
+        public float open_price;
+        public float close_price;
+        public int leftTime;
+        public float serve_price;
     }
 
 }
