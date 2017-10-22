@@ -51,9 +51,6 @@ public class Step2SMSCodeFragment extends BaseFragment {
     @BindViews({R2.id.t1, R2.id.t2, R2.id.t3, R2.id.t4, R2.id.t5})
     TextView[] mSmscodes;
 
-
-
-
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {

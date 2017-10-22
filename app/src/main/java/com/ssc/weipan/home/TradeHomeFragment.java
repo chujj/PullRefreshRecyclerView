@@ -21,8 +21,11 @@ import com.ssc.weipan.R2;
 import com.ssc.weipan.api.ServerAPI;
 import com.ssc.weipan.api.trade.GoodsApi;
 import com.ssc.weipan.api.user.UserApi;
+import com.ssc.weipan.base.BaseApp;
 import com.ssc.weipan.base.BaseFragment;
+import com.ssc.weipan.base.PreferencesUtil;
 import com.ssc.weipan.base.ToastHelper;
+import com.ssc.weipan.login.AccountManager;
 import com.viewpagerindicator.PageIndicator;
 
 import java.util.Map;
@@ -85,6 +88,8 @@ public class TradeHomeFragment extends BaseFragment {
         setting.setDatabaseEnabled(true);
         setting.setDomStorageEnabled(true);
 
+
+        final String userID = PreferencesUtil.getString(BaseApp.getApp(), AccountManager.PREF_USER_ID, "");
         mWSWebview.addJavascriptInterface(new WebApi(), "WebAPI");
         mWSWebview.setWebViewClient(new WebViewClient() {
             @Override
@@ -95,7 +100,7 @@ public class TradeHomeFragment extends BaseFragment {
             @Override
             public void onPageFinished(WebView view, String url) {
                 super.onPageFinished(view, url);
-                mWSWebview.loadUrl("javascript:WebAPI.userID=3");
+                mWSWebview.loadUrl("javascript:WebAPI.userID=" + userID);
                 mWSWebview.loadUrl("javascript:nativeCompleted()");
             }
         });
