@@ -12,6 +12,7 @@
 
 
     <ImageView
+        android:id="@+id/icon"
         android:layout_width="22dp"
         android:layout_height="wrap_content"
         android:src="@drawable/trade_home_user_header_chongzhi"
@@ -19,6 +20,7 @@
 
 
     <TextView
+        android:id="@+id/name"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
