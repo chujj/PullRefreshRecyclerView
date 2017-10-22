@@ -2,6 +2,7 @@ package com.ssc.weipan.home;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import com.ssc.weipan.R;
@@ -23,6 +24,8 @@ public class TradeHistoryActivity extends BaseActivity {
     Topbar mTopbar;
 
 
+    @BindView(R2.id.listview)
+    ListView mListView;
     @BindViews({R2.id.tab_1, R2.id.tab_2, R2.id.tab_3,})
     TextView[] mTabs;
 
