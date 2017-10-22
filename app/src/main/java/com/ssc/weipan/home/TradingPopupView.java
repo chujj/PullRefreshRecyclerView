@@ -1,6 +1,7 @@
 package com.ssc.weipan.home;
 
 import android.content.Context;
+import android.os.CountDownTimer;
 import android.util.AttributeSet;
 import android.view.View;
 import android.view.ViewGroup;
@@ -43,6 +44,7 @@ public class TradingPopupView extends RelativeLayout {
 
     private Runnable mUIUpdate;
     private Status mStatus;
+    private CountDownTimer mTimer;
 
     public TradingPopupView(Context context) {
         super(context);
@@ -97,13 +99,30 @@ public class TradingPopupView extends RelativeLayout {
         mUIUpdate = new Runnable() {
             @Override
             public void run() {
+                mStatusTv.setText(mStatus.status_finished ? "平仓结果" : "等待中");
+                mGoodName.setText(String.format("合约：%s", mStatus.goods_name));
+                mOpenPrice.setText(String.format("%.2f元", mStatus.open_price));
+                mClosePrice.setText(String.format("%.2f元", mStatus.close_price));
+                mServiceFee.setText(String.format("手续费：%.2f元", mStatus.service_fee));
 
+                mBuyUpDownType.setText(mStatus.buyUp ? "买涨" : "买跌");
+                mBuyUpDownType.setTextColor(mStatus.buyUp ? 0xFFF35833: 0xFF20B83E);
+
+
+                boolean guessUp = (mStatus.open_price - mStatus.close_price) > 0f;
+                mUpDownGuessType.setText(guessUp ? "涨" : "跌");
+                mUpDownGuessType.setTextColor(guessUp ? 0xFFF35833: 0xFF20B83E);
             }
         };
 
     }
 
     private void close() {
+        if (mTimer != null) {
+            mTimer.cancel();
+            mTimer = null;
+        }
+
         ((ViewGroup)TradingPopupView.this.getParent()).removeView(TradingPopupView.this);
     }
 
@@ -111,20 +130,24 @@ public class TradingPopupView extends RelativeLayout {
         return mStatus;
     }
 
+    public void startCountDown() {
+        mTimer = new CountDownTimer(mStatus.count_down_secs * 1000l, 300) {
+            @Override
+            public void onTick(long millisUntilFinished) {
+                mStatusPromt.setText(millisUntilFinished /1000l + "秒");
+            }
+
+            @Override
+            public void onFinish() {
+
+            }
+        };
+        mTimer.start();
+    }
+
 
     public void updateUI() {
-        mStatusTv.setText(mStatus.status_finished ? "平仓结果" : "等待中");
-        mGoodName.setText(String.format("合约：%s", mStatus.goods_name));
-        mOpenPrice.setText(String.format("%.2f元", mStatus.open_price));
-        mClosePrice.setText(String.format("%.2f元", mStatus.close_price));
-
-        mBuyUpDownType.setText(mStatus.buyUp ? "买涨" : "买跌");
-        mBuyUpDownType.setTextColor(mStatus.buyUp ? 0xFFF35833: 0xFF20B83E);
-
-
-        boolean guessUp = (mStatus.open_price - mStatus.close_price) > 0f;
-        mUpDownGuessType.setText(guessUp ? "涨" : "跌");
-        mUpDownGuessType.setTextColor(guessUp ? 0xFFF35833: 0xFF20B83E);
+        mUIUpdate.run();
     }
 
 }

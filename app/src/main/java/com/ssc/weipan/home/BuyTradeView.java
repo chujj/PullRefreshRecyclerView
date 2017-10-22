@@ -217,6 +217,7 @@ public class BuyTradeView extends RelativeLayout {
         tpv.getStatus().count_down_secs =  resp.data.leftTime; // (int) mBuyArgs.get("secs");
         tpv.getStatus().service_fee =  resp.data.serve_price; // ((int) mBuyArgs.get("chip") * Data.sData.names.get(mKey).serviceFee);
         tpv.updateUI();
+        tpv.startCountDown();
 
         CommonUtils.addToActivity(mBaseActivity, viewRoot);
 
