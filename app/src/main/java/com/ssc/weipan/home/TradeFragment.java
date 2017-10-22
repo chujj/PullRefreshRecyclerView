@@ -86,6 +86,7 @@ public class TradeFragment extends BaseFragment {
 
         ButterKnife.bind(this, view);
 
+        // init privates
         mEntrySets = new EntrySet[ViewSize];
         for (int i = 0; i < mEntrySets.length; i++) {
             mEntrySets[i] = new EntrySet();
@@ -146,6 +147,7 @@ public class TradeFragment extends BaseFragment {
             }
         }
 
+        // load data
         for (int i = 0; i < mLinesDetail.length; i++) {
             if (i > (mChardata.size() -1)) {
                 mLinesIndicator[i].setVisibility(View.GONE);
@@ -186,9 +188,11 @@ public class TradeFragment extends BaseFragment {
             }
         }
 
+        // default selection
         clickTime60();
         clickLine1();
 
+        // update charts ui
         onDataReady();
     }
 
@@ -271,7 +275,6 @@ public class TradeFragment extends BaseFragment {
     }
 
     private void showBuyLayout(boolean up) {
-
         View root = LayoutInflater.from(getContext()).inflate(R.layout.trade_buy_layout, null, false);
         BuyTradeView btv = CommonUtils.findView(root, R.id.buytradeview);
         btv.setKey(mKey);

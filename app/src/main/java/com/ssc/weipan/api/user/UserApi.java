@@ -26,6 +26,11 @@ public class UserApi {
         @FormUrlEncoded
         @POST("/customer/init_password")
         public void initPassword(@Field("password") String pwd, Callback<BaseModel> cb);
+
+
+        @FormUrlEncoded
+        @POST("/customer/auth_password")
+        public void authPawd(@Field("password") String pwd, Callback<BaseModel> cb);
     }
 
 

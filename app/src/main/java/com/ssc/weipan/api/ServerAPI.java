@@ -10,7 +10,9 @@ import com.ssc.weipan.account.AccountHelper;
 import com.ssc.weipan.base.BaseApp;
 import com.ssc.weipan.base.CommonUtils;
 import com.ssc.weipan.base.ToastHelper;
+import com.ssc.weipan.home.ConfirmPwdActivity;
 import com.ssc.weipan.home.PasswordSetupActivity;
+import com.ssc.weipan.login.LoginActivity;
 import com.ssc.weipan.model.BaseModel;
 
 import java.net.CookieManager;
@@ -104,8 +106,14 @@ public class ServerAPI {
 
             Intent it = new Intent(BaseApp.getApp(), PasswordSetupActivity.class);
             BaseApp.getApp().startActivity(it);
-        } else {
+        } else if (baseModel.code == 1000) {
+            Intent it = new Intent(BaseApp.getApp(), LoginActivity.class);
+            it.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+            BaseApp.getApp().startActivity(it);
 
+        } else if (baseModel.code == 5) {
+            Intent it = new Intent(BaseApp.getApp(), ConfirmPwdActivity.class);
+            BaseApp.getApp().startActivity(it);
         }
     }
 }
