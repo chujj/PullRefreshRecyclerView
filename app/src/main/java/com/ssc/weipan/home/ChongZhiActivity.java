@@ -11,6 +11,7 @@ import android.text.style.ForegroundColorSpan;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.google.gson.Gson;
@@ -82,6 +83,16 @@ public class ChongZhiActivity extends BaseActivity {
     private String mChipSelected;
 
 
+    private Map<GoodsApi.Channel, Object[]> mChannelsClosures = new HashMap<>();
+
+    private void onPayChannelClicked(GoodsApi.Channel channel) {
+        for (Object[] os : mChannelsClosures.values()) {
+            ((ClosureMethod)os[0]).run(channel);
+        }
+
+    }
+
+
     private Map<String, Object> mInMoneyMethodMap = new HashMap<String, Object>() {
         {
             put("scan_98pay", new ClosureMethod() {
@@ -95,62 +106,82 @@ public class ChongZhiActivity extends BaseActivity {
 
                     ((TextView) CommonUtils.findView(_itemRoot, R.id.name))
                             .setText(channel.name);
+                    final ImageView checkBox = CommonUtils.findView(_itemRoot, R.id.checkbox);
 
+
+                    ClosureMethod[] closures = new ClosureMethod[] {
+                            new ClosureMethod() { // update UI
+                                @Override
+                                public Object[] run(Object... args) {
+                                    checkBox.setSelected(args[0] == channel);
+                                    return new Object[0];
+                                }
+                            },
+                            new ClosureMethod() { // callpay
+                                @Override
+                                public Object[] run(Object... args) {
+
+                                    String url = channel.url;
+                                    if (url.indexOf("?") > 0) {
+                                        url += ("&money=" +mChipSelected);
+                                    } else {
+                                        url += ("?money=" +mChipSelected);
+                                    }
+                                    final String f_url = url;
+
+                                    new AsyncTask<Void, Void, Void>() {
+
+                                        com.squareup.okhttp.Response response;
+                                        GoodsApi.QRCodePayResp wcpr = null;
+
+                                        @Override
+                                        protected Void doInBackground(Void... params) {
+
+                                            try {
+                                                Request request = new Request.Builder().url(f_url).get().build();
+                                                Call call = ServerAPI.getInstance().mOKClient.newCall(request);
+                                                response = call.execute();
+
+                                                wcpr = new Gson().fromJson(response.body().string(), GoodsApi.QRCodePayResp.class);
+
+                                            } catch (Exception e) {
+                                                ServerAPI.HandlerException(RetrofitError.unexpectedError(f_url, e));
+                                            }
+                                            return null;
+                                        }
+
+                                        @Override
+                                        protected void onPostExecute(Void aVoid) {
+                                            super.onPostExecute(aVoid);
+
+                                            if (wcpr == null) {
+                                                ToastHelper.showToast("数据错误");
+                                                return;
+                                            }
+
+                                            if (wcpr.code != 0) {
+                                                ServerAPI.handleCodeError(wcpr);
+                                                ToastHelper.showToast(wcpr.message);
+                                            } else {
+                                                Uri uri = Uri.parse(wcpr.data);
+                                                Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+                                                ChongZhiActivity.this.startActivity(intent);
+                                            }
+
+                                        }
+                                    }.execute();
+
+                                    return new Object[0];
+                                }
+                            }
+                    };
+
+                    mChannelsClosures.put(channel, closures);
 
                     _itemRoot.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-
-                            String url = channel.url;
-                            if (url.indexOf("?") > 0) {
-                                url += ("&money=" +mChipSelected);
-                            } else {
-                                url += ("?money=" +mChipSelected);
-                            }
-                            final String f_url = url;
-
-                            new AsyncTask<Void, Void, Void>() {
-
-                                com.squareup.okhttp.Response response;
-                                GoodsApi.QRCodePayResp wcpr = null;
-
-                                @Override
-                                protected Void doInBackground(Void... params) {
-
-                                    try {
-                                        Request request = new Request.Builder().url(f_url).get().build();
-                                        Call call = ServerAPI.getInstance().mOKClient.newCall(request);
-                                        response = call.execute();
-
-                                        wcpr = new Gson().fromJson(response.body().string(), GoodsApi.QRCodePayResp.class);
-
-                                    } catch (Exception e) {
-                                        ServerAPI.HandlerException(RetrofitError.unexpectedError(f_url, e));
-                                    }
-                                    return null;
-                                }
-
-                                @Override
-                                protected void onPostExecute(Void aVoid) {
-                                    super.onPostExecute(aVoid);
-
-                                    if (wcpr == null) {
-                                        ToastHelper.showToast("数据错误");
-                                        return;
-                                    }
-
-                                    if (wcpr.code != 0) {
-                                        ServerAPI.handleCodeError(wcpr);
-                                        ToastHelper.showToast(wcpr.message);
-                                    } else {
-                                        Uri uri = Uri.parse(wcpr.data);
-                                        Intent intent = new Intent(Intent.ACTION_VIEW, uri);
-                                        ChongZhiActivity.this.startActivity(intent);
-                                    }
-
-                                }
-                            }.execute();
-
+                            onPayChannelClicked(channel);
                         }
                     });
 
@@ -160,20 +191,116 @@ public class ChongZhiActivity extends BaseActivity {
             put("unionpay", new ClosureMethod() {
                 @Override
                 public Object[] run(Object... args) {
-                    LayoutInflater inflater = (LayoutInflater) args[0];
+                    final LayoutInflater inflater = (LayoutInflater) args[0];
                     ViewGroup parent = (ViewGroup) args[1];
-                    GoodsApi.Channel channel = (GoodsApi.Channel) args[2];
+                    final GoodsApi.Channel channel = (GoodsApi.Channel) args[2];
 
-                    View _itemRoot = inflater.inflate(R.layout.in_money_channel, parent, false);
+                    View _itemRoot = inflater.inflate(R.layout.in_money_channel_bank, parent, false);
 
                     ((TextView) CommonUtils.findView(_itemRoot, R.id.name))
                             .setText(channel.name);
 
+                    final ViewGroup banks_container = CommonUtils.findView(
+                            _itemRoot, R.id.banks_container);
+                    final ViewGroup selectedBankContainer = CommonUtils.findView(
+                            _itemRoot, R.id.focus_bank_container);
+                    final TextView selectBankText = CommonUtils.findView(
+                            _itemRoot, R.id.selected_bank);
+
+                    final ImageView checkBox = CommonUtils.findView(_itemRoot, R.id.checkbox);
+
+
+                    ClosureMethod[] closures = new ClosureMethod[] {
+                            new ClosureMethod() { // update UI
+                                @Override
+                                public Object[] run(Object... args) {
+                                    checkBox.setSelected(args[0] == channel);
+                                    selectedBankContainer.setVisibility(args[0] == channel ? View.VISIBLE : View.GONE);
+                                    return new Object[0];
+                                }
+                            },
+                            new ClosureMethod() {
+                                boolean bank_loaded = false;
+                                boolean ellipse_banks = false;
+                                @Override
+                                public Object[] run(Object... args) {
+
+
+                                    ToastHelper.showToast("银联");
+
+                                    if (!bank_loaded) {
+                                        bank_loaded = true;
+                                        getPayBank(channel.bank_url);
+                                        return null;
+                                    }
+
+                                    ellipse_banks = !ellipse_banks;
+                                    banks_container.setVisibility(ellipse_banks ? View.GONE : View.VISIBLE);
+
+                                    return new Object[0];
+                                }
+
+
+                                private void getPayBank(final String brank_url) {
+
+                                    new AsyncTask<Void, Void, Void>() {
+
+                                        com.squareup.okhttp.Response response;
+                                        GoodsApi.BankResp wcpr = null;
+
+                                        @Override
+                                        protected Void doInBackground(Void... params) {
+                                            try {
+                                                Request request = new Request.Builder().url(brank_url).get().build();
+                                                Call call = ServerAPI.getInstance().mOKClient.newCall(request);
+                                                response = call.execute();
+
+                                                wcpr = new Gson().fromJson(response.body().string(), GoodsApi.BankResp.class);
+
+                                            } catch (Exception e) {
+                                                ServerAPI.HandlerException(RetrofitError.unexpectedError(brank_url, e));
+                                            }
+                                            return null;
+                                        }
+
+                                        @Override
+                                        protected void onPostExecute(Void aVoid) {
+                                            super.onPostExecute(aVoid);
+
+                                            if (wcpr == null) {
+                                                ToastHelper.showToast("数据错误");
+                                                return;
+                                            }
+
+                                            if (wcpr.code != 0) {
+                                                ServerAPI.handleCodeError(wcpr);
+                                                ToastHelper.showToast(wcpr.message);
+                                            } else {
+                                                for (int i = 0; i < wcpr.data.size(); i++) {
+
+                                                    View bank_item_view =
+                                                            inflater.inflate(R.layout.chongzhi_bank_item, banks_container, false);
+                                                    ((TextView) CommonUtils.findView(bank_item_view, R.id.name)).
+                                                            setText(wcpr.data.get(i).bankName);
+                                                    banks_container.addView(bank_item_view);
+
+                                                }
+
+
+                                            }
+
+                                        }
+                                    }.execute();
+                                }
+                            }
+                    };
+
+                    mChannelsClosures.put(channel, closures);
 
                     _itemRoot.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-                            ToastHelper.showToast("银联");
+                            onPayChannelClicked(channel);
                         }
                     });
 
@@ -193,7 +320,31 @@ public class ChongZhiActivity extends BaseActivity {
                             .setText(channel.name);
 
 
+                    final ImageView checkBox = CommonUtils.findView(_itemRoot, R.id.checkbox);
+
+
+                    ClosureMethod[] closures = new ClosureMethod[] {
+                            new ClosureMethod() { // update UI
+                                @Override
+                                public Object[] run(Object... args) {
+                                    checkBox.setSelected(args[0] == channel);
+                                    return new Object[0];
+                                }
+                            }
+                    };
+
+                    mChannelsClosures.put(channel, closures);
+
                     _itemRoot.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            onPayChannelClicked(channel);
+                        }
+                    });
+
+
+//                    _itemRoot.setOnClickListener(
+                    new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
 
@@ -248,7 +399,8 @@ public class ChongZhiActivity extends BaseActivity {
                             }.execute();
 
                         }
-                    });
+                    };
+//                    );
 
                     return new Object[] {_itemRoot};
                 }

@@ -168,4 +168,15 @@ public class GoodsApi {
     public static class QRCodePayResp extends BaseModel {
         public String data;
     }
+
+
+    public static class BankResp extends BaseModel {
+        public List<Bank> data;
+    }
+
+    public static class Bank extends BaseModel {
+
+        public String bankCode;
+        public String bankName;
+    }
 }

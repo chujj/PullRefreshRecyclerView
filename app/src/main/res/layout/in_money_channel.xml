@@ -26,6 +26,18 @@
         />
 
 
+    <View
+        android:layout_width="0dp"
+        android:layout_height="3dp"
+        android:layout_weight="1"
+        />
+
+    <ImageView
+        android:id="@+id/checkbox"
+        android:layout_width="16dp"
+        android:layout_height="16dp"
+        android:layout_marginRight="10dp"
+        android:src="@drawable/pay_type_selected_selector"/>
 
 
 
