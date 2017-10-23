@@ -17,6 +17,7 @@ import android.webkit.WebViewClient;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.ssc.weipan.R;
 import com.ssc.weipan.R2;
 import com.ssc.weipan.api.ServerAPI;
@@ -194,6 +195,7 @@ public class TradeHomeFragment extends BaseFragment {
                 } else {
 
 
+                    Glide.with(TradeHomeFragment.this).load(accountResp.head_portrait).into(mAvatar);
                     mAssets.setText((TextUtils.isEmpty(accountResp.asset) ? 0 : accountResp.asset) + "元");
                 }
             }
