@@ -179,4 +179,13 @@ public class GoodsApi {
         public String bankCode;
         public String bankName;
     }
+
+
+    public static class UnipayResp extends BaseModel {
+        public UnipayData data;
+    }
+
+    public static class UnipayData extends BaseModel {
+        public String gateway;
+    }
 }

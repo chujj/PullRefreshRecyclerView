@@ -338,9 +338,59 @@ public class ChongZhiActivity extends BaseActivity {
 
                                     if (bank == null) {
                                         ToastHelper.showToast("请选择银行");
-                                    } else {
-                                        ToastHelper.showToast("银联");
+                                        return null;
                                     }
+
+                                    String url = channel.url;
+                                    if (url.indexOf("?") > 0) {
+                                        url += (String.format("&tranAmt=%s&bankCode=%s", mChipSelected, bank.bankCode));
+                                    } else {
+                                        url += (String.format("?tranAmt=%s&bankCode=%s", mChipSelected, bank.bankCode));
+                                    }
+                                    final String f_url = url;
+
+                                    new AsyncTask<Void, Void, Void>() {
+
+                                        com.squareup.okhttp.Response response;
+                                        GoodsApi.UnipayResp wcpr = null;
+
+                                        @Override
+                                        protected Void doInBackground(Void... params) {
+
+                                            try {
+                                                Request request = new Request.Builder().url(f_url).get().build();
+                                                Call call = ServerAPI.getInstance().mOKClient.newCall(request);
+                                                response = call.execute();
+
+                                                wcpr = new Gson().fromJson(response.body().string(), GoodsApi.UnipayResp.class);
+
+                                            } catch (Exception e) {
+                                                ServerAPI.HandlerException(RetrofitError.unexpectedError(f_url, e));
+                                            }
+                                            return null;
+                                        }
+
+                                        @Override
+                                        protected void onPostExecute(Void aVoid) {
+                                            super.onPostExecute(aVoid);
+
+                                            if (wcpr == null) {
+                                                ToastHelper.showToast("数据错误");
+                                                return;
+                                            }
+
+                                            if (wcpr.code != 0) {
+                                                ServerAPI.handleCodeError(wcpr);
+                                                ToastHelper.showToast(wcpr.message);
+                                            } else {
+                                                Uri uri = Uri.parse(wcpr.data.gateway);
+                                                Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+                                                ChongZhiActivity.this.startActivity(intent);
+                                            }
+
+                                        }
+                                    }.execute();
+
 
                                     return new Object[0];
                                 }
