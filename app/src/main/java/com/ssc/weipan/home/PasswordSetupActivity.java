@@ -6,6 +6,7 @@ import android.text.Editable;
 import android.text.InputFilter;
 import android.text.TextUtils;
 import android.text.TextWatcher;
+import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -41,17 +42,37 @@ public class PasswordSetupActivity extends BaseActivity {
     @BindView(R2.id.pwd_confirm)
     EditText mPwdConfirm;
 
+
+    @BindView(R2.id.orig_pwd_layout)
+    View mOriginPwdLayout;
+    @BindView(R2.id.orig_pwd)
+    EditText mOriPwd;
+
+    private boolean mResetPwdMode;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         this.setContentView(R.layout.trade_password_setup_activity);
 
+
+        mResetPwdMode = getIntent().getBooleanExtra("reset_pwd", false);
+
         ButterKnife.bind(this, this);
 
-        mTopbar.setTitle("设置交易密码");
+        mTopbar.setTitle(mResetPwdMode ? "修改交易密码" : "设置交易密码");
+
+        mOriginPwdLayout.setVisibility(mResetPwdMode ? View.VISIBLE : View.GONE);
 
         mOk.setEnabled(false);
+
+
+        if (mResetPwdMode) {
+            mOriPwd.setFilters(new InputFilter[] {
+                    new InputFilter.LengthFilter(12),
+            });
+        }
 
 
         mPwd.setFilters(new InputFilter[] {
@@ -81,7 +102,19 @@ public class PasswordSetupActivity extends BaseActivity {
                 if (!TextUtils.isEmpty(pwd) && pwd.length() >= 6 &&
                         !TextUtils.isEmpty(pwd_c) && pwd_c.length() >= 6&&
                         TextUtils.equals(pwd, pwd_c)) {
-                    mOk.setEnabled(true);
+
+                    if (mResetPwdMode) {
+                        String pwd_orig = mOriPwd.getText().toString().trim();
+                        if (!TextUtils.isEmpty(pwd_orig) && pwd_orig.length() >= 6) {
+                            mOk.setEnabled(true);
+                        } else {
+                            mOk.setEnabled(false);
+                        }
+                    } else {
+                        mOk.setEnabled(true);
+                    }
+
+
                 } else {
                     mOk.setEnabled(false);
                 }
@@ -92,30 +125,60 @@ public class PasswordSetupActivity extends BaseActivity {
 
     @OnClick(R2.id.ok)
     public void clickOk() {
-        String pwd = mPwdConfirm.getText().toString();
+        if (mResetPwdMode) {
+            String pwd = mPwdConfirm.getText().toString().trim();
+            String pwd_orig = mOriPwd.getText().toString().trim();
 
 
-        showLoadingDialog("加载中", false);
+            showLoadingDialog("加载中", false);
 
-        UserApi.IUser iUser = ServerAPI.getInterface(UserApi.IUser.class);
-        iUser.initPassword(pwd, new Callback<BaseModel>() {
-            @Override
-            public void success(BaseModel baseModel, Response response) {
-                dismissLoadingDialog();
-                if (baseModel.code != 0) {
-                    ToastHelper.showToast(baseModel.message);
-                } else {
-                    ToastHelper.showToast("设置成功");
-                    finish();
+            UserApi.IUser iUser = ServerAPI.getInterface(UserApi.IUser.class);
+            iUser.modifyPassword(pwd_orig, pwd, new Callback<BaseModel>() {
+                @Override
+                public void success(BaseModel baseModel, Response response) {
+                    dismissLoadingDialog();
+                    if (baseModel.code != 0) {
+                        ToastHelper.showToast(baseModel.message);
+                    } else {
+                        ToastHelper.showToast("修改成功");
+                        finish();
+                    }
                 }
-            }
 
-            @Override
-            public void failure(RetrofitError error) {
-                dismissLoadingDialog();
-                ServerAPI.HandlerException(error);
-            }
-        });
+                @Override
+                public void failure(RetrofitError error) {
+                    dismissLoadingDialog();
+                    ServerAPI.HandlerException(error);
+                }
+            });
+
+        } else {
+            String pwd = mPwdConfirm.getText().toString();
+
+
+            showLoadingDialog("加载中", false);
+
+            UserApi.IUser iUser = ServerAPI.getInterface(UserApi.IUser.class);
+            iUser.initPassword(pwd, new Callback<BaseModel>() {
+                @Override
+                public void success(BaseModel baseModel, Response response) {
+                    dismissLoadingDialog();
+                    if (baseModel.code != 0) {
+                        ToastHelper.showToast(baseModel.message);
+                    } else {
+                        ToastHelper.showToast("设置成功");
+                        finish();
+                    }
+                }
+
+                @Override
+                public void failure(RetrofitError error) {
+                    dismissLoadingDialog();
+                    ServerAPI.HandlerException(error);
+                }
+            });
+
+        }
 
 
 

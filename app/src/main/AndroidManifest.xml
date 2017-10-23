@@ -50,6 +50,9 @@
 
         <activity android:name=".home.ChongZhiActivity"/>
 
+
+        <activity android:name=".home.SettingActivity"/>
+
     </application>
 
 

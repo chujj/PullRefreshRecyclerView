@@ -56,67 +56,68 @@ public class MineFragment extends BaseFragment {
 
 
     private List<Object[]> entryProperties = new ArrayList<Object[]>() {
-            {
-                add( new Object[] {
-                        "银行卡",
-                        new View.OnClickListener() {
-                            @Override
-                            public void onClick(View v) {
-                                Intent it = new Intent(MineFragment.this.getContext(),
-                                        BankCardActivity.class);
-                                MineFragment.this.startActivity(it);
-                            }
+        {
+            add( new Object[] {
+                    "银行卡",
+                    new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            Intent it = new Intent(MineFragment.this.getContext(),
+                                    BankCardActivity.class);
+                            MineFragment.this.startActivity(it);
                         }
-                });
-                add(new Object[] {
-                        "我的交易轨迹",
-                        new View.OnClickListener() {
-                            @Override
-                            public void onClick(View v) {
-                                Intent it = new Intent(MineFragment.this.getContext(),
-                                        TradeHistoryActivity.class);
-                                MineFragment.this.startActivity(it);
-                            }
+                    }
+            });
+            add(new Object[] {
+                    "我的交易轨迹",
+                    new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            Intent it = new Intent(MineFragment.this.getContext(),
+                                    TradeHistoryActivity.class);
+                            MineFragment.this.startActivity(it);
                         }
-                });
-                add(new Object[] {
-                        "出入金记录",
-                        new View.OnClickListener() {
-                            @Override
-                            public void onClick(View v) {
+                    }
+            });
+            add(new Object[] {
+                    "出入金记录",
+                    new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
 
-                            }
                         }
-                });
-                add(new Object[] {
-                        "优惠券",
-                        new View.OnClickListener() {
-                            @Override
-                            public void onClick(View v) {
+                    }
+            });
+            add(new Object[] {
+                    "优惠券",
+                    new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
 
-                            }
                         }
-                });
-                add(new Object[] {
-                        "推荐码",
-                        new View.OnClickListener() {
-                            @Override
-                            public void onClick(View v) {
+                    }
+            });
+            add(new Object[] {
+                    "推荐码",
+                    new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
 
-                            }
                         }
-                });
-                add(new Object[] {
-                        "个人设置",
-                        new View.OnClickListener() {
-                            @Override
-                            public void onClick(View v) {
-
-                            }
+                    }
+            });
+            add(new Object[] {
+                    "个人设置",
+                    new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            Intent it = new Intent(v.getContext(), SettingActivity.class);
+                            v.getContext().startActivity(it);
                         }
-                });
-            }
-        };
+                    }
+            });
+        }
+    };
 
 
 
