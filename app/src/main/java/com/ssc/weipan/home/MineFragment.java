@@ -19,6 +19,7 @@ import java.util.List;
 
 import butterknife.BindViews;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 /**
  * Created by zhujj on 17-10-22.
@@ -117,6 +118,13 @@ public class MineFragment extends BaseFragment {
             }
         };
 
+
+
+    @OnClick(R2.id.chongzhi)
+    public void clickChongZhi() {
+        Intent it = new Intent(getContext(), ChongZhiActivity.class);
+        startActivity(it);
+    }
 
 
 }
