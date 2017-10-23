@@ -14,7 +14,7 @@
         android:id="@+id/avatar"
         android:layout_width="64dp"
         android:layout_height="64dp"
-        android:src="@drawable/home_icon_1"/>
+        android:scaleType="centerCrop"/>
 
 
 
