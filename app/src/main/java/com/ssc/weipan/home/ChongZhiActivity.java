@@ -212,30 +212,35 @@ public class ChongZhiActivity extends BaseActivity {
 
                     ClosureMethod[] closures = new ClosureMethod[] {
                             new ClosureMethod() { // update UI
+
+
+                                boolean bank_loaded = false;
+                                private View.OnClickListener toggleEllipse = null;
+                                private GoodsApi.Bank mSelectedBank = null;
+
                                 @Override
                                 public Object[] run(Object... args) {
                                     checkBox.setSelected(args[0] == channel);
                                     selectedBankContainer.setVisibility(args[0] == channel ? View.VISIBLE : View.GONE);
-                                    return new Object[0];
-                                }
-                            },
-                            new ClosureMethod() {
-                                boolean bank_loaded = false;
-                                boolean ellipse_banks = false;
-                                @Override
-                                public Object[] run(Object... args) {
 
-
-                                    ToastHelper.showToast("银联");
+                                    if(args[0] != channel) {
+                                        banks_container.setVisibility(View.GONE);
+                                    }
 
                                     if (!bank_loaded) {
                                         bank_loaded = true;
-                                        getPayBank(channel.bank_url);
-                                        return null;
-                                    }
 
-                                    ellipse_banks = !ellipse_banks;
-                                    banks_container.setVisibility(ellipse_banks ? View.GONE : View.VISIBLE);
+                                        toggleEllipse = new View.OnClickListener() {
+                                            @Override
+                                            public void onClick(View v) {
+                                                boolean opend = banks_container.getVisibility() == View.VISIBLE;
+                                                banks_container.setVisibility(opend ? View.GONE : View.VISIBLE);
+                                            }
+                                        };
+                                        selectedBankContainer.setOnClickListener(toggleEllipse);
+
+                                        getPayBank(channel.bank_url);
+                                    }
 
                                     return new Object[0];
                                 }
@@ -282,6 +287,18 @@ public class ChongZhiActivity extends BaseActivity {
                                                             inflater.inflate(R.layout.chongzhi_bank_item, banks_container, false);
                                                     ((TextView) CommonUtils.findView(bank_item_view, R.id.name)).
                                                             setText(wcpr.data.get(i).bankName);
+
+                                                    final GoodsApi.Bank my_bank = wcpr.data.get(i);
+
+                                                    bank_item_view.setOnClickListener(new View.OnClickListener() {
+                                                        @Override
+                                                        public void onClick(View v) {
+                                                            selectBankText.setText(my_bank.bankName);
+                                                            mSelectedBank = my_bank;
+                                                            toggleEllipse.onClick(null);
+                                                        }
+                                                    });
+
                                                     banks_container.addView(bank_item_view);
 
                                                 }
@@ -292,6 +309,25 @@ public class ChongZhiActivity extends BaseActivity {
                                         }
                                     }.execute();
                                 }
+
+                            },
+                            new ClosureMethod() {
+
+                                boolean ellipse_banks = false;
+                                @Override
+                                public Object[] run(Object... args) {
+
+
+                                    ToastHelper.showToast("银联");
+
+
+
+                                    ellipse_banks = !ellipse_banks;
+                                    banks_container.setVisibility(ellipse_banks ? View.GONE : View.VISIBLE);
+
+                                    return new Object[0];
+                                }
+
                             }
                     };
 
