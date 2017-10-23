@@ -123,6 +123,7 @@ public class ChongZhiActivity extends BaseActivity {
                                 @Override
                                 public Object[] run(Object... args) {
 
+
                                     String url = channel.url;
                                     if (url.indexOf("?") > 0) {
                                         url += ("&money=" +mChipSelected);
@@ -131,6 +132,7 @@ public class ChongZhiActivity extends BaseActivity {
                                     }
                                     final String f_url = url;
 
+                                    showLoadingDialog("加载中", false);
                                     new AsyncTask<Void, Void, Void>() {
 
                                         com.squareup.okhttp.Response response;
@@ -156,6 +158,7 @@ public class ChongZhiActivity extends BaseActivity {
                                         protected void onPostExecute(Void aVoid) {
                                             super.onPostExecute(aVoid);
 
+                                            dismissLoadingDialog();
                                             if (wcpr == null) {
                                                 ToastHelper.showToast("数据错误");
                                                 return;
@@ -266,6 +269,7 @@ public class ChongZhiActivity extends BaseActivity {
 
                                 private void getPayBank(final String brank_url) {
 
+                                    showLoadingDialog("加载中", false);
                                     new AsyncTask<Void, Void, Void>() {
 
                                         com.squareup.okhttp.Response response;
@@ -290,6 +294,7 @@ public class ChongZhiActivity extends BaseActivity {
                                         protected void onPostExecute(Void aVoid) {
                                             super.onPostExecute(aVoid);
 
+                                            dismissLoadingDialog();
                                             if (wcpr == null) {
                                                 ToastHelper.showToast("数据错误");
                                                 return;
@@ -349,6 +354,7 @@ public class ChongZhiActivity extends BaseActivity {
                                     }
                                     final String f_url = url;
 
+                                    showLoadingDialog("加载中", false);
                                     new AsyncTask<Void, Void, Void>() {
 
                                         com.squareup.okhttp.Response response;
@@ -374,6 +380,7 @@ public class ChongZhiActivity extends BaseActivity {
                                         protected void onPostExecute(Void aVoid) {
                                             super.onPostExecute(aVoid);
 
+                                            dismissLoadingDialog();
                                             if (wcpr == null) {
                                                 ToastHelper.showToast("数据错误");
                                                 return;
@@ -433,6 +440,66 @@ public class ChongZhiActivity extends BaseActivity {
                                     checkBox.setSelected(args[0] == channel);
                                     return new Object[0];
                                 }
+                            },
+                            new ClosureMethod() {
+                                @Override
+                                public Object[] run(Object... args) {
+
+                                    String url = channel.url;
+                                    if (url.indexOf("?") > 0) {
+                                        url += ("&tranAmt=" +mChipSelected);
+                                    } else {
+                                        url += ("?tranAmt=" +mChipSelected);
+                                    }
+                                    final String f_url = url;
+
+                                    showLoadingDialog("加载中", false);
+                                    new AsyncTask<Void, Void, Void>() {
+
+                                        com.squareup.okhttp.Response response;
+                                        GoodsApi.WeChatPayResp wcpr = null;
+
+                                        @Override
+                                        protected Void doInBackground(Void... params) {
+
+                                            try {
+                                                Request request = new Request.Builder().url(f_url).get().build();
+                                                Call call = ServerAPI.getInstance().mOKClient.newCall(request);
+                                                response = call.execute();
+
+                                                wcpr = new Gson().fromJson(response.body().string(), GoodsApi.WeChatPayResp.class);
+
+                                            } catch (Exception e) {
+                                                ServerAPI.HandlerException(RetrofitError.unexpectedError(f_url, e));
+                                            }
+                                            return null;
+                                        }
+
+                                        @Override
+                                        protected void onPostExecute(Void aVoid) {
+                                            super.onPostExecute(aVoid);
+
+                                            dismissLoadingDialog();
+
+                                            if (wcpr == null) {
+                                                ToastHelper.showToast("数据错误");
+                                                return;
+                                            }
+
+                                            if (wcpr.code != 0) {
+                                                ServerAPI.handleCodeError(wcpr);
+                                                ToastHelper.showToast(wcpr.message);
+                                            } else {
+                                                Uri uri = Uri.parse(wcpr.data.gateway);
+                                                Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+                                                ChongZhiActivity.this.startActivity(intent);
+                                            }
+
+                                        }
+                                    }.execute();
+
+                                    return new Object[0];
+                                }
                             }
                     };
 
@@ -445,65 +512,6 @@ public class ChongZhiActivity extends BaseActivity {
                         }
                     });
 
-
-//                    _itemRoot.setOnClickListener(
-                    new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-
-                            String url = channel.url;
-                            if (url.indexOf("?") > 0) {
-                                url += ("&tranAmt=" +mChipSelected);
-                            } else {
-                                url += ("?tranAmt=" +mChipSelected);
-                            }
-                            final String f_url = url;
-
-                            new AsyncTask<Void, Void, Void>() {
-
-                                com.squareup.okhttp.Response response;
-                                GoodsApi.WeChatPayResp wcpr = null;
-
-                                @Override
-                                protected Void doInBackground(Void... params) {
-
-                                    try {
-                                        Request request = new Request.Builder().url(f_url).get().build();
-                                        Call call = ServerAPI.getInstance().mOKClient.newCall(request);
-                                        response = call.execute();
-
-                                        wcpr = new Gson().fromJson(response.body().string(), GoodsApi.WeChatPayResp.class);
-
-                                    } catch (Exception e) {
-                                        ServerAPI.HandlerException(RetrofitError.unexpectedError(f_url, e));
-                                    }
-                                    return null;
-                                }
-
-                                @Override
-                                protected void onPostExecute(Void aVoid) {
-                                    super.onPostExecute(aVoid);
-
-                                    if (wcpr == null) {
-                                        ToastHelper.showToast("数据错误");
-                                        return;
-                                    }
-
-                                    if (wcpr.code != 0) {
-                                        ServerAPI.handleCodeError(wcpr);
-                                        ToastHelper.showToast(wcpr.message);
-                                    } else {
-                                        Uri uri = Uri.parse(wcpr.data.gateway);
-                                        Intent intent = new Intent(Intent.ACTION_VIEW, uri);
-                                        ChongZhiActivity.this.startActivity(intent);
-                                    }
-
-                                }
-                            }.execute();
-
-                        }
-                    };
-//                    );
 
                     return new Object[] {_itemRoot};
                 }
