@@ -85,7 +85,9 @@ public class ChongZhiActivity extends BaseActivity {
 
     private Map<GoodsApi.Channel, Object[]> mChannelsClosures = new HashMap<>();
 
+    private GoodsApi.Channel mSelectedChannel;
     private void onPayChannelClicked(GoodsApi.Channel channel) {
+        mSelectedChannel = channel;
         for (Object[] os : mChannelsClosures.values()) {
             ((ClosureMethod)os[0]).run(channel);
         }
@@ -210,13 +212,29 @@ public class ChongZhiActivity extends BaseActivity {
                     final ImageView checkBox = CommonUtils.findView(_itemRoot, R.id.checkbox);
 
 
+                    final ClosureMethod selectBankHolder = new ClosureMethod() {
+                        private GoodsApi.Bank mSelectedBank = null;
+
+                        @Override
+                        public Object[] run(Object... args) {
+                            if (args[0] == "set") {
+                                mSelectedBank = (GoodsApi.Bank) args[1];
+                            } else if (args[0] == "get") {
+                                return new Object[] {
+                                        mSelectedBank
+                                };
+                            }
+
+                            return new Object[0];
+                        }
+                    };
+
+
                     ClosureMethod[] closures = new ClosureMethod[] {
                             new ClosureMethod() { // update UI
 
-
                                 boolean bank_loaded = false;
                                 private View.OnClickListener toggleEllipse = null;
-                                private GoodsApi.Bank mSelectedBank = null;
 
                                 @Override
                                 public Object[] run(Object... args) {
@@ -294,7 +312,7 @@ public class ChongZhiActivity extends BaseActivity {
                                                         @Override
                                                         public void onClick(View v) {
                                                             selectBankText.setText(my_bank.bankName);
-                                                            mSelectedBank = my_bank;
+                                                            selectBankHolder.run("set", my_bank);
                                                             toggleEllipse.onClick(null);
                                                         }
                                                     });
@@ -313,17 +331,16 @@ public class ChongZhiActivity extends BaseActivity {
                             },
                             new ClosureMethod() {
 
-                                boolean ellipse_banks = false;
+
                                 @Override
                                 public Object[] run(Object... args) {
+                                    GoodsApi.Bank bank = (GoodsApi.Bank) selectBankHolder.run("get")[0];
 
-
-                                    ToastHelper.showToast("银联");
-
-
-
-                                    ellipse_banks = !ellipse_banks;
-                                    banks_container.setVisibility(ellipse_banks ? View.GONE : View.VISIBLE);
+                                    if (bank == null) {
+                                        ToastHelper.showToast("请选择银行");
+                                    } else {
+                                        ToastHelper.showToast("银联");
+                                    }
 
                                     return new Object[0];
                                 }
@@ -547,6 +564,14 @@ public class ChongZhiActivity extends BaseActivity {
 
     @OnClick(R2.id.confirm)
     public void clickConfirm() {
+
+        if (mSelectedChannel == null) {
+            ToastHelper.showToast("请选择支付方式");
+        }
+
+
+        ((ClosureMethod)mChannelsClosures.get(mSelectedChannel)[1])
+                .run();
 
     }
 
