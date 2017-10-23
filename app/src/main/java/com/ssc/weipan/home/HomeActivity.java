@@ -34,7 +34,7 @@ public class HomeActivity extends BaseActivity {
     private String[] mFragmentNames = new String[] {
             TradeHomeFragment.class.getName(),
             EmptyFragment.class.getName(),
-            EmptyFragment.class.getName(),
+            ZhanduiFragment.class.getName(),
             MineFragment.class.getName(),
     };
 
