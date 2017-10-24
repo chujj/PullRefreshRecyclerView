@@ -51,7 +51,7 @@
             android:layout_height="30dp"
             android:gravity="center"
             android:layout_marginLeft="1dp"
-            android:text="今日成交"
+            android:text="历史成交"
             android:background="@drawable/trade_history_title_textcolor_bg"
             android:textColor="@color/trade_history_title_textcolor"
             android:textSize="14sp"

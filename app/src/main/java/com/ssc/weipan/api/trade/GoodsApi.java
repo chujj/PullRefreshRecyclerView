@@ -130,6 +130,9 @@ public class GoodsApi {
         public float close_price;
         public int leftTime;
         public float serve_price;
+        public int amount;
+
+        public String win_money;
     }
 
 

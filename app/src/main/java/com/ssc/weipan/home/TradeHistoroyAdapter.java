@@ -53,25 +53,107 @@ public class TradeHistoroyAdapter extends BaseAdapter {
             View root = LayoutInflater.from(parent.getContext())
                     .inflate(R.layout.trade_history_list_item, parent, false);
 
-
-            final TextView type = CommonUtils.findView(root, R.id.type);
-            final TextView name = CommonUtils.findView(root, R.id.name);
-//            final TextView amount = CommonUtils.findView(root, R.id.amount);
-//            final TextView trade_detail = CommonUtils.findView(root, R.id.trade_detail);
-
-
             final ImageView toggleImage = CommonUtils.findView(root, R.id.open_toggle);
             final View toggleContainer = CommonUtils.findView(root, R.id.toggle_container);
             final View detailContainer = CommonUtils.findView(root, R.id.detail_container);
+
+            //headr
+            final TextView type = CommonUtils.findView(root, R.id.buy_up_type);
+            final TextView name = CommonUtils.findView(root, R.id.name);
+            final TextView amount = CommonUtils.findView(root, R.id.amount);
+            final TextView win_money = CommonUtils.findView(root, R.id.win_money);
+
+
+            // detail
+            final List<View[]> detailViews = new ArrayList<View[]>(){
+                {
+                    add(new View[] {
+                            CommonUtils.findView(detailContainer, R.id.c_1),
+                            CommonUtils.findView(detailContainer, R.id.l_1),
+                            CommonUtils.findView(detailContainer, R.id.r_1),
+                    });
+                    add(new View[] {
+                            CommonUtils.findView(detailContainer, R.id.c_2),
+                            CommonUtils.findView(detailContainer, R.id.l_2),
+                            CommonUtils.findView(detailContainer, R.id.r_2),
+
+                    });
+                    add(new View[] {
+                            CommonUtils.findView(detailContainer, R.id.c_3),
+                            CommonUtils.findView(detailContainer, R.id.l_3),
+                            CommonUtils.findView(detailContainer, R.id.r_3),
+
+                    });
+                    add(new View[] {
+                            CommonUtils.findView(detailContainer, R.id.c_4),
+                            CommonUtils.findView(detailContainer, R.id.l_4),
+                            CommonUtils.findView(detailContainer, R.id.r_4),
+
+                    });
+                    add(new View[] {
+                            CommonUtils.findView(detailContainer, R.id.c_5),
+                            CommonUtils.findView(detailContainer, R.id.l_5),
+                            CommonUtils.findView(detailContainer, R.id.r_5),
+
+                    });
+                    add(new View[] {
+                            CommonUtils.findView(detailContainer, R.id.c_6),
+                            CommonUtils.findView(detailContainer, R.id.l_6),
+                            CommonUtils.findView(detailContainer, R.id.r_6),
+
+                    });
+                    add(new View[] {
+                            CommonUtils.findView(detailContainer, R.id.c_7),
+                            CommonUtils.findView(detailContainer, R.id.l_7),
+                            CommonUtils.findView(detailContainer, R.id.r_7),
+
+                    });
+                }
+            };
+
+
 
             root.setTag(new ClosureMethod() {
                 @Override
                 public Object[] run(Object... args) {
                     final GoodsApi.BuyTradeData data = (GoodsApi.BuyTradeData) args[0];
 
+                    { // header
+                        type.setText(data.up_down_type == 0 ? "买涨" : "买跌");
+                        type.setBackgroundResource(data.up_down_type == 0 ? R.drawable.trading_history_list_item_buy_type_bg_up
+                                : R.drawable.trading_history_list_item_buy_type_bg_down);
+
+                        name.setText(data.goods_name);
+                        amount.setText(data.amount + "");
+                        win_money.setText(data.win_money + "");
+                    }
 
 
-                    name.setText(data.goods_name);
+
+                    { // detail
+
+                        ((TextView)detailViews.get(0)[1]).setText("手续费");
+                        ((TextView)detailViews.get(0)[2]).setText("");
+
+                        ((TextView)detailViews.get(1)[1]).setText("建仓价格");
+                        ((TextView)detailViews.get(1)[2]).setText("");
+
+                        ((TextView)detailViews.get(2)[1]).setText("平仓价格");
+                        ((TextView)detailViews.get(2)[2]).setText("");
+
+                        ((TextView)detailViews.get(3)[1]).setText("平仓时间");
+                        ((TextView)detailViews.get(3)[2]).setText("");
+
+                        ((TextView)detailViews.get(4)[1]).setText("购买方式");
+                        ((TextView)detailViews.get(4)[2]).setText("");
+
+                        ((TextView)detailViews.get(5)[1]).setText("平仓类型");
+                        ((TextView)detailViews.get(5)[2]).setText("");
+
+                        ((TextView)detailViews.get(6)[1]).setText("定金");
+                        ((TextView)detailViews.get(6)[2]).setText("");
+                    }
+
 
                     toggleContainer.setOnClickListener(new View.OnClickListener() {
                         @Override
