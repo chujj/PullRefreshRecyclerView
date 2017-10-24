@@ -9,9 +9,11 @@ import com.squareup.okhttp.OkHttpClient;
 import com.ssc.weipan.account.AccountHelper;
 import com.ssc.weipan.base.BaseApp;
 import com.ssc.weipan.base.CommonUtils;
+import com.ssc.weipan.base.PreferencesUtil;
 import com.ssc.weipan.base.ToastHelper;
 import com.ssc.weipan.home.ConfirmPwdActivity;
 import com.ssc.weipan.home.PasswordSetupActivity;
+import com.ssc.weipan.login.AccountManager;
 import com.ssc.weipan.login.LoginActivity;
 import com.ssc.weipan.model.BaseModel;
 
@@ -109,7 +111,8 @@ public class ServerAPI {
 
             Intent it = new Intent(BaseApp.getApp(), PasswordSetupActivity.class);
             BaseApp.getApp().startActivity(it);
-        } else if (baseModel.code == 1000) {
+        } else if (baseModel.code == 1000 || baseModel.code == 2000) {
+            PreferencesUtil.putString(BaseApp.getApp(), AccountManager.PREF_USER_ID, "");
             Intent it = new Intent(BaseApp.getApp(), LoginActivity.class);
             it.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
             BaseApp.getApp().startActivity(it);
