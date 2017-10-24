@@ -9,8 +9,8 @@ import com.ssc.weipan.R2;
 import com.ssc.weipan.api.ServerAPI;
 import com.ssc.weipan.api.user.UserApi;
 import com.ssc.weipan.base.BaseActivity;
+import com.ssc.weipan.base.ToastHelper;
 import com.ssc.weipan.base.Topbar;
-import com.ssc.weipan.model.BaseModel;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -27,6 +27,7 @@ public class ChuRuJinHistoryActivity extends BaseActivity {
     Topbar mTopbar;
     @BindView(R2.id.listview)
     ListView mListView;
+    private ChuRuJinAdapter mAdapter;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -37,24 +38,30 @@ public class ChuRuJinHistoryActivity extends BaseActivity {
         ButterKnife.bind(this, this);
 
         mTopbar.setTitle("出入金记录");
-//        mListView.setAdapter(new YouHuiQuanAdapter(this));
+        mListView.setAdapter(mAdapter = new ChuRuJinAdapter(this));
 
         loadData();
     }
 
     private void loadData() {
-
-
+        showLoadingDialog("加载中...", false);
         UserApi.IUser iUser = ServerAPI.getInterface(UserApi.IUser.class);
-        iUser.getChuRuJinHistory(new Callback<BaseModel>() {
+        iUser.getChuRuJinHistory(new Callback<UserApi.ChuRuJinHistoryResp>() {
             @Override
-            public void success(BaseModel baseModel, Response response) {
-
+            public void success(UserApi.ChuRuJinHistoryResp resp, Response response) {
+                ChuRuJinHistoryActivity.this.dismissLoadingDialog();
+                if (resp.code != 0) {
+                    ToastHelper.showToast(resp.message);
+                    ServerAPI.handleCodeError(resp);
+                } else {
+                    mAdapter.setData(resp.data);
+                }
             }
 
             @Override
             public void failure(RetrofitError error) {
-
+                ServerAPI.HandlerException(error);
+                ChuRuJinHistoryActivity.this.dismissLoadingDialog();
             }
         });
 

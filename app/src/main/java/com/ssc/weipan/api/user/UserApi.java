@@ -2,6 +2,8 @@ package com.ssc.weipan.api.user;
 
 import com.ssc.weipan.model.BaseModel;
 
+import java.util.List;
+
 import retrofit.Callback;
 import retrofit.http.Field;
 import retrofit.http.FormUrlEncoded;
@@ -43,7 +45,8 @@ public class UserApi {
 
         public void getTuijianma(Callback<BaseModel> cb);
 
-        public void getChuRuJinHistory(Callback<BaseModel> cb);
+        @GET("/customer/account_asset_change_list")
+        public void getChuRuJinHistory(Callback<ChuRuJinHistoryResp> cb);
     }
 
 
@@ -59,5 +62,22 @@ public class UserApi {
         // "lock_asset":"0",
         // "broker":0,
         public String head_portrait; // ":"http://wx.qlogo.cn/mmopen/PiajxSqBRaEKYAP4qbkb8Fkn0sn8hstyLmXicXUSeRhVjmzicDjbgYoVt2IkfzIOcRh03qHAVtdF9SwcBoUrUTQyw/0"
+    }
+
+
+
+    public static class ChuRuJinHistoryResp extends BaseModel {
+        public List<ChuRuJin> data;
+    }
+
+
+    public static class ChuRuJin extends BaseModel {
+        public int changeType; // ":1,
+        public String title; // ":"微信支付",
+        public String orderNo; // ":"C15170730105626476123002",
+        public String money; // ":"0.6",
+        public String createdOn; // ":"2017-07-30 10:56:27",
+//            "changeStatus":101,
+//            "changeOn":null
     }
 }
