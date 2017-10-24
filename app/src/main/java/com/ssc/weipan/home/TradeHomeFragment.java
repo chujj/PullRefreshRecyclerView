@@ -15,6 +15,7 @@ import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -25,10 +26,11 @@ import com.ssc.weipan.api.trade.GoodsApi;
 import com.ssc.weipan.api.user.UserApi;
 import com.ssc.weipan.base.BaseApp;
 import com.ssc.weipan.base.BaseFragment;
+import com.ssc.weipan.base.CommonUtils;
 import com.ssc.weipan.base.PreferencesUtil;
 import com.ssc.weipan.base.ToastHelper;
+import com.ssc.weipan.base.UnderlineIndicator;
 import com.ssc.weipan.login.AccountManager;
-import com.viewpagerindicator.PageIndicator;
 
 import java.util.Map;
 
@@ -48,7 +50,7 @@ public class TradeHomeFragment extends BaseFragment {
     @BindView(R2.id.viewpager)
     ViewPager mViewPager;
     @BindView(R2.id.indicator)
-    PageIndicator mIndicator;
+    UnderlineIndicator mIndicator;
 
     @BindView(R2.id.avatar)
     ImageView mAvatar;
@@ -181,7 +183,21 @@ public class TradeHomeFragment extends BaseFragment {
         });
 
 
-        mIndicator.setViewPager(mViewPager);
+        mIndicator.setViewPager(mViewPager, new UnderlineIndicator.ChildProvider() {
+            @Override
+            public View onGetChild(ViewGroup parent, int position) {
+                View view = LayoutInflater.from(parent.getContext()).
+                        inflate(R.layout.trade_home_good_indicator_item, parent, false);
+
+
+                ((TextView) CommonUtils.findView(view, R.id.name)).setText(
+                        mViewPager.getAdapter().getPageTitle(position));
+
+                view .getLayoutParams().width = 0;
+                ((LinearLayout.LayoutParams)view.getLayoutParams()).weight = 1;
+                return view;
+            }
+        });
     }
 
 
