@@ -85,6 +85,9 @@ public class MineFragment extends BaseFragment {
                         @Override
                         public void onClick(View v) {
 
+                            Intent it = new Intent(MineFragment.this.getContext(),
+                                    ChuRuJinHistoryActivity.class);
+                            MineFragment.this.startActivity(it);
                         }
                     }
             });

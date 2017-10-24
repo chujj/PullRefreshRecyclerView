@@ -60,6 +60,9 @@
             android:theme="@style/TransparentActivity"
             android:name=".home.TuijianmaActivity"/>
 
+
+        <activity android:name=".home.ChuRuJinHistoryActivity"/>
+
     </application>
 
 

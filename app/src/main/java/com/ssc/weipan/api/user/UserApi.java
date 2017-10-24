@@ -42,6 +42,8 @@ public class UserApi {
 
 
         public void getTuijianma(Callback<BaseModel> cb);
+
+        public void getChuRuJinHistory(Callback<BaseModel> cb);
     }
 
 
