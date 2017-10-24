@@ -55,6 +55,11 @@
 
         <activity android:name=".home.YouHuiQuanActivity"/>
 
+
+        <activity
+            android:theme="@style/TransparentActivity"
+            android:name=".home.TuijianmaActivity"/>
+
     </application>
 
 

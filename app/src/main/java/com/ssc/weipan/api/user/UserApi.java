@@ -39,6 +39,9 @@ public class UserApi {
 
 
         public void getYouhuiquan(Callback<BaseModel> cb);
+
+
+        public void getTuijianma(Callback<BaseModel> cb);
     }
 
 
