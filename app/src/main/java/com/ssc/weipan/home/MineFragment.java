@@ -93,7 +93,9 @@ public class MineFragment extends BaseFragment {
                     new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-
+                            Intent it = new Intent(MineFragment.this.getContext(),
+                                    YouHuiQuanActivity.class);
+                            MineFragment.this.startActivity(it);
                         }
                     }
             });

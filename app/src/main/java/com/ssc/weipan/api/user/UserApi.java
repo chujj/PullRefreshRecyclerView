@@ -36,6 +36,9 @@ public class UserApi {
         @FormUrlEncoded
         @POST("/customer/auth_password")
         public void authPawd(@Field("password") String pwd, Callback<BaseModel> cb);
+
+
+        public void getYouhuiquan(Callback<BaseModel> cb);
     }
 
 
