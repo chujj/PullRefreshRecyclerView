@@ -26,6 +26,10 @@ public class TradeHistoroyAdapter extends BaseAdapter {
 
     private Set<GoodsApi.BuyTradeData> mSelectedData = new HashSet<>();
 
+    public final static int TYPE_NORMAL = 0;
+    public final static int TYPE_Today = 1;
+    private int mType = TYPE_NORMAL;
+
     @Override
     public int getCount() {
         return mData.size();
@@ -133,25 +137,29 @@ public class TradeHistoroyAdapter extends BaseAdapter {
                     { // detail
 
                         ((TextView)detailViews.get(0)[1]).setText("手续费");
-                        ((TextView)detailViews.get(0)[2]).setText("");
+                        ((TextView)detailViews.get(0)[2]).setText(String.format("%.2f元", data.serve_price));
 
                         ((TextView)detailViews.get(1)[1]).setText("建仓价格");
-                        ((TextView)detailViews.get(1)[2]).setText("");
+                        ((TextView)detailViews.get(1)[2]).setText(String.format("%.2f元", data.open_price));
 
                         ((TextView)detailViews.get(2)[1]).setText("平仓价格");
-                        ((TextView)detailViews.get(2)[2]).setText("");
+                        ((TextView)detailViews.get(2)[2]).setText(String.format("%.2f元", data.close_price));
 
-                        ((TextView)detailViews.get(3)[1]).setText("平仓时间");
-                        ((TextView)detailViews.get(3)[2]).setText("");
+                        if (mType == TYPE_Today) {
+                            ((View)detailViews.get(3)[0]).setVisibility(View.GONE);
+                        } else {
+                            ((TextView)detailViews.get(3)[1]).setText("平仓时间");
+                            ((TextView)detailViews.get(3)[2]).setText(data.close_time);
+                        }
 
                         ((TextView)detailViews.get(4)[1]).setText("购买方式");
-                        ((TextView)detailViews.get(4)[2]).setText("");
+                        ((TextView)detailViews.get(4)[2]).setText(""  + data.pay_type); // TODO
 
                         ((TextView)detailViews.get(5)[1]).setText("平仓类型");
-                        ((TextView)detailViews.get(5)[2]).setText("");
+                        ((TextView)detailViews.get(5)[2]).setText("" + data.close_type); // TODO
 
                         ((TextView)detailViews.get(6)[1]).setText("定金");
-                        ((TextView)detailViews.get(6)[2]).setText("");
+                        ((TextView)detailViews.get(6)[2]).setText(data.chip);
                     }
 
 
@@ -186,4 +194,7 @@ public class TradeHistoroyAdapter extends BaseAdapter {
         return convertView;
     }
 
+    public void setType(int type) {
+        mType = type;
+    }
 }

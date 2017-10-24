@@ -134,6 +134,7 @@ public class TradeHistoryActivity extends BaseActivity {
                 } else {
 
                     mAdapter[0].setData(baseModel.data.open);
+                    mAdapter[0].setType(TradeHistoroyAdapter.TYPE_Today);
                     mAdapter[1].setData(baseModel.data.today);
                     mAdapter[2].setData(baseModel.data.history);
 

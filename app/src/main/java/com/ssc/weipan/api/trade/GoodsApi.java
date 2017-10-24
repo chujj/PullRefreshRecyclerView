@@ -128,6 +128,10 @@ public class GoodsApi {
         public int up_down_type;
         public float open_price;
         public float close_price;
+        public String close_time;
+        public int pay_type;
+        public int close_type;
+        public String chip;
         public int leftTime;
         public float serve_price;
         public int amount;
