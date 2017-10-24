@@ -2,6 +2,11 @@ package com.ssc.weipan.home;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.view.PagerAdapter;
+import android.support.v4.view.ViewPager;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -22,8 +27,8 @@ public class TradeHistoryActivity extends BaseActivity {
 
     @BindView(R2.id.topbar)
     Topbar mTopbar;
-
-
+    @BindView(R2.id.viewpager)
+    ViewPager mViewPager;
     @BindView(R2.id.listview)
     ListView mListView;
     @BindViews({R2.id.tab_1, R2.id.tab_2, R2.id.tab_3,})
@@ -38,6 +43,36 @@ public class TradeHistoryActivity extends BaseActivity {
         ButterKnife.bind(this, this);
 
         mTopbar.setTitle("我的交易轨迹");
+
+
+        mViewPager.setOffscreenPageLimit(3);
+        mViewPager.setAdapter(new PagerAdapter() {
+            @Override
+            public Object instantiateItem(ViewGroup container, int position) {
+                LayoutInflater.from(container.getContext());
+                TextView view = new TextView(container.getContext());
+                view.setText("Position: " + position);
+                container.addView(view);
+                return view;
+            }
+
+            @Override
+            public int getCount() {
+                return 3;
+            }
+
+
+            @Override
+            public void destroyItem(ViewGroup container, int position, Object object) {
+                container.removeView((View) object);
+            }
+
+
+            @Override
+            public boolean isViewFromObject(View view, Object object) {
+                return view == object;
+            }
+        });
 
 
         setSelectTab(0);
