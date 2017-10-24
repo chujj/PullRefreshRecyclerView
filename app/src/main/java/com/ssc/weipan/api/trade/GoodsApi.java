@@ -32,7 +32,7 @@ public class GoodsApi {
 
 
         @POST("/customer/account_trade_list")
-        public void getTradeHistory(Callback<BaseModel> cb);
+        public void getTradeHistory(Callback<TradeHistoryResp> cb);
 
 
         @GET("/asset/account_asset_pay_prepare")
@@ -187,5 +187,17 @@ public class GoodsApi {
 
     public static class UnipayData extends BaseModel {
         public String gateway;
+    }
+
+
+    public static class TradeHistoryResp extends BaseModel {
+        public TradeHistory data;
+    }
+
+
+    public static class TradeHistory extends BaseModel {
+        public List<BuyTradeData> today;
+        public List<BuyTradeData> history;
+        public List<BuyTradeData> open;
     }
 }
