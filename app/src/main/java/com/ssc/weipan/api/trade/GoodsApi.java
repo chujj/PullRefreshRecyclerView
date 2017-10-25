@@ -1,5 +1,6 @@
 package com.ssc.weipan.api.trade;
 
+import com.google.gson.annotations.SerializedName;
 import com.ssc.weipan.model.BaseModel;
 
 import java.util.List;
@@ -41,6 +42,11 @@ public class GoodsApi {
         @GET("/asset/pay_type_list")
         public void igetInMoneyChannelList(Callback<InMoneyChannelListResp> cb);
 
+        @GET("/asset/account_asset_extract_prepare")
+        public void getOutMoneyUIInfo(Callback<OutMoneyUIInfoResp> cb);
+
+        @GET("/areacode")
+        public void getCityList(Callback<List<City>> cb);
     }
 
     ///////////////////////// goods /////////////////////
@@ -207,4 +213,31 @@ public class GoodsApi {
         public List<BuyTradeData> history;
         public List<BuyTradeData> open;
     }
+
+
+    public static class OutMoneyUIInfoResp extends BaseModel {
+        public OutMoneyUIInfo data;
+    }
+
+    public static class OutMoneyUIInfo extends BaseModel {
+        public String extract_fee; // ":"2",
+        public String mobile; // ":"136****0756"
+        public boolean allowAssetExtract; // ":true,
+        public String free_asset; // ":"98004",
+        public String tips; // ":"每周一至周五9:00-16:00",
+        public String bank_name; // ":"",
+        public String id_card; // ":"",
+        public String bank_account; // ":"",
+        public String realname; // ":""
+    }
+
+    public static class City {
+        @SerializedName("name")
+        public String name; // ":"市辖区",
+        @SerializedName("code")
+        public String code; // ":"110100",
+        @SerializedName("children")
+        public List<City> children; // ":null
+    }
 }
+

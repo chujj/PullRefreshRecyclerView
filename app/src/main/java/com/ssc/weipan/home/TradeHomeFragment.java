@@ -231,6 +231,13 @@ public class TradeHomeFragment extends BaseFragment {
     }
 
 
+    @OnClick(R2.id.tixian)
+    public void clickTiXian() {
+        Intent it = new Intent(getContext(), TixianActivity.class);
+        startActivity(it);
+    }
+
+
 
 
 }

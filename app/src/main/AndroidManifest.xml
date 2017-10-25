@@ -63,6 +63,8 @@
 
         <activity android:name=".home.ChuRuJinHistoryActivity"/>
 
+        <activity android:name=".home.TixianActivity"/>
+
     </application>
 
 
