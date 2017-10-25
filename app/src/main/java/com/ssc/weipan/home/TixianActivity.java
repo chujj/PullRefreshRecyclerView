@@ -78,6 +78,11 @@ public class TixianActivity extends BaseActivity {
     private GoodsApi.OutMoneyUIInfo mUIInfo;
     private List<GoodsApi.OutChannel> mOutChannels;
 
+    // TODO 各种click事件的关联
+    private GoodsApi.OutChannel mSelectedOutChannel;
+    private GoodsApi.City mSelectedProvince;
+    private GoodsApi.City mSelectedCity;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
