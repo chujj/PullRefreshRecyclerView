@@ -5,6 +5,7 @@ import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -43,6 +44,36 @@ public class TixianActivity extends BaseActivity {
     @BindView(R2.id.banks_container)
     ViewGroup mBanksContainer;
 
+    @BindView(R2.id.tixian_price)
+    EditText mTiXianPrice;
+
+    @BindView(R2.id.bank_name)
+    EditText mBankName;
+
+    @BindView(R2.id.privince_name)
+    EditText mProvinceName;
+
+    @BindView(R2.id.city_name)
+    EditText mCityName;
+
+    @BindView(R2.id.card_id)
+    EditText mCardId;
+
+    @BindView(R2.id.card_owner_name)
+    EditText mCardOwnerName;
+
+    @BindView(R2.id.card_owner_id)
+    EditText mCardOwnerId;
+
+    @BindView(R2.id.sms_code)
+    EditText mSMSCode;
+
+    @BindView(R2.id.require_sms_code)
+    TextView mRequireSMSCode;
+
+    @BindView(R2.id.confirm)
+    View mConfirm;
+
     private List<GoodsApi.City> mCitys;
     private GoodsApi.OutMoneyUIInfo mUIInfo;
     private List<GoodsApi.OutChannel> mOutChannels;
@@ -69,12 +100,7 @@ public class TixianActivity extends BaseActivity {
         final Runnable initUI = new Runnable() {
             int success_count = 0;
 
-
-
             private ArrayList<ClosureMethod> bankChangeCBs = new ArrayList<>();
-
-
-
 
             @Override
             public void run() {

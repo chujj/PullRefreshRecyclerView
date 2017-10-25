@@ -113,6 +113,7 @@
 
 
                     <EditText
+                        android:id="@+id/bank_name"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="10dp"
@@ -148,6 +149,7 @@
 
 
                     <EditText
+                        android:id="@+id/privince_name"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="10dp"
@@ -183,6 +185,7 @@
 
 
                     <EditText
+                        android:id="@+id/city_name"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="10dp"
@@ -218,6 +221,7 @@
 
 
                     <EditText
+                        android:id="@+id/card_id"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="10dp"
@@ -254,6 +258,7 @@
 
 
                     <EditText
+                        android:id="@+id/card_owner_name"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="10dp"
@@ -291,6 +296,7 @@
 
 
                     <EditText
+                        android:id="@+id/card_owner_id"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="10dp"
@@ -306,6 +312,65 @@
 
 
                 </LinearLayout>
+
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="10dp"
+                android:text="已验证手机  186****0141"
+                android:textColor="#FF999999"
+                android:textSize="16sp"
+                />
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="44dp"
+                android:layout_marginTop="10dp"
+                android:gravity="center_vertical"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:orientation="horizontal"
+                android:background="#FF444444">
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="验证码"
+                    android:textColor="#FFCCCCCC"
+                    android:textSize="16sp"
+                    />
+
+
+                <EditText
+                    android:id="@+id/sms_code"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_marginLeft="10dp"
+                    android:gravity="center_vertical"
+                    android:focusable="true"
+                    android:background="@null"
+                    android:inputType="number"
+                    android:textColor="#FFCCCCCC"
+                    android:hint="330102198507213038"
+                    android:textColorHint="#FF999999"
+                    android:textSize="16sp"
+                    />
+
+
+                <TextView
+                    android:id="@+id/require_sms_code"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="获取验证码"
+                    android:textColor="#FFEBAD33"
+                    android:textSize="16sp"
+                    />
 
             </LinearLayout>
 
