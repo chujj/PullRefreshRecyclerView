@@ -47,6 +47,9 @@ public class GoodsApi {
 
         @GET("/areacode")
         public void getCityList(Callback<List<City>> cb);
+
+        @GET("/asset/extract_type_list")
+        public void getOutMoneyChannelList(Callback<OutChannelResp> cb);
     }
 
     ///////////////////////// goods /////////////////////
@@ -238,6 +241,18 @@ public class GoodsApi {
         public String code; // ":"110100",
         @SerializedName("children")
         public List<City> children; // ":null
+    }
+
+    public static class OutChannelResp extends BaseModel {
+        public List<OutChannel> data;
+    }
+
+
+    public static class OutChannel extends BaseModel {
+        public String name; // ":"98出金",
+        public String bank_url; // ":"http://time.168zhibo.cn/98pay/bank_list",
+        public String extract_url; // ":"http://time.168zhibo.cn/98pay/asset_extract",
+        public String type; // ":"union_pay"
     }
 }
 

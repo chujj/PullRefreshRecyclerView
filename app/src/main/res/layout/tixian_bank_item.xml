@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="40dp"
+    android:background="#FF444444"
+    android:gravity="center_vertical"
+    >
+
+    <ImageView
+        android:layout_width="30dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:src="@drawable/trade_home_user_header_tixian"
+        />
+
+    <TextView
+        android:id="@+id/name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:text="微信支付"
+        android:textColor="#FFCCCCCC"
+        android:textSize="14sp"
+        />
+
+
+    <View
+        android:layout_width="0dp"
+        android:layout_height="3dp"
+        android:layout_weight="1"
+        />
+
+    <ImageView
+        android:id="@+id/checkbox"
+        android:layout_width="16dp"
+        android:layout_height="16dp"
+        android:layout_marginRight="10dp"
+        android:src="@drawable/pay_type_selected_selector"/>
+
+
+
+
+</LinearLayout>

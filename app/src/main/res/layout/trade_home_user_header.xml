@@ -115,6 +115,19 @@
 
             </LinearLayout>
 
+
+            <TextView
+                android:id="@+id/promt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                android:singleLine="true"
+                android:ellipsize="end"
+                android:text="可提现金额：99427元"
+                android:textColor="#FFCCCCCC"
+                android:textSize="16sp"
+                />
+
         </LinearLayout>
 
 

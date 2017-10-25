@@ -6,6 +6,7 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:focusableInTouchMode="true"
     android:background="#FF1F1F1F">
 
     <include layout="@layout/topbar_layout"/>
@@ -19,9 +20,6 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-
-
-
             <include layout="@layout/trade_home_user_header"/>
 
 
@@ -32,64 +30,304 @@
 
 
             <LinearLayout
-                android:id="@+id/container"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="44dp"
+                android:gravity="center_vertical"
                 android:paddingLeft="10dp"
                 android:paddingRight="10dp"
-                android:orientation="vertical"
-                >
+                android:orientation="horizontal"
+                android:background="#FF444444">
+
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="22dp"
-                    android:text="充值金额"
+                    android:text="提现金额"
                     android:textColor="#FFCCCCCC"
-                    android:textSize="14sp"
+                    android:textSize="16sp"
                     />
 
 
-                <com.ssc.weipan.home.ChipLabelsLayout
-                    android:id="@+id/chips"
-                    android:layout_marginTop="10dp"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"/>
-
-
-                <LinearLayout
-                    android:id="@+id/channel_container"
+                <EditText
+                    android:id="@+id/tixian_price"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
-                    android:orientation="vertical">
+                    android:layout_marginLeft="10dp"
+                    android:gravity="center_vertical"
+                    android:focusable="true"
+                    android:background="@null"
+                    android:inputType="number"
+                    android:textColor="#FFCCCCCC"
+                    android:hint="请输入提现金额"
+                    android:textColorHint="#FF999999"
+                    android:textSize="16sp"
+                    />
+
+
+            </LinearLayout>
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:text="手续费2元/笔，可提现时间：每周一至周五9:00－16:00"
+                android:textColor="#FF999999"
+                android:textSize="12sp"
+                />
+
+            <LinearLayout
+                android:id="@+id/banks_container"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+            </LinearLayout>
+
+
+
+            <!-- 输入框 -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="44dp"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
+                    android:orientation="horizontal"
+                    android:background="#FF444444">
+
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="银行"
+                        android:textColor="#FFCCCCCC"
+                        android:textSize="16sp"
+                        />
+
+
+                    <EditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:gravity="center_vertical"
+                        android:focusable="true"
+                        android:background="@null"
+                        android:inputType="number"
+                        android:textColor="#FFCCCCCC"
+                        android:hint="银行名称"
+                        android:textColorHint="#FF999999"
+                        android:textSize="16sp"
+                        />
+
 
                 </LinearLayout>
 
-                <TextView
-                    android:id="@+id/service_fee"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:text="每笔充值收取 2% 的手续费"
-                    android:textColor="#FFCCCCCC"
-                    android:textSize="14sp"
-                    />
-
-
-                <TextView
-                    android:id="@+id/confirm"
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="38.5dp"
-                    android:layout_marginTop="20dp"
-                    android:gravity="center"
-                    android:text="充 值"
-                    android:textColor="#FF000000"
-                    android:textSize="18sp"
-                    android:background="@drawable/round_btn_bg"
-                    />
+                    android:layout_height="44dp"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
+                    android:orientation="horizontal"
+                    android:background="#FF444444">
+
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="省份"
+                        android:textColor="#FFCCCCCC"
+                        android:textSize="16sp"
+                        />
+
+
+                    <EditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:gravity="center_vertical"
+                        android:focusable="true"
+                        android:background="@null"
+                        android:inputType="number"
+                        android:textColor="#FFCCCCCC"
+                        android:hint="选择开卡省份"
+                        android:textColorHint="#FF999999"
+                        android:textSize="16sp"
+                        />
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="44dp"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
+                    android:orientation="horizontal"
+                    android:background="#FF444444">
+
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="城市"
+                        android:textColor="#FFCCCCCC"
+                        android:textSize="16sp"
+                        />
+
+
+                    <EditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:gravity="center_vertical"
+                        android:focusable="true"
+                        android:background="@null"
+                        android:inputType="number"
+                        android:textColor="#FFCCCCCC"
+                        android:hint="选择开卡城市"
+                        android:textColorHint="#FF999999"
+                        android:textSize="16sp"
+                        />
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="44dp"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
+                    android:orientation="horizontal"
+                    android:background="#FF444444">
+
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="卡号"
+                        android:textColor="#FFCCCCCC"
+                        android:textSize="16sp"
+                        />
+
+
+                    <EditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:gravity="center_vertical"
+                        android:focusable="true"
+                        android:background="@null"
+                        android:inputType="number"
+                        android:textColor="#FFCCCCCC"
+                        android:hint="9558 80011112 2222"
+                        android:textColorHint="#FF999999"
+                        android:textSize="16sp"
+                        />
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="44dp"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
+                    android:orientation="horizontal"
+                    android:background="#FF444444">
+
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="持卡人"
+                        android:textColor="#FFCCCCCC"
+                        android:textSize="16sp"
+                        />
+
+
+                    <EditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:gravity="center_vertical"
+                        android:focusable="true"
+                        android:background="@null"
+                        android:inputType="number"
+                        android:textColor="#FFCCCCCC"
+                        android:hint="阿方"
+                        android:textColorHint="#FF999999"
+                        android:textSize="16sp"
+                        />
+
+
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="44dp"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
+                    android:orientation="horizontal"
+                    android:background="#FF444444">
+
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="身份证"
+                        android:textColor="#FFCCCCCC"
+                        android:textSize="16sp"
+                        />
+
+
+                    <EditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:gravity="center_vertical"
+                        android:focusable="true"
+                        android:background="@null"
+                        android:inputType="number"
+                        android:textColor="#FFCCCCCC"
+                        android:hint="330102198507213038"
+                        android:textColorHint="#FF999999"
+                        android:textSize="16sp"
+                        />
+
+
+                </LinearLayout>
 
             </LinearLayout>
+
+
+
+            <TextView
+                android:id="@+id/confirm"
+                android:layout_width="match_parent"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginBottom="53.5dp"
+                android:layout_height="38.5dp"
+                android:layout_marginTop="20dp"
+                android:gravity="center"
+                android:text="提 现"
+                android:textColor="#FF000000"
+                android:textSize="18sp"
+                android:background="@drawable/round_btn_bg"
+                />
 
         </LinearLayout>
 

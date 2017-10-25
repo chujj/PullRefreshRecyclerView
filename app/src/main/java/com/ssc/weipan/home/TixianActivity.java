@@ -2,15 +2,22 @@ package com.ssc.weipan.home;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.ssc.weipan.R;
 import com.ssc.weipan.R2;
 import com.ssc.weipan.api.ServerAPI;
 import com.ssc.weipan.api.trade.GoodsApi;
 import com.ssc.weipan.base.BaseActivity;
+import com.ssc.weipan.base.ClosureMethod;
 import com.ssc.weipan.base.ToastHelper;
 import com.ssc.weipan.base.Topbar;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
@@ -27,8 +34,18 @@ public class TixianActivity extends BaseActivity {
     @BindView(R2.id.topbar)
     Topbar mTopbar;
 
+    @BindView(R2.id.promt)
+    TextView mHeaderPromt;
+    @BindView(R2.id.tixian)
+    View mTixian;
+    @BindView(R2.id.chongzhi)
+    View mChongZhi;
+    @BindView(R2.id.banks_container)
+    ViewGroup mBanksContainer;
+
     private List<GoodsApi.City> mCitys;
     private GoodsApi.OutMoneyUIInfo mUIInfo;
+    private List<GoodsApi.OutChannel> mOutChannels;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -37,6 +54,10 @@ public class TixianActivity extends BaseActivity {
         this.setContentView(R.layout.tixian_activity);
 
         ButterKnife.bind(this, this);
+
+        mTixian.setVisibility(View.GONE);
+        mChongZhi.setVisibility(View.GONE);
+        mHeaderPromt.setVisibility(View.VISIBLE);
 
         mTopbar.setTitle("提现");
 
@@ -47,19 +68,64 @@ public class TixianActivity extends BaseActivity {
 
         final Runnable initUI = new Runnable() {
             int success_count = 0;
+
+
+
+            private ArrayList<ClosureMethod> bankChangeCBs = new ArrayList<>();
+
+
+
+
             @Override
             public void run() {
                 success_count ++;
 
-                if (success_count != 2) {
+                if (success_count != 3) {
                     return;
                 }
 
                 dismissLoadingDialog();
 
+                { // 初始化
+                    mBanksContainer.removeAllViews();
+                    LayoutInflater inflater = LayoutInflater.from(mBanksContainer.getContext());
+                    for (int i = 0; i < mOutChannels.size(); i++) {
+                        final GoodsApi.OutChannel myChannel = mOutChannels.get(i);
 
+                        View tixianBank = inflater.inflate(R.layout.tixian_bank_item, mBanksContainer, false);
+                        ((TextView) tixianBank.findViewById(R.id.name)).setText(myChannel.name);
+                        final ImageView checkbox = (ImageView) tixianBank.findViewById(R.id.checkbox);
+                        checkbox.setSelected(false);
 
+                        bankChangeCBs.add(new ClosureMethod() {
+                            @Override
+                            public Object[] run(Object... args) {
+                                checkbox.setSelected(args[0] == myChannel);
 
+                                return new Object[0];
+                            }
+                        });
+
+                        final int index = i;
+                        tixianBank.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                setSelectedChannel(myChannel);
+                            }
+                        });
+
+                        mBanksContainer.addView(tixianBank);
+                    }
+                }
+
+                setSelectedChannel(mOutChannels.get(0));
+
+            }
+
+            private void setSelectedChannel(GoodsApi.OutChannel channel) {
+                for (ClosureMethod cb : bankChangeCBs) {
+                    cb.run(channel);
+                }
             }
         };
 
@@ -89,6 +155,27 @@ public class TixianActivity extends BaseActivity {
                     ServerAPI.handleCodeError(resp);
                 } else {
                     mUIInfo = resp.data;
+                    initUI.run();
+                }
+
+            }
+
+            @Override
+            public void failure(RetrofitError error) {
+                ServerAPI.HandlerException(error);
+                dismissLoadingDialog();
+            }
+        });
+
+
+        iGood.getOutMoneyChannelList(new Callback<GoodsApi.OutChannelResp>() {
+            @Override
+            public void success(GoodsApi.OutChannelResp resp, Response response) {
+                if (resp.code != 0) {
+                    ToastHelper.showToast(resp.message);
+                    ServerAPI.handleCodeError(resp);
+                } else {
+                    mOutChannels = resp.data;
                     initUI.run();
                 }
 
