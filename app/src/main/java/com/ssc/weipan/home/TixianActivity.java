@@ -1,5 +1,6 @@
 package com.ssc.weipan.home;
 
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
@@ -9,6 +10,9 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.google.gson.Gson;
+import com.squareup.okhttp.Call;
+import com.squareup.okhttp.Request;
 import com.ssc.weipan.R;
 import com.ssc.weipan.R2;
 import com.ssc.weipan.api.ServerAPI;
@@ -19,10 +23,12 @@ import com.ssc.weipan.base.ToastHelper;
 import com.ssc.weipan.base.Topbar;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import retrofit.Callback;
 import retrofit.RetrofitError;
 import retrofit.client.Response;
@@ -49,12 +55,18 @@ public class TixianActivity extends BaseActivity {
 
     @BindView(R2.id.bank_name)
     EditText mBankName;
+    @BindView(R2.id.banks_select_container)
+    ViewGroup mBankSelectContainer;
 
     @BindView(R2.id.privince_name)
     EditText mProvinceName;
+    @BindView(R2.id.province_container)
+    ViewGroup mProvinceContainer;
 
     @BindView(R2.id.city_name)
     EditText mCityName;
+    @BindView(R2.id.city_container)
+    ViewGroup mCityContainer;
 
     @BindView(R2.id.card_id)
     EditText mCardId;
@@ -157,6 +169,7 @@ public class TixianActivity extends BaseActivity {
                 for (ClosureMethod cb : bankChangeCBs) {
                     cb.run(channel);
                 }
+                onChannelChanged(channel);
             }
         };
 
@@ -219,5 +232,167 @@ public class TixianActivity extends BaseActivity {
             }
         });
 
+    }
+
+
+    private HashMap<GoodsApi.OutChannel, List<GoodsApi.Bank>> mBankCache = new HashMap<>();
+
+    @OnClick(R2.id.bank_name)
+    public void clickBank() {
+        if (mBankSelectContainer.getChildCount() == 0) {
+            final ClosureMethod initView = new ClosureMethod() {
+                @Override
+                public Object[] run(Object... args) {
+
+                    List<GoodsApi.Bank> banks = mBankCache.get(mSelectedOutChannel);
+                    LayoutInflater inflater = LayoutInflater.from(mBankSelectContainer.getContext());
+                    for (GoodsApi.Bank bank : banks) {
+                        View root = inflater.inflate(R.layout.tixian_bank_item_bank, mBankSelectContainer, false);
+                        ((TextView) root.findViewById(R.id.name)).setText(bank.bankName);
+                        final String bankName = bank.bankName;
+                        mBankSelectContainer.addView(root);
+
+                        root.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                mBankName.setText(bankName);
+                                mBankSelectContainer.setVisibility(View.GONE);
+                            }
+                        });
+                    }
+
+                    mBankSelectContainer.setVisibility(View.VISIBLE);
+
+                    return new Object[0];
+                }
+            };
+
+
+            if (mBankCache.get(mSelectedOutChannel) == null){
+
+                showLoadingDialog("加载中", false);
+
+                new AsyncTask<Void, Void, Void>() {
+
+                    com.squareup.okhttp.Response response;
+                    GoodsApi.BankResp wcpr = null;
+
+                    @Override
+                    protected Void doInBackground(Void... params) {
+
+                        try {
+                            Request request = new Request.Builder().url(mSelectedOutChannel.bank_url).get().build();
+                            Call call = ServerAPI.getInstance().mOKClient.newCall(request);
+                            response = call.execute();
+
+                            wcpr = new Gson().fromJson(response.body().string(), GoodsApi.BankResp.class);
+
+                        } catch (Exception e) {
+                            ServerAPI.HandlerException(RetrofitError.unexpectedError(mSelectedOutChannel.bank_url, e));
+                        }
+                        return null;
+                    }
+
+                    @Override
+                    protected void onPostExecute(Void aVoid) {
+                        super.onPostExecute(aVoid);
+
+                        dismissLoadingDialog();
+                        if (wcpr == null) {
+                            ToastHelper.showToast("数据错误");
+                            return;
+                        }
+
+                        if (wcpr.code != 0) {
+                            ServerAPI.handleCodeError(wcpr);
+                            ToastHelper.showToast(wcpr.message);
+                        } else {
+                            mBankCache.put(mSelectedOutChannel, wcpr.data);
+                            initView.run();
+                        }
+
+                    }
+                }.execute();
+            } else {
+                initView.run();
+            }
+
+        } else {
+            mBankSelectContainer.setVisibility(View.VISIBLE);
+        }
+    }
+
+
+    @OnClick(R2.id.privince_name)
+    public void clickProvince() {
+        if (mProvinceContainer.getChildCount() == 0) {
+            LayoutInflater inflater = LayoutInflater.from(mProvinceContainer.getContext());
+            for (GoodsApi.City city : mCitys) {
+                View root = inflater.inflate(R.layout.tixian_bank_item_bank, mProvinceContainer, false);
+                ((TextView) root.findViewById(R.id.name)).setText(city.name);
+                final String cityName = city.name;
+                final GoodsApi.City cityMode = city;
+                mProvinceContainer.addView(root);
+
+                root.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        mSelectedProvince = cityMode;
+                        mProvinceName.setText(cityName);
+                        mProvinceContainer.setVisibility(View.GONE);
+
+
+                        mCityName.setText("");
+                        mCityContainer.removeAllViews();
+                    }
+                });
+            }
+
+            mProvinceContainer.setVisibility(View.VISIBLE);
+        } else {
+            mProvinceContainer.setVisibility(View.VISIBLE);
+        }
+    }
+
+
+
+    @OnClick(R2.id.city_name)
+    public void clickCity() {
+        if (mSelectedProvince == null ) {
+            ToastHelper.showToast("请先选择省份");
+            return;
+        }
+
+        if (mCityContainer.getChildCount() == 0) {
+            LayoutInflater inflater = LayoutInflater.from(mCityContainer.getContext());
+            for (GoodsApi.City city : mSelectedProvince.children) {
+                View root = inflater.inflate(R.layout.tixian_bank_item_bank, mCityContainer, false);
+                ((TextView) root.findViewById(R.id.name)).setText(city.name);
+                final String cityName = city.name;
+                final GoodsApi.City cityMode = city;
+                mCityContainer.addView(root);
+
+                root.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        mSelectedCity = cityMode;
+                        mCityName.setText(cityName);
+                        mCityContainer.setVisibility(View.GONE);
+                    }
+                });
+            }
+
+            mCityContainer.setVisibility(View.VISIBLE);
+        } else {
+            mCityContainer.setVisibility(View.VISIBLE);
+        }
+    }
+
+
+
+    private void onChannelChanged(GoodsApi.OutChannel channel) {
+        mSelectedOutChannel = channel;
+        mBankName.setText("");
+        mBankSelectContainer.removeAllViews();
     }
 }
