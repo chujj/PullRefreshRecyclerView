@@ -253,7 +253,7 @@
                         android:background="@null"
                         android:inputType="number"
                         android:textColor="#FFCCCCCC"
-                        android:hint="9558 80011112 2222"
+                        android:hint="请输入卡号"
                         android:textColorHint="#FF999999"
                         android:textSize="16sp"
                         />
@@ -288,9 +288,8 @@
                         android:gravity="center_vertical"
                         android:focusable="true"
                         android:background="@null"
-                        android:inputType="number"
                         android:textColor="#FFCCCCCC"
-                        android:hint="阿方"
+                        android:hint="请输入开户人"
                         android:textColorHint="#FF999999"
                         android:textSize="16sp"
                         />
@@ -326,9 +325,8 @@
                         android:gravity="center_vertical"
                         android:focusable="true"
                         android:background="@null"
-                        android:inputType="number"
                         android:textColor="#FFCCCCCC"
-                        android:hint="330102198507213038"
+                        android:hint="请输入身份证号"
                         android:textColorHint="#FF999999"
                         android:textSize="16sp"
                         />

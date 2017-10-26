@@ -2,8 +2,12 @@ package com.ssc.weipan.home;
 
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.support.annotation.Nullable;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
@@ -12,6 +16,7 @@ import android.widget.TextView;
 
 import com.google.gson.Gson;
 import com.squareup.okhttp.Call;
+import com.squareup.okhttp.MultipartBuilder;
 import com.squareup.okhttp.Request;
 import com.ssc.weipan.R;
 import com.ssc.weipan.R2;
@@ -21,6 +26,7 @@ import com.ssc.weipan.base.BaseActivity;
 import com.ssc.weipan.base.ClosureMethod;
 import com.ssc.weipan.base.ToastHelper;
 import com.ssc.weipan.base.Topbar;
+import com.ssc.weipan.model.BaseModel;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -89,11 +95,13 @@ public class TixianActivity extends BaseActivity {
     private List<GoodsApi.City> mCitys;
     private GoodsApi.OutMoneyUIInfo mUIInfo;
     private List<GoodsApi.OutChannel> mOutChannels;
+    private HashMap<GoodsApi.OutChannel, List<GoodsApi.Bank>> mBankCache = new HashMap<>();
 
     // TODO 各种click事件的关联
     private GoodsApi.OutChannel mSelectedOutChannel;
     private GoodsApi.City mSelectedProvince;
     private GoodsApi.City mSelectedCity;
+    private GoodsApi.Bank mSelectedBank;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -232,12 +240,61 @@ public class TixianActivity extends BaseActivity {
             }
         });
 
+
+        mBankName.setOnTouchListener(new MyTouchEventListener(new Runnable() {
+            @Override
+            public void run() {
+                clickBank();
+            }
+        }));
+        mProvinceName.setOnTouchListener(new MyTouchEventListener(new Runnable() {
+            @Override
+            public void run() {
+                clickProvince();
+            }
+        }));
+        mCityName.setOnTouchListener(new MyTouchEventListener(new Runnable() {
+            @Override
+            public void run() {
+                clickCity();
+            }
+        }));
     }
 
 
-    private HashMap<GoodsApi.OutChannel, List<GoodsApi.Bank>> mBankCache = new HashMap<>();
+    private class MyTouchEventListener implements View.OnTouchListener {
 
-    @OnClick(R2.id.bank_name)
+        private final Runnable mCB;
+        int count = 0;
+        MyTouchEventListener(Runnable calback) {
+            mCB = calback;
+        }
+
+        @Override
+        public boolean onTouch(View v, MotionEvent event) {
+            if (event.getAction() == MotionEvent.ACTION_DOWN) {
+                count ++;
+            } else if (event.getAction() == MotionEvent.ACTION_UP) {
+                count ++;
+            }
+
+            if (count == 2){
+                count = 0;
+                if (mCB != null) {
+                    mCB.run();
+                }
+            }
+
+            return false;
+        }
+    }
+
+    private void onChannelChanged(GoodsApi.OutChannel channel) {
+        mSelectedOutChannel = channel;
+        mBankName.setText("");
+        mBankSelectContainer.removeAllViews();
+    }
+
     public void clickBank() {
         if (mBankSelectContainer.getChildCount() == 0) {
             final ClosureMethod initView = new ClosureMethod() {
@@ -249,12 +306,14 @@ public class TixianActivity extends BaseActivity {
                     for (GoodsApi.Bank bank : banks) {
                         View root = inflater.inflate(R.layout.tixian_bank_item_bank, mBankSelectContainer, false);
                         ((TextView) root.findViewById(R.id.name)).setText(bank.bankName);
+                        final GoodsApi.Bank bankModel = bank;
                         final String bankName = bank.bankName;
                         mBankSelectContainer.addView(root);
 
                         root.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
+                                mSelectedBank = bankModel;
                                 mBankName.setText(bankName);
                                 mBankSelectContainer.setVisibility(View.GONE);
                             }
@@ -322,8 +381,6 @@ public class TixianActivity extends BaseActivity {
         }
     }
 
-
-    @OnClick(R2.id.privince_name)
     public void clickProvince() {
         if (mProvinceContainer.getChildCount() == 0) {
             LayoutInflater inflater = LayoutInflater.from(mProvinceContainer.getContext());
@@ -354,9 +411,6 @@ public class TixianActivity extends BaseActivity {
         }
     }
 
-
-
-    @OnClick(R2.id.city_name)
     public void clickCity() {
         if (mSelectedProvince == null ) {
             ToastHelper.showToast("请先选择省份");
@@ -389,10 +443,118 @@ public class TixianActivity extends BaseActivity {
     }
 
 
+    @OnClick(R2.id.confirm)
+    public void clickConfirm() {
+        final String realname = mCardOwnerName.getText().toString(); // 开户名
+        final String id_card	= mCardOwnerId.getText().toString(); // 是	string	身份证
+        final String bank_account = mCardId.getText().toString()	; // 是	string	银行账户
+        final String bank_province = mSelectedProvince == null ? "" : mSelectedProvince.code; // 是	string	省份
+        final String bank_city  = mSelectedCity == null ? "" : mSelectedCity.code; // 	是	string	城市
+        final String bank_code = mSelectedBank == null ? "" : mSelectedBank.bankCode; // 	是	string	银行的编码
+        final String sms_code = mSMSCode.getText().toString() ; // 	是	string	提现短信验证码
+        final String money = mTiXianPrice.getText().toString(); // 	是	string	金额（元）
 
-    private void onChannelChanged(GoodsApi.OutChannel channel) {
-        mSelectedOutChannel = channel;
-        mBankName.setText("");
-        mBankSelectContainer.removeAllViews();
+        if (TextUtils.isEmpty(realname)) {
+            ToastHelper.showToast("请输入开户名");
+            return;
+        }
+
+        if (TextUtils.isEmpty(id_card)) {
+            ToastHelper.showToast("请输入身份证");
+            return;
+        }
+
+        if (TextUtils.isEmpty(bank_account)) {
+            ToastHelper.showToast("请输入银行账户");
+            return;
+        }
+
+        if (TextUtils.isEmpty(bank_province)) {
+            ToastHelper.showToast("请输入省份");
+            return;
+        }
+
+        if (TextUtils.isEmpty(bank_city)) {
+            ToastHelper.showToast("请输入城市");
+            return;
+        }
+
+        if (TextUtils.isEmpty(bank_code)) {
+            ToastHelper.showToast("请输入银行");
+            return;
+        }
+
+        if (TextUtils.isEmpty(sms_code)) {
+            ToastHelper.showToast("请输入提现短信验证码");
+            return;
+        }
+
+        if (TextUtils.isEmpty(money)) {
+            ToastHelper.showToast("请输入金额（元）");
+            return;
+        }
+
+
+        showLoadingDialog("加载中", false);
+
+        new AsyncTask<Void, Void, Void>() {
+
+            com.squareup.okhttp.Response response;
+            BaseModel wcpr = null;
+
+            @Override
+            protected Void doInBackground(Void... params) {
+
+                try {
+
+                    MultipartBuilder b = new MultipartBuilder();
+                    b.addFormDataPart("realname", realname);
+                    b.addFormDataPart("id_card", id_card);
+                    b.addFormDataPart("bank_account", bank_account);
+                    b.addFormDataPart("bank_province", bank_province);
+                    b.addFormDataPart("bank_city", bank_city);
+                    b.addFormDataPart("bank_code", bank_code);
+                    b.addFormDataPart("sms_code", sms_code);
+                    b.addFormDataPart("money", money);
+
+                    Request request = new Request.Builder().url(mSelectedOutChannel.extract_url).post(b.build()).build();
+                    Call call = ServerAPI.getInstance().mOKClient.newCall(request);
+                    response = call.execute();
+
+                    BaseModel resp = new Gson().fromJson(response.body().string(), BaseModel.class);
+                    wcpr = resp;
+
+                } catch (final Exception e) {
+                    new Handler(Looper.getMainLooper()).post(new Runnable() {
+                        @Override
+                        public void run() {
+
+                            ServerAPI.HandlerException(RetrofitError.unexpectedError(mSelectedOutChannel.extract_url, e));
+                        }
+                    });
+                }
+                return null;
+            }
+
+            @Override
+            protected void onPostExecute(Void aVoid) {
+                super.onPostExecute(aVoid);
+
+                dismissLoadingDialog();
+                if (wcpr == null) {
+                    ToastHelper.showToast("数据错误");
+                    return;
+                }
+
+                if (wcpr.code != 0) {
+                    ServerAPI.handleCodeError(wcpr);
+                    ToastHelper.showToast(wcpr.message);
+                } else {
+                    ToastHelper.showToast("提现成功");
+                }
+
+            }
+        }.execute();
     }
+
 }
