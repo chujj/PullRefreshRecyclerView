@@ -46,9 +46,6 @@ public class WebApi {
                     continue;
                 }
 
-
-
-
                 if(chart.list.size() > 0) { // chart1
 
                     int chartIndex = 0;
@@ -83,8 +80,46 @@ public class WebApi {
                             Double.valueOf(model.d2.lowPrice));
 //                    System.out.println("debug2: " + newData);
                     chartData.data.add(newData);
+                }
 
+                if (chart.list.size() > 2) { // chart3
 
+                    int chartIndex = 2;
+
+                    GoodsApi.ChartData chartData = chart.list.get(chartIndex);
+                    if (model.dm != (chartIndex + 1)) {
+                        chartData.xAxis.remove(chartData.xAxis.size() - 1);
+                        chartData.data.remove(chartData.data.size() - 1);
+                    }
+
+                    chartData.xAxis.add(Long.valueOf(model.time));
+
+                    List<Double> newData = Arrays.asList(
+                            Double.valueOf(model.d3.openPrice),
+                            Double.valueOf(model.d3.closePrice),
+                            Double.valueOf(model.d3.highPrice),
+                            Double.valueOf(model.d3.lowPrice));
+                    chartData.data.add(newData);
+                }
+
+                if (chart.list.size() > 3) { // chart3
+
+                    int chartIndex = 3;
+
+                    GoodsApi.ChartData chartData = chart.list.get(chartIndex);
+                    if (model.dm != (chartIndex + 1)) {
+                        chartData.xAxis.remove(chartData.xAxis.size() - 1);
+                        chartData.data.remove(chartData.data.size() - 1);
+                    }
+
+                    chartData.xAxis.add(Long.valueOf(model.time));
+
+                    List<Double> newData = Arrays.asList(
+                            Double.valueOf(model.d4.openPrice),
+                            Double.valueOf(model.d4.closePrice),
+                            Double.valueOf(model.d4.highPrice),
+                            Double.valueOf(model.d4.lowPrice));
+                    chartData.data.add(newData);
                 }
 
 
