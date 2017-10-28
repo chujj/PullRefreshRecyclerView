@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#1F1F1F"
-    >
+    android:background="#1F1F1F">
 
 
     <ScrollView
@@ -99,9 +98,10 @@
 
 
                         <TextView
+                            android:id="@+id/free_asset"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="9900.00"
+                            tools:text="9900.00"
                             android:textColor="#FFFFFFFF"
                             android:textSize="14sp"
                             />
@@ -128,9 +128,10 @@
 
 
                         <TextView
+                            android:id="@+id/lock_asset"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="100.00"
+                            tools:text="100.00"
                             android:textColor="#FFFFFFFF"
                             android:textSize="14sp"
                             />
@@ -175,6 +176,7 @@
 
 
                 <TextView
+                    android:id="@+id/tixian"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"

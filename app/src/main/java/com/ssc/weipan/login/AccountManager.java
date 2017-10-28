@@ -41,6 +41,8 @@ public class AccountManager {
         public String nickName;
         public String avatar;
         public String asset;
+        public String free_asset;
+        public String lock_asset;
     }
 
 

@@ -40,7 +40,8 @@ public class UserApi {
         public void authPawd(@Field("password") String pwd, Callback<BaseModel> cb);
 
 
-        public void getYouhuiquan(Callback<BaseModel> cb);
+        @GET("/customer/my_coupon")
+        public void getYouhuiquan(Callback<YouhuiquanResp> cb);
 
 
         public void getTuijianma(Callback<BaseModel> cb);
@@ -74,8 +75,8 @@ public class UserApi {
         public String nickname; // ":"站",
         public String mobile; // ":"13675840756",
         public String asset; // ":"98004",
-        // "free_asset":"98004",
-        // "lock_asset":"0",
+        public String free_asset; // ":"98004",
+        public String lock_asset; // ":"0",
         // "broker":0,
         public String head_portrait; // ":"http://wx.qlogo.cn/mmopen/PiajxSqBRaEKYAP4qbkb8Fkn0sn8hstyLmXicXUSeRhVjmzicDjbgYoVt2IkfzIOcRh03qHAVtdF9SwcBoUrUTQyw/0"
     }
@@ -95,5 +96,21 @@ public class UserApi {
         public String createdOn; // ":"2017-07-30 10:56:27",
 //            "changeStatus":101,
 //            "changeOn":null
+    }
+
+
+    public static class YouhuiquanResp extends BaseModel {
+
+        public List<Youhuiquan> data;
+    }
+
+    public static class Youhuiquan extends BaseModel {
+        public long id; // ": 1,
+        public long customerId; // ": 844,
+        public long gmtCreated; // ": 1508658869000,
+        public long couponType; // ": 1, 优惠券类型 1:增益券 2:体验券
+        public long discount; // ": 10,
+        public long needMoney; // ": 100,
+        public long validDays; // ": 7
     }
 }

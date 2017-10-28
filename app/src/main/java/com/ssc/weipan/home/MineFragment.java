@@ -33,6 +33,11 @@ public class MineFragment extends BaseFragment {
     ImageView mAvatar;
     @BindView(R2.id.assets)
     TextView mAssets;
+    @BindView(R2.id.free_asset)
+    TextView mFreeAsset;
+    @BindView(R2.id.lock_asset)
+    TextView mLockAsset;
+
 
     @BindViews({R2.id.entry_1, R2.id.entry_2, R2.id.entry_3, R2.id.entry_4, R2.id.entry_5, R2.id.entry_6, })
     View[] mEntrys;
@@ -54,6 +59,8 @@ public class MineFragment extends BaseFragment {
         AccountManager.Account account = AccountManager.getAccount();
         Glide.with(this).load(account.avatar).into(mAvatar);
         mAssets.setText(account.asset);
+        mFreeAsset.setText(account.free_asset);
+        mLockAsset.setText(account.lock_asset);
 
         initEntries();
     }
@@ -159,6 +166,13 @@ public class MineFragment extends BaseFragment {
     @OnClick(R2.id.chongzhi)
     public void clickChongZhi() {
         Intent it = new Intent(getContext(), ChongZhiActivity.class);
+        startActivity(it);
+    }
+
+
+    @OnClick(R2.id.tixian)
+    public void clickTixian() {
+        Intent it = new Intent(getContext(), TixianActivity.class);
         startActivity(it);
     }
 
