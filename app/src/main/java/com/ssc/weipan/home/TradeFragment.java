@@ -68,8 +68,6 @@ public class TradeFragment extends BaseFragment {
 
     private String mKey;
 
-    private List<GoodsApi.ChartData> mChardata;
-
     private List<ClosureMethod> mUIUpdates = new ArrayList<>();
 
     @Override
@@ -173,66 +171,76 @@ public class TradeFragment extends BaseFragment {
         mUIUpdates.add(priceUpdater);
 
 
-
-
-        // 初始化表单
-        for (int i = 0; i < Data.sData.charts.size(); i++) {
-            if (TextUtils.equals(Data.sData.charts.get(i).label, mKey)) {
-                mChardata = Data.sData.charts.get(i).list;
-                break;
-            }
-        }
-
-        // load data
-        for (int i = 0; i < mLinesDetail.length; i++) {
-            if (i > (mChardata.size() -1)) {
-                mLinesIndicator[i].setVisibility(View.GONE);
-            } else {
-                mLinesDetail[i].setText(mChardata.get(i).name);
-
-
-                if (mChardata.get(i).data.size() == 0) continue;
-
-                // load data into set
-
-                boolean isTimelineChart = (mChardata.get(i).data.get(0) instanceof Double);
-
-
-                if (isTimelineChart) {
-                    for (int j = 0; j < mChardata.get(i).data.size(); j++) {
-                        String xLabel = (new SimpleDateFormat("HH:mm")).format(new Date(mChardata.get(i).xAxis.get(j).longValue()));
-
-                        Entry entry = new Entry(((Double) mChardata.get(i).data.get(j)).floatValue(), 0, xLabel);
-                        mEntrySets[i].addEntry(entry);
-
-                    }
-                } else {
-                    for (int j = 0; j < mChardata.get(i).data.size(); j++) {
-                        List _data = (List) mChardata.get(i).data.get(j);
-
-                        float open = ((Double)_data.get(0)).floatValue();
-                        float high = ((Double)_data.get(2)).floatValue();
-                        float low =  ((Double)_data.get(3)).floatValue();
-                        float close =((Double)_data.get(1)).floatValue();
-
-                        String xLabel = (new SimpleDateFormat("HH:mm")).format(new Date(mChardata.get(i).xAxis.get(j).longValue()));
-                        mEntrySets[i].addEntry(new Entry(open, high, low, close, 0, xLabel));
-
-                    }
-
-                    mEntrySets[i].computeStockIndex();
-
-                }
-
-            }
-        }
-
         // default selection
         clickTime60();
         clickLine1();
 
-        // update charts ui
-        onDataReady();
+
+        ClosureMethod dataUpdate = new ClosureMethod() {
+            @Override
+            public Object[] run(Object... args) {
+                // 初始化表单
+                List<GoodsApi.ChartData> mChardata = new ArrayList<>();
+                for (int i = 0; i < Data.sData.charts.size(); i++) {
+                    if (TextUtils.equals(Data.sData.charts.get(i).label, mKey)) {
+                        mChardata = Data.sData.charts.get(i).list;
+                        break;
+                    }
+                }
+
+                // load data
+                for (int i = 0; i < mLinesDetail.length; i++) {
+                    if (i > (mChardata.size() -1)) {
+                        mLinesIndicator[i].setVisibility(View.GONE);
+                    } else {
+                        mLinesDetail[i].setText(mChardata.get(i).name);
+
+
+                        if (mChardata.get(i).data.size() == 0) continue;
+
+                        // load data into set
+
+                        boolean isTimelineChart = (mChardata.get(i).data.get(0) instanceof Double);
+
+
+                        if (isTimelineChart) {
+                            for (int j = 0; j < mChardata.get(i).data.size(); j++) {
+                                String xLabel = (new SimpleDateFormat("HH:mm")).format(new Date(mChardata.get(i).xAxis.get(j).longValue()));
+
+                                Entry entry = new Entry(((Double) mChardata.get(i).data.get(j)).floatValue(), 0, xLabel);
+                                mEntrySets[i].addEntry(entry);
+
+                            }
+                        } else {
+                            for (int j = 0; j < mChardata.get(i).data.size(); j++) {
+                                List _data = (List) mChardata.get(i).data.get(j);
+
+                                float open = ((Double)_data.get(0)).floatValue();
+                                float high = ((Double)_data.get(2)).floatValue();
+                                float low =  ((Double)_data.get(3)).floatValue();
+                                float close =((Double)_data.get(1)).floatValue();
+
+                                String xLabel = (new SimpleDateFormat("HH:mm")).format(new Date(mChardata.get(i).xAxis.get(j).longValue()));
+                                mEntrySets[i].addEntry(new Entry(open, high, low, close, 0, xLabel));
+
+                            }
+
+                            mEntrySets[i].computeStockIndex();
+
+                        }
+
+                    }
+                }
+
+                // update charts ui
+                onDataReady();
+                return null;
+            }
+        };
+
+        dataUpdate.run();
+        mUIUpdates.add(dataUpdate);
+
     }
 
     public void onDataReady() {

@@ -48,8 +48,8 @@ public class WebApi {
 
                 if(chart.list.size() > 0) { // chart1
 
-                    GoodsApi.ChartData chartData = chart.list.get(chart.list.size() - 1);
-                    if (model.dm == 1) {
+                    GoodsApi.ChartData chartData = chart.list.get(0);
+                    if (model.dm != 1) {
                         chartData.xAxis.remove(chartData.xAxis.size() - 1);
                         chartData.data.remove(chartData.data.size() - 1);
                     }
