@@ -14,6 +14,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.google.gson.Gson;
 import com.squareup.okhttp.Call;
 import com.squareup.okhttp.Request;
@@ -26,6 +27,7 @@ import com.ssc.weipan.base.ClosureMethod;
 import com.ssc.weipan.base.CommonUtils;
 import com.ssc.weipan.base.ToastHelper;
 import com.ssc.weipan.base.Topbar;
+import com.ssc.weipan.login.AccountManager;
 
 import java.util.HashMap;
 import java.util.List;
@@ -57,6 +59,10 @@ public class ChongZhiActivity extends BaseActivity {
     ViewGroup mChannelContainer;
     @BindView(R2.id.service_fee)
     TextView mServiceFee;
+    @BindView(R2.id.avatar)
+    ImageView mAvatar;
+    @BindView(R2.id.assets)
+    TextView mAssets;
 
 
     @Override
@@ -75,6 +81,11 @@ public class ChongZhiActivity extends BaseActivity {
         }
 
         mContainer.setVisibility(View.GONE);
+
+        AccountManager.Account account = AccountManager.getAccount();
+
+        Glide.with(this).load(account.avatar).into(mAvatar);
+        mAssets.setText(account.asset + "元");
 
 
         requireData();

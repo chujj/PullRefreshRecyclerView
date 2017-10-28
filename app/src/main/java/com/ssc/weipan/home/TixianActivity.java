@@ -14,6 +14,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.google.gson.Gson;
 import com.squareup.okhttp.Call;
 import com.squareup.okhttp.MultipartBuilder;
@@ -26,6 +27,7 @@ import com.ssc.weipan.base.BaseActivity;
 import com.ssc.weipan.base.ClosureMethod;
 import com.ssc.weipan.base.ToastHelper;
 import com.ssc.weipan.base.Topbar;
+import com.ssc.weipan.login.AccountManager;
 import com.ssc.weipan.model.BaseModel;
 
 import java.util.ArrayList;
@@ -92,12 +94,17 @@ public class TixianActivity extends BaseActivity {
     @BindView(R2.id.confirm)
     View mConfirm;
 
+
+    @BindView(R2.id.avatar)
+    ImageView mAvatar;
+    @BindView(R2.id.assets)
+    TextView mAssets;
+
     private List<GoodsApi.City> mCitys;
     private GoodsApi.OutMoneyUIInfo mUIInfo;
     private List<GoodsApi.OutChannel> mOutChannels;
     private HashMap<GoodsApi.OutChannel, List<GoodsApi.Bank>> mBankCache = new HashMap<>();
 
-    // TODO 各种click事件的关联
     private GoodsApi.OutChannel mSelectedOutChannel;
     private GoodsApi.City mSelectedProvince;
     private GoodsApi.City mSelectedCity;
@@ -114,6 +121,12 @@ public class TixianActivity extends BaseActivity {
         mTixian.setVisibility(View.GONE);
         mChongZhi.setVisibility(View.GONE);
         mHeaderPromt.setVisibility(View.VISIBLE);
+
+
+        AccountManager.Account account = AccountManager.getAccount();
+
+        Glide.with(this).load(account.avatar).into(mAvatar);
+        mAssets.setText(account.asset + "元");
 
         mTopbar.setTitle("提现");
 
