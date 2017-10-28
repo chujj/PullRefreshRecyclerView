@@ -32,6 +32,8 @@ public class TradingPopupView extends RelativeLayout {
     TextView mStatusTv;
     @BindView(R2.id.good_name)
     TextView mGoodName;
+    @BindView(R2.id.ding_jin)
+    TextView mDingJin;
     @BindView(R2.id.service_fee)
     TextView mServiceFee;
     @BindView(R2.id.status_promt)
@@ -76,6 +78,7 @@ public class TradingPopupView extends RelativeLayout {
         public int count_down_secs;
         public String goods_name;
         public float service_fee;
+        public String chip;
         public String status_promt;
         public float open_price;
         public float close_price;
@@ -148,18 +151,19 @@ public class TradingPopupView extends RelativeLayout {
                 mOpenPrice.setText(String.format("%.2f元", mStatus.open_price));
                 mClosePrice.setText(String.format("%.2f元", mStatus.close_price));
                 mServiceFee.setText(String.format("手续费：%.2f元", mStatus.service_fee));
+                mDingJin.setText(String.format("定金：%s元", mStatus.chip));
 
                 mBuyUpDownType.setText(mStatus.buyUp ? "买涨" : "买跌");
                 mBuyUpDownType.setTextColor(mStatus.buyUp ? 0xFFF35833: 0xFF20B83E);
 
 
                 boolean guessUp = (mStatus.close_price - mStatus.open_price) > 0f;
-                mUpDownGuessType.setText(guessUp ? "涨" : "跌");
+                mUpDownGuessType.setText(guessUp ? "赢" : "亏");
                 mUpDownGuessType.setTextColor(guessUp ? 0xFFF35833: 0xFF20B83E);
                 mHeaderBg.setEnabled(guessUp);
 
                 if (mStatus.status_finished) {
-                    mStatusPromt.setText((guessUp ? "赢+" : "亏-")  + mStatus.win_money);
+                    mStatusPromt.setText((guessUp ? "赢" : "亏")  + mStatus.win_money);
                 }
 
             }

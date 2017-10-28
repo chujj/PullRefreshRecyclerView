@@ -135,7 +135,18 @@ public class BuyTradeView extends RelativeLayout {
 
                 mGoodName.setText(String.format("合约：%s", Data.sData.names.get(mKey).goods_name));
                 mTimeInterval.setText(String.format("结算周期：%s", mProvider.timeInterval()));
-                mBuyUp.setText(String.format("订单方向：买%s", mUp ? "涨" : "跌"));
+
+                {
+                    int[] _temp = new int[2];
+                    StringBuilder sb = new StringBuilder("订单方向：");
+                    _temp[0] = sb.length();
+                    sb.append(mUp ? "买涨" : "买跌");
+                    _temp[1] = sb.length();
+                    SpannableString ss = new SpannableString(sb.toString());
+                    ss.setSpan(new ForegroundColorSpan(mUp ? 0xFFF35833 : 0xFF2CB545), _temp[0], _temp[1], Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+
+                    mBuyUp.setText(ss);
+                }
 
 
                 mChipsLayout.setItems(Data.sData.names.get(mKey).chip);
@@ -266,6 +277,7 @@ public class BuyTradeView extends RelativeLayout {
         TradingPopupView tpv = CommonUtils.findView(viewRoot, R.id.trading_popup_view);
         tpv.getStatus().trade_id = resp.data.trade_id;
         tpv.getStatus().label = resp.data.label;
+        tpv.getStatus().chip = resp.data.chip;
         tpv.getStatus().goods_name = resp.data.goods_name; // Data.sData.names.get(mKey).goods_name;
         tpv.getStatus().buyUp = resp.data.up_down_type == 0;
         tpv.getStatus().open_price = resp.data.open_price; // openPrice;

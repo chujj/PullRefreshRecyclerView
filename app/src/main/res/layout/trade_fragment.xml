@@ -214,6 +214,7 @@
                 android:layout_width="13dp"
                 android:layout_height="13dp"
                 android:layout_marginLeft="4dp"
+                android:visibility="gone"
                 android:background="#FFF35833"/>
 
         </LinearLayout>
@@ -247,6 +248,7 @@
             <ImageView
                 android:layout_width="13dp"
                 android:layout_height="13dp"
+                android:visibility="gone"
                 android:layout_marginLeft="4dp"
                 android:background="#FF2CB545"/>
 
