@@ -185,7 +185,7 @@ public class TradeHomeFragment extends BaseFragment {
 
         mIndicator.setViewPager(mViewPager, new UnderlineIndicator.ChildProvider() {
             @Override
-            public View onGetChild(ViewGroup parent, int position) {
+            public View onGetChild(ViewGroup parent, final int position) {
                 View view = LayoutInflater.from(parent.getContext()).
                         inflate(R.layout.trade_home_good_indicator_item, parent, false);
 
@@ -195,6 +195,14 @@ public class TradeHomeFragment extends BaseFragment {
 
                 view .getLayoutParams().width = 0;
                 ((LinearLayout.LayoutParams)view.getLayoutParams()).weight = 1;
+
+                view.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        mViewPager.setCurrentItem(position);
+                    }
+                });
+
                 return view;
             }
         });
