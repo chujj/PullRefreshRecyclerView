@@ -203,6 +203,13 @@ public class TradeFragment extends BaseFragment {
                         boolean isTimelineChart = (mChardata.get(i).data.get(0) instanceof Double);
 
 
+                        mEntrySets[i].getEntryList().clear();
+//                        System.out.println(String.format("size %d %d %d %d",
+//                                mEntrySets[0].getEntryList().size(),
+//                                mEntrySets[1].getEntryList().size(),
+//                                mEntrySets[2].getEntryList().size(),
+//                                mEntrySets[3].getEntryList().size()
+//                        ));
                         if (isTimelineChart) {
                             for (int j = 0; j < mChardata.get(i).data.size(); j++) {
                                 String xLabel = (new SimpleDateFormat("HH:mm")).format(new Date(mChardata.get(i).xAxis.get(j).longValue()));
