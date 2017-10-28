@@ -37,6 +37,7 @@ import java.util.Map;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import de.greenrobot.event.EventBus;
 import retrofit.Callback;
 import retrofit.RetrofitError;
 import retrofit.client.Response;
@@ -60,6 +61,23 @@ public class TradeHomeFragment extends BaseFragment {
 
     @BindView(R2.id.ws_callback)
     WebView mWSWebview;
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        EventBus.getDefault().register(this);
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        EventBus.getDefault().unregister(this);
+    }
+
+    public void onEventMainThread(AccountManager.Account account) {
+        Glide.with(TradeHomeFragment.this).load(account.avatar).into(mAvatar);
+        mAssets.setText((TextUtils.isEmpty(account.asset) ? 0 : account.asset) + "元");
+    }
 
     @Nullable
     @Override
@@ -214,19 +232,71 @@ public class TradeHomeFragment extends BaseFragment {
         iUser.account(new Callback<UserApi.AccountResp>() {
             @Override
             public void success(UserApi.AccountResp accountResp, Response response) {
-                if (accountResp.code != 0) {
+                if (accountResp.code != 0 && accountResp.data != null) {
+                    ServerAPI.handleCodeError(accountResp);
                     ToastHelper.showToast(accountResp.message);
                 } else {
+                    AccountManager.Account account =AccountManager.getAccount();
+
+                    boolean changede = false;
+                    if (!TextUtils.isEmpty(accountResp.data.head_portrait)) {
+                        changede = true;
+                        account.avatar = accountResp.data.head_portrait;
+                    }
+
+                    if (!TextUtils.isEmpty(accountResp.data.asset)) {
+                        changede = true;
+                        account.asset = accountResp.data.asset;
+                    }
 
 
-                    Glide.with(TradeHomeFragment.this).load(accountResp.head_portrait).into(mAvatar);
-                    mAssets.setText((TextUtils.isEmpty(accountResp.asset) ? 0 : accountResp.asset) + "元");
+                    if (changede) {
+                        AccountManager.saveAccount(account);
+                    }
                 }
             }
 
             @Override
             public void failure(RetrofitError error) {
+                ServerAPI.HandlerException(error);
+            }
+        });
 
+
+        iUser.status(new Callback<UserApi.StatusResp>() {
+            @Override
+            public void success(UserApi.StatusResp resp, Response response) {
+
+                if (resp.code != 0 && resp.data != null) {
+                    ServerAPI.handleCodeError(resp);
+                    ToastHelper.showToast(resp.message);
+                } else {
+
+
+                    AccountManager.Account account =AccountManager.getAccount();
+
+                    boolean changede = false;
+                    if (!TextUtils.isEmpty(resp.data.head_portrait)) {
+                        changede = true;
+                        account.avatar = resp.data.head_portrait;
+                    }
+
+                    if (!TextUtils.isEmpty(resp.data.asset)) {
+                        changede = true;
+                        account.asset = resp.data.asset;
+                    }
+
+
+                    if (changede) {
+                        AccountManager.saveAccount(account);
+                    }
+
+                }
+            }
+
+            @Override
+            public void failure(RetrofitError error) {
+                ServerAPI.HandlerException(error);
             }
         });
     }

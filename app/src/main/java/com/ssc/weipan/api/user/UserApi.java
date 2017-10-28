@@ -51,10 +51,26 @@ public class UserApi {
 
 
     public static class StatusResp extends BaseModel {
+        public StatusData data;
+    }
+
+    public static class StatusData extends BaseModel {
+        public String wechat_openid; // ": null,
+		public boolean initpassword; // ": true,
+		public String bindedmobile; // ": true,
+//		"trades": [],
+		public int id; // ": 838,
+		public String asset; // ": "109878",
+//		"timeout": true,
+		public String head_portrait; // ": "http://time.168zhibo.cn/assets/images/default_head_portrait.png"
     }
 
 
     public static class AccountResp extends BaseModel {
+        public AccountData data;
+    }
+
+    public static class AccountData extends BaseModel {
         public String nickname; // ":"站",
         public String mobile; // ":"13675840756",
         public String asset; // ":"98004",

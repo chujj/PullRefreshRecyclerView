@@ -1,14 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="horizontal"
     android:layout_width="match_parent"
     android:layout_height="90dp"
     android:paddingLeft="19dp"
     android:paddingRight="19dp"
     android:gravity="center_vertical"
-    android:background="#FF181818"
-    >
+    android:background="#FF181818">
 
     <ImageView
         android:id="@+id/avatar"
@@ -42,7 +41,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="9dp"
-                android:text="10000元"
+                tools:text="10000元"
                 android:textColor="#FFFFFFFF"
                 android:textSize="16sp"
                 />
