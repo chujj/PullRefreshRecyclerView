@@ -70,6 +70,7 @@ public class TradingPopupView extends RelativeLayout {
     }
 
     public static class Status {
+        public long trade_id;
         public String label;
         public boolean status_finished; // false -> 倒计时中; true -> 结束
         public int count_down_secs;
@@ -78,6 +79,8 @@ public class TradingPopupView extends RelativeLayout {
         public String status_promt;
         public float open_price;
         public float close_price;
+
+        public String win_money;
 
         public boolean buyUp;
         public boolean result_up;
@@ -117,6 +120,20 @@ public class TradingPopupView extends RelativeLayout {
                 }
 
 
+                if (Data.sData._closeTrade.containsKey(Long.valueOf(mStatus.trade_id))) {
+                    EventBus.getDefault().unregister(TradingPopupView.this);
+
+                    if (mTimer != null) {
+                        mTimer.cancel();
+                        mTimer = null;
+                    }
+
+                    mStatus.status_finished = true;
+                    mStatus.close_price = Data.sData._closeTrade.get(Long.valueOf(mStatus.trade_id)).close_price;
+                    mStatus.win_money = Data.sData._closeTrade.get(Long.valueOf(mStatus.trade_id)).win_money;
+                }
+
+
                 updateUI();
 
                 return null;
@@ -140,6 +157,11 @@ public class TradingPopupView extends RelativeLayout {
                 mUpDownGuessType.setText(guessUp ? "涨" : "跌");
                 mUpDownGuessType.setTextColor(guessUp ? 0xFFF35833: 0xFF20B83E);
                 mHeaderBg.setEnabled(guessUp);
+
+                if (mStatus.status_finished) {
+                    mStatusPromt.setText((guessUp ? "赢+" : "亏-")  + mStatus.win_money);
+                }
+
             }
         };
 
@@ -156,8 +178,10 @@ public class TradingPopupView extends RelativeLayout {
     protected void onDetachedFromWindow() {
         super.onDetachedFromWindow();
 
+        if (EventBus.getDefault().isRegistered(this)) {
+            EventBus.getDefault().unregister(this);
+        }
 
-        EventBus.getDefault().unregister(this);
     }
 
     public void onEventMainThread(Message msg) {

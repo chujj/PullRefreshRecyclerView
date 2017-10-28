@@ -2,7 +2,10 @@ package com.ssc.weipan.home;
 
 import android.content.Context;
 import android.os.Message;
+import android.text.SpannableString;
+import android.text.Spanned;
 import android.text.TextUtils;
+import android.text.style.ForegroundColorSpan;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -147,8 +150,23 @@ public class BuyTradeView extends RelativeLayout {
 
                         mServiceFee.setText(
                                 String.format("手续费：%.2f元", chip * Data.sData.names.get(mKey).serviceFee));
-                        mReturnGoods.setText(
-                                String.format("预期收入：%.2f元", chip * (1 - Data.sData.names.get(mKey).serviceFee)));
+
+                        int[] _temp = new int[4];
+                        StringBuilder sb = new StringBuilder("预期盈亏：");
+                        _temp[0] = sb.length();
+                        sb.append( ((int)(chip * (1 - Data.sData.names.get(mKey).serviceFee))) + "");
+                        _temp[1] = sb.length();
+                        sb.append("/");
+                        _temp[2] = sb.length();
+                        sb.append("-" + chip);
+                        _temp[3] = sb.length();
+
+                        SpannableString ss = new SpannableString(sb.toString());
+                        ss.setSpan(new ForegroundColorSpan(0xFFF35833), _temp[0], _temp[1], Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+                        ss.setSpan(new ForegroundColorSpan(0xFF2CB545), _temp[2], _temp[3], Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+
+
+                        mReturnGoods.setText(ss);
                     }
                 });
 
@@ -246,6 +264,7 @@ public class BuyTradeView extends RelativeLayout {
     private void showCounterdownText (GoodsApi.BuyTradeResponse resp) {
         View viewRoot = LayoutInflater.from(getContext()).inflate(R.layout.trading_popup_layout, null, false);
         TradingPopupView tpv = CommonUtils.findView(viewRoot, R.id.trading_popup_view);
+        tpv.getStatus().trade_id = resp.data.trade_id;
         tpv.getStatus().label = resp.data.label;
         tpv.getStatus().goods_name = resp.data.goods_name; // Data.sData.names.get(mKey).goods_name;
         tpv.getStatus().buyUp = resp.data.up_down_type == 0;

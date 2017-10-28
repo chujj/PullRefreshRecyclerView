@@ -3,6 +3,7 @@ package com.ssc.weipan.api.trade;
 import com.google.gson.annotations.SerializedName;
 import com.ssc.weipan.model.BaseModel;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -64,6 +65,9 @@ public class GoodsApi {
         public List<Good> goods;
 
         public List<Charts> charts;
+
+
+        public HashMap<Long, BuyTradeData> _closeTrade = new HashMap<>();
     }
 
 

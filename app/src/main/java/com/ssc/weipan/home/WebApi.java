@@ -126,11 +126,32 @@ public class WebApi {
 
             }
 
+        } else if (TextUtils.equals("2", type)) {
 
-            Message msg = Message.obtain();
-            msg.what = 0x13d;
-            EventBus.getDefault().post(msg);
+            Type_2_Model model = mGson.fromJson(json, Type_2_Model.class);
+
+            if (model.isTradeCloseType()) {
+                Data.sData._closeTrade.put(Long.valueOf(model.data.trade_id), model.data);
+            }
         }
+
+        Message msg = Message.obtain();
+        msg.what = 0x13d;
+        EventBus.getDefault().post(msg);
+
+    }
+
+
+    public static class Type_2_Model extends BaseModel {
+        public String socketEventType;
+
+        GoodsApi.BuyTradeData data;
+
+
+        public boolean isTradeCloseType() {
+            return TextUtils.equals("TRADE_CLOSED", socketEventType);
+        }
+
 
     }
 
