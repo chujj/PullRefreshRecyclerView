@@ -9,14 +9,17 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.ssc.weipan.R;
 import com.ssc.weipan.R2;
 import com.ssc.weipan.base.BaseFragment;
 import com.ssc.weipan.base.CommonUtils;
+import com.ssc.weipan.login.AccountManager;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import butterknife.BindView;
 import butterknife.BindViews;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -26,6 +29,10 @@ import butterknife.OnClick;
  */
 public class MineFragment extends BaseFragment {
 
+    @BindView(R2.id.avatar)
+    ImageView mAvatar;
+    @BindView(R2.id.assets)
+    TextView mAssets;
 
     @BindViews({R2.id.entry_1, R2.id.entry_2, R2.id.entry_3, R2.id.entry_4, R2.id.entry_5, R2.id.entry_6, })
     View[] mEntrys;
@@ -42,6 +49,11 @@ public class MineFragment extends BaseFragment {
         super.onViewCreated(view, savedInstanceState);
 
         ButterKnife.bind(this, view);
+
+
+        AccountManager.Account account = AccountManager.getAccount();
+        Glide.with(this).load(account.avatar).into(mAvatar);
+        mAssets.setText(account.asset);
 
         initEntries();
     }
