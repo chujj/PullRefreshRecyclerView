@@ -249,6 +249,11 @@ public class TradeHomeFragment extends BaseFragment {
                         account.asset = accountResp.data.asset;
                     }
 
+                    if (!TextUtils.isEmpty(accountResp.data.nickname)) {
+                        changede = true;
+                        account.nickName = accountResp.data.nickname;
+                    }
+
 
                     if (changede) {
                         AccountManager.saveAccount(account);
