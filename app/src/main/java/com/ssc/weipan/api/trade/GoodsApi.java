@@ -151,6 +151,7 @@ public class GoodsApi {
         public int amount;
 
         public String win_money;
+        public String open_time;
     }
 
 

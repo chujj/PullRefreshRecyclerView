@@ -56,6 +56,9 @@ public class TradeFragment extends BaseFragment {
     TextView[] mLinesDetail;
 
 
+    @BindView(R2.id.trades_container)
+    ViewGroup mTradesContainer;
+
     @BindView(R2.id.kline_container)
     ViewGroup mKlineContainer;
 
@@ -87,11 +90,15 @@ public class TradeFragment extends BaseFragment {
     }
 
     public void onEventMainThread(Message msg) {
-        if (msg.what != 0x13d) return;
+        if (msg.what != 0x13d && msg.what != 0x14d) return;
 
 
-        for(ClosureMethod call : mUIUpdates) {
-            call.run();
+        if (msg.what == 0x13d) {
+            for(ClosureMethod call : mUIUpdates) {
+                call.run();
+            }
+        } else if (msg.what == 0x14d) {
+            refreshTradingList();
         }
     }
 
@@ -252,6 +259,54 @@ public class TradeFragment extends BaseFragment {
         dataUpdate.run();
         mUIUpdates.add(dataUpdate);
 
+
+
+        refreshTradingList();
+
+    }
+
+
+    private void refreshTradingList() {
+        final List<ClosureMethod> listUpdaters = new ArrayList<>();
+
+        mTradesContainer.removeAllViews();
+        for(GoodsApi.BuyTradeData btd : Data.sTradings) {
+            if (TextUtils.equals(btd.label, mKey)) {
+                View root =
+                        LayoutInflater.from(getContext()).inflate(R.layout.trade_trades_header_layout, mTradesContainer, false);
+
+                TextView name = CommonUtils.findView(root, R.id.name);
+                TextView buyType = CommonUtils.findView(root, R.id.buy_type);
+                TextView openTime = CommonUtils.findView(root, R.id.open_time);
+                TextView openPrice = CommonUtils.findView(root, R.id.open_price);
+                TextView newPrice = CommonUtils.findView(root, R.id.new_price);
+                TextView dingJin = CommonUtils.findView(root, R.id.ding_jin);
+
+                name.setText(btd.goods_name);
+                buyType.setText(btd.up_down_type == 0 ? "买涨" : "买跌");
+                buyType.setTextColor(btd.up_down_type == 0 ? 0xFFF35833 : 0xFF2CB545);
+                openTime.setText(btd.open_time);
+                openPrice.setText(btd.open_price + "");
+                newPrice.setText(btd.close_price + "");
+                dingJin.setText(btd.chip);
+
+
+                listUpdaters.add(new ClosureMethod() {
+                    @Override
+                    public Object[] run(Object... args) {
+                        for (int i = 0; i < Data.sData.goods.size(); i++) {
+
+                            if (Da)
+
+                        }
+                        
+                        return null;
+                    }
+                });
+
+                mTradesContainer.addView(root);
+            }
+        }
     }
 
     public void onDataReady() {

@@ -257,6 +257,13 @@ public class BuyTradeView extends RelativeLayout {
                             ToastHelper.showToast(baseModel.message);
                             ServerAPI.handleCodeError(baseModel);
                         } else {
+
+                            Data.sTradings.add(baseModel.data);
+                            Message msg = Message.obtain();
+                            msg.what = 0x14d;
+                            EventBus.getDefault().post(msg);
+
+
                             close();
 
                             showCounterdownText(baseModel);

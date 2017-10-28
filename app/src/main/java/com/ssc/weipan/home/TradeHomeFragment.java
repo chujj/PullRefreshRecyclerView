@@ -113,6 +113,7 @@ public class TradeHomeFragment extends BaseFragment {
         requireGoodsInfo();
 
         requireUserInfo();
+        getUserStatus();
     }
 
     private void setupWebView() {
@@ -317,7 +318,10 @@ public class TradeHomeFragment extends BaseFragment {
             }
         });
 
+    }
 
+    public void getUserStatus() {
+        UserApi.IUser iUser = ServerAPI.getInterface(UserApi.IUser.class);
         iUser.status(new Callback<UserApi.StatusResp>() {
             @Override
             public void success(UserApi.StatusResp resp, Response response) {
@@ -327,6 +331,11 @@ public class TradeHomeFragment extends BaseFragment {
                     ToastHelper.showToast(resp.message);
                 } else {
 
+                    Data.sTradings = resp.data.trades;
+
+                    Message msg = Message.obtain();
+                    msg.what = 0x14d;
+                    EventBus.getDefault().post(msg);
 
                     AccountManager.Account account =AccountManager.getAccount();
 

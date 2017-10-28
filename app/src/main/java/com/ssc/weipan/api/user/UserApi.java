@@ -1,5 +1,6 @@
 package com.ssc.weipan.api.user;
 
+import com.ssc.weipan.api.trade.GoodsApi;
 import com.ssc.weipan.model.BaseModel;
 
 import java.util.List;
@@ -64,6 +65,7 @@ public class UserApi {
 		public boolean initpassword; // ": true,
 		public String bindedmobile; // ": true,
 //		"trades": [],
+        public List<GoodsApi.BuyTradeData> trades;
 		public int id; // ": 838,
 		public String asset; // ": "109878",
 //		"timeout": true,
