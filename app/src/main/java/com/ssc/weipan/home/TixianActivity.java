@@ -93,6 +93,8 @@ public class TixianActivity extends BaseActivity {
 
     @BindView(R2.id.confirm)
     View mConfirm;
+    @BindView(R2.id.mobile_promt)
+    TextView mMobilePromot;
 
 
     @BindView(R2.id.avatar)
@@ -152,6 +154,7 @@ public class TixianActivity extends BaseActivity {
 
 
                 mHeaderPromt.setText(String.format("可提现金额：%s元", mUIInfo.free_asset ));
+                mMobilePromot.setText(String.format("已验证手机  %s", mUIInfo.mobile));
 
                 { // 初始化
                     mBanksContainer.removeAllViews();

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -337,11 +337,12 @@
             </LinearLayout>
 
             <TextView
+                android:id="@+id/mobile_promt"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:layout_marginLeft="10dp"
-                android:text="已验证手机  186****0141"
+                tools:text="已验证手机  186****0141"
                 android:textColor="#FF999999"
                 android:textSize="16sp"
                 />
@@ -378,7 +379,7 @@
                     android:background="@null"
                     android:inputType="number"
                     android:textColor="#FFCCCCCC"
-                    android:hint="330102198507213038"
+                    android:hint="请输入验证码"
                     android:textColorHint="#FF999999"
                     android:textSize="16sp"
                     />
