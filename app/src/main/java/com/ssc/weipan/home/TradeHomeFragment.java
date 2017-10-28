@@ -3,6 +3,7 @@ package com.ssc.weipan.home;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.os.Message;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentPagerAdapter;
@@ -26,12 +27,15 @@ import com.ssc.weipan.api.trade.GoodsApi;
 import com.ssc.weipan.api.user.UserApi;
 import com.ssc.weipan.base.BaseApp;
 import com.ssc.weipan.base.BaseFragment;
+import com.ssc.weipan.base.ClosureMethod;
 import com.ssc.weipan.base.CommonUtils;
 import com.ssc.weipan.base.PreferencesUtil;
 import com.ssc.weipan.base.ToastHelper;
 import com.ssc.weipan.base.UnderlineIndicator;
 import com.ssc.weipan.login.AccountManager;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 import butterknife.BindView;
@@ -77,6 +81,17 @@ public class TradeHomeFragment extends BaseFragment {
     public void onEventMainThread(AccountManager.Account account) {
         Glide.with(TradeHomeFragment.this).load(account.avatar).into(mAvatar);
         mAssets.setText((TextUtils.isEmpty(account.asset) ? 0 : account.asset) + "元");
+    }
+
+
+    private List<ClosureMethod> mIndicatorUpdate = new ArrayList<>();
+    public void onEventMainThread(Message msg) {
+        if (msg.what != 0x13d) return;
+
+
+        for(ClosureMethod call : mIndicatorUpdate) {
+            call.run();
+        }
     }
 
     @Nullable
@@ -211,6 +226,30 @@ public class TradeHomeFragment extends BaseFragment {
                 ((TextView) CommonUtils.findView(view, R.id.name)).setText(
                         mViewPager.getAdapter().getPageTitle(position));
 
+                final TextView price = CommonUtils.findView(view, R.id.price);
+
+                ClosureMethod update = new ClosureMethod() {
+
+                    String label_name =  keys[position];
+
+                    @Override
+                    public Object[] run(Object... args) {
+
+                        for (GoodsApi.Good good : Data.sData.goods) {
+                            if (TextUtils.equals(good.label,label_name)) {
+                                price.setText("" + good.newPrice);
+                                price.setTextColor( (good.newPrice - good.open) > 0 ? 0xFFF35833 : 0xFF2CB545);
+                            }
+                        }
+
+                        return new Object[0];
+                    }
+                };
+
+                mIndicatorUpdate.add(update);
+                update.run();
+
+
                 view .getLayoutParams().width = 0;
                 ((LinearLayout.LayoutParams)view.getLayoutParams()).weight = 1;
 
@@ -225,7 +264,6 @@ public class TradeHomeFragment extends BaseFragment {
             }
         });
     }
-
 
     private void requireUserInfo() {
         UserApi.IUser iUser = ServerAPI.getInterface(UserApi.IUser.class);
