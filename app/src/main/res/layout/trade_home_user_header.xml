@@ -122,9 +122,10 @@
                 android:visibility="gone"
                 android:singleLine="true"
                 android:ellipsize="end"
-                android:text="可提现金额：99427元"
+                tools:text="可提现金额：99427元"
                 android:textColor="#FFCCCCCC"
                 android:textSize="16sp"
+                tools:visibility="visible"
                 />
 
         </LinearLayout>

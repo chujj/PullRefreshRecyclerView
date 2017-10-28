@@ -150,6 +150,9 @@ public class TixianActivity extends BaseActivity {
 
                 dismissLoadingDialog();
 
+
+                mHeaderPromt.setText(String.format("可提现金额：%s元", mUIInfo.free_asset ));
+
                 { // 初始化
                     mBanksContainer.removeAllViews();
                     LayoutInflater inflater = LayoutInflater.from(mBanksContainer.getContext());
