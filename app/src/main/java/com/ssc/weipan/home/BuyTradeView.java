@@ -1,6 +1,7 @@
 package com.ssc.weipan.home;
 
 import android.content.Context;
+import android.os.Message;
 import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
@@ -14,10 +15,10 @@ import com.ssc.weipan.R2;
 import com.ssc.weipan.api.ServerAPI;
 import com.ssc.weipan.api.trade.GoodsApi;
 import com.ssc.weipan.base.BaseActivity;
+import com.ssc.weipan.base.ClosureMethod;
 import com.ssc.weipan.base.CommonUtils;
 import com.ssc.weipan.base.ToastHelper;
 import com.ssc.weipan.base.Topbar;
-import com.ssc.weipan.model.BaseModel;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -25,6 +26,7 @@ import java.util.Map;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import de.greenrobot.event.EventBus;
 import retrofit.Callback;
 import retrofit.RetrofitError;
 import retrofit.client.Response;
@@ -57,13 +59,15 @@ public class BuyTradeView extends RelativeLayout {
     @BindView(R2.id.return_goods)
     TextView mReturnGoods;
 
-    private Runnable mUIUpdate;
+
     private String mKey;
     private boolean mUp;
     private TimeIntervalProvider mProvider;
 
+
     private Map<String, Object> mBuyArgs = new HashMap<>();
     private BaseActivity mBaseActivity;
+    private ClosureMethod mUIUpdater;
 
     public BuyTradeView(Context context) {
         super(context);
@@ -105,10 +109,23 @@ public class BuyTradeView extends RelativeLayout {
         mTopbar.setTitle("购买");
         mTopbar.setBackgroundColor(0xFF1F1F1F);
 
-        mUIUpdate = new Runnable() {
 
+        mUIUpdater = new ClosureMethod() {
             @Override
-            public void run() {
+            public Object[] run(Object... args) {
+
+                for (int i = 0; i < Data.sData.goods.size(); i++) {
+                    if (TextUtils.equals(Data.sData.goods.get(i).label, mKey)) {
+                        mPriceNow.setText(String.format("当前价格：%.2f", Data.sData.goods.get(i).newPrice));
+                        break;
+                    }
+                }
+
+                if (args[0] == "newdata") {
+
+                    return null;
+                }
+
                 mBuyArgs.put("goods_id", Data.sData.names.get(mKey).goods_id);
                 mBuyArgs.put("up_down_type", mUp ? 0 : 1);
                 mBuyArgs.put("secs", Integer.parseInt(mProvider.timeInterval().replaceAll("秒", "")));
@@ -116,12 +133,7 @@ public class BuyTradeView extends RelativeLayout {
                 mGoodName.setText(String.format("合约：%s", Data.sData.names.get(mKey).goods_name));
                 mTimeInterval.setText(String.format("结算周期：%s", mProvider.timeInterval()));
                 mBuyUp.setText(String.format("订单方向：买%s", mUp ? "涨" : "跌"));
-                for (int i = 0; i < Data.sData.goods.size(); i++) {
-                    if (TextUtils.equals(Data.sData.goods.get(i).label, mKey)) {
-                        mPriceNow.setText(String.format("当前价格：%.2f", Data.sData.goods.get(i).newPrice));
-                        break;
-                    }
-                }
+
 
                 mChipsLayout.setItems(Data.sData.names.get(mKey).chip);
 
@@ -143,8 +155,11 @@ public class BuyTradeView extends RelativeLayout {
 
                 mChipsLayout.getChildAt(0).performClick();
 
+                return null;
             }
         };
+
+
     }
 
 
@@ -157,7 +172,7 @@ public class BuyTradeView extends RelativeLayout {
     }
 
     public void initUI() {
-        mUIUpdate.run();
+        mUIUpdater.run("init");
     }
 
     public void setUpDown(boolean up) {
@@ -165,6 +180,27 @@ public class BuyTradeView extends RelativeLayout {
     }
 
 
+    @Override
+    protected void onAttachedToWindow() {
+        super.onAttachedToWindow();
+
+        EventBus.getDefault().register(this);
+    }
+
+    @Override
+    protected void onDetachedFromWindow() {
+        super.onDetachedFromWindow();
+
+        EventBus.getDefault().unregister(this);
+    }
+
+    public void onEventMainThread(Message msg) {
+        if (msg.what != 0x13d) return;
+
+        if (mUIUpdater != null) {
+            mUIUpdater.run("newdata");
+        }
+    }
 
     @OnClick(R2.id.cancel)
     public void clickCancel() {
