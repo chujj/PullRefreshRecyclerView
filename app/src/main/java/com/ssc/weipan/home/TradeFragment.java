@@ -1,6 +1,7 @@
 package com.ssc.weipan.home;
 
 import android.os.Bundle;
+import android.os.Message;
 import android.support.annotation.Nullable;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
@@ -13,6 +14,7 @@ import com.ssc.weipan.R2;
 import com.ssc.weipan.api.trade.GoodsApi;
 import com.ssc.weipan.base.BaseActivity;
 import com.ssc.weipan.base.BaseFragment;
+import com.ssc.weipan.base.ClosureMethod;
 import com.ssc.weipan.base.CommonUtils;
 import com.wordplat.ikvstockchart.InteractiveKLineView;
 import com.wordplat.ikvstockchart.entry.Entry;
@@ -20,6 +22,7 @@ import com.wordplat.ikvstockchart.entry.EntrySet;
 import com.wordplat.ikvstockchart.render.TimeLineRender;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -27,6 +30,7 @@ import butterknife.BindView;
 import butterknife.BindViews;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import de.greenrobot.event.EventBus;
 
 /**
  * Created by zhujj on 17-10-18.
@@ -66,12 +70,33 @@ public class TradeFragment extends BaseFragment {
 
     private List<GoodsApi.ChartData> mChardata;
 
+    private List<ClosureMethod> mUIUpdates = new ArrayList<>();
+
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         mKey = getArguments().getString("key");
+
+        EventBus.getDefault().register(this);
     }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+
+        EventBus.getDefault().unregister(this);
+    }
+
+    public void onEventMainThread(Message msg) {
+        if (msg.what != 0x13d) return;
+
+
+        for(ClosureMethod call : mUIUpdates) {
+            call.run();
+        }
+    }
+
 
     @Nullable
     @Override
@@ -128,15 +153,26 @@ public class TradeFragment extends BaseFragment {
             mTimeDetail[i].setText(String.format("%s秒", i > (gName.point.length - 1) ? 0 : gName.point[i]));
         }
 
-        // 高低价初始化
-        for (int i = 0; i < Data.sData.goods.size(); i++) {
-            if (TextUtils.equals(Data.sData.goods.get(i).label, mKey)) {
-                mOpenText.setText(String.format("今开：%.2f", Data.sData.goods.get(i).open));
-                mHighText.setText(String.format("最高：%.2f", Data.sData.goods.get(i).high));
-                mLowText.setText(String.format("最低：%.2f", Data.sData.goods.get(i).low));
-                break;
+
+        ClosureMethod priceUpdater = new ClosureMethod() {
+            @Override
+            public Object[] run(Object... args) {
+                // 高低价初始化
+                for (int i = 0; i < Data.sData.goods.size(); i++) {
+                    if (TextUtils.equals(Data.sData.goods.get(i).label, mKey)) {
+                        mOpenText.setText(String.format("今开：%.2f", Data.sData.goods.get(i).open));
+                        mHighText.setText(String.format("最高：%.2f", Data.sData.goods.get(i).high));
+                        mLowText.setText(String.format("最低：%.2f", Data.sData.goods.get(i).low));
+                        break;
+                    }
+                }
+                return null;
             }
-        }
+        };
+        priceUpdater.run();
+        mUIUpdates.add(priceUpdater);
+
+
 
 
         // 初始化表单
