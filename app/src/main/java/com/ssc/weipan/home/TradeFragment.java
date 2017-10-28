@@ -154,6 +154,9 @@ public class TradeFragment extends BaseFragment {
             } else {
                 mLinesDetail[i].setText(mChardata.get(i).name);
 
+
+                if (mChardata.get(i).data.size() == 0) continue;
+
                 // load data into set
 
                 boolean isTimelineChart = (mChardata.get(i).data.get(0) instanceof Double);
