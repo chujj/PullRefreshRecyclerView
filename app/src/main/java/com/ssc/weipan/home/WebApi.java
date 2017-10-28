@@ -60,7 +60,7 @@ public class WebApi {
                     chartData.data.add(Double.valueOf(model.newPrice));
                 }
 
-                if (chart.list.size() > 1) { // chart2
+                if (chart.list.size() > 1 && model.d2 != null) { // chart2
 
                     int chartIndex = 1;
 
@@ -82,7 +82,7 @@ public class WebApi {
                     chartData.data.add(newData);
                 }
 
-                if (chart.list.size() > 2) { // chart3
+                if (chart.list.size() > 2 && model.d3 != null) { // chart3
 
                     int chartIndex = 2;
 
@@ -102,7 +102,7 @@ public class WebApi {
                     chartData.data.add(newData);
                 }
 
-                if (chart.list.size() > 3) { // chart3
+                if (chart.list.size() > 3 && model.d4 != null) { // chart3
 
                     int chartIndex = 3;
 

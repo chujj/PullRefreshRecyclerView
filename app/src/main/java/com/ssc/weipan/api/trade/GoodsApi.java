@@ -132,6 +132,7 @@ public class GoodsApi {
     }
 
     public static class BuyTradeData extends BaseModel {
+        public String label;
         public int trade_id;
         public String goods_name;
         public int up_down_type;

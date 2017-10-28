@@ -246,10 +246,11 @@ public class BuyTradeView extends RelativeLayout {
     private void showCounterdownText (GoodsApi.BuyTradeResponse resp) {
         View viewRoot = LayoutInflater.from(getContext()).inflate(R.layout.trading_popup_layout, null, false);
         TradingPopupView tpv = CommonUtils.findView(viewRoot, R.id.trading_popup_view);
+        tpv.getStatus().label = resp.data.label;
         tpv.getStatus().goods_name = resp.data.goods_name; // Data.sData.names.get(mKey).goods_name;
         tpv.getStatus().buyUp = resp.data.up_down_type == 0;
         tpv.getStatus().open_price = resp.data.open_price; // openPrice;
-        tpv.getStatus().close_price = resp.data.close_price; // openPrice + 1;
+        tpv.getStatus().close_price = resp.data.open_price; // openPrice + 1;
         tpv.getStatus().status_finished = false;
         tpv.getStatus().count_down_secs =  resp.data.leftTime; // (int) mBuyArgs.get("secs");
         tpv.getStatus().service_fee =  resp.data.serve_price; // ((int) mBuyArgs.get("chip") * Data.sData.names.get(mKey).serviceFee);

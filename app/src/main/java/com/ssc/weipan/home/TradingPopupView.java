@@ -2,6 +2,8 @@ package com.ssc.weipan.home;
 
 import android.content.Context;
 import android.os.CountDownTimer;
+import android.os.Message;
+import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,9 +12,12 @@ import android.widget.TextView;
 
 import com.ssc.weipan.R;
 import com.ssc.weipan.R2;
+import com.ssc.weipan.api.trade.GoodsApi;
+import com.ssc.weipan.base.ClosureMethod;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import de.greenrobot.event.EventBus;
 
 /**
  * Created by zhujj on 17-10-21.
@@ -46,6 +51,8 @@ public class TradingPopupView extends RelativeLayout {
     private Status mStatus;
     private CountDownTimer mTimer;
 
+    private ClosureMethod mUIUpdater;
+
     public TradingPopupView(Context context) {
         super(context);
     }
@@ -63,6 +70,7 @@ public class TradingPopupView extends RelativeLayout {
     }
 
     public static class Status {
+        public String label;
         public boolean status_finished; // false -> 倒计时中; true -> 结束
         public int count_down_secs;
         public String goods_name;
@@ -96,6 +104,25 @@ public class TradingPopupView extends RelativeLayout {
 
         mStatus = new Status();
 
+
+        mUIUpdater = new ClosureMethod() {
+
+            @Override
+            public Object[] run(Object... args) {
+                for (GoodsApi.Good good : Data.sData.goods) {
+                    if (TextUtils.equals(good.label, mStatus.label)) {
+                        mStatus.close_price = good.newPrice;
+                        break;
+                    }
+                }
+
+
+                updateUI();
+
+                return null;
+            }
+        };
+
         mUIUpdate = new Runnable() {
             @Override
             public void run() {
@@ -109,12 +136,36 @@ public class TradingPopupView extends RelativeLayout {
                 mBuyUpDownType.setTextColor(mStatus.buyUp ? 0xFFF35833: 0xFF20B83E);
 
 
-                boolean guessUp = (mStatus.open_price - mStatus.close_price) > 0f;
+                boolean guessUp = (mStatus.close_price - mStatus.open_price) > 0f;
                 mUpDownGuessType.setText(guessUp ? "涨" : "跌");
                 mUpDownGuessType.setTextColor(guessUp ? 0xFFF35833: 0xFF20B83E);
+                mHeaderBg.setEnabled(guessUp);
             }
         };
 
+    }
+
+    @Override
+    protected void onAttachedToWindow() {
+        super.onAttachedToWindow();
+
+        EventBus.getDefault().register(this);
+    }
+
+    @Override
+    protected void onDetachedFromWindow() {
+        super.onDetachedFromWindow();
+
+
+        EventBus.getDefault().unregister(this);
+    }
+
+    public void onEventMainThread(Message msg) {
+        if (msg.what != 0x13d) return;
+
+        if (mUIUpdater != null) {
+            mUIUpdater.run("newdata");
+        }
     }
 
     private void close() {
