@@ -49,6 +49,7 @@ public class PasswordSetupActivity extends BaseActivity {
     EditText mOriPwd;
 
     private boolean mResetPwdMode;
+    private boolean mForgetPwdMode;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -58,6 +59,7 @@ public class PasswordSetupActivity extends BaseActivity {
 
 
         mResetPwdMode = getIntent().getBooleanExtra("reset_pwd", false);
+        mForgetPwdMode = getIntent().getBooleanExtra("forget_pwd", false);
 
         ButterKnife.bind(this, this);
 
@@ -158,25 +160,48 @@ public class PasswordSetupActivity extends BaseActivity {
 
             showLoadingDialog("加载中", false);
 
-            UserApi.IUser iUser = ServerAPI.getInterface(UserApi.IUser.class);
-            iUser.initPassword(pwd, new Callback<BaseModel>() {
-                @Override
-                public void success(BaseModel baseModel, Response response) {
-                    dismissLoadingDialog();
-                    if (baseModel.code != 0) {
-                        ToastHelper.showToast(baseModel.message);
-                    } else {
-                        ToastHelper.showToast("设置成功");
-                        finish();
+            if (mForgetPwdMode) {
+                UserApi.IUser iUser = ServerAPI.getInterface(UserApi.IUser.class);
+                iUser.forgetPassword(pwd, new Callback<BaseModel>() {
+                    @Override
+                    public void success(BaseModel baseModel, Response response) {
+                        dismissLoadingDialog();
+                        if (baseModel.code != 0) {
+                            ToastHelper.showToast(baseModel.message);
+                        } else {
+                            ToastHelper.showToast("设置成功");
+                            finish();
+                        }
                     }
-                }
 
-                @Override
-                public void failure(RetrofitError error) {
-                    dismissLoadingDialog();
-                    ServerAPI.HandlerException(error);
-                }
-            });
+                    @Override
+                    public void failure(RetrofitError error) {
+                        dismissLoadingDialog();
+                        ServerAPI.HandlerException(error);
+                    }
+                });
+            } else {
+                UserApi.IUser iUser = ServerAPI.getInterface(UserApi.IUser.class);
+                iUser.initPassword(pwd, new Callback<BaseModel>() {
+                    @Override
+                    public void success(BaseModel baseModel, Response response) {
+                        dismissLoadingDialog();
+                        if (baseModel.code != 0) {
+                            ToastHelper.showToast(baseModel.message);
+                        } else {
+                            ToastHelper.showToast("设置成功");
+                            finish();
+                        }
+                    }
+
+                    @Override
+                    public void failure(RetrofitError error) {
+                        dismissLoadingDialog();
+                        ServerAPI.HandlerException(error);
+                    }
+                });
+            }
+
 
         }
 

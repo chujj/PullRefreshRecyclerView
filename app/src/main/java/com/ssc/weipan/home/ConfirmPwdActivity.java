@@ -1,5 +1,6 @@
 package com.ssc.weipan.home;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.text.Editable;
@@ -12,9 +13,11 @@ import android.widget.EditText;
 import com.ssc.weipan.R;
 import com.ssc.weipan.R2;
 import com.ssc.weipan.api.ServerAPI;
+import com.ssc.weipan.api.sms.SmsApi;
 import com.ssc.weipan.api.user.UserApi;
 import com.ssc.weipan.base.BaseActivity;
 import com.ssc.weipan.base.ToastHelper;
+import com.ssc.weipan.login.LoginActivity;
 import com.ssc.weipan.model.BaseModel;
 
 import butterknife.BindView;
@@ -95,6 +98,41 @@ public class ConfirmPwdActivity extends BaseActivity {
             @Override
             public void failure(RetrofitError error) {
                 ServerAPI.HandlerException(error);
+            }
+        });
+
+    }
+
+
+    @OnClick(R2.id.forget_pwd)
+    public void clickForgetPwd() {
+        this.showLoadingDialog("加载中", true);
+
+        SmsApi.ISMS iSms = ServerAPI.getInterface(SmsApi.ISMS.class);
+        iSms.requereSMSCode2("5", new Callback<BaseModel>() {
+            @Override
+            public void success(BaseModel baseModel, Response response) {
+                dissmiss();
+
+                if (baseModel.code == 0) {
+//                    // success
+                    Intent it = new Intent(ConfirmPwdActivity.this, LoginActivity.class);
+                    it.putExtra("forget_pwd", true);
+                    ConfirmPwdActivity.this.startActivity(it);
+//                    (this).switchToStep2SMSCode(phoneNum);
+                } else {
+                    ToastHelper.showToast(baseModel.message);
+                }
+            }
+
+            @Override
+            public void failure(RetrofitError error) {
+                ServerAPI.HandlerException(error);
+                dissmiss();
+            }
+
+            private void dissmiss() {
+                ConfirmPwdActivity.this.dismissLoadingDialog();
             }
         });
 

@@ -24,11 +24,15 @@ public class LoginActivity extends BaseActivity {
             bundle = new Bundle();
         }
 
-        FragmentUtils.switchFragment(
-                getSupportFragmentManager(),
-                this,
-                Step1PhoneNumInputFragment.class.getName(), bundle);
 
+        if (getIntent().getBooleanExtra("forget_pwd", false)) {
+            switchToStep2SMSCode("");
+        } else {
+            FragmentUtils.switchFragment(
+                    getSupportFragmentManager(),
+                    this,
+                    Step1PhoneNumInputFragment.class.getName(), bundle);
+        }
     }
 
 

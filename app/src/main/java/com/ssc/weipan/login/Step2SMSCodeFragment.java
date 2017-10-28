@@ -1,5 +1,6 @@
 package com.ssc.weipan.login;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
@@ -21,12 +22,15 @@ import com.ssc.weipan.R2;
 import com.ssc.weipan.SplashActivity;
 import com.ssc.weipan.api.ServerAPI;
 import com.ssc.weipan.api.login.LoginApi;
+import com.ssc.weipan.api.sms.SmsApi;
 import com.ssc.weipan.base.BaseActivity;
 import com.ssc.weipan.base.BaseFragment;
 import com.ssc.weipan.base.CommonUtils;
 import com.ssc.weipan.base.PreferencesUtil;
 import com.ssc.weipan.base.ToastHelper;
 import com.ssc.weipan.base.Topbar;
+import com.ssc.weipan.home.PasswordSetupActivity;
+import com.ssc.weipan.model.BaseModel;
 
 import butterknife.BindView;
 import butterknife.BindViews;
@@ -144,7 +148,11 @@ public class Step2SMSCodeFragment extends BaseFragment {
                     if (finished) {
                         mInput.setEnabled(false);
                         String smsCode = str.substring(0, mSmscodes.length);
-                        verifySMSCode(smsCode);
+                        if (getArguments().getBoolean("forget_pwd", false)) {
+                            verifyForgetPwd(smsCode);
+                        } else {
+                            verifySMSCode(smsCode);
+                        }
                     }
 
                 }
@@ -156,6 +164,38 @@ public class Step2SMSCodeFragment extends BaseFragment {
 
     }
 
+    private void verifyForgetPwd(String smsCode) {
+
+        String phone = getArguments().getString("phone_num", "");
+
+        ((BaseActivity) getActivity()).showLoadingDialog("加载中", false);
+
+
+        SmsApi.ISMS iSms = ServerAPI.getInterface(SmsApi.ISMS.class);
+        iSms.verifySms("5", smsCode, new Callback<BaseModel>() {
+            @Override
+            public void success(BaseModel baseModel, Response response) {
+                ((BaseActivity) getActivity()).dismissLoadingDialog();
+                if (baseModel.code != 0) {
+                    ServerAPI.handleCodeError(baseModel);
+                    ToastHelper.showToast(baseModel.message);
+                } else {
+                    Intent it = new Intent(getContext(), PasswordSetupActivity.class);
+                    it.putExtra("forget_pwd", true);
+                    startActivity(it);
+                    getActivity().finish();
+                }
+
+            }
+
+            @Override
+            public void failure(RetrofitError error) {
+                 ((BaseActivity) getActivity()).dismissLoadingDialog();
+                ServerAPI.HandlerException(error);
+            }
+        });
+
+    }
 
     private void verifySMSCode(String smsCode) {
 
@@ -187,6 +227,7 @@ public class Step2SMSCodeFragment extends BaseFragment {
 
             @Override
             public void failure(RetrofitError error) {
+                 ((BaseActivity) getActivity()).dismissLoadingDialog();
                 ServerAPI.HandlerException(error);
             }
         });
