@@ -3,6 +3,7 @@ package com.ssc.weipan.home;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,8 +13,12 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.ssc.weipan.R;
 import com.ssc.weipan.R2;
+import com.ssc.weipan.api.ServerAPI;
+import com.ssc.weipan.api.trade.GoodsApi;
+import com.ssc.weipan.base.BaseActivity;
 import com.ssc.weipan.base.BaseFragment;
 import com.ssc.weipan.base.CommonUtils;
+import com.ssc.weipan.base.ToastHelper;
 import com.ssc.weipan.login.AccountManager;
 
 import java.util.ArrayList;
@@ -23,6 +28,9 @@ import butterknife.BindView;
 import butterknife.BindViews;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import retrofit.Callback;
+import retrofit.RetrofitError;
+import retrofit.client.Response;
 
 /**
  * Created by zhujj on 17-10-22.
@@ -63,6 +71,34 @@ public class MineFragment extends BaseFragment {
         mLockAsset.setText(account.lock_asset);
 
         initEntries();
+
+        mEntrys[0].setVisibility(View.GONE);
+
+
+        loadYinhangkaData();
+    }
+
+    private void loadYinhangkaData() {
+        ((BaseActivity)getActivity()).showLoadingDialog("加载中...", false);
+        GoodsApi.IGood iGood = ServerAPI.getInterface(GoodsApi.IGood.class);
+        iGood.getOutMoneyUIInfo(new Callback<GoodsApi.OutMoneyUIInfoResp>() {
+            @Override
+            public void success(GoodsApi.OutMoneyUIInfoResp resp, Response response) {
+                ((BaseActivity)getActivity()).dismissLoadingDialog();
+                if (resp.code != 0) {
+                    ToastHelper.showToast(resp.message);
+                    ServerAPI.handleCodeError(resp);
+                } else {
+                    mEntrys[0].setVisibility(TextUtils.isEmpty(resp.data.bank_account) ? View.GONE : View.VISIBLE);
+                }
+            }
+
+            @Override
+            public void failure(RetrofitError error) {
+                ServerAPI.HandlerException(error);
+                ((BaseActivity)getActivity()).dismissLoadingDialog();
+            }
+        });
     }
 
     private void initEntries() {
