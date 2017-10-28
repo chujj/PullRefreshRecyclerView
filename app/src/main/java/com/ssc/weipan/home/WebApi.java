@@ -10,6 +10,9 @@ import com.google.gson.annotations.SerializedName;
 import com.ssc.weipan.api.trade.GoodsApi;
 import com.ssc.weipan.model.BaseModel;
 
+import java.util.Arrays;
+import java.util.List;
+
 import de.greenrobot.event.EventBus;
 
 /**
@@ -48,14 +51,40 @@ public class WebApi {
 
                 if(chart.list.size() > 0) { // chart1
 
-                    GoodsApi.ChartData chartData = chart.list.get(0);
-                    if (model.dm != 1) {
+                    int chartIndex = 0;
+
+                    GoodsApi.ChartData chartData = chart.list.get(chartIndex);
+                    if (model.dm != (chartIndex + 1)) {
                         chartData.xAxis.remove(chartData.xAxis.size() - 1);
                         chartData.data.remove(chartData.data.size() - 1);
                     }
 
                     chartData.xAxis.add(Long.valueOf(model.time));
                     chartData.data.add(Double.valueOf(model.newPrice));
+                }
+
+                if (chart.list.size() > 1) { // chart2
+
+                    int chartIndex = 1;
+
+                    GoodsApi.ChartData chartData = chart.list.get(chartIndex);
+                    if (model.dm != (chartIndex + 1)) {
+//                        System.out.println("debug2: " + " update");
+                        chartData.xAxis.remove(chartData.xAxis.size() - 1);
+                        chartData.data.remove(chartData.data.size() - 1);
+                    }
+
+                    chartData.xAxis.add(Long.valueOf(model.time));
+
+                    List<Double> newData = Arrays.asList(
+                            Double.valueOf(model.d2.openPrice),
+                            Double.valueOf(model.d2.closePrice),
+                            Double.valueOf(model.d2.highPrice),
+                            Double.valueOf(model.d2.lowPrice));
+//                    System.out.println("debug2: " + newData);
+                    chartData.data.add(newData);
+
+
                 }
 
 
@@ -80,6 +109,10 @@ public class WebApi {
         public float low; // ": 329,
         public float newPrice; // ": 352,
         public int dm; // ": 1,
+
+        public D2 d2;
+        public D3 d3;
+        public D4 d4;
     }
 
 

@@ -219,13 +219,17 @@ public class TradeFragment extends BaseFragment {
 
                             }
                         } else {
+                            if (i == 1) {
+                                int size = mChardata.get(i).data.size();
+//                                System.out.println("debug2: " + size + " : " + mChardata.get(i).data.get( mChardata.get(i).data.size() - 1));
+                            }
                             for (int j = 0; j < mChardata.get(i).data.size(); j++) {
                                 List _data = (List) mChardata.get(i).data.get(j);
 
                                 float open = ((Double)_data.get(0)).floatValue();
+                                float close =((Double)_data.get(1)).floatValue();
                                 float high = ((Double)_data.get(2)).floatValue();
                                 float low =  ((Double)_data.get(3)).floatValue();
-                                float close =((Double)_data.get(1)).floatValue();
 
                                 String xLabel = (new SimpleDateFormat("HH:mm")).format(new Date(mChardata.get(i).xAxis.get(j).longValue()));
                                 mEntrySets[i].addEntry(new Entry(open, high, low, close, 0, xLabel));
