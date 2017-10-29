@@ -158,7 +158,8 @@ public class TradingPopupView extends RelativeLayout {
                 mBuyUpDownType.setTextColor(mStatus.buyUp ? 0xFFF35833: 0xFF20B83E);
 
 
-                boolean guessUp = (mStatus.close_price - mStatus.open_price) > 0f;
+                boolean priceUp = (mStatus.close_price - mStatus.open_price) > -0.001f;
+                boolean guessUp =(priceUp == mStatus.buyUp);
                 mUpDownGuessType.setText(guessUp ? "赢" : "亏");
                 mUpDownGuessType.setTextColor(guessUp ? 0xFFF35833: 0xFF20B83E);
                 mHeaderBg.setEnabled(guessUp);
