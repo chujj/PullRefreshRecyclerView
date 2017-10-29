@@ -64,11 +64,7 @@ public class MineFragment extends BaseFragment {
         ButterKnife.bind(this, view);
 
 
-        AccountManager.Account account = AccountManager.getAccount();
-        Glide.with(this).load(account.avatar).into(mAvatar);
-        mAssets.setText(account.asset);
-        mFreeAsset.setText(account.free_asset);
-        mLockAsset.setText(account.lock_asset);
+        refreshUserInfoUI();
 
         initEntries();
 
@@ -76,6 +72,26 @@ public class MineFragment extends BaseFragment {
 
 
         loadYinhangkaData();
+    }
+
+
+    @Override
+    public void onHiddenChanged(boolean hidden) {
+        super.onHiddenChanged(hidden);
+
+        if (!hidden) {
+            refreshUserInfoUI();
+        }
+    }
+
+
+    private  void refreshUserInfoUI() {
+
+        AccountManager.Account account = AccountManager.getAccount();
+        Glide.with(this).load(account.avatar).into(mAvatar);
+        mAssets.setText(account.asset);
+        mFreeAsset.setText(account.free_asset);
+        mLockAsset.setText(account.lock_asset);
     }
 
     private void loadYinhangkaData() {
