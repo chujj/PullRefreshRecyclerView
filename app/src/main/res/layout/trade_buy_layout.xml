@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.ssc.weipan.home.BuyTradeView
-    android:id="@+id/buytradeview"
+<com.ssc.weipan.home.BuyTradeView android:id="@+id/buytradeview"
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/trading_popup_view_bg"
-    >
+    xmlns:tools="http://schemas.android.com/tools">
 
 
     <LinearLayout
@@ -42,6 +41,55 @@
             android:layout_height="1dp"
             android:background="#FF3C3C3C"
             />
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:gravity="center_vertical"
+            android:layout_marginTop="10dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/coupon1"
+                android:layout_width="77dp"
+                android:layout_height="40dp"
+                android:gravity="center"
+                android:background="@drawable/trade_buy_chip_item"
+                android:text="直盈券\n10元1张"
+                android:textColor="@color/trade_buy_chip_item_color"
+                android:textSize="14sp"
+                android:visibility="gone"
+                tools:visibility="visible"
+                />
+
+            <TextView
+                android:id="@+id/coupon2"
+                android:layout_width="77dp"
+                android:layout_height="40dp"
+                android:gravity="center"
+                android:layout_marginLeft="10dp"
+                android:background="@drawable/trade_buy_chip_item"
+                android:text="直盈券\n10元1张"
+                android:textColor="@color/trade_buy_chip_item_color"
+                android:textSize="14sp"
+                android:visibility="gone"
+                tools:visibility="visible"
+                />
+
+            <TextView
+                android:id="@+id/empty_coupon"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:gravity="center"
+                android:layout_marginLeft="10dp"
+                android:text="暂无可用优惠券"
+                android:textColor="@color/trade_buy_chip_item_color"
+                android:textSize="14sp"
+                android:visibility="gone"
+                tools:visibility="visible"
+                />
+        </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"

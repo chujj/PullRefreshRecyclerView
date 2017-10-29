@@ -26,6 +26,7 @@ import com.ssc.weipan.base.ToastHelper;
 import com.ssc.weipan.base.Topbar;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import butterknife.BindView;
@@ -65,6 +66,14 @@ public class BuyTradeView extends RelativeLayout {
     TextView mReturnGoods;
 
 
+    @BindView(R2.id.coupon1)
+    TextView mCoupon1;
+    @BindView(R2.id.coupon2)
+    TextView mCoupon2;
+    @BindView(R2.id.empty_coupon)
+    TextView mCouponEmpty;
+
+
     private String mKey;
     private boolean mUp;
     private TimeIntervalProvider mProvider;
@@ -73,6 +82,7 @@ public class BuyTradeView extends RelativeLayout {
     private Map<String, Object> mBuyArgs = new HashMap<>();
     private BaseActivity mBaseActivity;
     private ClosureMethod mUIUpdater;
+    private List<UserApi.Youhuiquan> mCoupons;
 
     public BuyTradeView(Context context) {
         super(context);
@@ -223,6 +233,9 @@ public class BuyTradeView extends RelativeLayout {
                         ToastHelper.showToast(resp.message);
                         ServerAPI.handleCodeError(resp);
                     } else {
+                        mCoupons = resp.data;
+                        mCouponEmpty.setVisibility(
+                                (mCoupons == null || mCoupons.size() == 0) ? VISIBLE : GONE);
                     }
                 }
 
