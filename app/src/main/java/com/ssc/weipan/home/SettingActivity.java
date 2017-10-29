@@ -1,5 +1,7 @@
 package com.ssc.weipan.home;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -51,13 +53,35 @@ public class SettingActivity extends BaseActivity {
     @OnClick(R2.id.logout)
     public void clickLogout() {
 
-        PreferencesUtil.putString(BaseApp.getApp(), AccountManager.PREF_USER_ID, "");
+        final Runnable callRunnable = new Runnable() {
+            @Override
+            public void run() {
+                PreferencesUtil.putString(BaseApp.getApp(), AccountManager.PREF_USER_ID, "");
 
-        AccountManager.Account account = new Gson().fromJson("{}", AccountManager.Account.class);
-        AccountManager.saveAccount(account);
+                AccountManager.Account account = new Gson().fromJson("{}", AccountManager.Account.class);
+                AccountManager.saveAccount(account);
 
-        Intent it = new Intent(BaseApp.getApp(), LoginActivity.class);
-        it.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
-        this.startActivity(it);
+                Intent it = new Intent(BaseApp.getApp(), LoginActivity.class);
+                it.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(it);
+
+            }
+        };
+
+
+        new AlertDialog.Builder(this).setTitle("提示").setMessage("确认推出登录")
+                .setNegativeButton("取消", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                })
+                .setPositiveButton("确认", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        callRunnable.run();
+                    }
+                }).create().show();
+
     }
 }
