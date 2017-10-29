@@ -69,7 +69,7 @@ public class SettingActivity extends BaseActivity {
         };
 
 
-        new AlertDialog.Builder(this).setTitle("提示").setMessage("确认推出登录")
+        new AlertDialog.Builder(this).setTitle("提示").setMessage("确认退出登录")
                 .setNegativeButton("取消", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
