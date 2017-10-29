@@ -13,9 +13,24 @@ android {
         versionCode 1
         versionName "1.0"
     }
+
+    signingConfigs {
+        ZJJClient {
+            storeFile file('/home/zhujj/.ssh/zjj-android.keystore')
+            keyAlias 'zhujj'
+            keyPassword 'android2013ad'
+            storePassword 'android2013ad'
+        }
+    }
+
     buildTypes {
+        debug {
+            signingConfig signingConfigs.ZJJClient
+        }
+
         release {
-            minifyEnabled false
+            signingConfig signingConfigs.ZJJClient
+            minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
