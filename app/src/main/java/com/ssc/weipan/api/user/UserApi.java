@@ -27,6 +27,11 @@ public class UserApi {
 
 
         @FormUrlEncoded
+        @POST("/customer/set/broker")
+        public void setBroker(@Field("mobile") String phone, Callback<BaseModel> cb);
+
+
+        @FormUrlEncoded
         @POST("/customer/init_password")
         public void initPassword(@Field("password") String pwd, Callback<BaseModel> cb);
 
