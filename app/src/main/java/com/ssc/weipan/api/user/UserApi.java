@@ -28,7 +28,7 @@ public class UserApi {
 
         @FormUrlEncoded
         @POST("/customer/set/broker")
-        public void setBroker(@Field("mobile") String phone, Callback<BaseModel> cb);
+        public void setBroker(@Field("inviteCode") String phone, Callback<BaseModel> cb);
 
 
         @FormUrlEncoded
