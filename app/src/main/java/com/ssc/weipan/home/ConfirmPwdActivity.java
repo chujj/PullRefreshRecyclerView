@@ -106,8 +106,6 @@ public class ConfirmPwdActivity extends BaseActivity {
 
     @OnClick(R2.id.forget_pwd)
     public void clickForgetPwd() {
-        this.showLoadingDialog("加载中", true);
-
 
         requireSMSCode(this, new Runnable() {
             @Override
@@ -122,6 +120,8 @@ public class ConfirmPwdActivity extends BaseActivity {
 
 
     public static void requireSMSCode(final BaseActivity baseActivity, final Runnable successCB) {
+        baseActivity.showLoadingDialog("加载中", true);
+
         SmsApi.ISMS iSms = ServerAPI.getInterface(SmsApi.ISMS.class);
         iSms.requereSMSCode2("5", new Callback<BaseModel>() {
             @Override
