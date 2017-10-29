@@ -79,7 +79,21 @@ public class Step1PhoneNumInputFragment extends BaseFragment {
     public void clickNext() {
         final String phoneNum = mPhone.getText().toString();
 
-        ((BaseActivity)getActivity()).showLoadingDialog("加载中", true);
+
+
+        requireSMSCode(this, phoneNum, new Runnable() {
+            @Override
+            public void run() {
+                ((LoginActivity)getActivity()).switchToStep2SMSCode(phoneNum);
+            }
+        });
+    }
+
+
+
+    public static void requireSMSCode(final BaseFragment baseFragment, final String phoneNum, final Runnable successCB) {
+
+        ((BaseActivity)baseFragment.getActivity()).showLoadingDialog("加载中", true);
 
         SmsApi.ISMS iSms = ServerAPI.getInterface(SmsApi.ISMS.class);
         iSms.requereSMSCode("7", phoneNum, new Callback<BaseModel>() {
@@ -89,7 +103,9 @@ public class Step1PhoneNumInputFragment extends BaseFragment {
 
                 if (baseModel.code == 0) {
 //                    // success
-                    ((LoginActivity)getActivity()).switchToStep2SMSCode(phoneNum);
+                    if (successCB != null) {
+                        successCB.run();
+                    }
                 } else {
                     ToastHelper.showToast(baseModel.message);
                 }
@@ -102,12 +118,9 @@ public class Step1PhoneNumInputFragment extends BaseFragment {
             }
 
             private void dissmiss() {
-                ((BaseActivity)getActivity()).dismissLoadingDialog();
+                ((BaseActivity) baseFragment.getActivity()).dismissLoadingDialog();
             }
         });
-
-
-
     }
 
 }

@@ -3,6 +3,7 @@ package com.ssc.weipan.login;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.text.Editable;
@@ -54,6 +55,13 @@ public class Step2SMSCodeFragment extends BaseFragment {
 
     @BindViews({R2.id.t1, R2.id.t2, R2.id.t3, R2.id.t4, R2.id.t5})
     TextView[] mSmscodes;
+
+
+    @BindView(R2.id.count_down)
+    TextView mCounterDownText;
+
+
+    CountDownTimer mTimer;
 
     @Nullable
     @Override
@@ -164,7 +172,52 @@ public class Step2SMSCodeFragment extends BaseFragment {
             });
         }
 
+        startCountDown();
     }
+
+    private void startCountDown() {
+
+        mTimer = new CountDownTimer(60 * 1000, 300) {
+            @Override
+            public void onTick(long millisUntilFinished) {
+                mCounterDownText.setText("重新获取" + (millisUntilFinished / 1000) + "秒");
+            }
+
+            @Override
+            public void onFinish() {
+                mCounterDownText.setText("重新获取短信验证码");
+                mCounterDownText.setOnClickListener(countDownTextClick);
+            }
+        };
+        mTimer.start();
+    }
+
+
+
+    private View.OnClickListener countDownTextClick = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            mCounterDownText.setOnClickListener(null);
+
+
+            if (getArguments().getBoolean("forget_pwd", false)) {
+//                verifyForgetPwd(smsCode);
+            } else {
+                Step1PhoneNumInputFragment.requireSMSCode(
+                        Step2SMSCodeFragment.this,
+                        getArguments().getString("phone_num", ""),
+                        new Runnable() {
+                            @Override
+                            public void run() {
+                                startCountDown();
+                            }
+                        });
+            }
+
+        }
+    };
+
+
 
     private void verifyForgetPwd(String smsCode) {
 
