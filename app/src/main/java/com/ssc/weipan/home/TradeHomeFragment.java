@@ -359,6 +359,11 @@ public class TradeHomeFragment extends BaseFragment {
                         account.asset = resp.data.asset;
                     }
 
+                    if (!TextUtils.isEmpty(resp.data.inviteCode)) {
+                        changede = true;
+                        account.invite_code = resp.data.inviteCode;
+                    }
+
 
                     if (changede) {
                         AccountManager.saveAccount(account);

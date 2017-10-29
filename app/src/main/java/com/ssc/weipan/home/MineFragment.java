@@ -179,21 +179,6 @@ public class MineFragment extends BaseFragment {
                         @Override
                         public void onClick(View v) {
 
-
-//                            UserApi.IUser iUser = ServerAPI.getInterface(UserApi.IUser.class);
-//                            iUser.getYouhuiquan(new Callback<BaseModel>() {
-//                                @Override
-//                                public void success(BaseModel baseModel, Response response) {
-//
-//                                }
-//
-//                                @Override
-//                                public void failure(RetrofitError error) {
-//
-//                                }
-//                            });
-
-
                             Intent it = new Intent(MineFragment.this.getContext(),
                                     TuijianmaActivity.class);
                             MineFragment.this.startActivity(it);

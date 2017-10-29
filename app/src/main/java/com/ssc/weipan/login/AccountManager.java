@@ -43,6 +43,7 @@ public class AccountManager {
         public String asset;
         public String free_asset;
         public String lock_asset;
+        public String invite_code;
     }
 
 

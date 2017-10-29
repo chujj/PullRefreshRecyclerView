@@ -73,6 +73,7 @@ public class UserApi {
         public List<GoodsApi.BuyTradeData> trades;
 		public int id; // ": 838,
 		public String asset; // ": "109878",
+        public String inviteCode;
 //		"timeout": true,
 		public String head_portrait; // ": "http://time.168zhibo.cn/assets/images/default_head_portrait.png"
     }
