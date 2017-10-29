@@ -193,6 +193,15 @@ public class Step2SMSCodeFragment extends BaseFragment {
     }
 
 
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+
+        if (mTimer != null) {
+            mTimer.cancel();
+            mTimer = null;
+        }
+    }
 
     private View.OnClickListener countDownTextClick = new View.OnClickListener() {
         @Override
