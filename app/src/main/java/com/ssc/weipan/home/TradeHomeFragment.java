@@ -77,6 +77,10 @@ public class TradeHomeFragment extends BaseFragment {
     @Override
     public void onDestroy() {
         super.onDestroy();
+
+        mWSWebview.removeJavascriptInterface("WebAPI");
+        mWSWebview.destroy();
+
         EventBus.getDefault().unregister(this);
     }
 
