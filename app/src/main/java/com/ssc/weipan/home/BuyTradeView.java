@@ -18,6 +18,7 @@ import com.ssc.weipan.R;
 import com.ssc.weipan.R2;
 import com.ssc.weipan.api.ServerAPI;
 import com.ssc.weipan.api.trade.GoodsApi;
+import com.ssc.weipan.api.user.UserApi;
 import com.ssc.weipan.base.BaseActivity;
 import com.ssc.weipan.base.ClosureMethod;
 import com.ssc.weipan.base.CommonUtils;
@@ -203,6 +204,36 @@ public class BuyTradeView extends RelativeLayout {
 
     public void initUI() {
         mUIUpdater.run("init");
+        loadData();
+    }
+
+
+    private void loadData() {
+        if (getContext() instanceof BaseActivity) {
+
+            final BaseActivity baseActivity = (BaseActivity) getContext();
+            baseActivity.showLoadingDialog("加载中...", false);
+
+            UserApi.IUser iUser = ServerAPI.getInterface(UserApi.IUser.class);
+            iUser.getYouhuiquan(new Callback<UserApi.YouhuiquanResp>() {
+                @Override
+                public void success(UserApi.YouhuiquanResp resp, Response response) {
+                    baseActivity.dismissLoadingDialog();
+                    if (resp.code != 0) {
+                        ToastHelper.showToast(resp.message);
+                        ServerAPI.handleCodeError(resp);
+                    } else {
+                    }
+                }
+
+                @Override
+                public void failure(RetrofitError error) {
+                    baseActivity.dismissLoadingDialog();
+                    ServerAPI.HandlerException(error);
+                }
+            });
+        }
+
     }
 
     public void setUpDown(boolean up) {
