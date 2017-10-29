@@ -29,7 +29,7 @@ import retrofit.converter.GsonConverter;
 
 public class ServerAPI {
 //    public final static String HOST = "http://m.weixl.org/xlcl-counselor-api";
-    public final static String HOST = "http://time.168zhibo.cn";
+    public final static String HOST = "http://time.168zhibo.cn/";
     public final static String HOST_DOMAIN = "168zhibo.cn";
     private static ServerAPI sInstance;
 

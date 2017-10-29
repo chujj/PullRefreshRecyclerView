@@ -23,6 +23,22 @@ public class WebApi {
 
     private Gson mGson = new Gson();
 
+
+
+    @JavascriptInterface
+    public void share(String json) {
+
+        ShareModel shareModel = mGson.fromJson(json, ShareModel.class);
+
+
+    }
+
+
+
+    public static class ShareModel extends BaseModel {
+        public String url;
+    }
+
     @JavascriptInterface
     public void sender(String json, String type) {
         Log.e(TAG, json + " | " + type);
