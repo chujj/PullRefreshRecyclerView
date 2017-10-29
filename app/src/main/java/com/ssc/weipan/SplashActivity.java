@@ -25,7 +25,7 @@ public class SplashActivity extends AppCompatActivity {
 
         mHandler.sendMessageDelayed(
                 Message.obtain(mHandler, AccountManager.isLogin() ? 0x13d : 0x14d),
-                2000);
+                1000);
 
     }
 
