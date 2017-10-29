@@ -264,6 +264,7 @@ public class BuyTradeView extends RelativeLayout {
                     @Override
                     public void onClick(View v) {
                         mCoupon1.setSelected(true);
+                        mCoupon2.setVisibility(GONE);
                         mCoupon2.setSelected(false);
                         mBuyArgs.put("coupon", final_yhq);
                         mChipsLayout.selectChipItem("0", null, true);
