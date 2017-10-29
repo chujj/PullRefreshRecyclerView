@@ -30,6 +30,7 @@ public class GoodsApi {
                              @Field("chip") int chip,
                              @Field("amount") int amount,
                              @Field("stop_win_percent") int secs,
+                             @Field("use_coupon_type") String coupon_type,
                              Callback<BuyTradeResponse> cb);
 
 

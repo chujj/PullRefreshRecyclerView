@@ -360,16 +360,29 @@ public class BuyTradeView extends RelativeLayout {
     @OnClick(R2.id.ok)
     public void clickOK() {
 
+        int chip = (int) mBuyArgs.get("chip");
+        UserApi.Youhuiquan coupon = (UserApi.Youhuiquan) mBuyArgs.get("coupon");
+        String coupon_type = "";
+        if (coupon != null) {
+            coupon_type = coupon.couponType + "";
+        }
+
+//        if (1 > 0) {
+//            System.out.println(chip + ", " + coupon_type);
+//            return;
+//        }
 
         mBaseActivity.showLoadingDialog("加载中", false);
+
 
         GoodsApi.IGood iGood = ServerAPI.getInterface(GoodsApi.IGood.class);
         iGood.buyTrade(
                 (int) mBuyArgs.get("up_down_type"),
                 (int) mBuyArgs.get("goods_id"),
-                (int) mBuyArgs.get("chip"),
+                chip,
                 1,
                 (int) mBuyArgs.get("secs"),
+                coupon_type,
                 new Callback<GoodsApi.BuyTradeResponse>() {
                     @Override
                     public void success(GoodsApi.BuyTradeResponse baseModel, Response response) {
