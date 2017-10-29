@@ -30,6 +30,7 @@ import com.ssc.weipan.base.CommonUtils;
 import com.ssc.weipan.base.PreferencesUtil;
 import com.ssc.weipan.base.ToastHelper;
 import com.ssc.weipan.base.Topbar;
+import com.ssc.weipan.home.ConfirmPwdActivity;
 import com.ssc.weipan.home.PasswordSetupActivity;
 import com.ssc.weipan.model.BaseModel;
 
@@ -210,7 +211,19 @@ public class Step2SMSCodeFragment extends BaseFragment {
 
 
             if (getArguments().getBoolean("forget_pwd", false)) {
-//                verifyForgetPwd(smsCode);
+                ConfirmPwdActivity.requireSMSCode((BaseActivity) getActivity(), new Runnable() {
+                    @Override
+                    public void run() {
+                        startCountDown();
+
+                        new Handler().postDelayed(new Runnable() {
+                            @Override
+                            public void run() {
+                                CommonUtils.showSoftKeyboard(mInput, getContext());
+                            }
+                        }, 1000);
+                    }
+                });
             } else {
                 Step1PhoneNumInputFragment.requireSMSCode(
                         Step2SMSCodeFragment.this,

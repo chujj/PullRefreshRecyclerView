@@ -108,6 +108,20 @@ public class ConfirmPwdActivity extends BaseActivity {
     public void clickForgetPwd() {
         this.showLoadingDialog("加载中", true);
 
+
+        requireSMSCode(this, new Runnable() {
+            @Override
+            public void run() {
+                Intent it = new Intent(ConfirmPwdActivity.this, LoginActivity.class);
+                it.putExtra("forget_pwd", true);
+                ConfirmPwdActivity.this.startActivity(it);
+            }
+        });
+    }
+
+
+
+    public static void requireSMSCode(final BaseActivity baseActivity, final Runnable successCB) {
         SmsApi.ISMS iSms = ServerAPI.getInterface(SmsApi.ISMS.class);
         iSms.requereSMSCode2("5", new Callback<BaseModel>() {
             @Override
@@ -116,9 +130,9 @@ public class ConfirmPwdActivity extends BaseActivity {
 
                 if (baseModel.code == 0) {
 //                    // success
-                    Intent it = new Intent(ConfirmPwdActivity.this, LoginActivity.class);
-                    it.putExtra("forget_pwd", true);
-                    ConfirmPwdActivity.this.startActivity(it);
+                    if (successCB != null) {
+                        successCB.run();
+                    }
 //                    (this).switchToStep2SMSCode(phoneNum);
                 } else {
                     ToastHelper.showToast(baseModel.message);
@@ -132,9 +146,8 @@ public class ConfirmPwdActivity extends BaseActivity {
             }
 
             private void dissmiss() {
-                ConfirmPwdActivity.this.dismissLoadingDialog();
+                baseActivity.dismissLoadingDialog();
             }
         });
-
     }
 }
