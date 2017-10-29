@@ -19,8 +19,8 @@
             android:layout_height="64dp"
             android:layout_centerInParent="true"
             />
-        
-        
+
+
         <TextView
             android:id="@+id/nickname"
             android:layout_width="wrap_content"
@@ -63,6 +63,7 @@
 
 
             <TextView
+                android:id="@+id/jin_ri_yong_jin"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16.6dp"
@@ -103,6 +104,7 @@
 
 
             <TextView
+                android:id="@+id/lei_ji_yong_jin"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16.6dp"
@@ -150,6 +152,7 @@
 
 
             <TextView
+                android:id="@+id/qin_bin_dui_total"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16.6dp"
@@ -190,6 +193,7 @@
 
 
             <TextView
+                android:id="@+id/hu_wei_dui_total"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16.6dp"
@@ -258,7 +262,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="战队"
+            android:text="累计佣金"
             android:textColor="#FF999999"
             android:textSize="12sp"
             />
@@ -288,6 +292,7 @@
             />
 
         <TextView
+            android:id="@+id/q1"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -297,6 +302,7 @@
             android:textSize="12sp"
             />
         <TextView
+            android:id="@+id/q2"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -306,6 +312,7 @@
             android:textSize="12sp"
             />
         <TextView
+            android:id="@+id/q3"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -315,6 +322,7 @@
             android:textSize="12sp"
             />
         <TextView
+            android:id="@+id/q4"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -349,6 +357,7 @@
             />
 
         <TextView
+            android:id="@+id/h1"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -358,6 +367,7 @@
             android:textSize="12sp"
             />
         <TextView
+            android:id="@+id/h2"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -367,6 +377,7 @@
             android:textSize="12sp"
             />
         <TextView
+            android:id="@+id/h3"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -376,6 +387,7 @@
             android:textSize="12sp"
             />
         <TextView
+            android:id="@+id/h4"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"

@@ -58,6 +58,9 @@ public class UserApi {
 
         @GET("/customer/account_asset_change_list")
         public void getChuRuJinHistory(Callback<ChuRuJinHistoryResp> cb);
+
+        @GET("/broker/brokerageReport")
+        public void brokerReport(Callback<BrokerReportResp> cb);
     }
 
 
@@ -125,4 +128,22 @@ public class UserApi {
         public long needMoney; // ": 100,
         public long validDays; // ": 7
     }
+
+
+    public static class BrokerReportResp extends BaseModel {
+        public BrokerReport data;
+    }
+
+
+    public static class BrokerReport extends BaseModel {
+        public int todayTradeMoneyLv1; // ": 10000,
+        public int todayTradeMoneyLv2; // ": 10000,
+        public int totalTradeMoneyLv1; // ": 20000,
+        public int totalTradeMoneyLv2; // ": 20000,
+        public int todayBrokerageLv1; // ": 50,
+        public int todayBrokerageLv2; // ": 200,
+        public int totalBrokerageLv1; // ": 100,
+        public int totalBrokerageLv2; // ": 400
+    }
+
 }
