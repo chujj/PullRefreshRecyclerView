@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.ssc.weipan.Consts;
 import com.ssc.weipan.R;
 import com.ssc.weipan.R2;
 import com.ssc.weipan.api.ServerAPI;
@@ -224,7 +225,8 @@ public class BuyTradeView extends RelativeLayout {
     }
 
     public void onEventMainThread(Message msg) {
-        if (msg.what != 0x13d) return;
+        if (msg.what != Consts.BoardCast_PriceMsg &&
+                msg.what != Consts.BoardCast_TradeClose) return;
 
         if (mUIUpdater != null) {
             mUIUpdater.run("newdata");

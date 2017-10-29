@@ -20,6 +20,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.ssc.weipan.Consts;
 import com.ssc.weipan.R;
 import com.ssc.weipan.R2;
 import com.ssc.weipan.api.ServerAPI;
@@ -86,11 +87,14 @@ public class TradeHomeFragment extends BaseFragment {
 
     private List<ClosureMethod> mIndicatorUpdate = new ArrayList<>();
     public void onEventMainThread(Message msg) {
-        if (msg.what != 0x13d) return;
 
 
-        for(ClosureMethod call : mIndicatorUpdate) {
-            call.run();
+        if (msg.what == Consts.BoardCast_PriceMsg) {
+            for(ClosureMethod call : mIndicatorUpdate) {
+                call.run();
+            }
+        } else if (msg.what == Consts.BoardCast_TradeClose) {
+            getUserStatus();
         }
     }
 
@@ -333,9 +337,9 @@ public class TradeHomeFragment extends BaseFragment {
 
                     Data.sTradings = resp.data.trades;
 
-                    Message msg = Message.obtain();
-                    msg.what = 0x14d;
-                    EventBus.getDefault().post(msg);
+                    EventBus.getDefault().post(
+                            Consts.getBoardCastMessage(Consts.BoardCast_TradingListChange)
+                    );
 
                     AccountManager.Account account =AccountManager.getAccount();
 

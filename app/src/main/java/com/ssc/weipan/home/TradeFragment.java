@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.ssc.weipan.Consts;
 import com.ssc.weipan.R;
 import com.ssc.weipan.R2;
 import com.ssc.weipan.api.trade.GoodsApi;
@@ -72,6 +73,7 @@ public class TradeFragment extends BaseFragment {
     private String mKey;
 
     private List<ClosureMethod> mUIUpdates = new ArrayList<>();
+    private ClosureMethod mTradingUpdater;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -90,14 +92,16 @@ public class TradeFragment extends BaseFragment {
     }
 
     public void onEventMainThread(Message msg) {
-        if (msg.what != 0x13d && msg.what != 0x14d) return;
+        if (msg.what != Consts.BoardCast_PriceMsg
+                && msg.what != Consts.BoardCast_TradingListChange
+                && msg.what != Consts.BoardCast_TradeClose) return;
 
 
-        if (msg.what == 0x13d) {
+        if (msg.what == Consts.BoardCast_PriceMsg || msg.what == Consts.BoardCast_TradeClose) {
             for(ClosureMethod call : mUIUpdates) {
                 call.run();
             }
-        } else if (msg.what == 0x14d) {
+        } else if (msg.what == Consts.BoardCast_TradingListChange) {
             refreshTradingList();
         }
     }
@@ -267,6 +271,9 @@ public class TradeFragment extends BaseFragment {
 
 
     private void refreshTradingList() {
+
+        mUIUpdates.remove(mTradingUpdater);
+
         final List<ClosureMethod> listUpdaters = new ArrayList<>();
 
         mTradesContainer.removeAllViews();
@@ -279,7 +286,7 @@ public class TradeFragment extends BaseFragment {
                 TextView buyType = CommonUtils.findView(root, R.id.buy_type);
                 TextView openTime = CommonUtils.findView(root, R.id.open_time);
                 TextView openPrice = CommonUtils.findView(root, R.id.open_price);
-                TextView newPrice = CommonUtils.findView(root, R.id.new_price);
+                final TextView newPrice = CommonUtils.findView(root, R.id.new_price);
                 TextView dingJin = CommonUtils.findView(root, R.id.ding_jin);
 
                 name.setText(btd.goods_name);
@@ -296,7 +303,9 @@ public class TradeFragment extends BaseFragment {
                     public Object[] run(Object... args) {
                         for (int i = 0; i < Data.sData.goods.size(); i++) {
 
-                            if (Da)
+                            if (TextUtils.equals(Data.sData.goods.get(i).label, mKey)) {
+                                newPrice.setText(Data.sData.goods.get(i).newPrice + "");
+                            }
 
                         }
                         
@@ -307,6 +316,20 @@ public class TradeFragment extends BaseFragment {
                 mTradesContainer.addView(root);
             }
         }
+
+
+        mTradingUpdater = new ClosureMethod() {
+            @Override
+            public Object[] run(Object... args) {
+
+                for(ClosureMethod call : listUpdaters) {
+                    call.run();
+                }
+
+                return null;
+            }
+        };
+        mUIUpdates.add(mTradingUpdater);
     }
 
     public void onDataReady() {

@@ -1,12 +1,12 @@
 package com.ssc.weipan.home;
 
-import android.os.Message;
 import android.text.TextUtils;
 import android.util.Log;
 import android.webkit.JavascriptInterface;
 
 import com.google.gson.Gson;
 import com.google.gson.annotations.SerializedName;
+import com.ssc.weipan.Consts;
 import com.ssc.weipan.api.trade.GoodsApi;
 import com.ssc.weipan.model.BaseModel;
 
@@ -126,6 +126,10 @@ public class WebApi {
 
             }
 
+
+            EventBus.getDefault().post(
+                    Consts.getBoardCastMessage(Consts.BoardCast_PriceMsg));
+
         } else if (TextUtils.equals("2", type)) {
 
             Type_2_Model model = mGson.fromJson(json, Type_2_Model.class);
@@ -133,11 +137,11 @@ public class WebApi {
             if (model.isTradeCloseType()) {
                 Data.sData._closeTrade.put(Long.valueOf(model.data.trade_id), model.data);
             }
-        }
 
-        Message msg = Message.obtain();
-        msg.what = 0x13d;
-        EventBus.getDefault().post(msg);
+
+             EventBus.getDefault().post(
+                    Consts.getBoardCastMessage(Consts.BoardCast_TradeClose));
+        }
 
     }
 
