@@ -50,6 +50,11 @@ public class TradeHistoroyAdapter extends BaseAdapter {
         mSelectedData.clear();
     }
 
+
+    public static void setTextColor(TextView tv, int buyUpDownType) {
+        tv.setTextColor(buyUpDownType == 0 ? 0xFFF35833 : 0xFF2CB545);
+    }
+
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
 
@@ -126,6 +131,7 @@ public class TradeHistoroyAdapter extends BaseAdapter {
                         type.setText(data.up_down_type == 0 ? "买涨" : "买跌");
                         type.setBackgroundResource(data.up_down_type == 0 ? R.drawable.trading_history_list_item_buy_type_bg_up
                                 : R.drawable.trading_history_list_item_buy_type_bg_down);
+                        setTextColor(type, data.up_down_type);
 
                         name.setText(data.goods_name);
                         amount.setText(data.amount + "");
