@@ -550,7 +550,7 @@ public class ChongZhiActivity extends BaseActivity {
 
                     mChips.setOnChipSelected(new ChipLabelsLayout.OnChipSelected() {
                         @Override
-                        public void onChipSelected(String chip) {
+                        public void onChipSelected(String chip, boolean fromCoupon) {
                             mChipSelected = chip;
                         }
                     });

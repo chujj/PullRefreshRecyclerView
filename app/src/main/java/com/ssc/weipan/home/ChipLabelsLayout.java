@@ -19,7 +19,7 @@ import java.util.List;
 public class ChipLabelsLayout extends WrapLabelLayout<String> {
 
 
-    private OnChipSelected mListener;
+    public OnChipSelected mListener;
 
     public ChipLabelsLayout(Context context) {
         super(context);
@@ -49,14 +49,7 @@ public class ChipLabelsLayout extends WrapLabelLayout<String> {
         itemRoot.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                for(View view : toggles) {
-                    view.setSelected(view == v);
-                    view.findViewById(R.id.chip).setSelected(view == v);
-
-                    if (view == v && mListener != null) {
-                        mListener.onChipSelected(s);
-                    }
-                }
+                selectChipItem(s, v, false);
             }
         });
 
@@ -64,8 +57,26 @@ public class ChipLabelsLayout extends WrapLabelLayout<String> {
     }
 
 
+
+    public void selectChipItem(String chip, View v, boolean fromCoupon) {
+
+        for(View view : toggles) {
+            view.setSelected(view == v);
+            view.findViewById(R.id.chip).setSelected(view == v);
+
+            if (view == v && mListener != null) {
+                mListener.onChipSelected(chip, fromCoupon);
+            }
+        }
+
+        if (fromCoupon && mListener != null) {
+            mListener.onChipSelected(chip, fromCoupon);
+        }
+    }
+
+
     public static interface OnChipSelected {
-        public void onChipSelected(String chip);
+        public void onChipSelected(String chip, boolean fromCoupon);
     }
     public void setOnChipSelected(OnChipSelected listener) {
 

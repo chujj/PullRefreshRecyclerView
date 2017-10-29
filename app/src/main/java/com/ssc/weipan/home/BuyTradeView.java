@@ -167,8 +167,21 @@ public class BuyTradeView extends RelativeLayout {
 
                 mChipsLayout.setOnChipSelected(new ChipLabelsLayout.OnChipSelected() {
                     @Override
-                    public void onChipSelected(String chipOri) {
+                    public void onChipSelected(String chipOri, boolean fromCoupon) {
                         int chip = Integer.parseInt(chipOri);
+
+                        UserApi.Youhuiquan coupon = null;
+                        if (fromCoupon) {
+                            coupon = (UserApi.Youhuiquan) mBuyArgs.get("coupon");
+                            if (coupon.couponType == 2) { // 直盈
+                                chip = (int) coupon.discount;
+                            } else if (coupon.couponType == 1) { // 增益
+
+                            }
+                        } else {
+                            mBuyArgs.remove("coupon");
+                        }
+
                         mBuyArgs.put("chip", chip);
 
                         mServiceFee.setText(
@@ -177,11 +190,19 @@ public class BuyTradeView extends RelativeLayout {
                         int[] _temp = new int[4];
                         StringBuilder sb = new StringBuilder("预期盈亏：");
                         _temp[0] = sb.length();
-                        sb.append( ((int)(chip * (1 - Data.sData.names.get(mKey).serviceFee))) + "");
+                        if (coupon != null && coupon.couponType == 1) {
+                            sb.append( ((int)((chip + coupon.discount)* (1 - Data.sData.names.get(mKey).serviceFee))) + "");
+                        } else {
+                            sb.append( ((int)(chip * (1 - Data.sData.names.get(mKey).serviceFee))) + "");
+                        }
                         _temp[1] = sb.length();
                         sb.append("/");
                         _temp[2] = sb.length();
-                        sb.append("-" + chip);
+                        if (coupon != null && coupon.couponType == 2) {
+                            sb.append("0");
+                        } else {
+                            sb.append("-" + chip);
+                        }
                         _temp[3] = sb.length();
 
                         SpannableString ss = new SpannableString(sb.toString());
@@ -190,6 +211,10 @@ public class BuyTradeView extends RelativeLayout {
 
 
                         mReturnGoods.setText(ss);
+
+                        if (!fromCoupon) {
+                            initCoupon(chip);
+                        }
                     }
                 });
 
@@ -201,6 +226,51 @@ public class BuyTradeView extends RelativeLayout {
         };
 
 
+    }
+
+
+
+    private void initCoupon(int chip) {
+        if (mCoupons == null) return;
+
+        mCoupon1.setVisibility(GONE);
+        mCoupon1.setSelected(false);
+        mCoupon2.setVisibility(GONE);
+        mCoupon2.setSelected(false);
+        boolean gettype2 = false;
+        boolean gettype1 = false;
+        for(UserApi.Youhuiquan yhq : mCoupons) {
+            final UserApi.Youhuiquan final_yhq = yhq;
+            if (yhq.couponType == 1 && !gettype1 && chip == yhq.needMoney) {
+                gettype1 = true;
+                mCoupon2.setText("增益券\n" + yhq.discount + "元");
+                mCoupon2.setVisibility(VISIBLE);
+                mCoupon2.setOnClickListener(new OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        mCoupon1.setSelected(false);
+                        mCoupon2.setSelected(true);
+                        mBuyArgs.put("coupon", final_yhq);
+                        if (mChipsLayout.mListener != null) {
+                            mChipsLayout.mListener.onChipSelected("" +mBuyArgs.get("chip"), true);
+                        }
+                    }
+                });
+            } else if (yhq.couponType == 2 && !gettype2){
+                gettype2 = true;
+                mCoupon1.setText("直盈券\n" + yhq.discount + "元");
+                mCoupon1.setVisibility(VISIBLE);
+                mCoupon1.setOnClickListener(new OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        mCoupon1.setSelected(true);
+                        mCoupon2.setSelected(false);
+                        mBuyArgs.put("coupon", final_yhq);
+                        mChipsLayout.selectChipItem("0", null, true);
+                    }
+                });
+            }
+        }
     }
 
 
@@ -234,8 +304,13 @@ public class BuyTradeView extends RelativeLayout {
                         ServerAPI.handleCodeError(resp);
                     } else {
                         mCoupons = resp.data;
-                        mCouponEmpty.setVisibility(
-                                (mCoupons == null || mCoupons.size() == 0) ? VISIBLE : GONE);
+
+                        if ((mCoupons == null || mCoupons.size() == 0)) {
+                            mCouponEmpty.setVisibility(VISIBLE);
+                        } else {
+                            mCouponEmpty.setVisibility(GONE);
+                            initCoupon((Integer) mBuyArgs.get("chip"));
+                        }
                     }
                 }
 
