@@ -102,7 +102,9 @@ public class Step2SMSCodeFragment extends BaseFragment {
             if (CommonUtils.isDebugBuild()) {
                 mInput.setTextColor(0xffffffff);
             } else {
+                mInput.setHeight(1);
                 mInput.setTextColor(0x00ffffff);
+                mInput.setBackgroundColor(Color.TRANSPARENT);
             }
 
             new Handler().postDelayed(new Runnable() {

@@ -6,6 +6,8 @@ import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.FrameLayout;
 
+import com.ssc.weipan.BuildConfig;
+
 /**
  * Created by zhujj on 17-10-17.
  */
@@ -20,7 +22,7 @@ public class CommonUtils {
     }
 
     public static boolean isDebugBuild() {
-        return true;
+        return BuildConfig.DEBUG;
     }
 
 
