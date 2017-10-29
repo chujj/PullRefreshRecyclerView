@@ -21,5 +21,6 @@ public class SmsApi {
 
         @GET("/sms/verify_sms_code")
         public void verifySms(@Query("sms_code_type") String type, @Query("sms_code") String sms_code, Callback<BaseModel> cb);
+
     }
 }

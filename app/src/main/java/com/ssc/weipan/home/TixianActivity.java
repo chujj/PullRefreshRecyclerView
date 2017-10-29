@@ -2,6 +2,7 @@ package com.ssc.weipan.home;
 
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.os.Handler;
 import android.os.Looper;
 import android.support.annotation.Nullable;
@@ -22,6 +23,7 @@ import com.squareup.okhttp.Request;
 import com.ssc.weipan.R;
 import com.ssc.weipan.R2;
 import com.ssc.weipan.api.ServerAPI;
+import com.ssc.weipan.api.sms.SmsApi;
 import com.ssc.weipan.api.trade.GoodsApi;
 import com.ssc.weipan.base.BaseActivity;
 import com.ssc.weipan.base.ClosureMethod;
@@ -125,6 +127,9 @@ public class TixianActivity extends BaseActivity {
         mHeaderPromt.setVisibility(View.VISIBLE);
 
 
+        mRequireSMSCode.setOnClickListener(countDownTextClick);
+
+
         AccountManager.Account account = AccountManager.getAccount();
 
         Glide.with(this).load(account.avatar).into(mAvatar);
@@ -134,6 +139,66 @@ public class TixianActivity extends BaseActivity {
 
         loadData();
     }
+
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+
+        if (mTimer != null) {
+            mTimer.cancel();
+            mTimer = null;
+        }
+    }
+
+    private CountDownTimer mTimer;
+    private View.OnClickListener countDownTextClick = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            mRequireSMSCode.setOnClickListener(null);
+
+
+            SmsApi.ISMS isms = ServerAPI.getInterface(SmsApi.ISMS.class);
+            isms.requereSMSCode2("3", new Callback<BaseModel>() {
+                @Override
+                public void success(BaseModel baseModel, Response response) {
+                    dismissLoadingDialog();
+
+                    if (baseModel.code == 0) {//                    // success
+
+                        startCountDown();
+                    } else {
+                        ToastHelper.showToast(baseModel.message);
+                    }
+                }
+
+                @Override
+                public void failure(RetrofitError error) {
+                    dismissLoadingDialog();
+                    ServerAPI.HandlerException(error);
+                }
+            });
+        }
+
+
+        private void startCountDown() {
+
+            mTimer = new CountDownTimer(60 * 1000, 300) {
+                @Override
+                public void onTick(long millisUntilFinished) {
+                    mRequireSMSCode.setText("重新获取" + (millisUntilFinished / 1000) + "秒");
+                }
+
+                @Override
+                public void onFinish() {
+                    mRequireSMSCode.setText("获取验证码");
+                    mRequireSMSCode.setOnClickListener(countDownTextClick);
+                }
+            };
+            mTimer.start();
+        }
+
+    };
 
     private void loadData() {
 
@@ -155,6 +220,19 @@ public class TixianActivity extends BaseActivity {
 
                 mHeaderPromt.setText(String.format("可提现金额：%s元", mUIInfo.free_asset ));
                 mMobilePromot.setText(String.format("已验证手机  %s", mUIInfo.mobile));
+
+
+                if (!TextUtils.isEmpty(mUIInfo.id_card)) {
+                    mCardOwnerId.setText(mUIInfo.id_card);
+                }
+
+                if (!TextUtils.isEmpty(mUIInfo.bank_account)) {
+                    mCardId.setText(mUIInfo.bank_account);
+                }
+
+                if (!TextUtils.isEmpty(mUIInfo.realname)) {
+                    mCardOwnerName.setText(mUIInfo.realname);
+                }
 
                 { // 初始化
                     mBanksContainer.removeAllViews();
