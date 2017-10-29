@@ -16,8 +16,33 @@
 #   public *;
 #}
 
+-keepattributes SourceFile,LineNumberTable
+-verbose
+
+-keep class * extends android.support.v4.app.Fragment
+-keep class android.support.v4.view.ViewPager.** { *; }
+-keep class * extends android.support.v4.view.ViewPager { *; }
+-keep class * extends android.app.Service
+-keep class * extends android.content.BroadcastReceiver
+-keep class * extends android.content.ContentProvider
+-keep class * extends android.app.Application
+-keep class * extends android.support.v4.view.ActionProvider { *; }
+
+
+
+-keepclassmembers class * {
+    @android.webkit.JavascriptInterface <methods>;
+}
+
+
 ## mine
 -keep class * extends com.ssc.weipan.model.BaseModel {*;}
+-keep class com.ssc.weipan.account.** { *; }
+
+## eventbus
+-keepclassmembers class ** {
+    public void onEvent*(**);
+}
 
 
 ## glide
@@ -26,6 +51,7 @@
     **[] $VALUES;
     public *;
 }
+
 
 
 ## retrofit1.x https://github.com/krschultz/android-proguard-snippets/blob/master/libraries/proguard-square-retrofit.pro
