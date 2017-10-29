@@ -219,6 +219,13 @@ public class Step2SMSCodeFragment extends BaseFragment {
                             @Override
                             public void run() {
                                 startCountDown();
+
+                                new Handler().postDelayed(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        CommonUtils.showSoftKeyboard(mInput, getContext());
+                                    }
+                                }, 1000);
                             }
                         });
             }
