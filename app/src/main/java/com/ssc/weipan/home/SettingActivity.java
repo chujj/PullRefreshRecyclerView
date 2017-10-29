@@ -9,6 +9,7 @@ import android.support.annotation.Nullable;
 import com.google.gson.Gson;
 import com.ssc.weipan.R;
 import com.ssc.weipan.R2;
+import com.ssc.weipan.account.AccountHelper;
 import com.ssc.weipan.base.BaseActivity;
 import com.ssc.weipan.base.BaseApp;
 import com.ssc.weipan.base.PreferencesUtil;
@@ -56,6 +57,9 @@ public class SettingActivity extends BaseActivity {
         final Runnable callRunnable = new Runnable() {
             @Override
             public void run() {
+
+                AccountHelper.getCookieStore().removeAll();
+
                 PreferencesUtil.putString(BaseApp.getApp(), AccountManager.PREF_USER_ID, "");
 
                 AccountManager.Account account = new Gson().fromJson("{}", AccountManager.Account.class);

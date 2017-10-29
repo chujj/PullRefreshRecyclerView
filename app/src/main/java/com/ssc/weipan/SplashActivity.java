@@ -35,8 +35,8 @@ public class SplashActivity extends AppCompatActivity {
             public void handleMessage(Message msg) {
                 switch (msg.what) {
                     case 0x14d:
-                        switchToRegister();
-                        break;
+//                        switchToRegister();
+//                        break;
                     case 0x13d:
                         switchToMain(SplashActivity.this);
                         break;
@@ -54,6 +54,7 @@ public class SplashActivity extends AppCompatActivity {
 
     public static void switchToMain(Context context) {
         Intent it = new Intent(context, HomeActivity.class);
+        it.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
         context.startActivity(it);
     }
 }

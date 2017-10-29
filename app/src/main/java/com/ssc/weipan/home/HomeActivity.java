@@ -1,5 +1,6 @@
 package com.ssc.weipan.home;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -11,6 +12,8 @@ import com.ssc.weipan.R;
 import com.ssc.weipan.R2;
 import com.ssc.weipan.base.BaseActivity;
 import com.ssc.weipan.base.Topbar;
+import com.ssc.weipan.login.AccountManager;
+import com.ssc.weipan.login.LoginActivity;
 
 import butterknife.BindView;
 import butterknife.BindViews;
@@ -56,6 +59,13 @@ public class HomeActivity extends BaseActivity {
 
     private String mLastFragmentKey = null;
     private void switchToIndex(int index) {
+        if (index != 0 && !AccountManager.isLogin()) {
+            Intent it = new Intent(this, LoginActivity.class);
+            startActivity(it);
+            return;
+        }
+
+
         mIndex = index;
 
 

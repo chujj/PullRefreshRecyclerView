@@ -114,7 +114,9 @@ public class ServerAPI {
         } else if (baseModel.code == 1000 || baseModel.code == 2000) {
             PreferencesUtil.putString(BaseApp.getApp(), AccountManager.PREF_USER_ID, "");
             Intent it = new Intent(BaseApp.getApp(), LoginActivity.class);
-            it.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+            if (AccountManager.isLogin()) {
+                it.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+            }
             BaseApp.getApp().startActivity(it);
 
         } else if (baseModel.code == 5) {

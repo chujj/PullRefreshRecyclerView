@@ -34,6 +34,7 @@ import com.ssc.weipan.base.PreferencesUtil;
 import com.ssc.weipan.base.ToastHelper;
 import com.ssc.weipan.base.UnderlineIndicator;
 import com.ssc.weipan.login.AccountManager;
+import com.ssc.weipan.login.LoginActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -372,6 +373,12 @@ public class TradeHomeFragment extends BaseFragment {
 
     @OnClick(R2.id.chongzhi)
     public void clickChongZhi() {
+        if (!AccountManager.isLogin()) {
+            Intent it = new Intent(this.getContext(), LoginActivity.class);
+            startActivity(it);
+            return;
+        }
+
         Intent it = new Intent(getContext(), ChongZhiActivity.class);
         startActivity(it);
     }
@@ -379,6 +386,13 @@ public class TradeHomeFragment extends BaseFragment {
 
     @OnClick(R2.id.tixian)
     public void clickTiXian() {
+        if (!AccountManager.isLogin()) {
+            Intent it = new Intent(this.getContext(), LoginActivity.class);
+            startActivity(it);
+            return;
+        }
+
+
         Intent it = new Intent(getContext(), TixianActivity.class);
         startActivity(it);
     }
