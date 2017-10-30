@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.ssc.weipan.home.TradingPopupView
+<com.biaoyixin.shangcheng.home.TradingPopupView
     android:id="@+id/trading_popup_view"
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
@@ -244,4 +244,4 @@
             />
     </LinearLayout>
 
-</com.ssc.weipan.home.TradingPopupView>
+</com.biaoyixin.shangcheng.home.TradingPopupView>

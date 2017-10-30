@@ -36,8 +36,8 @@
 
 
 ## mine
--keep class * extends com.ssc.weipan.model.BaseModel {*;}
--keep class com.ssc.weipan.account.** { *; }
+-keep class * extends com.biaoyixin.shangcheng.model.BaseModel {*;}
+-keep class com.biaoyixin.shangcheng.account.** { *; }
 
 ## eventbus
 -keepclassmembers class ** {

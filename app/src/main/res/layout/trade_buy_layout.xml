@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.ssc.weipan.home.BuyTradeView android:id="@+id/buytradeview"
+<com.biaoyixin.shangcheng.home.BuyTradeView android:id="@+id/buytradeview"
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -28,7 +28,7 @@
             android:background="#FF3C3C3C"
             />
 
-        <com.ssc.weipan.home.ChipLabelsLayout
+        <com.biaoyixin.shangcheng.home.ChipLabelsLayout
             android:id="@+id/chips"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -228,4 +228,4 @@
 
     </LinearLayout>
 
-</com.ssc.weipan.home.BuyTradeView>
+</com.biaoyixin.shangcheng.home.BuyTradeView>

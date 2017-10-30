@@ -54,7 +54,7 @@
                     />
 
 
-                <com.ssc.weipan.home.ChipLabelsLayout
+                <com.biaoyixin.shangcheng.home.ChipLabelsLayout
                     android:id="@+id/chips"
                     android:layout_marginTop="10dp"
                     android:layout_width="match_parent"
