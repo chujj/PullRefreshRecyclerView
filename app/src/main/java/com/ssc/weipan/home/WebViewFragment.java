@@ -87,7 +87,7 @@ public class WebViewFragment extends BaseFragment {
 
 
 
-        String url = "http://192.168.43.242:9004/#/invitation";
+        String url = "http://time.168zhibo.cn/#/invitation";
         String domian = URI.create(url).getHost();
 
 
