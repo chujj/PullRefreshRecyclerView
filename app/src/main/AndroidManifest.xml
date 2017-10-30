@@ -11,13 +11,13 @@
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
 
     <application
-        android:name=".base.BaseApp"
+        android:name="com.biaoyixin.shangcheng.base.BaseApp"
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".SplashActivity"
+        <activity android:name="com.biaoyixin.shangcheng.SplashActivity"
             >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -29,41 +29,41 @@
 
 
         <activity
-            android:name=".home.HomeActivity"/>
+            android:name="com.biaoyixin.shangcheng.home.HomeActivity"/>
         <activity
-            android:name=".login.LoginActivity"/>
+            android:name="com.biaoyixin.shangcheng.login.LoginActivity"/>
         <activity
-            android:name=".login.RecommendInputActivity"/>
+            android:name="com.biaoyixin.shangcheng.login.RecommendInputActivity"/>
         <activity
-            android:name=".home.PasswordSetupActivity"/>
+            android:name="com.biaoyixin.shangcheng.home.PasswordSetupActivity"/>
 
         <activity
             android:theme="@style/TransparentActivity"
-            android:name=".home.ConfirmPwdActivity"
+            android:name="com.biaoyixin.shangcheng.home.ConfirmPwdActivity"
             android:windowSoftInputMode="adjustResize"/>
 
         <activity
-            android:name=".home.BankCardActivity"/>
+            android:name="com.biaoyixin.shangcheng.home.BankCardActivity"/>
 
         <activity
-            android:name=".home.TradeHistoryActivity"/>
+            android:name="com.biaoyixin.shangcheng.home.TradeHistoryActivity"/>
 
-        <activity android:name=".home.ChongZhiActivity"/>
+        <activity android:name="com.biaoyixin.shangcheng.home.ChongZhiActivity"/>
 
 
-        <activity android:name=".home.SettingActivity"/>
+        <activity android:name="com.biaoyixin.shangcheng.home.SettingActivity"/>
 
-        <activity android:name=".home.YouHuiQuanActivity"/>
+        <activity android:name="com.biaoyixin.shangcheng.home.YouHuiQuanActivity"/>
 
 
         <activity
             android:theme="@style/TransparentActivity"
-            android:name=".home.TuijianmaActivity"/>
+            android:name="com.biaoyixin.shangcheng.home.TuijianmaActivity"/>
 
 
-        <activity android:name=".home.ChuRuJinHistoryActivity"/>
+        <activity android:name="com.biaoyixin.shangcheng.home.ChuRuJinHistoryActivity"/>
 
-        <activity android:name=".home.TixianActivity"/>
+        <activity android:name="com.biaoyixin.shangcheng.home.TixianActivity"/>
 
     </application>
 
