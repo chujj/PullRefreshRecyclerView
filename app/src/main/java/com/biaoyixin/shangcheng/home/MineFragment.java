@@ -119,7 +119,7 @@ public class MineFragment extends BaseFragment {
 
     private void initEntries() {
         for (int i = 0; i < entryProperties.size(); i++) {
-            ((ImageView) CommonUtils.findView(mEntrys[i], R.id.icon)).setImageResource(R.drawable.trade_home_user_header_tixian);
+            ((ImageView) CommonUtils.findView(mEntrys[i], R.id.icon)).setImageResource((int) entryProperties.get(i)[2]);
             ((TextView)CommonUtils.findView(mEntrys[i], R.id.name)).setText((String) entryProperties.get(i)[0]);
             mEntrys[i].setOnClickListener((View.OnClickListener) entryProperties.get(i)[1]);
         }
@@ -137,7 +137,8 @@ public class MineFragment extends BaseFragment {
                                     BankCardActivity.class);
                             MineFragment.this.startActivity(it);
                         }
-                    }
+                    },
+                    R.drawable.mine_fragment_entry_yinhangka
             });
             add(new Object[] {
                     "我的交易轨迹",
@@ -148,7 +149,8 @@ public class MineFragment extends BaseFragment {
                                     TradeHistoryActivity.class);
                             MineFragment.this.startActivity(it);
                         }
-                    }
+                    },
+                    R.drawable.mine_fragment_entry_trade_history
             });
             add(new Object[] {
                     "出入金记录",
@@ -160,7 +162,8 @@ public class MineFragment extends BaseFragment {
                                     ChuRuJinHistoryActivity.class);
                             MineFragment.this.startActivity(it);
                         }
-                    }
+                    },
+                    R.drawable.mine_fragment_entry_bill_history
             });
             add(new Object[] {
                     "优惠券",
@@ -171,7 +174,8 @@ public class MineFragment extends BaseFragment {
                                     YouHuiQuanActivity.class);
                             MineFragment.this.startActivity(it);
                         }
-                    }
+                    },
+                    R.drawable.mine_fragment_entry_youhuiquan
             });
             add(new Object[] {
                     "推荐码",
@@ -183,7 +187,8 @@ public class MineFragment extends BaseFragment {
                                     TuijianmaActivity.class);
                             MineFragment.this.startActivity(it);
                         }
-                    }
+                    },
+                    R.drawable.mine_fragment_entry_yinhangka
             });
             add(new Object[] {
                     "个人设置",
@@ -193,7 +198,8 @@ public class MineFragment extends BaseFragment {
                             Intent it = new Intent(v.getContext(), SettingActivity.class);
                             v.getContext().startActivity(it);
                         }
-                    }
+                    },
+                    R.drawable.mine_fragment_entry_settings
             });
         }
     };
