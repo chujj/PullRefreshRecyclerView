@@ -35,7 +35,7 @@
     <ImageView
         android:layout_width="8dp"
         android:layout_height="wrap_content"
-        android:src="@drawable/trade_home_user_header_chongzhi"
+        android:src="@drawable/mine_fragment_entry_right_more"
         />
 
 </LinearLayout>

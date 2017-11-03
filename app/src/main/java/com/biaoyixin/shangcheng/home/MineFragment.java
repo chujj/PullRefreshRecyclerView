@@ -188,7 +188,7 @@ public class MineFragment extends BaseFragment {
                             MineFragment.this.startActivity(it);
                         }
                     },
-                    R.drawable.mine_fragment_entry_yinhangka
+                    R.drawable.mine_fragment_entry_tuijianma
             });
             add(new Object[] {
                     "个人设置",
