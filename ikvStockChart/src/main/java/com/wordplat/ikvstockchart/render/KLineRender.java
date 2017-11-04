@@ -116,7 +116,7 @@ public class KLineRender extends AbstractRender {
 
         kLineDrawingList.add(kLineGridAxisDrawing);
         kLineDrawingList.add(candleDrawing);
-        kLineDrawingList.add(maDrawing);
+//        kLineDrawingList.add(maDrawing);
         kLineDrawingList.add(emptyDataDrawing);
         kLineDrawingList.add(highlightDrawing);
 

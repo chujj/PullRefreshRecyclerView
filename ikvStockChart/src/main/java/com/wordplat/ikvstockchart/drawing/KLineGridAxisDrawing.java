@@ -52,6 +52,8 @@ public class KLineGridAxisDrawing implements IDrawing {
     private final float[] pointCache = new float[2];
     private float lineHeight;
 
+    private final static int Y_LABEL_SIZE = 8;
+
     private YLabelAlign yLabelAlign; // Y 轴标签对齐方向
 
     @Override
@@ -95,7 +97,7 @@ public class KLineGridAxisDrawing implements IDrawing {
 
         kLineRect.set(contentRect);
 
-        lineHeight = kLineRect.height() / 4;
+        lineHeight = kLineRect.height() / (Y_LABEL_SIZE -1 );
     }
 
     @Override
@@ -108,10 +110,12 @@ public class KLineGridAxisDrawing implements IDrawing {
         final EntrySet entrySet = render.getEntrySet();
         final SizeColor sizeColor = render.getSizeColor();
         // 绘制 最外层大框框
-        canvas.drawRect(kLineRect, axisPaint);
+//        canvas.drawRect(kLineRect, axisPaint);
+        canvas.drawLine(kLineRect.left, kLineRect.top, kLineRect.right, kLineRect.top, axisPaint);
+        canvas.drawLine(kLineRect.left, kLineRect.bottom, kLineRect.right, kLineRect.bottom, axisPaint);
 
         // 绘制 三条横向网格线
-        for (int i = 0 ; i < 3 ; i++) {
+        for (int i = 0 ; i < (Y_LABEL_SIZE - 2) ; i++) {
             float lineTop = kLineRect.top + (i + 1) * lineHeight;
             canvas.drawLine(kLineRect.left, lineTop, kLineRect.right, lineTop, gridPaint);
         }
@@ -142,7 +146,7 @@ public class KLineGridAxisDrawing implements IDrawing {
                     continue;
                 }
 
-                canvas.drawLine(pointCache[0], kLineRect.top, pointCache[0], kLineRect.bottom, gridPaint);
+//                canvas.drawLine(pointCache[0], kLineRect.top, pointCache[0], kLineRect.bottom, gridPaint);
             }
         }
         canvas.restore();
@@ -151,7 +155,7 @@ public class KLineGridAxisDrawing implements IDrawing {
     @Override
     public void onDrawOver(Canvas canvas) {
         // 绘制 Y 轴 label
-        for (int i = 0 ; i < 5 ; i++) {
+        for (int i = 0 ; i < Y_LABEL_SIZE ; i++) {
             float lineTop = kLineRect.top + i * lineHeight;
             pointCache[1] = lineTop;
             render.invertMapPoints(pointCache);
@@ -162,7 +166,7 @@ public class KLineGridAxisDrawing implements IDrawing {
             } else if (i == 4) {
                 pointCache[0] = lineTop - fontMetrics.bottom;
             } else {
-                pointCache[0] = lineTop + fontMetrics.bottom;
+                pointCache[0] = lineTop - fontMetrics.bottom;
             }
 
             float labelX = yLabelAlign == YLabelAlign.LEFT ? kLineRect.left + 5 : kLineRect.right - 5;
