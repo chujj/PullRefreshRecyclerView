@@ -61,6 +61,13 @@ public class UserApi {
 
         @GET("/broker/brokerageReport")
         public void brokerReport(Callback<BrokerReportResp> cb);
+
+
+        @FormUrlEncoded
+        @POST("/upgrade/check")
+        public void upgradeCheck(@Field("internalVersion") int internalVersion,
+                                 @Field("os") String os,
+                                 Callback<UpgradeResp> cb);
     }
 
 
@@ -146,4 +153,15 @@ public class UserApi {
         public int totalBrokerageLv2; // ": 400
     }
 
+    public static class UpgradeResp extends BaseModel {
+        public UpgradeInfo data;
+    }
+
+    public static class UpgradeInfo  extends BaseModel {
+        public boolean force; // ": true,//是否强制更新
+//        public String version; // ": "2.1.2",//版本号
+//        public int internalVersion; // ": 20102,//内部版本号
+        public String desc; // ": "更新内容",
+        public String url; // ": "下载地址"
+    }
 }

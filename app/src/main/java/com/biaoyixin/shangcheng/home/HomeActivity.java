@@ -1,6 +1,9 @@
 package com.biaoyixin.shangcheng.home;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -10,7 +13,10 @@ import android.view.ViewGroup;
 
 import com.biaoyixin.shangcheng.R;
 import com.biaoyixin.shangcheng.R2;
+import com.biaoyixin.shangcheng.api.ServerAPI;
+import com.biaoyixin.shangcheng.api.user.UserApi;
 import com.biaoyixin.shangcheng.base.BaseActivity;
+import com.biaoyixin.shangcheng.base.CommonUtils;
 import com.biaoyixin.shangcheng.base.Topbar;
 import com.biaoyixin.shangcheng.login.AccountManager;
 import com.biaoyixin.shangcheng.login.LoginActivity;
@@ -19,6 +25,9 @@ import butterknife.BindView;
 import butterknife.BindViews;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import retrofit.Callback;
+import retrofit.RetrofitError;
+import retrofit.client.Response;
 
 /**
  * Created by zhujj on 17-10-16.
@@ -54,6 +63,54 @@ public class HomeActivity extends BaseActivity {
         mTopbar.setTitle("时间盘");
 
         switchToIndex(mIndex);
+
+
+        checkUpgrade();
+    }
+
+    private void checkUpgrade() {
+
+        UserApi.IUser iUser = ServerAPI.getInterface(UserApi.IUser.class);
+        iUser.upgradeCheck(CommonUtils.getVersionCode(this), "android", new Callback<UserApi.UpgradeResp>() {
+            @Override
+            public void success(final UserApi.UpgradeResp resp, Response response) {
+                if (resp == null || resp.code != 0) {
+
+                } else {
+                    try {
+                        AlertDialog.Builder ab = new AlertDialog.Builder(HomeActivity.this)
+                                .setTitle("检查到新版本")
+                                .setMessage(resp.data.desc)
+                                .setCancelable(!resp.data.force)
+                                .setPositiveButton("确认", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        Uri uri = Uri.parse(resp.data.url);
+                                        Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+                                        HomeActivity.this.startActivity(intent);
+                                    }
+                                });
+
+                        if (!resp.data.force) {
+                            ab.setNegativeButton("取消", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    dialog.dismiss();
+                                }
+                            });
+                        }
+                        ab.create().show();
+                    } catch (Throwable e) {
+
+                    }
+                }
+            }
+
+            @Override
+            public void failure(RetrofitError error) {
+
+            }
+        });
     }
 
 

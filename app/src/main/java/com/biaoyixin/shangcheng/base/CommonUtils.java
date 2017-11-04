@@ -2,6 +2,8 @@ package com.biaoyixin.shangcheng.base;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.FrameLayout;
@@ -47,4 +49,13 @@ public class CommonUtils {
     }    //dp转px
 
 
+    public static int getVersionCode(Context context) {
+        try {
+            PackageManager e = context.getPackageManager();
+            PackageInfo info = e.getPackageInfo(context.getPackageName(), 0);
+            return info.versionCode;
+        } catch (Exception var3) {
+            return 0;
+        }
+    }
 }
