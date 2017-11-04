@@ -260,7 +260,7 @@ public class TradeFragment extends BaseFragment {
 
         // default selection
         clickTime60();
-        clickLine2();
+        clickLine1();
 
         refreshTradingList();
 

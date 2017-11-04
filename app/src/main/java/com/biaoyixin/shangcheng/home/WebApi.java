@@ -160,7 +160,7 @@ public class WebApi {
                         chartData.xAxis.add(position, Long.valueOf(model.time));
                         chartData.data.add(position, newData);
                     }
-                    
+
                 }
 
 
