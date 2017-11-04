@@ -409,8 +409,7 @@ public class ChongZhiActivity extends BaseActivity {
                                                 try {
                                                     Map data = (Map) new Gson().fromJson(originBody, Map.class).get("data");
                                                     for(Object entry : data.keySet()) {
-                                                        if (TextUtils.equals(entry.toString(), "gateway") ||
-                                                                TextUtils.equals(entry.toString(), "gatewayEnd")) {
+                                                        if (TextUtils.equals(entry.toString(), "gateway")) {
 
                                                         } else {
 
