@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.text.SpannableString;
 import android.text.Spanned;
+import android.text.TextUtils;
 import android.text.style.ForegroundColorSpan;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -29,6 +30,7 @@ import com.biaoyixin.shangcheng.base.ToastHelper;
 import com.biaoyixin.shangcheng.base.Topbar;
 import com.biaoyixin.shangcheng.login.AccountManager;
 
+import java.net.URLEncoder;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -370,6 +372,7 @@ public class ChongZhiActivity extends BaseActivity {
 
                                         com.squareup.okhttp.Response response;
                                         GoodsApi.UnipayResp wcpr = null;
+                                        String originBody = null;
 
                                         @Override
                                         protected Void doInBackground(Void... params) {
@@ -378,8 +381,8 @@ public class ChongZhiActivity extends BaseActivity {
                                                 Request request = new Request.Builder().url(f_url).get().build();
                                                 Call call = ServerAPI.getInstance().mOKClient.newCall(request);
                                                 response = call.execute();
-
-                                                wcpr = new Gson().fromJson(response.body().string(), GoodsApi.UnipayResp.class);
+                                                originBody = response.body().string();
+                                                wcpr = new Gson().fromJson(originBody, GoodsApi.UnipayResp.class);
 
                                             } catch (Exception e) {
                                                 ServerAPI.HandlerException(RetrofitError.unexpectedError(f_url, e));
@@ -401,7 +404,31 @@ public class ChongZhiActivity extends BaseActivity {
                                                 ServerAPI.handleCodeError(wcpr);
                                                 ToastHelper.showToast(wcpr.message);
                                             } else {
-                                                Uri uri = Uri.parse(wcpr.data.gateway);
+
+                                                String url = wcpr.data.gateway;
+                                                try {
+                                                    Map data = (Map) new Gson().fromJson(originBody, Map.class).get("data");
+                                                    for(Object entry : data.keySet()) {
+                                                        if (TextUtils.equals(entry.toString(), "gateway") ||
+                                                                TextUtils.equals(entry.toString(), "gatewayEnd")) {
+
+                                                        } else {
+
+                                                            if (data.get(entry) == null) {
+                                                                continue;
+                                                            }
+
+                                                            if (!url.contains("?")) {
+                                                                url += "?" + entry.toString() + "=" + URLEncoder.encode(data.get(entry).toString());
+                                                            } else {
+                                                                url += "&" + entry.toString() + "=" + URLEncoder.encode(data.get(entry).toString());
+                                                            }
+                                                        }
+                                                    }
+                                                } catch (Exception e) {
+
+                                                }
+                                                Uri uri = Uri.parse(url);
                                                 Intent intent = new Intent(Intent.ACTION_VIEW, uri);
                                                 ChongZhiActivity.this.startActivity(intent);
                                             }
