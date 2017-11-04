@@ -42,18 +42,21 @@ public class TimeLineGridAxisDrawing implements IDrawing {
     private Paint axisPaint; // X 轴和 Y 轴的画笔
     private Paint gridPaint; // k线图网格线画笔
     private final Paint.FontMetrics fontMetrics = new Paint.FontMetrics(); // 用于 labelPaint 计算文字位置
-    private final DecimalFormat decimalFormatter = new DecimalFormat("0.00");
+    private final DecimalFormat decimalFormatter = new DecimalFormat("0");
 
     private final RectF chartRect = new RectF(); // 分时图显示区域
     private AbstractRender render;
     private SizeColor sizeColor;
 
     private final float[] pointCache = new float[2];
-    private final float[] valueCache = new float[5];
+    private final float[] valueCache = new float[Y_LABEL_SIZE];
     private float lineHeight;
     private float lineWidth;
 
     private int entrySetSize;
+
+
+    private final static int Y_LABEL_SIZE = 8;
     
     @Override
     public void onInit(RectF contentRect, AbstractRender render) {
@@ -92,7 +95,7 @@ public class TimeLineGridAxisDrawing implements IDrawing {
 
         chartRect.set(contentRect);
 
-        lineHeight = chartRect.height() / 4;
+        lineHeight = chartRect.height() / (Y_LABEL_SIZE -1);
         lineWidth = chartRect.width() / 4;
     }
 
@@ -111,15 +114,15 @@ public class TimeLineGridAxisDrawing implements IDrawing {
         canvas.drawLine(chartRect.left, chartRect.bottom, chartRect.right, chartRect.bottom, axisPaint);
 
         // 绘制 三条横向网格线
-        for (int i = 0 ; i < 3 ; i++) {
+        for (int i = 0 ; i < (Y_LABEL_SIZE - 2) ; i++) {
             float lineTop = chartRect.top + (i + 1) * lineHeight;
             canvas.drawLine(chartRect.left, lineTop, chartRect.right, lineTop, gridPaint);
         }
 
-        for (int i = 0 ; i < 5 ; i++) {
+        for (int i = 0 ; i < Y_LABEL_SIZE ; i++) {
             float lineLeft = chartRect.left + i * lineWidth;
 
-            if (i != 0 && i != 4) {
+            if (i != 0 && i != (Y_LABEL_SIZE  - 1)) {
                 // 绘制 三条竖向网格线
 //                canvas.drawLine(lineLeft, chartRect.top, lineLeft, chartRect.bottom, gridPaint);
                 xLabelPaint.setTextAlign(Paint.Align.CENTER);
@@ -146,7 +149,7 @@ public class TimeLineGridAxisDrawing implements IDrawing {
             return ;
         }
         // 绘制 Y 轴左边 label
-        for (int i = 0 ; i < 5 ; i++) {
+        for (int i = 0 ; i < Y_LABEL_SIZE ; i++) {
             float lineTop = chartRect.top + i * lineHeight;
             pointCache[1] = lineTop;
             render.invertMapPoints(pointCache);
@@ -154,7 +157,7 @@ public class TimeLineGridAxisDrawing implements IDrawing {
 
             if (i == 0) {
                 pointCache[0] = lineTop - fontMetrics.top;
-            } else if (i == 4) {
+            } else if (i == (Y_LABEL_SIZE - 1)) {
                 pointCache[0] = lineTop - fontMetrics.bottom;
             } else {
                 pointCache[0] = lineTop - fontMetrics.bottom;

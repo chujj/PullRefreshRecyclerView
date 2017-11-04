@@ -19,6 +19,7 @@
         app:decreasingColor="#FFCCCCCC"
         app:increasingColor="#FFCCCCCC"
         app:yLabelSize="8sp"
+        app:gridColor="#6C6C6c"
         />
 
 </LinearLayout>
