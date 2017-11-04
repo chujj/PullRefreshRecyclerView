@@ -87,15 +87,22 @@ public class WebApi {
                         chartData.data.remove(chartData.data.size() - 1);
                     }
 
-                    chartData.xAxis.add(Long.valueOf(model.time));
 
                     List<Double> newData = Arrays.asList(
                             Double.valueOf(model.d2.openPrice),
                             Double.valueOf(model.d2.closePrice),
                             Double.valueOf(model.d2.lowPrice),
                             Double.valueOf(model.d2.highPrice));
-//                    System.out.println("debug2: " + newData);
-                    chartData.data.add(newData);
+
+                    if (model.dm != (chartIndex + 1)) {
+                        chartData.xAxis.add(Long.valueOf(model.time));
+                        chartData.data.add(newData);
+                    } else {
+                        int position = chartData.xAxis.size() - 1;
+                        position = position < 0 ? 0 : position;
+                        chartData.xAxis.add(position, Long.valueOf(model.time));
+                        chartData.data.add(position, newData);
+                    }
                 }
 
                 if (chart.list.size() > 2 && model.d3 != null) { // chart3
@@ -108,14 +115,22 @@ public class WebApi {
                         chartData.data.remove(chartData.data.size() - 1);
                     }
 
-                    chartData.xAxis.add(Long.valueOf(model.time));
-
                     List<Double> newData = Arrays.asList(
                             Double.valueOf(model.d3.openPrice),
                             Double.valueOf(model.d3.closePrice),
                             Double.valueOf(model.d3.lowPrice),
                             Double.valueOf(model.d3.highPrice));
-                    chartData.data.add(newData);
+
+
+                    if (model.dm != (chartIndex + 1)) {
+                        chartData.xAxis.add(Long.valueOf(model.time));
+                        chartData.data.add(newData);
+                    } else {
+                        int position = chartData.xAxis.size() - 1;
+                        position = position < 0 ? 0 : position;
+                        chartData.xAxis.add(position, Long.valueOf(model.time));
+                        chartData.data.add(position, newData);
+                    }
                 }
 
                 if (chart.list.size() > 3 && model.d4 != null) { // chart3
@@ -135,7 +150,17 @@ public class WebApi {
                             Double.valueOf(model.d4.closePrice),
                             Double.valueOf(model.d4.lowPrice),
                             Double.valueOf(model.d4.highPrice));
-                    chartData.data.add(newData);
+
+                    if (model.dm != (chartIndex + 1)) {
+                        chartData.xAxis.add(Long.valueOf(model.time));
+                        chartData.data.add(newData);
+                    } else {
+                        int position = chartData.xAxis.size() - 1;
+                        position = position < 0 ? 0 : position;
+                        chartData.xAxis.add(position, Long.valueOf(model.time));
+                        chartData.data.add(position, newData);
+                    }
+                    
                 }
 
 
