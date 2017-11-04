@@ -14,7 +14,11 @@
         app:yLabelColor="#FFCCCCCC"
         app:timeLineColor="#FFCCCCCC"
         app:timeLineMaxCount="35"
-        app:xLabelSize="8dp"
+        app:xLabelSize="8sp"
+        app:neutralColor="#FFCCCCCC"
+        app:decreasingColor="#FFCCCCCC"
+        app:increasingColor="#FFCCCCCC"
+        app:yLabelSize="8sp"
         />
 
 </LinearLayout>

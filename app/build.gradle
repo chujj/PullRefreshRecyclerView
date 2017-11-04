@@ -50,7 +50,8 @@ dependencies {
     compile 'com.facebook.stetho:stetho:1.0.1'
     compile 'com.facebook.stetho:stetho-okhttp:1.0.1'
 
-    compile 'com.wordplat:ikvStockChart:0.1.5'
+//    compile 'com.wordplat:ikvStockChart:0.1.5'
+    compile project(':ikvStockChart')
 
     compile 'fr.avianey.com.viewpagerindicator:library:2.4.1.1@aar'
 
