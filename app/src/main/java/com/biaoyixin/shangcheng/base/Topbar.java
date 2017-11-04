@@ -2,6 +2,7 @@ package com.biaoyixin.shangcheng.base;
 
 import android.content.Context;
 import android.util.AttributeSet;
+import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -43,5 +44,14 @@ public class Topbar extends LinearLayout {
 
     public void setTitle(String title) {
         mTitleTV.setText(title);
+    }
+
+
+    public void setBackButton(OnClickListener listener) {
+
+        View view = CommonUtils.findView(this, R.id.back);
+
+        view.setVisibility(VISIBLE);
+        view.setOnClickListener(listener);
     }
 }

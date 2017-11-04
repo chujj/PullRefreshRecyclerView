@@ -77,6 +77,12 @@ public class ChongZhiActivity extends BaseActivity {
         ButterKnife.bind(this, this);
 
         mTopbar.setTitle("充值");
+        mTopbar.setBackButton(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
 
         for (int i = 0; i < mView2hide.length; i++) {
             mView2hide[i].setVisibility(View.GONE);

@@ -10,6 +10,14 @@
     android:background="#FF1B1B20">
 
 
+    <ImageView
+        android:id="@+id/back"
+        android:layout_width="33dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="15dp"
+        android:visibility="invisible"
+        android:src="@drawable/compat_toolbar_back"/>
+
     <TextView
         android:id="@+id/title"
         android:layout_width="0dp"
@@ -21,6 +29,11 @@
         android:textColor="#FFFFFFFF"
         android:textSize="19sp"/>
 
+
+    <View
+        android:layout_width="33dp"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="15dp"/>
 
 
 

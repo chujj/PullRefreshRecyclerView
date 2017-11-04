@@ -136,6 +136,12 @@ public class TixianActivity extends BaseActivity {
         mAssets.setText(account.asset + "元");
 
         mTopbar.setTitle("提现");
+        mTopbar.setBackButton(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
 
         loadData();
     }
