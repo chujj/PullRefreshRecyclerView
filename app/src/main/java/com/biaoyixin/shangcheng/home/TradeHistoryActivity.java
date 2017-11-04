@@ -53,6 +53,12 @@ public class TradeHistoryActivity extends BaseActivity {
         ButterKnife.bind(this, this);
 
         mTopbar.setTitle("我的交易轨迹");
+        mTopbar.setBackButton(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
 
 
         mViewPager.setOffscreenPageLimit(3);

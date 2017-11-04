@@ -2,6 +2,7 @@ package com.biaoyixin.shangcheng.home;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.view.View;
 import android.widget.TextView;
 
 import com.biaoyixin.shangcheng.R;
@@ -46,6 +47,12 @@ public class BankCardActivity extends BaseActivity {
         ButterKnife.bind(this, this);
 
         mTopbar.setTitle("银行卡");
+        mTopbar.setBackButton(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
 
 
         loadData();
