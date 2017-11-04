@@ -223,7 +223,7 @@ public class TradeFragment extends BaseFragment {
 //                        ));
                         if (isTimelineChart) {
                             for (int j = 0; j < mChardata.get(i).data.size(); j++) {
-                                String xLabel = (new SimpleDateFormat("HH:mm")).format(new Date(mChardata.get(i).xAxis.get(j).longValue()));
+                                String xLabel = (new SimpleDateFormat("mm:ss")).format(new Date(mChardata.get(i).xAxis.get(j).longValue()));
 
                                 Entry entry = new Entry(((Double) mChardata.get(i).data.get(j)).floatValue(), 0, xLabel);
                                 mEntrySets[i].addEntry(entry);

@@ -133,9 +133,10 @@ public class TimeLineGridAxisDrawing implements IDrawing {
             }
 
             // 绘制 X 轴 label
-            if (entrySetSize > 0) {
+            int index = entrySetSize - Y_LABEL_SIZE + i;
+            if (index > 0 && index < entrySetSize) {
                 canvas.drawText(
-                        entrySet.getEntryList().get(i).getXLabel(),
+                        entrySet.getEntryList().get(index).getXLabel(),
                         lineLeft,
                         chartRect.bottom + render.getSizeColor().getXLabelSize(),
                         xLabelPaint);
