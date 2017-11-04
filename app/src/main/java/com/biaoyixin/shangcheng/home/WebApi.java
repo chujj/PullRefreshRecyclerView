@@ -92,8 +92,8 @@ public class WebApi {
                     List<Double> newData = Arrays.asList(
                             Double.valueOf(model.d2.openPrice),
                             Double.valueOf(model.d2.closePrice),
-                            Double.valueOf(model.d2.highPrice),
-                            Double.valueOf(model.d2.lowPrice));
+                            Double.valueOf(model.d2.lowPrice),
+                            Double.valueOf(model.d2.highPrice));
 //                    System.out.println("debug2: " + newData);
                     chartData.data.add(newData);
                 }
@@ -113,8 +113,8 @@ public class WebApi {
                     List<Double> newData = Arrays.asList(
                             Double.valueOf(model.d3.openPrice),
                             Double.valueOf(model.d3.closePrice),
-                            Double.valueOf(model.d3.highPrice),
-                            Double.valueOf(model.d3.lowPrice));
+                            Double.valueOf(model.d3.lowPrice),
+                            Double.valueOf(model.d3.highPrice));
                     chartData.data.add(newData);
                 }
 
@@ -133,8 +133,8 @@ public class WebApi {
                     List<Double> newData = Arrays.asList(
                             Double.valueOf(model.d4.openPrice),
                             Double.valueOf(model.d4.closePrice),
-                            Double.valueOf(model.d4.highPrice),
-                            Double.valueOf(model.d4.lowPrice));
+                            Double.valueOf(model.d4.lowPrice),
+                            Double.valueOf(model.d4.highPrice));
                     chartData.data.add(newData);
                 }
 
