@@ -181,12 +181,6 @@ public class TradeFragment extends BaseFragment {
         priceUpdater.run();
         mUIUpdates.add(priceUpdater);
 
-
-        // default selection
-        clickTime60();
-        clickLine1();
-
-
         ClosureMethod dataUpdate = new ClosureMethod() {
             @Override
             public Object[] run(Object... args) {
@@ -264,6 +258,9 @@ public class TradeFragment extends BaseFragment {
         mUIUpdates.add(dataUpdate);
 
 
+        // default selection
+        clickTime60();
+        clickLine2();
 
         refreshTradingList();
 
