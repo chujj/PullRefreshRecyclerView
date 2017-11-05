@@ -1,6 +1,7 @@
 package com.biaoyixin.shangcheng.home;
 
 import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
@@ -51,6 +52,8 @@ public class HomeActivity extends BaseActivity {
     };
 
     private int mIndex = 0; // default 0
+    private boolean needShowUpgradeDialog = false;
+    private Dialog mUpgradeDialog = null;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -68,6 +71,21 @@ public class HomeActivity extends BaseActivity {
         checkUpgrade();
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        if (needShowUpgradeDialog) {
+            showUpgradeDialog();
+        }
+    }
+
+    private void showUpgradeDialog() {
+        if (!mUpgradeDialog.isShowing()) {
+            mUpgradeDialog.show();
+        }
+    }
+
     private void checkUpgrade() {
 
         UserApi.IUser iUser = ServerAPI.getInterface(UserApi.IUser.class);
@@ -77,6 +95,7 @@ public class HomeActivity extends BaseActivity {
                 if (resp == null || resp.code != 0) {
 
                 } else {
+
                     try {
                         AlertDialog.Builder ab = new AlertDialog.Builder(HomeActivity.this)
                                 .setTitle("检查到新版本")
@@ -98,8 +117,11 @@ public class HomeActivity extends BaseActivity {
                                     dialog.dismiss();
                                 }
                             });
+                        } else {
+                            needShowUpgradeDialog = true;
                         }
-                        ab.create().show();
+                        mUpgradeDialog = ab.create();
+                        showUpgradeDialog();
                     } catch (Throwable e) {
 
                     }
