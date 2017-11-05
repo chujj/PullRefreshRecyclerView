@@ -72,7 +72,7 @@ public class TeachPage extends FrameLayout implements View.OnClickListener {
     @Override
     public void onClick(View v) {
         if (mCurrIndex >= (mTeachPages.length -1)) {
-//            PreferencesUtil.putBoolean(BaseApp.getApp(), HomeActivity.KEY_TEACH_PAGES, true);
+            PreferencesUtil.putBoolean(BaseApp.getApp(), HomeActivity.KEY_TEACH_PAGES, true);
             ((ViewGroup) getParent()).removeView(this);
         } else {
             mCurrIndex++;
