@@ -15,11 +15,6 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
-import com.google.gson.Gson;
-import com.squareup.okhttp.Call;
-import com.squareup.okhttp.MultipartBuilder;
-import com.squareup.okhttp.Request;
 import com.biaoyixin.shangcheng.R;
 import com.biaoyixin.shangcheng.R2;
 import com.biaoyixin.shangcheng.api.ServerAPI;
@@ -27,10 +22,16 @@ import com.biaoyixin.shangcheng.api.sms.SmsApi;
 import com.biaoyixin.shangcheng.api.trade.GoodsApi;
 import com.biaoyixin.shangcheng.base.BaseActivity;
 import com.biaoyixin.shangcheng.base.ClosureMethod;
+import com.biaoyixin.shangcheng.base.CommonUtils;
 import com.biaoyixin.shangcheng.base.ToastHelper;
 import com.biaoyixin.shangcheng.base.Topbar;
 import com.biaoyixin.shangcheng.login.AccountManager;
 import com.biaoyixin.shangcheng.model.BaseModel;
+import com.bumptech.glide.Glide;
+import com.google.gson.Gson;
+import com.squareup.okhttp.Call;
+import com.squareup.okhttp.MultipartBuilder;
+import com.squareup.okhttp.Request;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -250,6 +251,8 @@ public class TixianActivity extends BaseActivity {
                         ((TextView) tixianBank.findViewById(R.id.name)).setText(myChannel.name);
                         final ImageView checkbox = (ImageView) tixianBank.findViewById(R.id.checkbox);
                         checkbox.setSelected(false);
+                        final ImageView icon = CommonUtils.findView(tixianBank, R.id.icon);
+                        icon.setVisibility(View.GONE);
 
                         bankChangeCBs.add(new ClosureMethod() {
                             @Override
