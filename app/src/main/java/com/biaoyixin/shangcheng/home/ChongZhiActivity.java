@@ -162,6 +162,8 @@ public class ChongZhiActivity extends BaseActivity {
                     ((TextView) CommonUtils.findView(_itemRoot, R.id.name))
                             .setText(channel.name);
                     final ImageView checkBox = CommonUtils.findView(_itemRoot, R.id.checkbox);
+                    final ImageView icon = CommonUtils.findView(_itemRoot, R.id.icon);
+                    Glide.with(ChongZhiActivity.this).load(channel.icon).into(icon);
 
 
                     ClosureMethod[] closures = new ClosureMethod[] {
@@ -267,6 +269,8 @@ public class ChongZhiActivity extends BaseActivity {
 
                     final ImageView checkBox = CommonUtils.findView(_itemRoot, R.id.checkbox);
 
+                    final ImageView icon = CommonUtils.findView(_itemRoot, R.id.icon);
+                    Glide.with(ChongZhiActivity.this).load(channel.icon).into(icon);
 
                     final ClosureMethod selectBankHolder = new ClosureMethod() {
                         private GoodsApi.Bank mSelectedBank = null;
@@ -504,6 +508,8 @@ public class ChongZhiActivity extends BaseActivity {
 
                     ((TextView) CommonUtils.findView(_itemRoot, R.id.name))
                             .setText(channel.name);
+                    final ImageView icon = CommonUtils.findView(_itemRoot, R.id.icon);
+                    Glide.with(ChongZhiActivity.this).load(channel.icon).into(icon);
 
 
                     final ImageView checkBox = CommonUtils.findView(_itemRoot, R.id.checkbox);
