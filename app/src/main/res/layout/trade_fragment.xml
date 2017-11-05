@@ -73,13 +73,11 @@
 
         <LinearLayout
             android:id="@+id/time_180"
-            android:layout_width="wrap_content"
+            android:layout_width="100dp"
             android:layout_height="wrap_content"
             android:gravity="center_horizontal"
             android:paddingTop="10dp"
             android:paddingBottom="10dp"
-            android:paddingLeft="20dp"
-            android:paddingRight="20dp"
             android:orientation="vertical"
             android:background="@drawable/trade_fragment_timeinterval_bg">
 
@@ -111,13 +109,11 @@
 
         <LinearLayout
             android:id="@+id/time_60"
-            android:layout_width="wrap_content"
+            android:layout_width="100dp"
             android:layout_height="wrap_content"
             android:gravity="center_horizontal"
             android:paddingTop="10dp"
             android:paddingBottom="10dp"
-            android:paddingLeft="20dp"
-            android:paddingRight="20dp"
             android:orientation="vertical"
             android:background="@drawable/trade_fragment_timeinterval_bg">
 
@@ -148,13 +144,11 @@
 
         <LinearLayout
             android:id="@+id/time_300"
-            android:layout_width="wrap_content"
+            android:layout_width="100dp"
             android:layout_height="wrap_content"
             android:gravity="center_horizontal"
             android:paddingTop="10dp"
             android:paddingBottom="10dp"
-            android:paddingLeft="20dp"
-            android:paddingRight="20dp"
             android:orientation="vertical"
             android:background="@drawable/trade_fragment_timeinterval_bg">
 
