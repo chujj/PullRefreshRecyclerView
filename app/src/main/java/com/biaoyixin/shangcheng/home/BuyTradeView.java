@@ -293,13 +293,13 @@ public class BuyTradeView extends RelativeLayout {
         if (getContext() instanceof BaseActivity) {
 
             final BaseActivity baseActivity = (BaseActivity) getContext();
-            baseActivity.showLoadingDialog("加载中...", false);
+//            baseActivity.showLoadingDialog("加载中...", false);
 
             UserApi.IUser iUser = ServerAPI.getInterface(UserApi.IUser.class);
             iUser.getYouhuiquan(new Callback<UserApi.YouhuiquanResp>() {
                 @Override
                 public void success(UserApi.YouhuiquanResp resp, Response response) {
-                    baseActivity.dismissLoadingDialog();
+//                    baseActivity.dismissLoadingDialog();
                     if (resp.code != 0) {
                         ServerAPI.handleCodeError(resp);
                     } else {
