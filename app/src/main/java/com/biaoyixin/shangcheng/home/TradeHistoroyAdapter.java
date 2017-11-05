@@ -136,6 +136,8 @@ public class TradeHistoroyAdapter extends BaseAdapter {
                         name.setText(data.goods_name);
                         amount.setText(data.amount + "");
                         win_money.setText(data.win_money + "");
+                        setTextColor(win_money, Float.parseFloat(data.win_money) > 0 ? 0 : 1);
+
                     }
 
 
@@ -159,10 +161,12 @@ public class TradeHistoroyAdapter extends BaseAdapter {
                         }
 
                         ((TextView)detailViews.get(4)[1]).setText("购买方式");
-                        ((TextView)detailViews.get(4)[2]).setText(""  + data.pay_type); // TODO
+                        ((TextView)detailViews.get(4)[2]).setText("现金" /* + data.pay_type*/);
 
                         ((TextView)detailViews.get(5)[1]).setText("平仓类型");
-                        ((TextView)detailViews.get(5)[2]).setText("" + data.close_type); // TODO
+                        String[]  strs = new String[] { "止盈平仓","止损平仓", "手动平仓", "强制平仓", "客服撤单", "平局平仓"};
+                        String str = data.close_type < 0 ? "休市撤单" : strs[data.close_type];
+                        ((TextView)detailViews.get(5)[2]).setText(str);
 
                         ((TextView)detailViews.get(6)[1]).setText("定金");
                         ((TextView)detailViews.get(6)[2]).setText(data.chip);
