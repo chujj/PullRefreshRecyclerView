@@ -1,5 +1,8 @@
 package com.biaoyixin.shangcheng.home;
 
+import android.app.AlertDialog;
+import android.app.Dialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.AsyncTask;
@@ -15,10 +18,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
-import com.google.gson.Gson;
-import com.squareup.okhttp.Call;
-import com.squareup.okhttp.Request;
+import com.biaoyixin.shangcheng.Consts;
 import com.biaoyixin.shangcheng.R;
 import com.biaoyixin.shangcheng.R2;
 import com.biaoyixin.shangcheng.api.ServerAPI;
@@ -29,6 +29,10 @@ import com.biaoyixin.shangcheng.base.CommonUtils;
 import com.biaoyixin.shangcheng.base.ToastHelper;
 import com.biaoyixin.shangcheng.base.Topbar;
 import com.biaoyixin.shangcheng.login.AccountManager;
+import com.bumptech.glide.Glide;
+import com.google.gson.Gson;
+import com.squareup.okhttp.Call;
+import com.squareup.okhttp.Request;
 
 import java.net.URLEncoder;
 import java.util.HashMap;
@@ -39,6 +43,7 @@ import butterknife.BindView;
 import butterknife.BindViews;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import de.greenrobot.event.EventBus;
 import retrofit.Callback;
 import retrofit.RetrofitError;
 import retrofit.client.Response;
@@ -101,6 +106,35 @@ public class ChongZhiActivity extends BaseActivity {
 
     private String mChipSelected;
 
+    private boolean needShowPayResultPromt = false;
+    private Dialog mDialog = null;
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+
+        if (needShowPayResultPromt) {
+            if (mDialog == null) {
+                mDialog = new AlertDialog.Builder(this).setTitle("提示")
+                        .setMessage("您充值的金额，将会在1～5分钟内到账，请关注账户余额的变化")
+                        .setPositiveButton("确认", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.dismiss();
+                                EventBus.getDefault().post(Consts.getBoardCastMessage(Consts.BoardCast_ChongZhi_Refresh));
+                                finish();
+                            }
+                        })
+                        .setCancelable(false)
+                        .create();
+            }
+            if (!mDialog.isShowing()) {
+                mDialog.show();
+            }
+        }
+
+    }
 
     private Map<GoodsApi.Channel, Object[]> mChannelsClosures = new HashMap<>();
 
@@ -187,6 +221,7 @@ public class ChongZhiActivity extends BaseActivity {
                                                 ServerAPI.handleCodeError(wcpr);
                                                 ToastHelper.showToast(wcpr.message);
                                             } else {
+                                                needShowPayResultPromt = true;
                                                 Uri uri = Uri.parse(wcpr.data);
                                                 Intent intent = new Intent(Intent.ACTION_VIEW, uri);
                                                 ChongZhiActivity.this.startActivity(intent);
@@ -433,6 +468,7 @@ public class ChongZhiActivity extends BaseActivity {
                                                 } catch (Exception e) {
 
                                                 }
+                                                needShowPayResultPromt = true;
                                                 Uri uri = Uri.parse(url);
                                                 Intent intent = new Intent(Intent.ACTION_VIEW, uri);
                                                 ChongZhiActivity.this.startActivity(intent);
@@ -533,6 +569,7 @@ public class ChongZhiActivity extends BaseActivity {
                                                 ServerAPI.handleCodeError(wcpr);
                                                 ToastHelper.showToast(wcpr.message);
                                             } else {
+                                                needShowPayResultPromt = true;
                                                 Uri uri = Uri.parse(wcpr.data.gateway);
                                                 Intent intent = new Intent(Intent.ACTION_VIEW, uri);
                                                 ChongZhiActivity.this.startActivity(intent);
@@ -668,6 +705,7 @@ public class ChongZhiActivity extends BaseActivity {
 
         if (mSelectedChannel == null) {
             ToastHelper.showToast("请选择支付方式");
+            return;
         }
 
 

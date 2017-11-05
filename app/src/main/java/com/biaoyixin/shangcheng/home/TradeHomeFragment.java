@@ -100,6 +100,8 @@ public class TradeHomeFragment extends BaseFragment {
             }
         } else if (msg.what == Consts.BoardCast_TradeClose) {
             getUserStatus();
+        } else if (msg.what == Consts.BoardCast_ChongZhi_Refresh) {
+            getUserStatus();
         }
     }
 
