@@ -1,11 +1,8 @@
 package com.biaoyixin.shangcheng.api;
 
 import android.content.Intent;
+import android.os.Process;
 
-import com.facebook.stetho.okhttp.StethoInterceptor;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.squareup.okhttp.OkHttpClient;
 import com.biaoyixin.shangcheng.account.AccountHelper;
 import com.biaoyixin.shangcheng.base.BaseApp;
 import com.biaoyixin.shangcheng.base.CommonUtils;
@@ -16,20 +13,27 @@ import com.biaoyixin.shangcheng.home.PasswordSetupActivity;
 import com.biaoyixin.shangcheng.login.AccountManager;
 import com.biaoyixin.shangcheng.login.LoginActivity;
 import com.biaoyixin.shangcheng.model.BaseModel;
+import com.facebook.stetho.okhttp.StethoInterceptor;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.squareup.okhttp.OkHttpClient;
 
 import java.net.CookieManager;
 import java.net.CookiePolicy;
 import java.util.HashMap;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ThreadFactory;
 import java.util.concurrent.TimeUnit;
 
 import retrofit.RestAdapter;
 import retrofit.RestAdapter.LogLevel;
 import retrofit.RetrofitError;
+import retrofit.android.MainThreadExecutor;
 import retrofit.client.OkClient;
 import retrofit.converter.GsonConverter;
 
 public class ServerAPI {
-//    public final static String HOST = "http://m.weixl.org/xlcl-counselor-api";
+    //    public final static String HOST = "http://m.weixl.org/xlcl-counselor-api";
     public final static String HOST = "http://time.168zhibo.cn/";
     public final static String HOST_DOMAIN = "168zhibo.cn";
     private static ServerAPI sInstance;
@@ -51,13 +55,13 @@ public class ServerAPI {
 
         return sInstance;
     }
-    
+
     public static <T> T getInterface(Class<T> clz) {
         return cacheInsterface(clz);
     }
 
     private synchronized <T> T getCachedInterface(String name,
-            Class<T> aInterface) {
+                                                  Class<T> aInterface) {
         if (mInterefaceMap.get(name) == null) {
             mInterefaceMap.put(name, mRestAdapter.create(aInterface));
         }
@@ -77,13 +81,23 @@ public class ServerAPI {
 //                return false;
 //            }
 //        })
-        .create();
+                .create();
 
         mOKClient = createDumpContentOKClient();
         mRestAdapter = new RestAdapter.Builder().setEndpoint(HOST)
                 .setLogLevel(CommonUtils.isDebugBuild() ? LogLevel.FULL : LogLevel.NONE)
                 // .setClient(new TrustAllSSLConnectionClient())
                 .setConverter(new GsonConverter(gson))
+                .setExecutors(Executors.newCachedThreadPool(new ThreadFactory() {
+                    @Override public Thread newThread(final Runnable r) {
+                        return new Thread(new Runnable() {
+                            @Override public void run() {
+                                android.os.Process.setThreadPriority(Process.THREAD_PRIORITY_FOREGROUND);
+                                r.run();
+                            }
+                        }, "retrofit-idle");
+                    }
+                }), new MainThreadExecutor())
                 .setClient(new OkClient(mOKClient)).build();
 
         mInterefaceMap = new HashMap<String, Object>();
