@@ -10,7 +10,9 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 
 import com.biaoyixin.shangcheng.R;
+import com.biaoyixin.shangcheng.base.BaseApp;
 import com.biaoyixin.shangcheng.base.CommonUtils;
+import com.biaoyixin.shangcheng.base.PreferencesUtil;
 
 /**
  * Created by zhujj on 17-11-5.

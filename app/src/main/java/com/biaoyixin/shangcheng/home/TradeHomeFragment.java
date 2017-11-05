@@ -417,6 +417,11 @@ public class TradeHomeFragment extends BaseFragment {
     }
 
 
-
-
+    @Override
+    public void onHiddenChanged(boolean hidden) {
+        super.onHiddenChanged(hidden);
+        if (!hidden) {
+            getUserStatus();
+        }
+    }
 }
