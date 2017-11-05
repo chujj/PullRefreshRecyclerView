@@ -20,6 +20,7 @@ import com.biaoyixin.shangcheng.model.BaseModel;
 import java.net.CookieManager;
 import java.net.CookiePolicy;
 import java.util.HashMap;
+import java.util.concurrent.TimeUnit;
 
 import retrofit.RestAdapter;
 import retrofit.RestAdapter.LogLevel;
@@ -90,6 +91,9 @@ public class ServerAPI {
 
     private static OkHttpClient createDumpContentOKClient() {
         OkHttpClient okHttpClient = new OkHttpClient();
+        okHttpClient.setConnectTimeout(10, TimeUnit.SECONDS);
+        okHttpClient.setReadTimeout(10, TimeUnit.SECONDS);
+        okHttpClient.setWriteTimeout(10, TimeUnit.SECONDS);
 
         CookieManager cm = new CookieManager(AccountHelper.getCookieStore(), CookiePolicy.ACCEPT_ALL);
 ////        cm = new CookieManager();
