@@ -284,7 +284,7 @@ public class TradeHomeFragment extends BaseFragment {
             public void success(UserApi.AccountResp accountResp, Response response) {
                 if (accountResp.code != 0 && accountResp.data != null) {
                     ServerAPI.handleCodeError(accountResp);
-                    ToastHelper.showToast(accountResp.message);
+
                 } else {
                     AccountManager.Account account =AccountManager.getAccount();
 
@@ -339,7 +339,7 @@ public class TradeHomeFragment extends BaseFragment {
 
                 if (resp.code != 0 && resp.data != null) {
                     ServerAPI.handleCodeError(resp);
-                    ToastHelper.showToast(resp.message);
+
                 } else {
 
                     Data.sTradings = resp.data.trades;

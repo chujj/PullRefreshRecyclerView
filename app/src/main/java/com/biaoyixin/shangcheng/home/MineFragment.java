@@ -102,7 +102,7 @@ public class MineFragment extends BaseFragment {
             public void success(GoodsApi.OutMoneyUIInfoResp resp, Response response) {
                 ((BaseActivity)getActivity()).dismissLoadingDialog();
                 if (resp.code != 0) {
-                    ToastHelper.showToast(resp.message);
+
                     ServerAPI.handleCodeError(resp);
                 } else {
                     mEntrys[0].setVisibility(TextUtils.isEmpty(resp.data.bank_account) ? View.GONE : View.VISIBLE);

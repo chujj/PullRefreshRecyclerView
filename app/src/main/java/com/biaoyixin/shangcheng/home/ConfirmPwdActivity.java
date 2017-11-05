@@ -87,7 +87,7 @@ public class ConfirmPwdActivity extends BaseActivity {
             @Override
             public void success(BaseModel baseModel, Response response) {
                 if (baseModel.code != 0) {
-                    ToastHelper.showToast(baseModel.message);
+
                     ServerAPI.handleCodeError(baseModel);
                 } else {
                     ToastHelper.showToast("验证成功");

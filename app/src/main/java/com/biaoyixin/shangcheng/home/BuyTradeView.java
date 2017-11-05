@@ -301,7 +301,6 @@ public class BuyTradeView extends RelativeLayout {
                 public void success(UserApi.YouhuiquanResp resp, Response response) {
                     baseActivity.dismissLoadingDialog();
                     if (resp.code != 0) {
-                        ToastHelper.showToast(resp.message);
                         ServerAPI.handleCodeError(resp);
                     } else {
                         mCoupons = resp.data;
@@ -389,7 +388,6 @@ public class BuyTradeView extends RelativeLayout {
                     public void success(GoodsApi.BuyTradeResponse baseModel, Response response) {
                         mBaseActivity.dismissLoadingDialog();
                         if (baseModel.code != 0) {
-                            ToastHelper.showToast(baseModel.message);
                             ServerAPI.handleCodeError(baseModel);
                         } else {
 

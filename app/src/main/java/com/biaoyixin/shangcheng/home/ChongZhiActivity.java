@@ -219,7 +219,6 @@ public class ChongZhiActivity extends BaseActivity {
 
                                             if (wcpr.code != 0) {
                                                 ServerAPI.handleCodeError(wcpr);
-                                                ToastHelper.showToast(wcpr.message);
                                             } else {
                                                 needShowPayResultPromt = true;
                                                 Uri uri = Uri.parse(wcpr.data);
@@ -356,7 +355,6 @@ public class ChongZhiActivity extends BaseActivity {
 
                                             if (wcpr.code != 0) {
                                                 ServerAPI.handleCodeError(wcpr);
-                                                ToastHelper.showToast(wcpr.message);
                                             } else {
                                                 for (int i = 0; i < wcpr.data.size(); i++) {
 
@@ -443,7 +441,6 @@ public class ChongZhiActivity extends BaseActivity {
 
                                             if (wcpr.code != 0) {
                                                 ServerAPI.handleCodeError(wcpr);
-                                                ToastHelper.showToast(wcpr.message);
                                             } else {
 
                                                 String url = wcpr.data.gateway;
@@ -567,7 +564,6 @@ public class ChongZhiActivity extends BaseActivity {
 
                                             if (wcpr.code != 0) {
                                                 ServerAPI.handleCodeError(wcpr);
-                                                ToastHelper.showToast(wcpr.message);
                                             } else {
                                                 needShowPayResultPromt = true;
                                                 Uri uri = Uri.parse(wcpr.data.gateway);
@@ -664,7 +660,6 @@ public class ChongZhiActivity extends BaseActivity {
             @Override
             public void success(GoodsApi.InMoneyUIInfoResp resp, Response response) {
                 if (resp.code != 0) {
-                    ToastHelper.showToast(resp.message);
                     ServerAPI.handleCodeError(resp);
                 } else {
                     mInMoneyUIInfo = resp.data;
@@ -684,7 +679,6 @@ public class ChongZhiActivity extends BaseActivity {
             @Override
             public void success(GoodsApi.InMoneyChannelListResp resp, Response response) {
                 if (resp.code != 0) {
-                    ToastHelper.showToast(resp.message);
                     ServerAPI.handleCodeError(resp);
                 } else {
                     mInMoneyChannels = resp.data;

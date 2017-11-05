@@ -58,7 +58,6 @@ public class ChuRuJinHistoryActivity extends BaseActivity {
             public void success(UserApi.ChuRuJinHistoryResp resp, Response response) {
                 ChuRuJinHistoryActivity.this.dismissLoadingDialog();
                 if (resp.code != 0) {
-                    ToastHelper.showToast(resp.message);
                     ServerAPI.handleCodeError(resp);
                 } else {
                     mAdapter.setData(resp.data);

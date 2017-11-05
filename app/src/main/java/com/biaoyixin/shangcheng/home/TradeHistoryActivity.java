@@ -135,7 +135,7 @@ public class TradeHistoryActivity extends BaseActivity {
             public void success(GoodsApi.TradeHistoryResp baseModel, Response response) {
                 TradeHistoryActivity.this.dismissLoadingDialog();
                 if (baseModel.code != 0) {
-                    ToastHelper.showToast(baseModel.message);
+
                     ServerAPI.handleCodeError(baseModel);
                 } else {
 

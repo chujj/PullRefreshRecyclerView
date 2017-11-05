@@ -107,11 +107,13 @@ public class ServerAPI {
 
 
     public static void handleCodeError(BaseModel baseModel) {
+        boolean showToast = true;
         if (baseModel.code == 3000) {
 
             Intent it = new Intent(BaseApp.getApp(), PasswordSetupActivity.class);
             BaseApp.getApp().startActivity(it);
         } else if (baseModel.code == 1000 || baseModel.code == 2000) {
+            showToast = false;
             PreferencesUtil.putString(BaseApp.getApp(), AccountManager.PREF_USER_ID, "");
             Intent it = new Intent(BaseApp.getApp(), LoginActivity.class);
             if (AccountManager.isLogin()) {
@@ -122,6 +124,10 @@ public class ServerAPI {
         } else if (baseModel.code == 5) {
             Intent it = new Intent(BaseApp.getApp(), ConfirmPwdActivity.class);
             BaseApp.getApp().startActivity(it);
+        }
+
+        if (showToast) {
+            ToastHelper.showToast(baseModel.message);
         }
     }
 }

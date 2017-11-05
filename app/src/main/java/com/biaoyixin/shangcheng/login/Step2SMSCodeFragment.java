@@ -262,7 +262,7 @@ public class Step2SMSCodeFragment extends BaseFragment {
                 ((BaseActivity) getActivity()).dismissLoadingDialog();
                 if (baseModel.code != 0) {
                     ServerAPI.handleCodeError(baseModel);
-                    ToastHelper.showToast(baseModel.message);
+
                 } else {
                     Intent it = new Intent(getContext(), PasswordSetupActivity.class);
                     it.putExtra("forget_pwd", true);

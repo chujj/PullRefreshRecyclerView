@@ -63,7 +63,7 @@ public class YouHuiQuanActivity extends BaseActivity {
             public void success(UserApi.YouhuiquanResp resp, Response response) {
                 dismissLoadingDialog();
                 if (resp.code != 0) {
-                    ToastHelper.showToast(resp.message);
+
                     ServerAPI.handleCodeError(resp);
                 } else {
 

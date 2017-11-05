@@ -67,7 +67,6 @@ public class BankCardActivity extends BaseActivity {
                 dismissLoadingDialog();
 
                 if (resp.code != 0) {
-                    ToastHelper.showToast(resp.message);
                     ServerAPI.handleCodeError(resp);
                 } else {
                     mBankName.setText(resp.data.bank_name);

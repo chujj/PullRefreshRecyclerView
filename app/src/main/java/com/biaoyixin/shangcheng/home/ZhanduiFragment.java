@@ -101,7 +101,7 @@ public class ZhanduiFragment extends BaseFragment {
                 baseActivity.dismissLoadingDialog();
 
                 if (resp.code != 0) {
-                    ToastHelper.showToast(resp.message);
+
                     ServerAPI.handleCodeError(resp);
                 } else {
                     mData = resp.data;

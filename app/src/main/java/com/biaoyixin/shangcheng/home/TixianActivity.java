@@ -306,7 +306,7 @@ public class TixianActivity extends BaseActivity {
             @Override
             public void success(GoodsApi.OutMoneyUIInfoResp resp, Response response) {
                 if (resp.code != 0) {
-                    ToastHelper.showToast(resp.message);
+
                     ServerAPI.handleCodeError(resp);
                 } else {
                     mUIInfo = resp.data;
@@ -327,7 +327,7 @@ public class TixianActivity extends BaseActivity {
             @Override
             public void success(GoodsApi.OutChannelResp resp, Response response) {
                 if (resp.code != 0) {
-                    ToastHelper.showToast(resp.message);
+
                     ServerAPI.handleCodeError(resp);
                 } else {
                     mOutChannels = resp.data;
@@ -467,7 +467,7 @@ public class TixianActivity extends BaseActivity {
 
                         if (wcpr.code != 0) {
                             ServerAPI.handleCodeError(wcpr);
-                            ToastHelper.showToast(wcpr.message);
+
                         } else {
                             mBankCache.put(mSelectedOutChannel, wcpr.data);
                             initView.run();
@@ -651,7 +651,7 @@ public class TixianActivity extends BaseActivity {
 
                 if (wcpr.code != 0) {
                     ServerAPI.handleCodeError(wcpr);
-                    ToastHelper.showToast(wcpr.message);
+
                 } else {
                     ToastHelper.showToast("提现成功");
                 }

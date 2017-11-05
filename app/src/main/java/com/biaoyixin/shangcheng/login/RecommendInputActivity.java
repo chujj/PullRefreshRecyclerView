@@ -71,7 +71,7 @@ public class RecommendInputActivity extends BaseActivity {
                 dismissLoadingDialog();
 
                 if (baseModel.code != 0) {
-                    ToastHelper.showToast(baseModel.message);
+
                     ServerAPI.handleCodeError(baseModel);
                 } else {
                     finish();
