@@ -5,6 +5,7 @@ import android.content.Context;
 import android.os.Bundle;
 
 import com.biaoyixin.shangcheng.base.ToastHelper;
+import com.biaoyixin.shangcheng.share.Share;
 import com.tencent.mm.opensdk.modelbase.BaseReq;
 import com.tencent.mm.opensdk.modelbase.BaseResp;
 import com.tencent.mm.opensdk.modelmsg.SendAuth.Resp;
@@ -15,14 +16,20 @@ import com.tencent.mm.opensdk.openapi.IWXAPIEventHandler;
  */
 public class WXEntryActivity extends Activity implements IWXAPIEventHandler {
     @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        Share.getInstance().getIWXAPI().handleIntent(getIntent(), this);
+    }
+
+    @Override
     public void onReq(BaseReq baseReq) {
 
     }
 
     @Override
     public void onResp(BaseResp baseResp) {
-
-
+        handleWxResp(this, baseResp);
+        finish();
     }
 
     public static void handleWxResp(Context context, BaseResp baseResp) {

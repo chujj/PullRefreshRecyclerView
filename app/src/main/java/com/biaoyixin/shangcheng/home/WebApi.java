@@ -58,13 +58,14 @@ public class WebApi {
                     return null;
                 }
 
-                WXImageObject imgObj = new WXImageObject();
-                imgObj.setImagePath(path);
+
+                Bitmap bmp = BitmapFactory.decodeFile(path);
+
+                WXImageObject imgObj = new WXImageObject(bmp);
 
                 WXMediaMessage msg = new WXMediaMessage();
                 msg.mediaObject = imgObj;
 
-                Bitmap bmp = BitmapFactory.decodeFile(path);
                 Bitmap thumbBmp = Bitmap.createScaledBitmap(bmp, THUMB_SIZE, THUMB_SIZE, true);
                 bmp.recycle();
                 msg.thumbData = bmpToByteArray(thumbBmp, true);
