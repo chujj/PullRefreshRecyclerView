@@ -136,6 +136,8 @@ public class ServerAPI {
             Intent it = new Intent(BaseApp.getApp(), LoginActivity.class);
             if (AccountManager.isLogin()) {
                 it.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+            } else {
+                it.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             }
             BaseApp.getApp().startActivity(it);
 
