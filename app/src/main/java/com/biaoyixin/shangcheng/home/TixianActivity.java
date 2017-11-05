@@ -30,9 +30,9 @@ import com.biaoyixin.shangcheng.model.BaseModel;
 import com.bumptech.glide.Glide;
 import com.google.gson.Gson;
 import com.squareup.okhttp.Call;
-import com.squareup.okhttp.MultipartBuilder;
 import com.squareup.okhttp.Request;
 
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -613,17 +613,31 @@ public class TixianActivity extends BaseActivity {
 
                 try {
 
-                    MultipartBuilder b = new MultipartBuilder();
-                    b.addFormDataPart("realname", realname);
-                    b.addFormDataPart("id_card", id_card);
-                    b.addFormDataPart("bank_account", bank_account);
-                    b.addFormDataPart("bank_province", bank_province);
-                    b.addFormDataPart("bank_city", bank_city);
-                    b.addFormDataPart("bank_code", bank_code);
-                    b.addFormDataPart("sms_code", sms_code);
-                    b.addFormDataPart("money", money);
+//                    MultipartBuilder b = new MultipartBuilder();
+//                    b.addFormDataPart("realname", realname);
+//                    b.addFormDataPart("id_card", id_card);
+//                    b.addFormDataPart("bank_account", bank_account);
+//                    b.addFormDataPart("bank_province", bank_province);
+//                    b.addFormDataPart("bank_city", bank_city);
+//                    b.addFormDataPart("bank_code", bank_code);
+//                    b.addFormDataPart("sms_code", sms_code);
+//                    b.addFormDataPart("money", money);
 
-                    Request request = new Request.Builder().url(mSelectedOutChannel.extract_url).post(b.build()).build();
+//                    Request request = new Request.Builder().url(mSelectedOutChannel.extract_url).post(b.build()).build();
+
+                    String url = mSelectedOutChannel.extract_url;
+                    url += (url.indexOf("?") > 0) ? "&" : "?";
+                    url += "realname=" + URLEncoder.encode(realname);
+                    url += "&id_card=" + URLEncoder.encode(id_card);
+                    url += "&bank_account=" + URLEncoder.encode(bank_account);
+                    url += "&bank_province=" + URLEncoder.encode(bank_province);
+                    url += "&bank_city=" + URLEncoder.encode(bank_city);
+                    url += "&bank_code=" + URLEncoder.encode(bank_code);
+                    url += "&sms_code=" + URLEncoder.encode(sms_code);
+                    url += "&money=" + URLEncoder.encode(money);
+
+
+                    Request request = new Request.Builder().url(url).get().build();
                     Call call = ServerAPI.getInstance().mOKClient.newCall(request);
                     response = call.execute();
 
