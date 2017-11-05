@@ -8,9 +8,10 @@
 
     <ImageView
         android:id="@+id/teach_page"
+        android:layout_gravity="bottom"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:scaleType="centerCrop"
+        android:layout_height="wrap_content"
+        android:scaleType="fitXY"
         />
 
 </com.biaoyixin.shangcheng.home.TeachPage>

@@ -47,10 +47,12 @@ public class TeachPage extends FrameLayout implements View.OnClickListener {
         this.setOnClickListener(this);
         mCurrIndex = 0;
         mTeachPages = new int[] {
-                R.drawable.ic_launcher,
-                R.drawable.ic_launcher,
-                R.drawable.ic_launcher,
-                R.drawable.ic_launcher,
+                R.drawable.teach_step1,
+                R.drawable.teach_step2,
+                R.drawable.teach_step3,
+                R.drawable.teach_step4,
+                R.drawable.teach_step5,
+                R.drawable.teach_step6,
         };
 
 
