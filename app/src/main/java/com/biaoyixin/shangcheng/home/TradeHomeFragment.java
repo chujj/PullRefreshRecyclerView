@@ -72,6 +72,9 @@ public class TradeHomeFragment extends BaseFragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EventBus.getDefault().register(this);
+
+//        new WebApi().shareImage("http://b1.hucdn.com/upload/item/1706/28/45282501058500_800x800.jpg!250x250.jpg");
+//        new WebApi().shareLink("http://m.baidu.com", "百度", "搜索引擎", "http://b1.hucdn.com/upload/item/1706/28/45282501058500_800x800.jpg!250x250.jpg");
     }
 
     @Override

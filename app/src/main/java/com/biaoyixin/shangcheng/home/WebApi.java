@@ -1,15 +1,31 @@
 package com.biaoyixin.shangcheng.home;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.text.TextUtils;
 import android.util.Log;
 import android.webkit.JavascriptInterface;
+import android.widget.Toast;
 
-import com.google.gson.Gson;
-import com.google.gson.annotations.SerializedName;
 import com.biaoyixin.shangcheng.Consts;
 import com.biaoyixin.shangcheng.api.trade.GoodsApi;
+import com.biaoyixin.shangcheng.base.BaseApp;
+import com.biaoyixin.shangcheng.base.ClosureMethod;
 import com.biaoyixin.shangcheng.model.BaseModel;
+import com.biaoyixin.shangcheng.share.Share;
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.animation.GlideAnimation;
+import com.bumptech.glide.request.target.BaseTarget;
+import com.bumptech.glide.request.target.SizeReadyCallback;
+import com.google.gson.Gson;
+import com.google.gson.annotations.SerializedName;
+import com.tencent.mm.opensdk.modelmsg.SendMessageToWX;
+import com.tencent.mm.opensdk.modelmsg.WXImageObject;
+import com.tencent.mm.opensdk.modelmsg.WXMediaMessage;
+import com.tencent.mm.opensdk.modelmsg.WXWebpageObject;
 
+import java.io.ByteArrayOutputStream;
+import java.io.File;
 import java.util.Arrays;
 import java.util.List;
 
@@ -26,17 +42,160 @@ public class WebApi {
 
 
     @JavascriptInterface
-    public void share(String json) {
+    public void shareImage(String imageUrl) {
 
-        ShareModel shareModel = mGson.fromJson(json, ShareModel.class);
+        final ClosureMethod runnable = new ClosureMethod() {
+            private static final int THUMB_SIZE = 120;
 
+            @Override
+            public Object[] run(Object... args) {
+
+                int mTargetScene =   SendMessageToWX.Req.WXSceneSession;
+                String path = (String) args[0];
+                File file = new File(path);
+                if (!file.exists()) {
+                    Toast.makeText(BaseApp.getApp(), "文件不存在" + " path = " + path, Toast.LENGTH_LONG).show();
+                    return null;
+                }
+
+                WXImageObject imgObj = new WXImageObject();
+                imgObj.setImagePath(path);
+
+                WXMediaMessage msg = new WXMediaMessage();
+                msg.mediaObject = imgObj;
+
+                Bitmap bmp = BitmapFactory.decodeFile(path);
+                Bitmap thumbBmp = Bitmap.createScaledBitmap(bmp, THUMB_SIZE, THUMB_SIZE, true);
+                bmp.recycle();
+                msg.thumbData = bmpToByteArray(thumbBmp, true);
+
+                SendMessageToWX.Req req = new SendMessageToWX.Req();
+                req.transaction = buildTransaction("img");
+                req.message = msg;
+                req.scene = mTargetScene;
+                Share.getInstance().getIWXAPI().sendReq(req);
+
+                return null;
+            }
+
+            private String buildTransaction(final String type) {
+                return (type == null) ? String.valueOf(System.currentTimeMillis()) : type + System.currentTimeMillis();
+            }
+
+
+        };
+
+
+        Glide.with(BaseApp.getApp()).load(imageUrl).downloadOnly(new BaseTarget<File>() {
+
+            @Override
+            public void onResourceReady(File resource, GlideAnimation<? super File> glideAnimation) {
+                System.out.println(resource.getAbsolutePath());
+
+
+                runnable.run(new Object[] {resource.getAbsolutePath()});
+            }
+
+            @Override
+            public void getSize(SizeReadyCallback cb) {
+                cb.onSizeReady(100, 100);
+            }
+        });
 
     }
 
+    public byte[] bmpToByteArray(final Bitmap bmp, final boolean needRecycle) {
+        ByteArrayOutputStream output = new ByteArrayOutputStream();
+        bmp.compress(Bitmap.CompressFormat.PNG, 100, output);
+        if (needRecycle) {
+            bmp.recycle();
+        }
+
+        byte[] result = output.toByteArray();
+        try {
+            output.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return result;
+    }
 
 
-    public static class ShareModel extends BaseModel {
-        public String url;
+    @JavascriptInterface
+    public void shareLink(final String url, final String title, final String desc, String imageUrl) {
+
+
+        final ClosureMethod runnable = new ClosureMethod() {
+            private static final int THUMB_SIZE = 120;
+
+            @Override
+            public Object[] run(Object... args) {
+
+                int mTargetScene =   SendMessageToWX.Req.WXSceneSession;
+                String path = (String) args[0];
+                File file = new File(path);
+                if (!file.exists()) {
+                    Toast.makeText(BaseApp.getApp(), "文件不存在" + " path = " + path, Toast.LENGTH_LONG).show();
+                    return null;
+                }
+
+                WXWebpageObject webpage = new WXWebpageObject();
+                webpage.webpageUrl = url;
+                WXMediaMessage msg = new WXMediaMessage(webpage);
+                msg.title = title;
+                msg.description = desc;
+                Bitmap bmp = BitmapFactory.decodeFile(path);
+                Bitmap thumbBmp = Bitmap.createScaledBitmap(bmp, THUMB_SIZE, THUMB_SIZE, true);
+                bmp.recycle();
+                msg.thumbData = bmpToByteArray(thumbBmp, true);
+
+                SendMessageToWX.Req req = new SendMessageToWX.Req();
+                req.transaction = buildTransaction("webpage");
+                req.message = msg;
+                req.scene = mTargetScene;
+                Share.getInstance().getIWXAPI().sendReq(req);
+
+                return null;
+            }
+
+            private String buildTransaction(final String type) {
+                return (type == null) ? String.valueOf(System.currentTimeMillis()) : type + System.currentTimeMillis();
+            }
+
+            public byte[] bmpToByteArray(final Bitmap bmp, final boolean needRecycle) {
+                ByteArrayOutputStream output = new ByteArrayOutputStream();
+                bmp.compress(Bitmap.CompressFormat.PNG, 100, output);
+                if (needRecycle) {
+                    bmp.recycle();
+                }
+
+                byte[] result = output.toByteArray();
+                try {
+                    output.close();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
+                return result;
+            }
+        };
+
+        Glide.with(BaseApp.getApp()).load(imageUrl).downloadOnly(new BaseTarget<File>() {
+
+            @Override
+            public void onResourceReady(File resource, GlideAnimation<? super File> glideAnimation) {
+                System.out.println(resource.getAbsolutePath());
+
+
+                runnable.run(new Object[] {resource.getAbsolutePath()});
+            }
+
+            @Override
+            public void getSize(SizeReadyCallback cb) {
+                cb.onSizeReady(100, 100);
+            }
+        });
     }
 
     @JavascriptInterface
@@ -180,7 +339,7 @@ public class WebApi {
             }
 
 
-             EventBus.getDefault().post(
+            EventBus.getDefault().post(
                     Consts.getBoardCastMessage(Consts.BoardCast_TradeClose));
         }
 

@@ -1,7 +1,8 @@
 package com.biaoyixin.shangcheng.share;
 
-import android.app.Activity;
+import android.content.Context;
 
+import com.biaoyixin.shangcheng.base.BaseApp;
 import com.tencent.mm.opensdk.openapi.IWXAPI;
 import com.tencent.mm.opensdk.openapi.WXAPIFactory;
 
@@ -14,8 +15,24 @@ public class Share {
     private final static String APP_ID = "";
     private IWXAPI api;
 
-    private void regToWX(Activity activity) {
+    private void regToWX(Context activity) {
         api = WXAPIFactory.createWXAPI(activity, APP_ID, true);
         api.registerApp(APP_ID);
+    }
+
+
+    private static Share sInstance;
+
+    public static synchronized  Share getInstance() {
+        if (sInstance == null) {
+            sInstance = new Share();
+            sInstance.regToWX(BaseApp.getApp());
+        }
+        return sInstance;
+    }
+
+
+    public IWXAPI getIWXAPI() {
+        return api;
     }
 }
