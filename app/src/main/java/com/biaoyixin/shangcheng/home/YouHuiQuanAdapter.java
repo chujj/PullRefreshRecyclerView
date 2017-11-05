@@ -62,6 +62,7 @@ public class YouHuiQuanAdapter extends BaseAdapter {
                     line1.setText(String.format("%s  有效登录时间： %s天",
                             new SimpleDateFormat("yyyy年MM月dd日").format(youhuiquen.gmtCreated),
                             youhuiquen.validDays));
+                    line2.setText("下单金额为" + youhuiquen.needMoney + "元时可用");
                     return null;
                 }
             });
