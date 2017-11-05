@@ -10,6 +10,8 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 
 import com.biaoyixin.shangcheng.R;
@@ -18,6 +20,7 @@ import com.biaoyixin.shangcheng.api.ServerAPI;
 import com.biaoyixin.shangcheng.api.user.UserApi;
 import com.biaoyixin.shangcheng.base.BaseActivity;
 import com.biaoyixin.shangcheng.base.CommonUtils;
+import com.biaoyixin.shangcheng.base.PreferencesUtil;
 import com.biaoyixin.shangcheng.base.Topbar;
 import com.biaoyixin.shangcheng.login.AccountManager;
 import com.biaoyixin.shangcheng.login.LoginActivity;
@@ -44,6 +47,9 @@ public class HomeActivity extends BaseActivity {
     @BindViews({R2.id.home_icon_1, R2.id.home_icon_2 , R2.id.home_icon_3 , R2.id.home_icon_4})
     ViewGroup[] mHomeButtons;
 
+
+    public final static String KEY_TEACH_PAGES = "KEY_TEACH_PAGES_showed";
+
     private String[] mFragmentNames = new String[] {
             TradeHomeFragment.class.getName(),
             WebViewFragment.class.getName(),
@@ -69,6 +75,8 @@ public class HomeActivity extends BaseActivity {
 
 
         checkUpgrade();
+
+        checkTeachPages();
     }
 
     @Override
@@ -198,6 +206,14 @@ public class HomeActivity extends BaseActivity {
         switchToIndex(3);
     }
 
+
+
+    private void checkTeachPages() {
+        if (!PreferencesUtil.getBoolean(this, KEY_TEACH_PAGES, false)) {
+            View view = LayoutInflater.from(this).inflate(R.layout.teach_page_layout, null, false);
+            CommonUtils.addToActivity(this, view);
+        }
+    }
 
 
 }
