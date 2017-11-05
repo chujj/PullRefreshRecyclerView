@@ -1,6 +1,8 @@
 package com.biaoyixin.shangcheng.home;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.util.AttributeSet;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,14 +10,14 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 
 import com.biaoyixin.shangcheng.R;
-import com.biaoyixin.shangcheng.base.BaseApp;
 import com.biaoyixin.shangcheng.base.CommonUtils;
-import com.biaoyixin.shangcheng.base.PreferencesUtil;
 
 /**
  * Created by zhujj on 17-11-5.
  */
 public class TeachPage extends FrameLayout implements View.OnClickListener {
+    private int mWidth;
+
     public TeachPage(Context context) {
         super(context);
     }
@@ -55,19 +57,32 @@ public class TeachPage extends FrameLayout implements View.OnClickListener {
                 R.drawable.teach_step6,
         };
 
+        mWidth = getResources().getDisplayMetrics().widthPixels;
 
         mImg = CommonUtils.findView(this, R.id.teach_page);
 
-        mImg.setImageResource(mTeachPages[mCurrIndex]);
+
+        Bitmap bitmap = BitmapFactory.decodeResource(getResources(), mTeachPages[mCurrIndex], new BitmapFactory.Options());
+        int height = (int) (1f * mWidth * bitmap.getHeight() / bitmap.getWidth());
+        mImg.setImageBitmap(bitmap);
+        mImg.getLayoutParams().height = height;
+
     }
 
     @Override
     public void onClick(View v) {
         if (mCurrIndex >= (mTeachPages.length -1)) {
-            PreferencesUtil.putBoolean(BaseApp.getApp(), HomeActivity.KEY_TEACH_PAGES, true);
+//            PreferencesUtil.putBoolean(BaseApp.getApp(), HomeActivity.KEY_TEACH_PAGES, true);
             ((ViewGroup) getParent()).removeView(this);
         } else {
             mCurrIndex++;
+
+
+            Bitmap bitmap = BitmapFactory.decodeResource(getResources(), mTeachPages[mCurrIndex], new BitmapFactory.Options());
+            int height = (int) (1f * mWidth * bitmap.getHeight() / bitmap.getWidth());
+            mImg.setImageBitmap(bitmap);
+            mImg.getLayoutParams().height = height;
+
             mImg.setImageResource(mTeachPages[mCurrIndex]);
         }
     }
