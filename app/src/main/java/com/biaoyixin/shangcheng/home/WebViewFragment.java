@@ -15,6 +15,7 @@ import com.biaoyixin.shangcheng.R;
 import com.biaoyixin.shangcheng.R2;
 import com.biaoyixin.shangcheng.account.AccountHelper;
 import com.biaoyixin.shangcheng.api.ServerAPI;
+import com.biaoyixin.shangcheng.base.BaseActivity;
 import com.biaoyixin.shangcheng.base.BaseFragment;
 
 import java.net.HttpCookie;
@@ -59,7 +60,9 @@ public class WebViewFragment extends BaseFragment {
         setting.setTextSize(WebSettings.TextSize.NORMAL);
         setting.setDatabaseEnabled(true);
         setting.setDomStorageEnabled(true);
-        mWebView.addJavascriptInterface(new WebApi(), "WebAPI");
+        WebApi webApi = new WebApi();
+        webApi.mActivity = (BaseActivity) getActivity();
+        mWebView.addJavascriptInterface(webApi, "WebAPI");
 
 
         try {
@@ -88,6 +91,7 @@ public class WebViewFragment extends BaseFragment {
 
 
         String url = "http://time.168zhibo.cn/#/invitation";
+//        url = "http://192.168.43.242:9004/#/invitation";
         String domian = URI.create(url).getHost();
 
 

@@ -19,7 +19,6 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
 import com.biaoyixin.shangcheng.Consts;
 import com.biaoyixin.shangcheng.R;
 import com.biaoyixin.shangcheng.R2;
@@ -35,6 +34,7 @@ import com.biaoyixin.shangcheng.base.ToastHelper;
 import com.biaoyixin.shangcheng.base.UnderlineIndicator;
 import com.biaoyixin.shangcheng.login.AccountManager;
 import com.biaoyixin.shangcheng.login.LoginActivity;
+import com.bumptech.glide.Glide;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -72,9 +72,6 @@ public class TradeHomeFragment extends BaseFragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EventBus.getDefault().register(this);
-
-//        new WebApi().shareImage("http://b1.hucdn.com/upload/item/1706/28/45282501058500_800x800.jpg!250x250.jpg");
-//        new WebApi().shareLink("http://m.baidu.com", "百度", "搜索引擎", "http://b1.hucdn.com/upload/item/1706/28/45282501058500_800x800.jpg!250x250.jpg");
     }
 
     @Override
@@ -387,6 +384,10 @@ public class TradeHomeFragment extends BaseFragment {
 
     @OnClick(R2.id.chongzhi)
     public void clickChongZhi() {
+//        WebApi webapi = new WebApi();
+//        webapi.mActivity = (BaseActivity) getActivity();
+//        webapi.shareImage("http://b1.hucdn.com/upload/item/1706/28/45282501058500_800x800.jpg!250x250.jpg");
+
         if (!AccountManager.isLogin()) {
             Intent it = new Intent(this.getContext(), LoginActivity.class);
             startActivity(it);
@@ -400,6 +401,10 @@ public class TradeHomeFragment extends BaseFragment {
 
     @OnClick(R2.id.tixian)
     public void clickTiXian() {
+//        WebApi webapi = new WebApi();
+//        webapi.mActivity = (BaseActivity) getActivity();
+//        webapi.shareLink("http://m.baidu.com", "百度", "搜索引擎", "");
+
         if (!AccountManager.isLogin()) {
             Intent it = new Intent(this.getContext(), LoginActivity.class);
             startActivity(it);

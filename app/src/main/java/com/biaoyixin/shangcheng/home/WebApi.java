@@ -1,16 +1,21 @@
 package com.biaoyixin.shangcheng.home;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.drawable.Drawable;
 import android.text.TextUtils;
 import android.util.Log;
 import android.webkit.JavascriptInterface;
 import android.widget.Toast;
 
 import com.biaoyixin.shangcheng.Consts;
+import com.biaoyixin.shangcheng.R;
 import com.biaoyixin.shangcheng.api.trade.GoodsApi;
+import com.biaoyixin.shangcheng.base.BaseActivity;
 import com.biaoyixin.shangcheng.base.BaseApp;
 import com.biaoyixin.shangcheng.base.ClosureMethod;
+import com.biaoyixin.shangcheng.base.ToastHelper;
 import com.biaoyixin.shangcheng.model.BaseModel;
 import com.biaoyixin.shangcheng.share.Share;
 import com.bumptech.glide.Glide;
@@ -40,9 +45,27 @@ public class WebApi {
     private Gson mGson = new Gson();
 
 
+    public BaseActivity mActivity;
 
     @JavascriptInterface
-    public void shareImage(String imageUrl) {
+    public void shareImage(final String imageUrl) {
+
+        if (mActivity == null){
+            return;
+        }
+
+        ShareActivity.sCallback = new ClosureMethod() {
+            @Override
+            public Object[] run(Object... args) {
+                doShareImage(imageUrl, (Integer) args[0]);
+                return new Object[0];
+            }
+        };
+        Intent it = new Intent(mActivity, ShareActivity.class);
+        mActivity.startActivity(it);
+    }
+
+    public void doShareImage(String imageUrl, final int shareType) {
 
         final ClosureMethod runnable = new ClosureMethod() {
             private static final int THUMB_SIZE = 120;
@@ -50,7 +73,7 @@ public class WebApi {
             @Override
             public Object[] run(Object... args) {
 
-                int mTargetScene =   SendMessageToWX.Req.WXSceneSession;
+                int mTargetScene =  shareType; //  SendMessageToWX.Req.WXSceneSession;
                 String path = (String) args[0];
                 File file = new File(path);
                 if (!file.exists()) {
@@ -87,13 +110,20 @@ public class WebApi {
         };
 
 
+        mActivity.showLoadingDialog("加载中...", false);
         Glide.with(BaseApp.getApp()).load(imageUrl).downloadOnly(new BaseTarget<File>() {
 
             @Override
+            public void onLoadFailed(Exception e, Drawable errorDrawable) {
+                super.onLoadFailed(e, errorDrawable);
+                ToastHelper.showToast("图片数据出错，分享失败");
+                mActivity.dismissLoadingDialog();
+            }
+
+            @Override
             public void onResourceReady(File resource, GlideAnimation<? super File> glideAnimation) {
-                System.out.println(resource.getAbsolutePath());
-
-
+                mActivity.dismissLoadingDialog();
+//                System.out.println(resource.getAbsolutePath());
                 runnable.run(new Object[] {resource.getAbsolutePath()});
             }
 
@@ -124,8 +154,23 @@ public class WebApi {
 
 
     @JavascriptInterface
-    public void shareLink(final String url, final String title, final String desc, String imageUrl) {
+    public void shareLink(final String url, final String title, final String desc, final String imageUrl) {
+        if (mActivity == null) {
+            return;
+        }
 
+        ShareActivity.sCallback = new ClosureMethod() {
+            @Override
+            public Object[] run(Object... args) {
+                doShareLink(url, title, desc, imageUrl, (Integer) args[0]);
+                return new Object[0];
+            }
+        };
+        Intent it = new Intent(mActivity, ShareActivity.class);
+        mActivity.startActivity(it);
+    }
+
+    public void doShareLink(final String url, final String title, final String desc, String imageUrl, final int type) {
 
         final ClosureMethod runnable = new ClosureMethod() {
             private static final int THUMB_SIZE = 120;
@@ -133,12 +178,19 @@ public class WebApi {
             @Override
             public Object[] run(Object... args) {
 
-                int mTargetScene =   SendMessageToWX.Req.WXSceneSession;
-                String path = (String) args[0];
-                File file = new File(path);
-                if (!file.exists()) {
-                    Toast.makeText(BaseApp.getApp(), "文件不存在" + " path = " + path, Toast.LENGTH_LONG).show();
-                    return null;
+                int mTargetScene = type; //  SendMessageToWX.Req.WXSceneSession;
+                boolean isPath = args[0] instanceof String;
+                String path = null;
+                Bitmap bitmap = null;
+                if (isPath) {
+                    path = (String) args[0];
+                    File file = new File(path);
+                    if (!file.exists()) {
+                        Toast.makeText(BaseApp.getApp(), "文件不存在" + " path = " + path, Toast.LENGTH_LONG).show();
+                        return null;
+                    }
+                } else {
+                    bitmap = (Bitmap) args[0];
                 }
 
                 WXWebpageObject webpage = new WXWebpageObject();
@@ -146,10 +198,14 @@ public class WebApi {
                 WXMediaMessage msg = new WXMediaMessage(webpage);
                 msg.title = title;
                 msg.description = desc;
-                Bitmap bmp = BitmapFactory.decodeFile(path);
-                Bitmap thumbBmp = Bitmap.createScaledBitmap(bmp, THUMB_SIZE, THUMB_SIZE, true);
-                bmp.recycle();
-                msg.thumbData = bmpToByteArray(thumbBmp, true);
+                if (isPath) {
+                    Bitmap bmp = BitmapFactory.decodeFile(path);
+                    Bitmap thumbBmp = Bitmap.createScaledBitmap(bmp, THUMB_SIZE, THUMB_SIZE, true);
+                    bmp.recycle();
+                    msg.thumbData = bmpToByteArray(thumbBmp, true);
+                } else {
+                    msg.thumbData = bmpToByteArray(bitmap, true);
+                }
 
                 SendMessageToWX.Req req = new SendMessageToWX.Req();
                 req.transaction = buildTransaction("webpage");
@@ -182,21 +238,36 @@ public class WebApi {
             }
         };
 
-        Glide.with(BaseApp.getApp()).load(imageUrl).downloadOnly(new BaseTarget<File>() {
+        if (!TextUtils.isEmpty(imageUrl)) {
+            mActivity.showLoadingDialog("加载中...", false);
+            Glide.with(BaseApp.getApp()).load(imageUrl).downloadOnly(new BaseTarget<File>() {
 
-            @Override
-            public void onResourceReady(File resource, GlideAnimation<? super File> glideAnimation) {
-                System.out.println(resource.getAbsolutePath());
+                @Override
+                public void onLoadFailed(Exception e, Drawable errorDrawable) {
+                    super.onLoadFailed(e, errorDrawable);
+                    ToastHelper.showToast("图片数据出错，分享失败");
+                    mActivity.dismissLoadingDialog();
+                }
 
+                @Override
+                public void onResourceReady(File resource, GlideAnimation<? super File> glideAnimation) {
+                    System.out.println(resource.getAbsolutePath());
 
-                runnable.run(new Object[] {resource.getAbsolutePath()});
-            }
+                    mActivity.dismissLoadingDialog();
 
-            @Override
-            public void getSize(SizeReadyCallback cb) {
-                cb.onSizeReady(100, 100);
-            }
-        });
+                    runnable.run(new Object[] {resource.getAbsolutePath()});
+                }
+
+                @Override
+                public void getSize(SizeReadyCallback cb) {
+                    cb.onSizeReady(100, 100);
+                }
+            });
+        } else {
+            Bitmap bitmap = BitmapFactory.decodeResource(mActivity.getResources(), R.drawable.ic_launcher);
+            runnable.run(new Object[] {bitmap});
+        }
+
     }
 
     @JavascriptInterface
