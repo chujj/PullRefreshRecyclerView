@@ -206,9 +206,9 @@
                 android:gravity="center"
                 android:layout_weight="5"
                 android:text="确认"
-                android:textColor="#FFCCCCCC"
+                android:textColor="#FF000000"
                 android:textSize="14sp"
-                android:background="@drawable/trade_buy_chip_item"
+                android:background="@drawable/trade_buy_chip_item_selected"
                 />
         </LinearLayout>
 
