@@ -44,6 +44,7 @@ public class AccountManager {
         public String free_asset;
         public String lock_asset;
         public String invite_code;
+        public String phoneNum;
     }
 
 

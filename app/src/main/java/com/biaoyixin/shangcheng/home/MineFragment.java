@@ -10,7 +10,6 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
 import com.biaoyixin.shangcheng.R;
 import com.biaoyixin.shangcheng.R2;
 import com.biaoyixin.shangcheng.api.ServerAPI;
@@ -18,8 +17,8 @@ import com.biaoyixin.shangcheng.api.trade.GoodsApi;
 import com.biaoyixin.shangcheng.base.BaseActivity;
 import com.biaoyixin.shangcheng.base.BaseFragment;
 import com.biaoyixin.shangcheng.base.CommonUtils;
-import com.biaoyixin.shangcheng.base.ToastHelper;
 import com.biaoyixin.shangcheng.login.AccountManager;
+import com.bumptech.glide.Glide;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -45,6 +44,9 @@ public class MineFragment extends BaseFragment {
     TextView mFreeAsset;
     @BindView(R2.id.lock_asset)
     TextView mLockAsset;
+
+    @BindView(R2.id.account)
+    TextView mAccount;
 
 
     @BindViews({R2.id.entry_1, R2.id.entry_2, R2.id.entry_3, R2.id.entry_4, R2.id.entry_5, R2.id.entry_6, })
@@ -92,6 +94,12 @@ public class MineFragment extends BaseFragment {
         mAssets.setText(account.asset);
         mFreeAsset.setText(account.free_asset);
         mLockAsset.setText(account.lock_asset);
+
+        String str = account.nickName;
+        if (!TextUtils.isEmpty(account.phoneNum)) {
+            str += ("("+ account.phoneNum + ")");
+        }
+        mAccount.setText(str);
     }
 
     private void loadYinhangkaData() {

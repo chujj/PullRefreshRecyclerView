@@ -314,7 +314,10 @@ public class TradeHomeFragment extends BaseFragment {
                         account.lock_asset = accountResp.data.lock_asset;
                     }
 
-
+                    if (!TextUtils.isEmpty(accountResp.data.mobile)) {
+                        changede = true;
+                        account.phoneNum = accountResp.data.mobile;
+                    }
 
 
                     if (changede) {
