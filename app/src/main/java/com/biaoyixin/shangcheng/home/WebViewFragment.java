@@ -97,6 +97,7 @@ public class WebViewFragment extends BaseFragment {
 
         List<HttpCookie> cookies = AccountHelper.getCookieStore().get(URI.create(ServerAPI.HOST));
         CookieManager cookieManager = CookieManager.getInstance();
+        cookieManager.removeAllCookie();
         for(HttpCookie cookie : cookies) {
             String domin_name = cookie.getDomain();
             domin_name = domian;
