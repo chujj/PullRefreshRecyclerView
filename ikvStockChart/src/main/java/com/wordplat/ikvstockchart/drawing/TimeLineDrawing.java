@@ -20,6 +20,7 @@ package com.wordplat.ikvstockchart.drawing;
 
 import android.graphics.Canvas;
 import android.graphics.Paint;
+import android.graphics.Path;
 import android.graphics.RectF;
 
 import com.wordplat.ikvstockchart.entry.Entry;
@@ -37,9 +38,11 @@ import com.wordplat.ikvstockchart.render.AbstractRender;
 public class TimeLineDrawing implements IDrawing {
 
     private Paint linePaint;
+    private Paint shadowPaint;
 
     private final RectF chartRect = new RectF(); // 分时图显示区域
     private AbstractRender render;
+    private final Path path = new Path();
 
     private float[] lineBuffer = new float[4];
     private float[] pointBuffer = new float[2];
@@ -55,6 +58,11 @@ public class TimeLineDrawing implements IDrawing {
         }
         linePaint.setStrokeWidth(sizeColor.getTimeLineSize());
         linePaint.setColor(sizeColor.getTimeLineColor());
+
+
+        shadowPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
+        shadowPaint.setStyle(Paint.Style.FILL);
+        shadowPaint.setColor(0x11ffffff);
 
         chartRect.set(contentRect);
     }
@@ -90,6 +98,17 @@ public class TimeLineDrawing implements IDrawing {
 
         if (count > 0) {
             canvas.drawLines(lineBuffer, 0, count, linePaint);
+
+
+            path.reset();
+            path.moveTo(chartRect.left, chartRect.bottom);
+            for (int i = 0; (i +1) < lineBuffer.length ; i+=2) {
+                path.lineTo(lineBuffer[i], lineBuffer[i+1]);
+            }
+            path.lineTo(lineBuffer[lineBuffer.length - 2], chartRect.bottom);
+            path.close();
+            canvas.drawPath(path, shadowPaint);
+
         }
 
         // 计算高亮坐标

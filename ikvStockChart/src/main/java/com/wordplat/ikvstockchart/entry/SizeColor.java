@@ -48,6 +48,8 @@ public class SizeColor {
     private int axisColor = 0xffdddddd; // 轴线条颜色
     private float gridSize = 2f; // 网格线大小
     private int gridColor = 0xffdddddd; // 网格线颜色
+    public int klineBottomIndexHeight;
+    public int klineBottomIndexLabelExtraHeight;
 
     public float getXLabelSize() {
         return xLabelSize;

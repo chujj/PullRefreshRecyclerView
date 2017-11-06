@@ -327,6 +327,9 @@ public class ViewUtils {
             sizeColor.setErrorTextColor(a.getColor(R.styleable.InteractiveKLineView_errorTextColor,
                     sizeColor.getErrorTextColor()));
 
+            sizeColor.klineBottomIndexHeight = ViewUtils.dpTopx(context, 6);
+            sizeColor.klineBottomIndexLabelExtraHeight = ViewUtils.dpTopx(context, 8); // max is 10
+
             String errorText = a.getString(R.styleable.InteractiveKLineView_errorText);
             if (!TextUtils.isEmpty(errorText)) {
                 sizeColor.setErrorText(errorText);

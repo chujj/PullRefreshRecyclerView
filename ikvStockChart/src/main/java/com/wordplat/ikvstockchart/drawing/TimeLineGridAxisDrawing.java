@@ -19,7 +19,9 @@
 package com.wordplat.ikvstockchart.drawing;
 
 import android.graphics.Canvas;
+import android.graphics.DashPathEffect;
 import android.graphics.Paint;
+import android.graphics.Path;
 import android.graphics.RectF;
 
 import com.wordplat.ikvstockchart.entry.EntrySet;
@@ -55,6 +57,7 @@ public class TimeLineGridAxisDrawing implements IDrawing {
 
     private int entrySetSize;
 
+    private Path mPath = new Path();
 
     private final static int Y_LABEL_SIZE = 8;
     
@@ -91,6 +94,7 @@ public class TimeLineGridAxisDrawing implements IDrawing {
 
         gridPaint.setStrokeWidth(sizeColor.getGridSize());
         gridPaint.setColor(sizeColor.getGridColor());
+        gridPaint.setPathEffect(new DashPathEffect(new float[] {4,4}, 0));
 //        gridPaint.setColor(0xffff0000);
 
         chartRect.set(contentRect);
@@ -116,12 +120,17 @@ public class TimeLineGridAxisDrawing implements IDrawing {
         // 绘制 三条横向网格线
         for (int i = 0 ; i < (Y_LABEL_SIZE - 2) ; i++) {
             float lineTop = chartRect.top + (i + 1) * lineHeight;
-            canvas.drawLine(chartRect.left, lineTop, chartRect.right, lineTop, gridPaint);
+//            canvas.drawLine(chartRect.left, lineTop, chartRect.right, lineTop, gridPaint);
+            mPath.reset();
+            mPath.moveTo(chartRect.left, lineTop);
+            mPath.lineTo(chartRect.right, lineTop);
+            canvas.drawPath(mPath, gridPaint);
         }
 
         for (int i = 0 ; i < Y_LABEL_SIZE ; i++) {
             float lineLeft = chartRect.left + i * lineWidth;
 
+            canvas.drawLine(lineLeft, chartRect.bottom, lineLeft, chartRect.bottom + sizeColor.klineBottomIndexHeight, gridPaint);
             if (i != 0 && i != (Y_LABEL_SIZE  - 1)) {
                 // 绘制 三条竖向网格线
 //                canvas.drawLine(lineLeft, chartRect.top, lineLeft, chartRect.bottom, gridPaint);
@@ -138,7 +147,7 @@ public class TimeLineGridAxisDrawing implements IDrawing {
                 canvas.drawText(
                         entrySet.getEntryList().get(index).getXLabel(),
                         lineLeft,
-                        chartRect.bottom + render.getSizeColor().getXLabelSize(),
+                        chartRect.bottom + render.getSizeColor().getXLabelSize() + sizeColor.klineBottomIndexLabelExtraHeight,
                         xLabelPaint);
             }
         }

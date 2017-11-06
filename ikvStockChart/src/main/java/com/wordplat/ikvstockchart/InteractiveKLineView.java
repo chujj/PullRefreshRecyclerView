@@ -307,7 +307,7 @@ public class InteractiveKLineView extends View {
 
     @Override
     protected void onSizeChanged(int w, int h, int oldw, int oldh) {
-        viewRect.set(viewPadding, viewPadding, w - viewPadding, h - viewPadding);
+        viewRect.set(viewPadding, viewPadding, w - viewPadding, h - viewPadding * 2);
 
         if (DEBUG) {
             Log.i(TAG, "##d onSizeChanged: " + viewRect);
