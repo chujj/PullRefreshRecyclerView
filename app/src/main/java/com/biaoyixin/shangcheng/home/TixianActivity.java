@@ -95,7 +95,7 @@ public class TixianActivity extends BaseActivity {
     TextView mRequireSMSCode;
 
     @BindView(R2.id.confirm)
-    View mConfirm;
+    TextView mConfirm;
     @BindView(R2.id.mobile_promt)
     TextView mMobilePromot;
 
@@ -225,6 +225,10 @@ public class TixianActivity extends BaseActivity {
                 dismissLoadingDialog();
 
 
+
+
+
+
                 mHeaderPromt.setText(String.format("可提现金额：%s元", mUIInfo.free_asset ));
                 mMobilePromot.setText(String.format("已验证手机  %s", mUIInfo.mobile));
 
@@ -276,6 +280,13 @@ public class TixianActivity extends BaseActivity {
                 }
 
                 setSelectedChannel(mOutChannels.get(0));
+
+                if (!mUIInfo.allowAssetExtract) {
+                    mConfirm.setBackgroundResource(R.drawable.round_btn_bg_disable_h5_style);
+                    mConfirm.setText("当前时间段不允许出金");
+                    mConfirm.setTextColor(0xff000000);
+                    mConfirm.setEnabled(false);
+                }
 
             }
 

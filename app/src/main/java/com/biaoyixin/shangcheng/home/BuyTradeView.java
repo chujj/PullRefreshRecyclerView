@@ -201,7 +201,7 @@ public class BuyTradeView extends RelativeLayout {
                         if (coupon != null && coupon.couponType == 2) {
                             sb.append("0");
                         } else {
-                            sb.append("-" + chip);
+                            sb.append("-" + ((int)(chip * (1 - Data.sData.names.get(mKey).serviceFee))));
                         }
                         _temp[3] = sb.length();
 
