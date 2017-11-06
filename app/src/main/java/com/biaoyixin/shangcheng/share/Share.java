@@ -12,7 +12,7 @@ import com.tencent.mm.opensdk.openapi.WXAPIFactory;
 public class Share {
 
 
-    private final static String APP_ID = "wxa95394123b4a5040";
+    private final static String APP_ID = "wxc062f523cb2dfaaf";
     private IWXAPI api;
 
     private void regToWX(Context activity) {
