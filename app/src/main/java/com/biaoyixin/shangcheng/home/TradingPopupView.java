@@ -147,7 +147,7 @@ public class TradingPopupView extends RelativeLayout {
         mUIUpdate = new Runnable() {
             @Override
             public void run() {
-                mStatusTv.setText(mStatus.status_finished ? "平仓结果" : "等待中...");
+                mStatusTv.setText(mStatus.status_finished ? "平仓结果" : "获取中...");
                 mGoodName.setText(String.format("合约：%s", mStatus.goods_name));
                 mOpenPrice.setText(String.format("%.2f元", mStatus.open_price));
                 mClosePrice.setText(String.format("%.2f元", mStatus.close_price));
@@ -217,7 +217,7 @@ public class TradingPopupView extends RelativeLayout {
             @Override
             public void onTick(long millisUntilFinished) {
                 if (millisUntilFinished /1000l <= 0) {
-                    mStatusPromt.setText("等待中...");
+                    mStatusPromt.setText("获取中...");
                 } else {
                     mStatusPromt.setText(millisUntilFinished /1000l + "秒");
                 }
@@ -225,7 +225,7 @@ public class TradingPopupView extends RelativeLayout {
 
             @Override
             public void onFinish() {
-                mStatusPromt.setText("等待中...");
+                mStatusPromt.setText("获取中...");
             }
         };
         mTimer.start();
