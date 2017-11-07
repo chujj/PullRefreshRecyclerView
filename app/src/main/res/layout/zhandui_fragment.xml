@@ -67,7 +67,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16.6dp"
-                android:text="12000.00"
+                tools:text="12000.00"
                 android:textColor="#FFCCCCCC"
                 android:textSize="18sp"
                 />
@@ -108,7 +108,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16.6dp"
-                android:text="0.00"
+                tools:text="0.00"
                 android:textColor="#FFCCCCCC"
                 android:textSize="18sp"
                 />
@@ -156,7 +156,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16.6dp"
-                android:text="0.00"
+                tools:text="0.00"
                 android:textColor="#FFCCCCCC"
                 android:textSize="18sp"
                 />
@@ -197,7 +197,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16.6dp"
-                android:text="0.00"
+                tools:text="0.00"
                 android:textColor="#FFCCCCCC"
                 android:textSize="18sp"
                 />
@@ -297,7 +297,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="0.00"
+            tools:text="0.00"
             android:textColor="#FFCCCCCC"
             android:textSize="12sp"
             />
@@ -307,7 +307,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="0.00"
+            tools:text="0.00"
             android:textColor="#FFCCCCCC"
             android:textSize="12sp"
             />
@@ -317,7 +317,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="0.00"
+            tools:text="0.00"
             android:textColor="#FFCCCCCC"
             android:textSize="12sp"
             />
@@ -327,7 +327,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="0.00"
+            tools:text="0.00"
             android:textColor="#FFCCCCCC"
             android:textSize="12sp"
             />
@@ -362,7 +362,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="0.00"
+            tools:text="0.00"
             android:textColor="#FFCCCCCC"
             android:textSize="12sp"
             />
@@ -372,7 +372,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="0.00"
+            tools:text="0.00"
             android:textColor="#FFCCCCCC"
             android:textSize="12sp"
             />
@@ -382,7 +382,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="0.00"
+            tools:text="0.00"
             android:textColor="#FFCCCCCC"
             android:textSize="12sp"
             />
@@ -392,12 +392,34 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="0.00"
+            tools:text="0.00"
             android:textColor="#FFCCCCCC"
             android:textSize="12sp"
             />
 
 
     </LinearLayout>
+
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"/>
+
+
+    <TextView
+        android:id="@+id/promt"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginBottom="40dp"
+        android:gravity="center"
+        tools:text="战队佣金每日xx:xx点结算"
+        android:textColor="#FFCCCCCC"
+        android:textSize="14sp"
+
+
+        />
 
 </LinearLayout>

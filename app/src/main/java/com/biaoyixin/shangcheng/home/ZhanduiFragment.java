@@ -2,21 +2,21 @@ package com.biaoyixin.shangcheng.home;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
 import com.biaoyixin.shangcheng.R;
 import com.biaoyixin.shangcheng.R2;
 import com.biaoyixin.shangcheng.api.ServerAPI;
 import com.biaoyixin.shangcheng.api.user.UserApi;
 import com.biaoyixin.shangcheng.base.BaseActivity;
 import com.biaoyixin.shangcheng.base.BaseFragment;
-import com.biaoyixin.shangcheng.base.ToastHelper;
 import com.biaoyixin.shangcheng.login.AccountManager;
+import com.bumptech.glide.Glide;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -64,6 +64,9 @@ public class ZhanduiFragment extends BaseFragment {
     TextView h4;
 
 
+    @BindView(R2.id.promt)
+    TextView mPromt;
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -91,15 +94,13 @@ public class ZhanduiFragment extends BaseFragment {
         final BaseActivity baseActivity = (BaseActivity) getActivity();
 
 
-        baseActivity.showLoadingDialog("加载中...", false);
+
 
 
         UserApi.IUser iUser = ServerAPI.getInterface(UserApi.IUser.class);
         iUser.brokerReport(new Callback<UserApi.BrokerReportResp>() {
             @Override
             public void success(UserApi.BrokerReportResp resp, Response response) {
-                baseActivity.dismissLoadingDialog();
-
                 if (resp.code != 0) {
 
                     ServerAPI.handleCodeError(resp);
@@ -111,8 +112,26 @@ public class ZhanduiFragment extends BaseFragment {
 
             @Override
             public void failure(RetrofitError error) {
-                baseActivity.dismissLoadingDialog();
                 ServerAPI.HandlerException(error);
+
+            }
+        });
+
+
+        iUser.getSystemInfo(new Callback<UserApi.SystemInfoResp>() {
+            @Override
+            public void success(UserApi.SystemInfoResp resp, Response response) {
+                if (resp.code != 0) {
+                    ServerAPI.handleCodeError(resp);
+                } else {
+                    if (!TextUtils.isEmpty(resp.data.settleTime)) {
+                        mPromt.setText("战队佣金每日"+ resp.data.settleTime + "点结算");
+                    }
+                }
+            }
+
+            @Override
+            public void failure(RetrofitError error) {
 
             }
         });

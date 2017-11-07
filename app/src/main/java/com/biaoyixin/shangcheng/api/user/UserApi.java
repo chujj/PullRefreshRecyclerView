@@ -68,6 +68,10 @@ public class UserApi {
         public void upgradeCheck(@Field("internalVersion") int internalVersion,
                                  @Field("os") String os,
                                  Callback<UpgradeResp> cb);
+
+
+        @GET("/systemInfo")
+        public void getSystemInfo(Callback<SystemInfoResp> cb);
     }
 
 
@@ -163,5 +167,14 @@ public class UserApi {
 //        public int internalVersion; // ": 20102,//内部版本号
         public String desc; // ": "更新内容",
         public String url; // ": "下载地址"
+    }
+
+
+    public static class SystemInfoResp extends BaseModel {
+        public SystemInfo data;
+    }
+
+    public static class SystemInfo extends BaseModel {
+        public String settleTime; // : "18:06"
     }
 }
