@@ -92,7 +92,7 @@ public class ServerAPI {
                     @Override public Thread newThread(final Runnable r) {
                         return new Thread(new Runnable() {
                             @Override public void run() {
-                                android.os.Process.setThreadPriority(Process.THREAD_PRIORITY_FOREGROUND);
+                                android.os.Process.setThreadPriority(Process.THREAD_PRIORITY_DISPLAY);
                                 r.run();
                             }
                         }, "retrofit-idle");
