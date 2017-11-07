@@ -18,6 +18,7 @@ import com.biaoyixin.shangcheng.base.BaseFragment;
 import com.biaoyixin.shangcheng.base.ClosureMethod;
 import com.biaoyixin.shangcheng.base.CommonUtils;
 import com.wordplat.ikvstockchart.InteractiveKLineView;
+import com.wordplat.ikvstockchart.drawing.TimeLineDrawing;
 import com.wordplat.ikvstockchart.entry.Entry;
 import com.wordplat.ikvstockchart.entry.EntrySet;
 import com.wordplat.ikvstockchart.render.TimeLineRender;
@@ -74,6 +75,7 @@ public class TradeFragment extends BaseFragment {
 
     private List<ClosureMethod> mUIUpdates = new ArrayList<>();
     private ClosureMethod mTradingUpdater;
+    private TimeLineRender mTimeLineRender;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -139,7 +141,7 @@ public class TradeFragment extends BaseFragment {
                 klineView.setEntrySet(mEntrySets[i]);
                 klineView.setEnableLeftRefresh(false);
                 klineView.setEnableRightRefresh(false);
-                klineView.setRender(new TimeLineRender());
+                klineView.setRender(mTimeLineRender = new TimeLineRender());
             } else {
                 newView = (ViewGroup) inflater.inflate(R.layout.trade_kline_layout, mKlineContainer, false);
                 mKlineContainer.addView(newView);
@@ -305,7 +307,7 @@ public class TradeFragment extends BaseFragment {
                             }
 
                         }
-                        
+
                         return null;
                     }
                 });
@@ -424,9 +426,59 @@ public class TradeFragment extends BaseFragment {
                 return "";
             }
         });
+        btv.mTradeCB = new ClosureMethod() {
+            @Override
+            public Object[] run(Object... args) {
+                GoodsApi.BuyTradeData trade = (GoodsApi.BuyTradeData) args[0];
+                markTrade(trade);
+                return null;
+            }
+        };
         btv.initUI();
 
         CommonUtils.addToActivity(getActivity(), root);
+    }
+
+    private void markTrade(final GoodsApi.BuyTradeData trade) {
+        if (trade == null) {
+            return;
+        }
+
+        mTimeLineRender.getTimeLineDrawing().mPriceMarkerProvider = new TimeLineDrawing.PriceMarkerProvider() {
+
+            float[] open = new float[] {0, trade.open_price};
+            float[ ] ignore = new float[2];
+            float [] cache = new float[2];
+
+            String promt = "建仓价:" + trade.open_price;
+
+            @Override
+            public boolean needDraw() {
+                if (Data.sData._closeTrade.containsKey(Long.valueOf(trade.trade_id))) {
+                    return false;
+                }
+                return true;
+            }
+
+            @Override
+            public float[] getLine1Y() {
+                cache[0] = open[0];
+                cache[1] = open[1];
+                return cache;
+            }
+
+            @Override
+            public float[] getLine2Y() {
+                cache[0] = ignore[0];
+                cache[1] = ignore[1];
+                return cache;
+            }
+
+            @Override
+            public String getLine1Promt() {
+                return promt;
+            }
+        };
     }
 
 }

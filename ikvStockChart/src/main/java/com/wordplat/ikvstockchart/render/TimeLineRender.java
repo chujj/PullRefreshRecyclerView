@@ -46,6 +46,17 @@ public class TimeLineRender extends AbstractRender {
 
     private final List<IDrawing> drawingList = new ArrayList<>();
 
+
+    public TimeLineDrawing getTimeLineDrawing() {
+        for(IDrawing drawing : drawingList) {
+            if (drawing instanceof TimeLineDrawing) {
+                return (TimeLineDrawing) drawing;
+            }
+        }
+
+        return  null;
+    }
+
     public TimeLineRender() {
         drawingList.add(new TimeLineGridAxisDrawing());
         drawingList.add(new TimeLineDrawing());

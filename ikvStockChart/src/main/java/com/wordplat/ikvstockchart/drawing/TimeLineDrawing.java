@@ -19,6 +19,7 @@
 package com.wordplat.ikvstockchart.drawing;
 
 import android.graphics.Canvas;
+import android.graphics.DashPathEffect;
 import android.graphics.Paint;
 import android.graphics.Path;
 import android.graphics.RectF;
@@ -37,6 +38,16 @@ import com.wordplat.ikvstockchart.render.AbstractRender;
 
 public class TimeLineDrawing implements IDrawing {
 
+
+    public static interface PriceMarkerProvider {
+        public boolean needDraw();
+
+        public float[] getLine1Y();
+        public float[] getLine2Y();
+
+        public String getLine1Promt();
+    }
+
     private Paint linePaint;
     private Paint shadowPaint;
 
@@ -46,6 +57,14 @@ public class TimeLineDrawing implements IDrawing {
 
     private float[] lineBuffer = new float[4];
     private float[] pointBuffer = new float[2];
+
+
+    private Paint mMarkLine1Paint;
+    private Paint mMarkLine2Paint;
+    private Paint mMarkLine1TextPaint;
+    private final Paint.FontMetrics fontMetrics = new Paint.FontMetrics(); // 用于 labelPaint 计算文字位置
+
+    public PriceMarkerProvider mPriceMarkerProvider;
 
     @Override
     public void onInit(RectF contentRect, AbstractRender render) {
@@ -63,6 +82,24 @@ public class TimeLineDrawing implements IDrawing {
         shadowPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
         shadowPaint.setStyle(Paint.Style.FILL);
         shadowPaint.setColor(0x11ffffff);
+
+
+        mMarkLine1Paint = new Paint(Paint.ANTI_ALIAS_FLAG);
+        mMarkLine1Paint.setPathEffect(new DashPathEffect(new float[] {4,4}, 0));
+        mMarkLine1Paint.setColor(0xff35a64b);
+        mMarkLine1Paint.setStyle(Paint.Style.STROKE);
+        mMarkLine1Paint.setStrokeWidth(sizeColor.getGridSize());
+
+        mMarkLine2Paint = new Paint(Paint.ANTI_ALIAS_FLAG);
+        mMarkLine2Paint.setPathEffect(new DashPathEffect(new float[] {4,4}, 0));
+        mMarkLine2Paint.setColor(0xff4187c2);
+        mMarkLine2Paint.setStyle(Paint.Style.STROKE);
+        mMarkLine2Paint.setStrokeWidth(sizeColor.getGridSize());
+
+        mMarkLine1TextPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
+        mMarkLine1TextPaint.setTextSize(sizeColor.getYLabelSize());
+        mMarkLine1TextPaint.setColor(0xff35a64b);
+        mMarkLine1TextPaint.getFontMetrics(fontMetrics);
 
         chartRect.set(contentRect);
     }
@@ -99,7 +136,7 @@ public class TimeLineDrawing implements IDrawing {
         if (count > 0) {
             canvas.drawLines(lineBuffer, 0, count, linePaint);
 
-
+            // draw shadow
             path.reset();
             path.moveTo(chartRect.left, chartRect.bottom);
             for (int i = 0; (i +1) < lineBuffer.length ; i+=2) {
@@ -109,6 +146,27 @@ public class TimeLineDrawing implements IDrawing {
             path.close();
             canvas.drawPath(path, shadowPaint);
 
+            // draw line
+            if (mPriceMarkerProvider != null && mPriceMarkerProvider.needDraw()) {
+
+                float[] line1 = mPriceMarkerProvider.getLine1Y();
+                render.mapPoints(line1);
+
+                path.reset();
+                path.moveTo(chartRect.left, line1[1]);
+                path.lineTo(chartRect.right, line1[1]);
+                canvas.drawPath(path, mMarkLine1Paint);
+
+                canvas.drawText(mPriceMarkerProvider.getLine1Promt(),
+                        lineBuffer[lineBuffer.length -2] - mMarkLine1TextPaint.measureText(mPriceMarkerProvider.getLine1Promt()) - 40,
+                        line1[1] - fontMetrics.bottom,
+                        mMarkLine1TextPaint);
+
+                path.reset();
+                path.moveTo(lineBuffer[lineBuffer.length -2], lineBuffer[lineBuffer.length -1]);
+                path.lineTo(chartRect.left, lineBuffer[lineBuffer.length -1]);
+                canvas.drawPath(path, mMarkLine2Paint);
+            }
         }
 
         // 计算高亮坐标

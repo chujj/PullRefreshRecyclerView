@@ -84,6 +84,8 @@ public class BuyTradeView extends RelativeLayout {
     private ClosureMethod mUIUpdater;
     private List<UserApi.Youhuiquan> mCoupons;
 
+    public ClosureMethod mTradeCB;
+
     public BuyTradeView(Context context) {
         super(context);
     }
@@ -390,6 +392,10 @@ public class BuyTradeView extends RelativeLayout {
                         if (baseModel.code != 0) {
                             ServerAPI.handleCodeError(baseModel);
                         } else {
+
+                            if (mTradeCB != null) {
+                                mTradeCB.run(baseModel.data);
+                            }
 
                             Data.sTradings.add(baseModel.data);
                             Message msg = Message.obtain();
