@@ -50,6 +50,9 @@ public class SizeColor {
     private int gridColor = 0xffdddddd; // 网格线颜色
     public int klineBottomIndexHeight;
     public int klineBottomIndexLabelExtraHeight;
+    public int markLine1MarginRight;
+    public int insidePointRadius;
+    public int outsizePointRadius;
 
     public float getXLabelSize() {
         return xLabelSize;

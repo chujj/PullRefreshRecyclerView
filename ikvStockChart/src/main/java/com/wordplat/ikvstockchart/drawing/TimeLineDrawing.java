@@ -66,6 +66,9 @@ public class TimeLineDrawing implements IDrawing {
 
     public PriceMarkerProvider mPriceMarkerProvider;
 
+    private Paint mPointInsidePaint, mPointOutsidePaint;
+    private RectF mPointRectF = new RectF();
+
     @Override
     public void onInit(RectF contentRect, AbstractRender render) {
         this.render = render;
@@ -100,6 +103,14 @@ public class TimeLineDrawing implements IDrawing {
         mMarkLine1TextPaint.setTextSize(sizeColor.getYLabelSize());
         mMarkLine1TextPaint.setColor(0xff35a64b);
         mMarkLine1TextPaint.getFontMetrics(fontMetrics);
+
+        mPointInsidePaint = new Paint(Paint.ANTI_ALIAS_FLAG);
+        mPointInsidePaint.setStyle(Paint.Style.FILL);
+        mPointInsidePaint.setColor(0xffa4a4a4);
+
+        mPointOutsidePaint = new Paint(Paint.ANTI_ALIAS_FLAG);
+        mPointOutsidePaint.setStyle(Paint.Style.FILL);
+        mPointOutsidePaint.setColor(0xffd7d7d7);
 
         chartRect.set(contentRect);
     }
@@ -158,7 +169,7 @@ public class TimeLineDrawing implements IDrawing {
                 canvas.drawPath(path, mMarkLine1Paint);
 
                 canvas.drawText(mPriceMarkerProvider.getLine1Promt(),
-                        lineBuffer[lineBuffer.length -2] - mMarkLine1TextPaint.measureText(mPriceMarkerProvider.getLine1Promt()) - 40,
+                        lineBuffer[lineBuffer.length -2] - mMarkLine1TextPaint.measureText(mPriceMarkerProvider.getLine1Promt()) - render.getSizeColor().markLine1MarginRight,
                         line1[1] - fontMetrics.bottom,
                         mMarkLine1TextPaint);
 
@@ -167,6 +178,20 @@ public class TimeLineDrawing implements IDrawing {
                 path.lineTo(chartRect.left, lineBuffer[lineBuffer.length -1]);
                 canvas.drawPath(path, mMarkLine2Paint);
             }
+
+            // draw point
+            float x = lineBuffer[lineBuffer.length -2];
+            float y = lineBuffer[lineBuffer.length -1];
+
+            float radius = render.getSizeColor().outsizePointRadius;
+            mPointRectF.set(x - radius, y+radius, x+radius, y-radius);
+            canvas.drawOval(mPointRectF, mPointOutsidePaint);
+
+
+            radius = render.getSizeColor().insidePointRadius;
+            mPointRectF.set(x - radius, y+radius, x+radius, y-radius);
+            canvas.drawOval(mPointRectF, mPointInsidePaint);
+
         }
 
         // 计算高亮坐标
