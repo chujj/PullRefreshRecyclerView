@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FF1F1F1F">
+
+    <include layout="@layout/topbar_layout"/>
+
+
+    <ImageView
+        android:layout_width="64dp"
+        android:layout_height="70dp"
+        android:layout_marginTop="121dp"
+        android:layout_gravity="center_horizontal"
+        android:src="@drawable/hu_wei_dui_img"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="25dp"
+        android:layout_gravity="center_horizontal"
+        android:text="您不可以直接管辖护卫队"
+        android:textColor="#FFCCCCCC"
+        android:textSize="14sp"
+        />
+
+</LinearLayout>

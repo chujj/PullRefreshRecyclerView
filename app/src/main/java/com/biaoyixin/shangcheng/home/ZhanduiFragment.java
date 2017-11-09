@@ -1,5 +1,6 @@
 package com.biaoyixin.shangcheng.home;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.text.TextUtils;
@@ -20,6 +21,7 @@ import com.bumptech.glide.Glide;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import retrofit.Callback;
 import retrofit.RetrofitError;
 import retrofit.client.Response;
@@ -225,5 +227,18 @@ public class ZhanduiFragment extends BaseFragment {
         }
     }
 
+
+
+    @OnClick(R2.id.qin_bin_dui_layout)
+    public void clickQinBinDui() {
+
+    }
+
+
+    @OnClick(R2.id.hu_wei_dui_layout)
+    public void clickHuWeiDui() {
+        Intent it = new Intent(this.getContext(), HuiWeiDuiActivity.class);
+        startActivity(it);
+    }
 
 }

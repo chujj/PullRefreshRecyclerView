@@ -133,6 +133,7 @@
 
 
         <LinearLayout
+            android:id="@+id/qin_bin_dui_layout"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
@@ -145,7 +146,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="12dp"
-                android:text="亲兵队"
+                android:text="亲兵队 >"
                 android:textColor="#FFCCCCCC"
                 android:textSize="14sp"
                 />
@@ -173,6 +174,7 @@
 
 
         <LinearLayout
+            android:id="@+id/hu_wei_dui_layout"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
@@ -186,7 +188,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="12dp"
-                android:text="护卫队"
+                android:text="护卫队 >"
                 android:textColor="#FFCCCCCC"
                 android:textSize="14sp"
                 />

@@ -86,6 +86,8 @@
             android:theme="@style/TransparentActivity"
             android:name="com.biaoyixin.shangcheng.home.ShareActivity"/>
 
+        <activity android:name=".home.HuiWeiDuiActivity"/>
+
     </application>
 
 
