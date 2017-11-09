@@ -231,7 +231,8 @@ public class ZhanduiFragment extends BaseFragment {
 
     @OnClick(R2.id.qin_bin_dui_layout)
     public void clickQinBinDui() {
-
+        Intent it = new Intent(this.getContext(), QinBinDuiActivity.class);
+        startActivity(it);
     }
 
 

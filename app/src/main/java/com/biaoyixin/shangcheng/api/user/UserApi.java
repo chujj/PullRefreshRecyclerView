@@ -177,4 +177,10 @@ public class UserApi {
     public static class SystemInfo extends BaseModel {
         public String settleTime; // : "18:06"
     }
+
+
+    public static class Broker extends BaseModel {
+        public String name;
+        public String phone;
+    }
 }

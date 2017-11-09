@@ -88,6 +88,8 @@
 
         <activity android:name=".home.HuiWeiDuiActivity"/>
 
+        <activity android:name=".home.QinBinDuiActivity"/>
+
     </application>
 
 
