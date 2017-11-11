@@ -397,6 +397,74 @@
 
     <!-- group trades -->
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <FrameLayout
+            android:id="@+id/trade_list1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            >
+
+
+            <TextView
+                android:id="@+id/trade_list1_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
+                android:text="最新成交"
+                android:layout_gravity="center"
+                android:textColor="#FFEBAD33"
+                android:textSize="12sp"
+                />
+
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:background="#FFEBAD33"
+                android:layout_gravity="bottom"/>
+
+
+        </FrameLayout>
+
+
+        <FrameLayout
+            android:id="@+id/trade_list2"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            >
+
+
+            <TextView
+                android:id="@+id/trade_list2_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
+                android:text="持仓订单"
+                android:layout_gravity="center"
+                android:textColor="#FFCCCCCC"
+                android:textSize="12sp"
+                />
+
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:background="#FFEBAD33"
+                android:layout_gravity="bottom"
+                android:visibility="invisible"/>
+
+
+        </FrameLayout>
+
+    </LinearLayout>
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -407,6 +475,7 @@
         android:text="持仓订单"
         android:textColor="#FFCCCCCC"
         android:textSize="12sp"
+        android:visibility="gone"
         />
 
     <View

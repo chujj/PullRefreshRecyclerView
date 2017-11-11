@@ -57,6 +57,9 @@ public class TradeFragment extends BaseFragment {
     @BindViews({R2.id.line_detail_1, R2.id.line_detail_2, R2.id.line_detail_3, R2.id.line_detail_4,})
     TextView[] mLinesDetail;
 
+    @BindViews({R2.id.trade_list1, R2.id.trade_list2})
+    ViewGroup[] mTradeLists;
+
 
     @BindView(R2.id.trades_container)
     ViewGroup mTradesContainer;
@@ -394,6 +397,36 @@ public class TradeFragment extends BaseFragment {
 
 
             mKLineViews[i].setVisibility(index == i ? View.VISIBLE : View.GONE);
+        }
+
+    }
+
+
+
+    @OnClick(R2.id.trade_list1)
+    public void clickTradeList1() {
+        selectTradeListIndex(0);
+    }
+
+    @OnClick(R2.id.trade_list2)
+    public void clickTradeList2() {
+        selectTradeListIndex(1);
+    }
+
+    private void selectTradeListIndex(int index) {
+        for (int i = 0; i < mTradeLists.length; i++) {
+            for (int j = 0; j < mTradeLists[i].getChildCount(); j++) {
+                View view = mTradeLists[i].getChildAt(j);
+                if (view instanceof TextView) {
+
+                    ((TextView)view).setTextColor(index == i ? 0xFFEBAD33 : 0xFFCCCCCC);
+                } else if (view instanceof View) {
+                    view.setVisibility( index == i ? View.VISIBLE : View.INVISIBLE);
+                }
+            }
+
+
+//            mKLineViews[i].setVisibility(index == i ? View.VISIBLE : View.GONE);
         }
 
     }
