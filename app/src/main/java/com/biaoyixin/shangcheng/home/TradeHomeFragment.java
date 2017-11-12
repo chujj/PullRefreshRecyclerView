@@ -420,7 +420,8 @@ public class TradeHomeFragment extends BaseFragment {
 //        });
 
 
-        mWSWebview.loadUrl("http://time.168zhibo.cn/customer/futures_trade/internal");
+
+        mWSWebview.loadUrl(Consts.HOST + "customer/futures_trade/internal");
 //        mWSWebview.loadUrl("http://192.168.43.242:9004/customer/futures_trade/internal");
 //        mWSWebview.loadUrl("http://192.168.43.124:8000/test.html");
     }

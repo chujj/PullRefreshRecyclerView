@@ -3,6 +3,7 @@ package com.biaoyixin.shangcheng.api;
 import android.content.Intent;
 import android.os.Process;
 
+import com.biaoyixin.shangcheng.Consts;
 import com.biaoyixin.shangcheng.account.AccountHelper;
 import com.biaoyixin.shangcheng.base.BaseApp;
 import com.biaoyixin.shangcheng.base.CommonUtils;
@@ -34,7 +35,7 @@ import retrofit.converter.GsonConverter;
 
 public class ServerAPI {
     //    public final static String HOST = "http://m.weixl.org/xlcl-counselor-api";
-    public final static String HOST = "http://time.168zhibo.cn/";
+    public final static String HOST = Consts.HOST; // "http://time.168zhibo.cn/";
     public final static String HOST_DOMAIN = "168zhibo.cn";
     private static ServerAPI sInstance;
 

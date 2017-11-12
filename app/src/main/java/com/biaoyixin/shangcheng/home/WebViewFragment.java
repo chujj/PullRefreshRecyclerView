@@ -11,6 +11,7 @@ import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
+import com.biaoyixin.shangcheng.Consts;
 import com.biaoyixin.shangcheng.R;
 import com.biaoyixin.shangcheng.R2;
 import com.biaoyixin.shangcheng.account.AccountHelper;
@@ -90,7 +91,7 @@ public class WebViewFragment extends BaseFragment {
 
 
 
-        String url = "http://time.168zhibo.cn/#/invitation";
+        String url = Consts.HOST + "#/invitation";
 //        url = "http://192.168.43.242:9004/#/invitation";
         String domian = URI.create(url).getHost();
 
