@@ -67,6 +67,8 @@ public class TradeFragment extends BaseFragment {
     @BindView(R2.id.kline_container)
     ViewGroup mKlineContainer;
 
+    @BindView(R2.id.trades_all_container)
+    ViewGroup mTradesAllContainer;
 
     ViewGroup[] mKLineViews;
     EntrySet[] mEntrySets;
@@ -101,9 +103,6 @@ public class TradeFragment extends BaseFragment {
     }
 
     public void onEventMainThread(Message msg) {
-        if (msg.what != Consts.BoardCast_PriceMsg
-                && msg.what != Consts.BoardCast_TradingListChange
-                && msg.what != Consts.BoardCast_TradeClose) return;
 
 
         if (msg.what == Consts.BoardCast_PriceMsg || msg.what == Consts.BoardCast_TradeClose) {
@@ -112,6 +111,8 @@ public class TradeFragment extends BaseFragment {
             }
         } else if (msg.what == Consts.BoardCast_TradingListChange) {
             refreshTradingList();
+        } else if (msg.what == Consts.BoardCast_TradingAllListChange) {
+            refreshAllTradingList();
         }
     }
 
@@ -273,7 +274,54 @@ public class TradeFragment extends BaseFragment {
         selectTradeListIndex(0);
 
         refreshTradingList();
+        refreshAllTradingList();
+    }
 
+
+
+    private void refreshAllTradingList() {
+        mTradesAllContainer.removeAllViews();
+
+
+        for(GoodsApi.BuyTradeData btd : Data.sAllTrading) {
+            View root =
+                    LayoutInflater.from(getContext()).inflate(R.layout.trade_all_trades_header_layout, mTradesAllContainer, false);
+
+            TextView openTime = CommonUtils.findView(root, R.id.open_time);
+            TextView key = CommonUtils.findView(root, R.id.key);
+            TextView buyType = CommonUtils.findView(root, R.id.buy_type);
+            TextView dingJin = CommonUtils.findView(root, R.id.ding_jin);
+
+
+            View price_mark  = CommonUtils.findView(root, R.id.price_mark);
+
+            openTime.setText(btd.open_time);
+            key.setText(btd.goods_name);
+
+            buyType.setText(btd.up_down_type == 0 ? "买涨" : "买跌");
+            buyType.setTextColor(btd.up_down_type == 0 ? 0xFFF35833 : 0xFF2CB545);
+
+
+            try {
+                price_mark.setBackgroundColor(btd.up_down_type == 0 ? 0xFFF35833 : 0xFF2CB545);
+                int maxWidth = (getContext().getResources().getDisplayMetrics().widthPixels / 5) -
+                        CommonUtils.dip2px(getContext(), 15 * 2);
+
+                int chip = Integer.parseInt(btd.chip);
+                chip = Math.min(3000, chip);
+                price_mark.getLayoutParams().width = (int) (1f * maxWidth / 3000 * chip);
+                price_mark.setVisibility(View.VISIBLE);
+            } catch (Exception e) {
+
+            }
+
+
+
+            dingJin.setText(btd.chip);
+
+            mTradesAllContainer.addView(root);
+
+        }
 
     }
 

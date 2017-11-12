@@ -12,6 +12,8 @@ public class Consts {
     public final static int BoardCast_TradeClose = 0x15d;
     public final static int BoardCast_ChongZhi_Refresh = 0x16d;
 
+    public final static int BoardCast_TradingAllListChange = 0x17d;
+
 
     public static Message getBoardCastMessage(int boardCastFlag) {
         return Message.obtain(null, boardCastFlag);

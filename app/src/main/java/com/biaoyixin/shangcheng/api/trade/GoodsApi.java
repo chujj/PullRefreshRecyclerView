@@ -55,6 +55,9 @@ public class GoodsApi {
 
         @GET("/asset/extract_type_list")
         public void getOutMoneyChannelList(Callback<OutChannelResp> cb);
+
+        @GET("/customer/all_trade_list")
+        void getTradeAllList(Callback<TradeAllListResp> cb);
     }
 
     ///////////////////////// goods /////////////////////
@@ -263,6 +266,11 @@ public class GoodsApi {
         public String bank_url; // ":"http://time.168zhibo.cn/98pay/bank_list",
         public String extract_url; // ":"http://time.168zhibo.cn/98pay/asset_extract",
         public String type; // ":"union_pay"
+    }
+
+
+    public static class TradeAllListResp extends BaseModel {
+        public List<BuyTradeData> data;
     }
 }
 

@@ -3,6 +3,7 @@ package com.biaoyixin.shangcheng.home;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.os.Handler;
 import android.os.Message;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -74,10 +75,17 @@ public class TradeHomeFragment extends BaseFragment {
     @BindView(R2.id.ws_callback)
     WebView mWSWebview;
 
+
+    private Handler mHandler;
+
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EventBus.getDefault().register(this);
+
+
+
+        mHandler = new Handler();
     }
 
     @Override
@@ -131,6 +139,8 @@ public class TradeHomeFragment extends BaseFragment {
 
         requireUserInfo();
         getUserStatus();
+
+        getTradeAllList();
     }
 
     private void setupWebView() {
@@ -391,6 +401,50 @@ public class TradeHomeFragment extends BaseFragment {
     }
 
 
+
+    private Runnable refreshArrTradeList = new Runnable() {
+
+
+        private void refreshAllTradeList() {
+            mHandler.removeCallbacks(refreshArrTradeList );
+            mHandler.postDelayed(refreshArrTradeList , 15 * 1000);
+        }
+
+        @Override
+        public void run() {
+
+            GoodsApi.IGood iGood = ServerAPI.getInterface(GoodsApi.IGood.class);
+            iGood.getTradeAllList(new Callback<GoodsApi.TradeAllListResp>() {
+
+                @Override
+                public void success(GoodsApi.TradeAllListResp resp, Response response) {
+                    if (resp.code != 0){
+                        ServerAPI.handleCodeError(resp);
+                    } else {
+                        Data.sAllTrading = resp.data;
+                        EventBus.getDefault().post(
+                                Consts.getBoardCastMessage(Consts.BoardCast_TradingAllListChange)
+                        );
+                    }
+
+                    refreshAllTradeList();
+                }
+
+                @Override
+                public void failure(RetrofitError error) {
+                    ServerAPI.HandlerException(error);
+
+                    refreshAllTradeList();
+                }
+            });
+        }
+    };
+
+    public void getTradeAllList() {
+        refreshArrTradeList .run();
+    }
+
+
     @OnClick(R2.id.chongzhi)
     public void clickChongZhi() {
 //        WebApi webapi = new WebApi();
@@ -431,6 +485,7 @@ public class TradeHomeFragment extends BaseFragment {
         super.onHiddenChanged(hidden);
         if (!hidden) {
             getUserStatus();
+            getTradeAllList();
         }
     }
 }

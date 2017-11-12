@@ -512,6 +512,17 @@
         android:minHeight="300dp"
         android:orientation="vertical">
 
+
+        <include layout="@layout/trade_all_trades_header_layout"/>
+
+        <LinearLayout
+            android:id="@+id/trades_all_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+        </LinearLayout>
+
     </LinearLayout>
 
 

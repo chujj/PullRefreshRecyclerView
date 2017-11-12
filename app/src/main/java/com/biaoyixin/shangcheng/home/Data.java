@@ -12,4 +12,8 @@ public class Data {
     public static GoodsApi.GoodsModel sData;
 
     public static List<GoodsApi.BuyTradeData> sTradings = new ArrayList<>();
+
+
+
+    public static List<GoodsApi.BuyTradeData> sAllTrading = new ArrayList<>();
 }
