@@ -98,6 +98,8 @@ public class TradeHomeFragment extends BaseFragment {
 
         private long lastTimeStamp = System.currentTimeMillis();
 
+        private boolean mLastChange = false;
+
         @Override
         public void run() {
 
@@ -118,9 +120,11 @@ public class TradeHomeFragment extends BaseFragment {
             }
 
 
-            if (changed) {
+            if (changed || mLastChange) {
                 EventBus.getDefault().post(Consts.getBoardCastMessage(Consts.BoardCast_Trade_OpenTimeIntervalChange));
             }
+
+            mLastChange = changed;
             lastTimeStamp = current;
             mHandler.postDelayed(this, 300);
         }
