@@ -65,6 +65,12 @@ public class TradeHomeFragment extends BaseFragment {
     TextView mAssets;
 
 
+    @BindView(R2.id.count_down_layout)
+    ViewGroup mCountDownLayout;
+    @BindView(R2.id.count_down_text)
+    TextView mCountDownText;
+
+
     @BindView(R2.id.ws_callback)
     WebView mWSWebview;
 
