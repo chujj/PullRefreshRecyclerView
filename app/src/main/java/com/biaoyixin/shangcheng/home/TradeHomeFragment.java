@@ -196,7 +196,9 @@ public class TradeHomeFragment extends BaseFragment {
                     mCountDownLayout.setVisibility(View.GONE);
                 } else {
                     mCountDownLayout.setVisibility(View.VISIBLE);
-                    mCountDownText.setText((int) btd.open_time_interval + "");
+                    int min = ((int) btd.open_time_interval)  / 60;
+                    int sec = ((int) btd.open_time_interval) % 60;
+                    mCountDownText.setText(String.format("%02d:%02d", min, sec));
                 }
             }
 
