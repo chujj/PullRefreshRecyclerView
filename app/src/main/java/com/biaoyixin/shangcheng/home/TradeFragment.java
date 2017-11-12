@@ -72,6 +72,10 @@ public class TradeFragment extends BaseFragment {
     EntrySet[] mEntrySets;
 
 
+    @BindViews({R2.id.trades_current_view_group, R2.id.trades_mine_view_group, })
+    ViewGroup[] mTradesViewGroup;
+
+
     private final static int ViewSize = 4;
 
     private String mKey;
@@ -266,8 +270,10 @@ public class TradeFragment extends BaseFragment {
         // default selection
         clickTime60();
         clickLine1();
+        selectTradeListIndex(0);
 
         refreshTradingList();
+
 
     }
 
@@ -426,7 +432,7 @@ public class TradeFragment extends BaseFragment {
             }
 
 
-//            mKLineViews[i].setVisibility(index == i ? View.VISIBLE : View.GONE);
+            mTradesViewGroup[i].setVisibility(index == i ? View.VISIBLE : View.GONE);
         }
 
     }
