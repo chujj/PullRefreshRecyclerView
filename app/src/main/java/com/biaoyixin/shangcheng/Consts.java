@@ -15,6 +15,8 @@ public class Consts {
     public final static int BoardCast_TradingAllListChange = 0x17d;
     public final static int BoardCast_Trade_OpenTimeIntervalChange = 0x18d;
 
+    public final static int BoardCast_PaySuccess = 0x19d;
+
 
     public static Message getBoardCastMessage(int boardCastFlag) {
         return Message.obtain(null, boardCastFlag);

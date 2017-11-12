@@ -404,30 +404,43 @@ public class WebApi {
 
         } else if (TextUtils.equals("2", type)) {
 
-            Type_2_Model model = mGson.fromJson(json, Type_2_Model.class);
+            Type_2_Model_Base modelBase = mGson.fromJson(json, Type_2_Model_Base.class);
 
-            if (model.isTradeCloseType()) {
+            if (modelBase .isTradeCloseType()) {
+
+                Type_2_Model model = mGson.fromJson(json, Type_2_Model.class);
+
                 Data.sData._closeTrade.put(Long.valueOf(model.data.trade_id), model.data);
+                EventBus.getDefault().post(
+                        Consts.getBoardCastMessage(Consts.BoardCast_TradeClose));
+            } else if (modelBase .isPaySuccessType()) {
+                EventBus.getDefault().post(
+                        Consts.getBoardCastMessage(Consts.BoardCast_PaySuccess));
             }
 
 
-            EventBus.getDefault().post(
-                    Consts.getBoardCastMessage(Consts.BoardCast_TradeClose));
         }
 
     }
 
 
-    public static class Type_2_Model extends BaseModel {
+    public static class Type_2_Model_Base extends BaseModel {
         public String socketEventType;
-
-        GoodsApi.BuyTradeData data;
-
 
         public boolean isTradeCloseType() {
             return TextUtils.equals("TRADE_CLOSED", socketEventType);
         }
 
+
+        public boolean isPaySuccessType() {
+            return TextUtils.equals("PAY_SUCCESS", socketEventType);
+        }
+    }
+
+    public static class Type_2_Model extends BaseModel {
+        public String socketEventType;
+
+        GoodsApi.BuyTradeData data;
 
     }
 

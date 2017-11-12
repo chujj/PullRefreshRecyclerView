@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Message;
 import android.support.annotation.Nullable;
 import android.text.SpannableString;
 import android.text.Spanned;
@@ -102,6 +103,9 @@ public class ChongZhiActivity extends BaseActivity {
 
 
         requireData();
+
+
+        EventBus.getDefault().register(this);
     }
 
     private String mChipSelected;
@@ -130,7 +134,11 @@ public class ChongZhiActivity extends BaseActivity {
                         .create();
             }
             if (!mDialog.isShowing()) {
-                mDialog.show();
+                try {
+                    mDialog.show();
+                } catch (Throwable t) {
+                    t.printStackTrace();
+                }
             }
         }
 
@@ -711,6 +719,27 @@ public class ChongZhiActivity extends BaseActivity {
 
         ((ClosureMethod)mChannelsClosures.get(mSelectedChannel)[1])
                 .run();
+
+    }
+
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+
+        EventBus.getDefault().unregister(this);
+    }
+
+    public void onEventMainThread(Message msg) {
+        if (msg.what == Consts.BoardCast_PaySuccess) {
+
+            Intent it = new Intent(this, ChuRuJinHistoryActivity.class);
+            this.startActivity(it);
+
+            EventBus.getDefault().post(Consts.getBoardCastMessage(Consts.BoardCast_ChongZhi_Refresh));
+
+            finish();
+        }
 
     }
 
