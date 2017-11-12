@@ -21,7 +21,6 @@ package com.wordplat.ikvstockchart.drawing;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.RectF;
-import android.text.TextPaint;
 
 import com.wordplat.ikvstockchart.entry.SizeColor;
 import com.wordplat.ikvstockchart.marker.IMarkerView;
@@ -109,6 +108,8 @@ public class HighlightDrawing implements IDrawing {
             }
 
             canvas.drawLine(highlightPoint[0], contentRect.top, highlightPoint[0], contentRect.bottom, highlightPaint);
+
+//            canvas.drawText();
             canvas.drawLine(contentRect.left, highlightPoint[1], contentRect.right, highlightPoint[1], highlightPaint);
 
             canvas.restore();

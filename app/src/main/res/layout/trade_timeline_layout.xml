@@ -21,6 +21,9 @@
         app:increasingColor="#FFCCCCCC"
         app:yLabelSize="8sp"
         app:gridColor="#6C6C6c"
+        app:highlightColor="#FFCCCCCC"
+        app:markerBorderColor="#FFCCCCCC"
+        app:markerTextColor="#FFCCCCCC"
         />
 
 </LinearLayout>

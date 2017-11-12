@@ -27,6 +27,8 @@ import com.wordplat.ikvstockchart.drawing.IDrawing;
 import com.wordplat.ikvstockchart.drawing.TimeLineDrawing;
 import com.wordplat.ikvstockchart.drawing.TimeLineGridAxisDrawing;
 import com.wordplat.ikvstockchart.entry.EntrySet;
+import com.wordplat.ikvstockchart.marker.XAxisTextMarkerView;
+import com.wordplat.ikvstockchart.marker.YAxisTextMarkerView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -58,10 +60,17 @@ public class TimeLineRender extends AbstractRender {
     }
 
     public TimeLineRender() {
+        HighlightDrawing highLinght  = null;
         drawingList.add(new TimeLineGridAxisDrawing());
         drawingList.add(new TimeLineDrawing());
         drawingList.add(new EmptyDataDrawing());
-        drawingList.add(new HighlightDrawing());
+        drawingList.add(highLinght  = new HighlightDrawing());
+
+
+        highLinght  .addMarkerView(new YAxisTextMarkerView(30));
+        highLinght.addMarkerView(new XAxisTextMarkerView(30));
+
+
     }
 
     public void addDrawing(IDrawing drawing) {
