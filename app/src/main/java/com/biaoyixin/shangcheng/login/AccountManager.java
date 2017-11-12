@@ -21,7 +21,6 @@ import de.greenrobot.event.EventBus;
  */
 public class AccountManager {
 
-    public final static String PREF_USER_ID = "key_user_id";
     public final static String PREF_USER_ACCOUNT = "KEY_USER_ACCOUNT";
 
 
@@ -30,7 +29,7 @@ public class AccountManager {
     public static boolean isLogin() {
         List<HttpCookie> cookie = AccountHelper.getCookieStore().get(URI.create(ServerAPI.HOST + LoginApi.LOGIN_PATH));
 
-        String userId = PreferencesUtil.getString(BaseApp.getApp(), PREF_USER_ID, "");
+        String userId = getAccount().id;
         return cookie.size() > 0 && !TextUtils.isEmpty(userId);
     }
 

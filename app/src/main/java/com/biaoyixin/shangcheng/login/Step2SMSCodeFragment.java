@@ -27,7 +27,6 @@ import com.biaoyixin.shangcheng.api.sms.SmsApi;
 import com.biaoyixin.shangcheng.base.BaseActivity;
 import com.biaoyixin.shangcheng.base.BaseFragment;
 import com.biaoyixin.shangcheng.base.CommonUtils;
-import com.biaoyixin.shangcheng.base.PreferencesUtil;
 import com.biaoyixin.shangcheng.base.ToastHelper;
 import com.biaoyixin.shangcheng.base.Topbar;
 import com.biaoyixin.shangcheng.home.ConfirmPwdActivity;
@@ -296,7 +295,10 @@ public class Step2SMSCodeFragment extends BaseFragment {
 
                 if (baseModel.code == 0) {
 
-                    PreferencesUtil.putString(getContext(), AccountManager.PREF_USER_ID, baseModel.data.id + "");
+                    AccountManager.Account account = AccountManager.getAccount();
+                    account.id = baseModel.data.id + "";
+                    AccountManager.saveAccount(account);
+
                     if (baseModel.data.needShowInputBroker()) {
                         ((LoginActivity)getActivity()).switchToStep3Recommend();
                     } else {

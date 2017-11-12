@@ -12,7 +12,6 @@ import com.biaoyixin.shangcheng.R2;
 import com.biaoyixin.shangcheng.account.AccountHelper;
 import com.biaoyixin.shangcheng.base.BaseActivity;
 import com.biaoyixin.shangcheng.base.BaseApp;
-import com.biaoyixin.shangcheng.base.PreferencesUtil;
 import com.biaoyixin.shangcheng.base.Topbar;
 import com.biaoyixin.shangcheng.login.AccountManager;
 import com.biaoyixin.shangcheng.login.LoginActivity;
@@ -66,8 +65,6 @@ public class SettingActivity extends BaseActivity {
             public void run() {
 
                 AccountHelper.getCookieStore().removeAll();
-
-                PreferencesUtil.putString(BaseApp.getApp(), AccountManager.PREF_USER_ID, "");
 
                 AccountManager.Account account = new Gson().fromJson("{}", AccountManager.Account.class);
                 AccountManager.saveAccount(account);

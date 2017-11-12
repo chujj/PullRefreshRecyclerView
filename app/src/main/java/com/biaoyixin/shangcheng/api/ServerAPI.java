@@ -7,7 +7,6 @@ import com.biaoyixin.shangcheng.Consts;
 import com.biaoyixin.shangcheng.account.AccountHelper;
 import com.biaoyixin.shangcheng.base.BaseApp;
 import com.biaoyixin.shangcheng.base.CommonUtils;
-import com.biaoyixin.shangcheng.base.PreferencesUtil;
 import com.biaoyixin.shangcheng.base.ToastHelper;
 import com.biaoyixin.shangcheng.home.ConfirmPwdActivity;
 import com.biaoyixin.shangcheng.home.PasswordSetupActivity;
@@ -133,7 +132,8 @@ public class ServerAPI {
             BaseApp.getApp().startActivity(it);
         } else if (baseModel.code == 1000 || baseModel.code == 2000) {
             showToast = false;
-            PreferencesUtil.putString(BaseApp.getApp(), AccountManager.PREF_USER_ID, "");
+            AccountManager.Account account = new Gson().fromJson("{}", AccountManager.Account.class);
+            AccountManager.saveAccount(account);
             Intent it = new Intent(BaseApp.getApp(), LoginActivity.class);
             if (AccountManager.isLogin()) {
                 it.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);

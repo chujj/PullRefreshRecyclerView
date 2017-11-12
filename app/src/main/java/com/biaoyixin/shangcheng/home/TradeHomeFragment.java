@@ -26,11 +26,9 @@ import com.biaoyixin.shangcheng.R2;
 import com.biaoyixin.shangcheng.api.ServerAPI;
 import com.biaoyixin.shangcheng.api.trade.GoodsApi;
 import com.biaoyixin.shangcheng.api.user.UserApi;
-import com.biaoyixin.shangcheng.base.BaseApp;
 import com.biaoyixin.shangcheng.base.BaseFragment;
 import com.biaoyixin.shangcheng.base.ClosureMethod;
 import com.biaoyixin.shangcheng.base.CommonUtils;
-import com.biaoyixin.shangcheng.base.PreferencesUtil;
 import com.biaoyixin.shangcheng.base.ToastHelper;
 import com.biaoyixin.shangcheng.base.UnderlineIndicator;
 import com.biaoyixin.shangcheng.login.AccountManager;
@@ -106,7 +104,7 @@ public class TradeHomeFragment extends BaseFragment {
             long current = System.currentTimeMillis();
             boolean changed = false;
             for(GoodsApi.BuyTradeData btd : Data.sTradings) {
-                System.out.println(btd.open_time_interval + "");
+//                System.out.println(btd.open_time_interval + "");
                 if (btd.open_time_interval < 0) {
                     continue;
                 }
@@ -393,7 +391,7 @@ public class TradeHomeFragment extends BaseFragment {
 
 
 
-        final String userID = PreferencesUtil.getString(BaseApp.getApp(), AccountManager.PREF_USER_ID, "");
+        final String userID = AccountManager.getAccount().id;
         mWSWebview.addJavascriptInterface(new WebApi(), "WebAPI");
         mWSWebview.setWebViewClient(new WebViewClient() {
             @Override
@@ -417,6 +415,12 @@ public class TradeHomeFragment extends BaseFragment {
 //                return false;
 //            }
 //
+//
+//            @Override
+//            public boolean onConsoleMessage(ConsoleMessage consoleMessage) {
+//                Log.e(WebApi.TAG, consoleMessage.message());
+//                return super.onConsoleMessage(consoleMessage);
+//            }
 //        });
 
 
@@ -632,6 +636,12 @@ public class TradeHomeFragment extends BaseFragment {
                     if (!TextUtils.isEmpty(resp.data.inviteCode)) {
                         changede = true;
                         account.invite_code = resp.data.inviteCode;
+                    }
+
+
+                    if (resp.data.id != 0 ) {
+                        changede = true;
+                        account.id = resp.data.id + "";
                     }
 
 
