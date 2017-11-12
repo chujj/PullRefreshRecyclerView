@@ -57,25 +57,16 @@ public class TradeFragment extends BaseFragment {
     @BindViews({R2.id.line_detail_1, R2.id.line_detail_2, R2.id.line_detail_3, R2.id.line_detail_4,})
     TextView[] mLinesDetail;
 
-    @BindViews({R2.id.trade_list1, R2.id.trade_list2})
-    ViewGroup[] mTradeLists;
 
-
-    @BindView(R2.id.trades_container)
-    ViewGroup mTradesContainer;
 
     @BindView(R2.id.kline_container)
     ViewGroup mKlineContainer;
 
-    @BindView(R2.id.trades_all_container)
-    ViewGroup mTradesAllContainer;
 
     ViewGroup[] mKLineViews;
     EntrySet[] mEntrySets;
 
 
-    @BindViews({R2.id.trades_current_view_group, R2.id.trades_mine_view_group, })
-    ViewGroup[] mTradesViewGroup;
 
 
     private final static int ViewSize = 4;
@@ -83,7 +74,7 @@ public class TradeFragment extends BaseFragment {
     private String mKey;
 
     private List<ClosureMethod> mUIUpdates = new ArrayList<>();
-    private ClosureMethod mTradingUpdater;
+
     private TimeLineRender mTimeLineRender;
 
     @Override
@@ -104,15 +95,10 @@ public class TradeFragment extends BaseFragment {
 
     public void onEventMainThread(Message msg) {
 
-
         if (msg.what == Consts.BoardCast_PriceMsg || msg.what == Consts.BoardCast_TradeClose) {
             for(ClosureMethod call : mUIUpdates) {
                 call.run();
             }
-        } else if (msg.what == Consts.BoardCast_TradingListChange) {
-            refreshTradingList();
-        } else if (msg.what == Consts.BoardCast_TradingAllListChange) {
-            refreshAllTradingList();
         }
     }
 
@@ -271,122 +257,11 @@ public class TradeFragment extends BaseFragment {
         // default selection
         clickTime60();
         clickLine1();
-        selectTradeListIndex(0);
-
-        refreshTradingList();
-        refreshAllTradingList();
-    }
-
-
-
-    private void refreshAllTradingList() {
-        mTradesAllContainer.removeAllViews();
-
-
-        for(GoodsApi.BuyTradeData btd : Data.sAllTrading) {
-            View root =
-                    LayoutInflater.from(getContext()).inflate(R.layout.trade_all_trades_header_layout, mTradesAllContainer, false);
-
-            TextView openTime = CommonUtils.findView(root, R.id.open_time);
-            TextView key = CommonUtils.findView(root, R.id.key);
-            TextView buyType = CommonUtils.findView(root, R.id.buy_type);
-            TextView dingJin = CommonUtils.findView(root, R.id.ding_jin);
-
-
-            View price_mark  = CommonUtils.findView(root, R.id.price_mark);
-
-            openTime.setText(btd.open_time);
-            key.setText(btd.goods_name);
-
-            buyType.setText(btd.up_down_type == 0 ? "买涨" : "买跌");
-            buyType.setTextColor(btd.up_down_type == 0 ? 0xFFF35833 : 0xFF2CB545);
-
-
-            try {
-                price_mark.setBackgroundColor(btd.up_down_type == 0 ? 0xFFF35833 : 0xFF2CB545);
-                int maxWidth = (getContext().getResources().getDisplayMetrics().widthPixels / 5) -
-                        CommonUtils.dip2px(getContext(), 15 * 2);
-
-                int chip = Integer.parseInt(btd.chip);
-                chip = Math.min(3000, chip);
-                price_mark.getLayoutParams().width = (int) (1f * maxWidth / 3000 * chip);
-                price_mark.setVisibility(View.VISIBLE);
-            } catch (Exception e) {
-
-            }
-
-
-
-            dingJin.setText(btd.chip);
-
-            mTradesAllContainer.addView(root);
-
-        }
 
     }
 
 
-    private void refreshTradingList() {
 
-        mUIUpdates.remove(mTradingUpdater);
-
-        final List<ClosureMethod> listUpdaters = new ArrayList<>();
-
-        mTradesContainer.removeAllViews();
-        for(GoodsApi.BuyTradeData btd : Data.sTradings) {
-            if (TextUtils.equals(btd.label, mKey)) {
-                View root =
-                        LayoutInflater.from(getContext()).inflate(R.layout.trade_trades_header_layout, mTradesContainer, false);
-
-                TextView name = CommonUtils.findView(root, R.id.name);
-                TextView buyType = CommonUtils.findView(root, R.id.buy_type);
-                TextView openTime = CommonUtils.findView(root, R.id.open_time);
-                TextView openPrice = CommonUtils.findView(root, R.id.open_price);
-                final TextView newPrice = CommonUtils.findView(root, R.id.new_price);
-                TextView dingJin = CommonUtils.findView(root, R.id.ding_jin);
-
-                name.setText(btd.goods_name);
-                buyType.setText(btd.up_down_type == 0 ? "买涨" : "买跌");
-                buyType.setTextColor(btd.up_down_type == 0 ? 0xFFF35833 : 0xFF2CB545);
-                openTime.setText(btd.open_time);
-                openPrice.setText(btd.open_price + "");
-                newPrice.setText(btd.close_price + "");
-                dingJin.setText(btd.chip);
-
-
-                listUpdaters.add(new ClosureMethod() {
-                    @Override
-                    public Object[] run(Object... args) {
-                        for (int i = 0; i < Data.sData.goods.size(); i++) {
-
-                            if (TextUtils.equals(Data.sData.goods.get(i).label, mKey)) {
-                                newPrice.setText(Data.sData.goods.get(i).newPrice + "");
-                            }
-
-                        }
-
-                        return null;
-                    }
-                });
-
-                mTradesContainer.addView(root);
-            }
-        }
-
-
-        mTradingUpdater = new ClosureMethod() {
-            @Override
-            public Object[] run(Object... args) {
-
-                for(ClosureMethod call : listUpdaters) {
-                    call.run();
-                }
-
-                return null;
-            }
-        };
-        mUIUpdates.add(mTradingUpdater);
-    }
 
     public void onDataReady() {
         for (int i = 0; i < mKLineViews.length; i++) {
@@ -454,37 +329,6 @@ public class TradeFragment extends BaseFragment {
         }
 
     }
-
-
-
-    @OnClick(R2.id.trade_list1)
-    public void clickTradeList1() {
-        selectTradeListIndex(0);
-    }
-
-    @OnClick(R2.id.trade_list2)
-    public void clickTradeList2() {
-        selectTradeListIndex(1);
-    }
-
-    private void selectTradeListIndex(int index) {
-        for (int i = 0; i < mTradeLists.length; i++) {
-            for (int j = 0; j < mTradeLists[i].getChildCount(); j++) {
-                View view = mTradeLists[i].getChildAt(j);
-                if (view instanceof TextView) {
-
-                    ((TextView)view).setTextColor(index == i ? 0xFFEBAD33 : 0xFFCCCCCC);
-                } else if (view instanceof View) {
-                    view.setVisibility( index == i ? View.VISIBLE : View.INVISIBLE);
-                }
-            }
-
-
-            mTradesViewGroup[i].setVisibility(index == i ? View.VISIBLE : View.GONE);
-        }
-
-    }
-
 
     @OnClick(R2.id.buy_up)
     public void clickBuyUp() {
