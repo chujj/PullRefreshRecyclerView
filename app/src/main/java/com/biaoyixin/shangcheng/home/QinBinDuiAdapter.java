@@ -1,6 +1,7 @@
 package com.biaoyixin.shangcheng.home;
 
 import android.content.Intent;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -64,6 +65,13 @@ public class QinBinDuiAdapter extends BaseAdapter {
 
 
                     name.setText(broker.name);
+                    if (TextUtils.isEmpty(broker.name)) {
+                        name.setVisibility(View.GONE);
+                    } else {
+                        name.setVisibility(View.VISIBLE);
+                    }
+
+
                     phone.setText(broker.phone);
 
 
