@@ -7,8 +7,8 @@ android {
     buildToolsVersion "26.0.0"
 
     defaultConfig {
-        applicationId "com.biaoyixin.shangcheng"
-//        applicationId "com.shouhuxing.healthassist"
+//        applicationId "com.biaoyixin.shangcheng"
+        applicationId "com.shouhuxing.healthassist"
         minSdkVersion 14
         targetSdkVersion 23
         versionCode 12
