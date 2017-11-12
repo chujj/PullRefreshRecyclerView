@@ -2,6 +2,7 @@ package com.biaoyixin.shangcheng.api.user;
 
 import com.biaoyixin.shangcheng.api.trade.GoodsApi;
 import com.biaoyixin.shangcheng.model.BaseModel;
+import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
 
@@ -72,6 +73,10 @@ public class UserApi {
 
         @GET("/systemInfo")
         public void getSystemInfo(Callback<SystemInfoResp> cb);
+
+
+        @GET("/broker/customer/list")
+        public void getBrokerList(Callback<BrokerListResp> cb);
     }
 
 
@@ -179,8 +184,21 @@ public class UserApi {
     }
 
 
+    public static class BrokerListResp extends BaseModel {
+        public BrokerListPage data;
+    }
+
+
+    public static class BrokerListPage extends BaseModel {
+        public List<Broker> content;
+        public boolean last;
+    }
+
     public static class Broker extends BaseModel {
+        public long id;
+        @SerializedName("nickname")
         public String name;
+        @SerializedName("mobile")
         public String phone;
     }
 }
