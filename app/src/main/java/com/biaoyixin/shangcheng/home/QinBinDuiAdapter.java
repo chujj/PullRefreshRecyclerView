@@ -1,5 +1,6 @@
 package com.biaoyixin.shangcheng.home;
 
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -45,7 +46,8 @@ public class QinBinDuiAdapter extends BaseAdapter {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         if (convertView == null ) {
-            convertView = LayoutInflater.from(parent.getContext()).inflate(R.layout.qin_bin_dui_list_item, parent, false);
+            final View viewRoot = LayoutInflater.from(parent.getContext()).inflate(R.layout.qin_bin_dui_list_item, parent, false);
+            convertView = viewRoot;
 
             final View gap = CommonUtils.findView(convertView, R.id.gap);
             final TextView name = CommonUtils.findView(convertView, R.id.name);
@@ -56,13 +58,24 @@ public class QinBinDuiAdapter extends BaseAdapter {
                 @Override
                 public Object[] run(Object... args) {
                     int pos = (int) args[1];
-                    UserApi.Broker broker = (UserApi.Broker) args[0];
+                    final UserApi.Broker broker = (UserApi.Broker) args[0];
 
                     gap.setVisibility(pos == 0 ? View.VISIBLE : View.GONE);
 
 
                     name.setText(broker.name);
                     phone.setText(broker.phone);
+
+
+                    viewRoot.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            Intent it = new Intent(viewRoot.getContext(),
+                                    TradeHistoryActivity.class);
+                            it.putExtra("customerId", broker.id);
+                            viewRoot.getContext().startActivity(it);
+                        }
+                    });
 
                     return null;
                 }

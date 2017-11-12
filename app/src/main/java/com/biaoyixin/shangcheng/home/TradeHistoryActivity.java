@@ -16,7 +16,6 @@ import com.biaoyixin.shangcheng.api.ServerAPI;
 import com.biaoyixin.shangcheng.api.trade.GoodsApi;
 import com.biaoyixin.shangcheng.base.BaseActivity;
 import com.biaoyixin.shangcheng.base.CommonUtils;
-import com.biaoyixin.shangcheng.base.ToastHelper;
 import com.biaoyixin.shangcheng.base.Topbar;
 
 import butterknife.BindView;
@@ -42,6 +41,8 @@ public class TradeHistoryActivity extends BaseActivity {
     TextView[] mTabs;
 
 
+    private long mCustomId;
+
     private TradeHistoroyAdapter[] mAdapter = new TradeHistoroyAdapter[3];
 
     @Override
@@ -49,6 +50,9 @@ public class TradeHistoryActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
 
         this.setContentView(R.layout.trade_history_activity);
+
+
+        mCustomId = getIntent().getLongExtra("customerId", 0);
 
         ButterKnife.bind(this, this);
 
@@ -130,7 +134,8 @@ public class TradeHistoryActivity extends BaseActivity {
         showLoadingDialog("加载中...", false);
 
         GoodsApi.IGood iGood = ServerAPI.getInterface(GoodsApi.IGood.class);
-        iGood.getTradeHistory(new Callback<GoodsApi.TradeHistoryResp>() {
+
+        Callback<GoodsApi.TradeHistoryResp> callback = new Callback<GoodsApi.TradeHistoryResp>() {
             @Override
             public void success(GoodsApi.TradeHistoryResp baseModel, Response response) {
                 TradeHistoryActivity.this.dismissLoadingDialog();
@@ -155,7 +160,12 @@ public class TradeHistoryActivity extends BaseActivity {
                 TradeHistoryActivity.this.dismissLoadingDialog();
                 ServerAPI.HandlerException(error);
             }
-        });
+        };
+        if (mCustomId == 0) {
+            iGood.getTradeHistory(callback);
+        } else {
+            iGood.getTradeHistoryV2(mCustomId, callback);
+        }
     }
 
 

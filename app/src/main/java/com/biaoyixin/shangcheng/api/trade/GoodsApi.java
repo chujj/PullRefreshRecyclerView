@@ -33,9 +33,12 @@ public class GoodsApi {
                              @Field("use_coupon_type") String coupon_type,
                              Callback<BuyTradeResponse> cb);
 
-
         @POST("/customer/account_trade_list")
         public void getTradeHistory(Callback<TradeHistoryResp> cb);
+
+        @FormUrlEncoded
+        @POST("/customer/account_trade_list")
+        public void getTradeHistoryV2(@Field("customerId") long customerId , Callback<TradeHistoryResp> cb);
 
 
         @GET("/asset/account_asset_pay_prepare")
