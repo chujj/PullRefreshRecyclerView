@@ -8,8 +8,8 @@ import android.os.Message;
 public class Consts {
 
 
-    public final static String HOST = "http://time.168zhibo.cn/";
-//    public static final String HOST = "http://time.glenair.cc/";
+    public final static String HOST = BuildConfig.OnlineServer ? "http://time.glenair.cc/" : "http://time.168zhibo.cn/";
+//    public static final String HOST = ;
 
     public final static int BoardCast_PriceMsg = 0x13d;
     public final static int BoardCast_TradingListChange = 0x14d;

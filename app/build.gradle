@@ -35,6 +35,20 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+
+    productFlavors {
+        ProductServer {
+            applicationId "com.biaoyixin.shangcheng"
+            buildConfigField "boolean", "OnlineServer", "true"
+            resValue "string", "app_name2", "熊猫商贸"
+        }
+
+        TestServer {
+            applicationId "com.shouhuxing.healthassist"
+            buildConfigField "boolean", "OnlineServer", "false"
+            resValue "string", "app_name2", "熊猫商贸-测试版"
+        }
+    }
 }
 
 dependencies {
