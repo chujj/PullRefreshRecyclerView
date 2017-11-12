@@ -160,6 +160,8 @@ public class UserApi {
         public int todayBrokerageLv2; // ": 200,
         public int totalBrokerageLv1; // ": 100,
         public int totalBrokerageLv2; // ": 400
+        public int lv1Count;
+        public int lv2Count;
     }
 
     public static class UpgradeResp extends BaseModel {
