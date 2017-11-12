@@ -32,7 +32,7 @@ public class WrapContentViewPager extends ViewPager {
                 height = h;
         }
 
-        heightMeasureSpec = MeasureSpec.makeMeasureSpec(height+ 100,
+        heightMeasureSpec = MeasureSpec.makeMeasureSpec(height+ 0,
                 MeasureSpec.EXACTLY);
 
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);

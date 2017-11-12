@@ -9,7 +9,7 @@
     <com.wordplat.ikvstockchart.InteractiveKLineView
         android:id="@+id/timeLineView"
         android:layout_width="match_parent"
-        android:layout_height="300dp"
+        android:layout_height="250dp"
         app:xLabelColor="#FFCCCCCC"
         app:yLabelColor="#FFCCCCCC"
         app:portraitDefaultVisibleCount="35"

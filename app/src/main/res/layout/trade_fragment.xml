@@ -64,7 +64,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
+        android:layout_marginTop="8dp"
         android:paddingLeft="20dp"
         android:paddingRight="20dp"
         android:orientation="horizontal">
@@ -76,8 +76,8 @@
             android:layout_width="100dp"
             android:layout_height="wrap_content"
             android:gravity="center_horizontal"
-            android:paddingTop="10dp"
-            android:paddingBottom="10dp"
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp"
             android:orientation="vertical"
             android:background="@drawable/trade_fragment_timeinterval_bg">
 
@@ -93,7 +93,7 @@
                 android:id="@+id/time1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
+                android:layout_marginTop="3dp"
                 android:text="180秒"
                 android:textColor="#FFEBAD33"
                 android:textSize="20sp"
@@ -112,8 +112,8 @@
             android:layout_width="100dp"
             android:layout_height="wrap_content"
             android:gravity="center_horizontal"
-            android:paddingTop="10dp"
-            android:paddingBottom="10dp"
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp"
             android:orientation="vertical"
             android:background="@drawable/trade_fragment_timeinterval_bg">
 
@@ -129,7 +129,7 @@
                 android:id="@+id/time2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
+                android:layout_marginTop="3dp"
                 android:text="60秒"
                 android:textColor="#FFEBAD33"
                 android:textSize="20sp"
@@ -147,8 +147,8 @@
             android:layout_width="100dp"
             android:layout_height="wrap_content"
             android:gravity="center_horizontal"
-            android:paddingTop="10dp"
-            android:paddingBottom="10dp"
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp"
             android:orientation="vertical"
             android:background="@drawable/trade_fragment_timeinterval_bg">
 
@@ -164,7 +164,7 @@
                 android:id="@+id/time3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
+                android:layout_marginTop="3dp"
                 android:text="300秒"
                 android:textColor="#FFEBAD33"
                 android:textSize="20sp"
@@ -179,7 +179,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
+        android:layout_marginTop="8dp"
         android:paddingLeft="10dp"
         android:paddingRight="10dp"
         android:orientation="horizontal">
