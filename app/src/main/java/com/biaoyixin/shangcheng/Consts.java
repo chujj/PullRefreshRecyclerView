@@ -13,6 +13,7 @@ public class Consts {
     public final static int BoardCast_ChongZhi_Refresh = 0x16d;
 
     public final static int BoardCast_TradingAllListChange = 0x17d;
+    public final static int BoardCast_Trade_OpenTimeIntervalChange = 0x18d;
 
 
     public static Message getBoardCastMessage(int boardCastFlag) {

@@ -152,13 +152,13 @@ public class ZhanduiFragment extends BaseFragment {
                         100)
         );
         qin_bin_dui_total.setText(
-                mData.lv1Count + ""
+                mData.lv1Count + "人"
 //                deRound(
 //                        mData.todayBrokerageLv1,
 //                        100)
         );
         hu_wei_dui_total.setText(
-                mData.lv2Count + ""
+                mData.lv2Count + "人"
 //                deRound(
 //                        mData.todayBrokerageLv2,
 //                        100)

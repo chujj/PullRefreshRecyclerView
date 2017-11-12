@@ -72,6 +72,9 @@ public class TradeHomeFragment extends BaseFragment {
     @BindView(R2.id.count_down_text)
     TextView mCountDownText;
 
+    @BindView(R2.id.trades_layout)
+    ViewGroup mTradesListLayout;
+
 
     @BindView(R2.id.ws_callback)
     WebView mWSWebview;
@@ -87,6 +90,41 @@ public class TradeHomeFragment extends BaseFragment {
     ViewGroup[] mTradesViewGroup;
 
     private Handler mHandler;
+
+    private ClosureMethod mCurrentKey ;
+
+    private Runnable mCounterDownOpenTimeIntervalRunnable = new Runnable() {
+
+
+        private long lastTimeStamp = System.currentTimeMillis();
+
+        @Override
+        public void run() {
+
+            long current = System.currentTimeMillis();
+            boolean changed = false;
+            for(GoodsApi.BuyTradeData btd : Data.sTradings) {
+                System.out.println(btd.open_time_interval + "");
+                if (btd.open_time_interval < 0) {
+                    continue;
+                }
+
+
+                float diff = (current - lastTimeStamp) / 1000f;
+                btd.open_time_interval -= diff;
+
+
+                changed  = true;
+            }
+
+
+            if (changed) {
+                EventBus.getDefault().post(Consts.getBoardCastMessage(Consts.BoardCast_Trade_OpenTimeIntervalChange));
+            }
+            lastTimeStamp = current;
+            mHandler.postDelayed(this, 300);
+        }
+    };
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -114,6 +152,18 @@ public class TradeHomeFragment extends BaseFragment {
     }
 
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        mHandler.post(mCounterDownOpenTimeIntervalRunnable);
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        mHandler.removeCallbacks(mCounterDownOpenTimeIntervalRunnable);
+    }
+
     private List<ClosureMethod> mIndicatorUpdate = new ArrayList<>();
     public void onEventMainThread(Message msg) {
 
@@ -130,6 +180,26 @@ public class TradeHomeFragment extends BaseFragment {
             refreshTradingList();
         } else if (msg.what == Consts.BoardCast_TradingAllListChange) {
             refreshAllTradingList();
+        } else if (msg.what == Consts.BoardCast_Trade_OpenTimeIntervalChange) {
+            if (mCurrentKey  == null) return;
+            String key = (String) mCurrentKey .run()[0];
+
+            mCountDownLayout.setVisibility(View.GONE);
+
+
+            for(GoodsApi.BuyTradeData btd: Data.sTradings) {
+                if (!TextUtils.equals(btd.label, key)) {
+                    continue;
+                }
+
+                if (btd.open_time_interval <= 0) {
+                    mCountDownLayout.setVisibility(View.GONE);
+                } else {
+                    mCountDownLayout.setVisibility(View.VISIBLE);
+                    mCountDownText.setText((int) btd.open_time_interval + "");
+                }
+            }
+
         }
     }
 
@@ -156,9 +226,12 @@ public class TradeHomeFragment extends BaseFragment {
 
         getTradeAllList();
 
-        selectTradeListIndex(0);
+
         refreshTradingList();
         refreshAllTradingList();
+        mTradesViewGroup[0].setVisibility(View.GONE);
+        mTradesViewGroup[1].setVisibility(View.GONE);
+        mTradesListLayout.setVisibility(View.GONE);
     }
 
     private void refreshAllTradingList() {
@@ -356,6 +429,8 @@ public class TradeHomeFragment extends BaseFragment {
                     ToastHelper.showToast(goodsResp.message);
                 } else {
                     updateViewPager(goodsResp.data);
+                    mTradesListLayout.setVisibility(View.VISIBLE);
+                    selectTradeListIndex(0);
                 }
 
             }
@@ -400,6 +475,15 @@ public class TradeHomeFragment extends BaseFragment {
                 return keys.length;
             }
         });
+
+        mCurrentKey = new ClosureMethod() {
+            @Override
+            public Object[] run(Object... args) {
+                return new Object[] {
+                        keys[mViewPager.getCurrentItem()],
+                };
+            }
+        };
 
 
         mIndicator.setViewPager(mViewPager, new UnderlineIndicator.ChildProvider() {
