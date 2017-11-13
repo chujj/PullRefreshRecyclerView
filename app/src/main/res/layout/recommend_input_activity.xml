@@ -65,6 +65,7 @@
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
         android:gravity="center"
+        android:visibility="gone"
         android:text="跳过"
         android:textColor="#FFEBAD33"
         android:textSize="18sp"/>

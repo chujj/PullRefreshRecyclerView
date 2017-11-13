@@ -8,6 +8,7 @@ import android.widget.EditText;
 import com.biaoyixin.shangcheng.R;
 import com.biaoyixin.shangcheng.R2;
 import com.biaoyixin.shangcheng.SplashActivity;
+import com.biaoyixin.shangcheng.account.AccountHelper;
 import com.biaoyixin.shangcheng.api.ServerAPI;
 import com.biaoyixin.shangcheng.api.user.UserApi;
 import com.biaoyixin.shangcheng.base.BaseActivity;
@@ -29,9 +30,11 @@ import retrofit.client.Response;
 public class RecommendInputActivity extends BaseActivity {
 
 
-
+    public static Runnable successCb;
     @BindView(R2.id.phone)
     EditText mPhone;
+
+    boolean success = false;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -74,6 +77,10 @@ public class RecommendInputActivity extends BaseActivity {
 
                     ServerAPI.handleCodeError(baseModel);
                 } else {
+                    if (successCb != null) {
+                        successCb.run();
+                    }
+                    success = true;
                     finish();
                     openHome();
                 }
@@ -89,10 +96,22 @@ public class RecommendInputActivity extends BaseActivity {
 
     }
 
+    private long mLastClick;
     @Override
     public void onBackPressed() {
+
+        long current = System.currentTimeMillis();
+        if (current - mLastClick > 1000) {
+            mLastClick = current;
+            ToastHelper.showToast("请输入推荐码后继续使用");
+            return;
+        }
+
         super.onBackPressed();
 
+        if (!success) {
+            AccountHelper.getCookieStore().removeAll();
+        }
         openHome();
     }
 

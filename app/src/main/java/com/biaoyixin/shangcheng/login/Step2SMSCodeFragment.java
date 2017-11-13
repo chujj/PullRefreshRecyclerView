@@ -295,13 +295,21 @@ public class Step2SMSCodeFragment extends BaseFragment {
 
                 if (baseModel.code == 0) {
 
-                    AccountManager.Account account = AccountManager.getAccount();
+                    final AccountManager.Account account = AccountManager.getAccount();
                     account.id = baseModel.data.id + "";
-                    AccountManager.saveAccount(account);
+                    Runnable saveAccount = new Runnable() {
+                        @Override
+                        public void run() {
+                            AccountManager.saveAccount(account);
+
+                        }
+                    };
 
                     if (baseModel.data.needShowInputBroker()) {
-                        ((LoginActivity)getActivity()).switchToStep3Recommend();
+
+                        ((LoginActivity)getActivity()).switchToStep3Recommend(saveAccount);
                     } else {
+                        saveAccount.run();
                         SplashActivity.switchToMain(getContext());
                     }
                     getActivity().finish();
