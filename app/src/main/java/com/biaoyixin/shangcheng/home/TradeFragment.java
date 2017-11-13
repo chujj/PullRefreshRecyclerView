@@ -1,6 +1,7 @@
 package com.biaoyixin.shangcheng.home;
 
 import android.os.Bundle;
+import android.os.Handler;
 import android.os.Message;
 import android.support.annotation.Nullable;
 import android.text.TextUtils;
@@ -77,13 +78,50 @@ public class TradeFragment extends BaseFragment {
 
     private TimeLineRender mTimeLineRender;
 
+
+    private Handler mHandler;
+
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         mKey = getArguments().getString("key");
 
+        mHandler = new Handler();
+
         EventBus.getDefault().register(this);
+    }
+
+
+    private Runnable redrawTimeLineViewRunnable;
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        if (redrawTimeLineViewRunnable != null) {
+            mHandler.post(redrawTimeLineViewRunnable);
+        }
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+
+        if (redrawTimeLineViewRunnable != null) {
+            mHandler.removeCallbacks(redrawTimeLineViewRunnable);
+        }
+    }
+
+    @Override
+    public void onHiddenChanged(boolean hidden) {
+        super.onHiddenChanged(hidden);
+        if (redrawTimeLineViewRunnable != null){
+            if (hidden) {
+                mHandler.removeCallbacks(redrawTimeLineViewRunnable);
+            } else {
+                mHandler.post(redrawTimeLineViewRunnable);
+            }
+        }
     }
 
     @Override
@@ -131,11 +169,23 @@ public class TradeFragment extends BaseFragment {
                 mKlineContainer.addView(newView);
                 mKLineViews[i] = newView;
 
-                InteractiveKLineView klineView = CommonUtils.findView(mKLineViews[i], R.id.timeLineView);
+                final InteractiveKLineView klineView = CommonUtils.findView(mKLineViews[i], R.id.timeLineView);
                 klineView.setEntrySet(mEntrySets[i]);
                 klineView.setEnableLeftRefresh(false);
                 klineView.setEnableRightRefresh(false);
                 klineView.setRender(mTimeLineRender = new TimeLineRender());
+                redrawTimeLineViewRunnable = new Runnable() {
+                    @Override
+                    public void run() {
+                        klineView.postInvalidate();
+                    }
+                };
+                mTimeLineRender.getTimeLineDrawing().drawAfterCb = new Runnable() {
+                    @Override
+                    public void run() {
+                        redrawTimeLineViewRunnable.run();
+                    }
+                };
             } else {
                 newView = (ViewGroup) inflater.inflate(R.layout.trade_kline_layout, mKlineContainer, false);
                 mKlineContainer.addView(newView);
@@ -268,6 +318,10 @@ public class TradeFragment extends BaseFragment {
             InteractiveKLineView kLineView = CommonUtils.findView(mKLineViews[i], R.id.timeLineView);
             kLineView.notifyDataSetChanged();
         }
+
+        if (redrawTimeLineViewRunnable != null) {
+            redrawTimeLineViewRunnable.run();
+        }
     }
 
 
@@ -326,6 +380,15 @@ public class TradeFragment extends BaseFragment {
 
 
             mKLineViews[i].setVisibility(index == i ? View.VISIBLE : View.GONE);
+        }
+
+
+        if (redrawTimeLineViewRunnable != null) {
+            if (index == 0) {
+                mHandler.post(redrawTimeLineViewRunnable);
+            } else {
+                mHandler.removeCallbacks(redrawTimeLineViewRunnable);
+            }
         }
 
     }

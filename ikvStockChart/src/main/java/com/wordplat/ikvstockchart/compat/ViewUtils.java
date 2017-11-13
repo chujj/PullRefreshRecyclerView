@@ -330,7 +330,7 @@ public class ViewUtils {
             sizeColor.klineBottomIndexHeight = ViewUtils.dpTopx(context, 6);
             sizeColor.klineBottomIndexLabelExtraHeight = ViewUtils.dpTopx(context, 8); // max is 10
             sizeColor.markLine1MarginRight = ViewUtils.dpTopx(context, 15);
-            sizeColor.insidePointRadius = ViewUtils.dpTopx(context, 5);
+            sizeColor.insidePointRadius = ViewUtils.dpTopx(context, 3);
             sizeColor.outsizePointRadius = ViewUtils.dpTopx(context, 8);
 
             String errorText = a.getString(R.styleable.InteractiveKLineView_errorText);

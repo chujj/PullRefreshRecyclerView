@@ -66,8 +66,10 @@ public class TimeLineDrawing implements IDrawing {
 
     public PriceMarkerProvider mPriceMarkerProvider;
 
-    private Paint mPointInsidePaint, mPointOutsidePaint;
+    private Paint mPointInsidePaint, mPointOutsidePaint, mPointBlinkPaint;
     private RectF mPointRectF = new RectF();
+
+    public Runnable drawAfterCb = null;
 
     @Override
     public void onInit(RectF contentRect, AbstractRender render) {
@@ -111,6 +113,13 @@ public class TimeLineDrawing implements IDrawing {
         mPointOutsidePaint = new Paint(Paint.ANTI_ALIAS_FLAG);
         mPointOutsidePaint.setStyle(Paint.Style.FILL);
         mPointOutsidePaint.setColor(0xffd7d7d7);
+
+
+        mPointBlinkPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
+        mPointBlinkPaint.setStrokeWidth(10);
+        mPointBlinkPaint.setStyle(Paint.Style.STROKE);
+        mPointBlinkPaint.setColor(0x88d7d7d7);
+
 
         chartRect.set(contentRect);
     }
@@ -184,13 +193,27 @@ public class TimeLineDrawing implements IDrawing {
             float y = lineBuffer[lineBuffer.length -1];
 
             float radius = render.getSizeColor().outsizePointRadius;
-            mPointRectF.set(x - radius, y+radius, x+radius, y-radius);
-            canvas.drawOval(mPointRectF, mPointOutsidePaint);
+//            mPointRectF.set(x - radius, y+radius, x+radius, y-radius);
+//            canvas.drawOval(mPointRectF, mPointOutsidePaint);
 
 
             radius = render.getSizeColor().insidePointRadius;
             mPointRectF.set(x - radius, y+radius, x+radius, y-radius);
             canvas.drawOval(mPointRectF, mPointInsidePaint);
+
+
+            radius = render.getSizeColor().insidePointRadius;
+
+            long current = System.currentTimeMillis();
+            long step = (current / 45) % render.getSizeColor().outsizePointRadius;
+//            System.out.println("zjj step: " + step);
+            radius += step;
+            mPointRectF.set(x - radius, y + radius, x + radius, y - radius);
+            canvas.drawOval(mPointRectF, mPointBlinkPaint);
+
+            if (drawAfterCb != null) {
+                drawAfterCb.run();
+            }
 
         }
 
