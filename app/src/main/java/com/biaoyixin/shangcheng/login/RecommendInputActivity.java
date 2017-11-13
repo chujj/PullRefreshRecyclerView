@@ -96,6 +96,16 @@ public class RecommendInputActivity extends BaseActivity {
 
     }
 
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+
+        if (!success) {
+            AccountHelper.getCookieStore().removeAll();
+        }
+    }
+
     private long mLastClick;
     @Override
     public void onBackPressed() {
@@ -109,9 +119,7 @@ public class RecommendInputActivity extends BaseActivity {
 
         super.onBackPressed();
 
-        if (!success) {
-            AccountHelper.getCookieStore().removeAll();
-        }
+
         openHome();
     }
 
