@@ -158,12 +158,14 @@ public class TradeHomeFragment extends BaseFragment {
     public void onResume() {
         super.onResume();
         mHandler.post(mCounterDownOpenTimeIntervalRunnable);
+        getTradeAllList();
     }
 
     @Override
     public void onPause() {
         super.onPause();
         mHandler.removeCallbacks(mCounterDownOpenTimeIntervalRunnable);
+        mHandler.removeCallbacks(refreshArrTradeList);
     }
 
     private List<ClosureMethod> mIndicatorUpdate = new ArrayList<>();
@@ -227,9 +229,6 @@ public class TradeHomeFragment extends BaseFragment {
 
         requireUserInfo();
         getUserStatus();
-
-        getTradeAllList();
-
 
         refreshTradingList();
         refreshAllTradingList();
@@ -672,6 +671,7 @@ public class TradeHomeFragment extends BaseFragment {
         @Override
         public void run() {
 
+            System.out.println("zhujj refreshArrTradeList");
             GoodsApi.IGood iGood = ServerAPI.getInterface(GoodsApi.IGood.class);
             iGood.getTradeAllList(new Callback<GoodsApi.TradeAllListResp>() {
 
@@ -744,7 +744,6 @@ public class TradeHomeFragment extends BaseFragment {
         super.onHiddenChanged(hidden);
         if (!hidden) {
             getUserStatus();
-            getTradeAllList();
         }
     }
 }
