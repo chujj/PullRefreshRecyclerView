@@ -36,6 +36,7 @@ import com.biaoyixin.shangcheng.model.BaseModel;
 import butterknife.BindView;
 import butterknife.BindViews;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import retrofit.Callback;
 import retrofit.RetrofitError;
 import retrofit.client.Response;
@@ -326,6 +327,19 @@ public class Step2SMSCodeFragment extends BaseFragment {
             }
         });
 
+    }
+
+
+    @OnClick(R2.id.inputarea)
+    public void clickInputArea() {
+        new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    CommonUtils.showSoftKeyboard(mInput, getContext());
+                    String text = mInput.getText().toString();
+                    mInput.setSelection(text != null && text.length() > 0 ? text.length() : 0);
+                }
+            }, 300);
     }
 
 }
