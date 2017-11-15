@@ -84,6 +84,7 @@
             android:layout_weight="1"/>
 
         <LinearLayout
+            android:visibility="gone"
             android:id="@+id/home_icon_3"
             android:layout_width="74dp"
             android:layout_height="wrap_content"
@@ -109,6 +110,7 @@
         <View
             android:layout_width="0dp"
             android:layout_height="1dp"
+            android:visibility="gone"
             android:layout_weight="1"/>
 
         <LinearLayout
