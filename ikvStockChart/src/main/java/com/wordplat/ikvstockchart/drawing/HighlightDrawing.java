@@ -39,6 +39,7 @@ import java.util.List;
 public class HighlightDrawing implements IDrawing {
 
     protected Paint highlightPaint; // 高亮线条画笔
+    private final Paint.FontMetrics fontMetrics = new Paint.FontMetrics(); // 用于 labelPaint 计算文字位置
 
     protected final RectF contentRect = new RectF(); // 绘图区域
     protected AbstractRender render;
@@ -70,6 +71,8 @@ public class HighlightDrawing implements IDrawing {
         }
         highlightPaint.setStrokeWidth(sizeColor.getHighlightSize());
         highlightPaint.setColor(sizeColor.getHighlightColor());
+        highlightPaint.setTextSize(sizeColor.getMarkerTextSize());
+        highlightPaint.getFontMetrics(fontMetrics);
 
         this.contentRect.set(contentRect);
 
@@ -108,8 +111,11 @@ public class HighlightDrawing implements IDrawing {
             }
 
             canvas.drawLine(highlightPoint[0], contentRect.top, highlightPoint[0], contentRect.bottom, highlightPaint);
+            if (render.highLightYLabel != null) {
+                int half = (int) (highlightPaint.measureText(render.highLightYLabel) / 2);
+                canvas.drawText(render.highLightYLabel, highlightPoint[0] - half, contentRect.bottom - fontMetrics.bottom, highlightPaint);
+            }
 
-//            canvas.drawText();
             canvas.drawLine(contentRect.left, highlightPoint[1], contentRect.right, highlightPoint[1], highlightPaint);
 
             canvas.restore();

@@ -225,6 +225,11 @@ public class TimeLineDrawing implements IDrawing {
             pointBuffer[0] = highlightPoint[0];
             render.invertMapPoints(pointBuffer);
             final int highlightIndex = pointBuffer[0] < 0 ? 0 : (int) pointBuffer[0];
+            try {
+                render.highLightYLabel = entrySet.getEntryList().get(highlightIndex).getXLabel();
+            } catch (Exception e ) {
+
+            }
             final int i = highlightIndex - minIndex;
             highlightPoint[0] = highlightIndex < lastEntryIndex ?
                     lineBuffer[i * 4 + 0] : lineBuffer[lastEntryIndex * 4 + 2];

@@ -100,7 +100,7 @@ public class TimeLineGridAxisDrawing implements IDrawing {
         chartRect.set(contentRect);
 
         lineHeight = chartRect.height() / (Y_LABEL_SIZE -1);
-        lineWidth = chartRect.width() / 4;
+        lineWidth = chartRect.width() / (Y_LABEL_SIZE - 1);
     }
 
     @Override
@@ -144,14 +144,29 @@ public class TimeLineGridAxisDrawing implements IDrawing {
             // 绘制 X 轴 label
             int index = entrySetSize - Y_LABEL_SIZE + i;
             if (index > 0 && index < entrySetSize) {
-                canvas.drawText(
-                        entrySet.getEntryList().get(index).getXLabel(),
-                        lineLeft,
-                        chartRect.bottom + render.getSizeColor().getXLabelSize() + sizeColor.klineBottomIndexLabelExtraHeight,
-                        xLabelPaint);
+                try {
+                    if (index == entrySetSize - 1) {
+
+                    } else {
+                        pointBuffer[0]= lineLeft;
+                        render.invertMapPoints(pointBuffer);
+                        int highlightIndex = pointBuffer[0] < 0 ? 0 : (int) pointBuffer[0];
+                        index = highlightIndex;
+                    }
+                    canvas.drawText(
+                            entrySet.getEntryList().get(index).getXLabel(),
+                            lineLeft,
+                            chartRect.bottom + render.getSizeColor().getXLabelSize() + sizeColor.klineBottomIndexLabelExtraHeight,
+                            xLabelPaint);
+                } catch (Exception e) {
+
+                }
             }
         }
     }
+
+
+        private float[] pointBuffer = new float[2];
 
     @Override
     public void onDrawOver(Canvas canvas) {

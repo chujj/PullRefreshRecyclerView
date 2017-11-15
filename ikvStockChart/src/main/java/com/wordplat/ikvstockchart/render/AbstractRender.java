@@ -63,6 +63,7 @@ public abstract class AbstractRender {
     private float maxScrollOffset = 0; // 最大滚动量
     private float lastMaxScrollOffset = 0; // 上一次的最大滚动量
     private float overScrollOffset = 0; // 超出边界的滚动量
+    public String highLightYLabel;
 
     /**
      * 根据给出的 view 坐标信息，进行视图上的一些设置
