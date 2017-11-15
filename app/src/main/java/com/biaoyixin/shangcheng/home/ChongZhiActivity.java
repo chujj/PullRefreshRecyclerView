@@ -231,9 +231,11 @@ public class ChongZhiActivity extends BaseActivity {
                                                 ServerAPI.handleCodeError(wcpr);
                                             } else {
                                                 needShowPayResultPromt = true;
-                                                Uri uri = Uri.parse(wcpr.data);
-                                                Intent intent = new Intent(Intent.ACTION_VIEW, uri);
-                                                ChongZhiActivity.this.startActivity(intent);
+
+                                                showQRCodePopView(wcpr.data);
+//                                                Uri uri = Uri.parse(wcpr.data);
+//                                                Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+//                                                ChongZhiActivity.this.startActivity(intent);
                                             }
 
                                         }
@@ -741,6 +743,58 @@ public class ChongZhiActivity extends BaseActivity {
             finish();
         }
 
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (removeTop != null) {
+            removeTop.run();
+            removeTop = null;
+            return;
+        }
+        super.onBackPressed();
+    }
+
+    private Runnable removeTop = null;
+
+    private void showQRCodePopView(String img) {
+        final View root = LayoutInflater.from(this).inflate(R.layout.qrcode_pop_layout, null, false);
+        Glide.with(this).load(img).into(((ImageView) CommonUtils.findView(root, R.id.img)));
+        ((View)CommonUtils.findView(root, R.id.scroller)).getLayoutParams().height =
+                (int) (this.getResources().getDisplayMetrics().heightPixels * 0.7);
+
+
+        removeTop = new Runnable() {
+            @Override
+            public void run() {
+                ((ViewGroup)root.getParent()).removeView(root);
+            }
+        };
+        ((View) CommonUtils.findView(root, R.id.root)).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                removeTop.run();
+                removeTop = null;
+            }
+        });
+
+        ((View) CommonUtils.findView(root, R.id.sth)).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+
+
+        ((View) CommonUtils.findView(root, R.id.close)).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                removeTop.run();
+                removeTop = null;
+            }
+        });
+
+        CommonUtils.addToActivity(this, root);
     }
 
 }
