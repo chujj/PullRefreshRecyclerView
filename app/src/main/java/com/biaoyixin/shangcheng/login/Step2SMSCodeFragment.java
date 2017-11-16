@@ -335,6 +335,8 @@ public class Step2SMSCodeFragment extends BaseFragment {
         new Handler().postDelayed(new Runnable() {
                 @Override
                 public void run() {
+                    mInput.setEnabled(true);
+                    mInput.requestFocus();
                     CommonUtils.showSoftKeyboard(mInput, getContext());
                     String text = mInput.getText().toString();
                     mInput.setSelection(text != null && text.length() > 0 ? text.length() : 0);
