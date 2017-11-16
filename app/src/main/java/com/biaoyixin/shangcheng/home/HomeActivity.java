@@ -19,6 +19,7 @@ import com.biaoyixin.shangcheng.R2;
 import com.biaoyixin.shangcheng.api.ServerAPI;
 import com.biaoyixin.shangcheng.api.user.UserApi;
 import com.biaoyixin.shangcheng.base.BaseActivity;
+import com.biaoyixin.shangcheng.base.ClosureMethod;
 import com.biaoyixin.shangcheng.base.CommonUtils;
 import com.biaoyixin.shangcheng.base.PreferencesUtil;
 import com.biaoyixin.shangcheng.base.Topbar;
@@ -77,6 +78,8 @@ public class HomeActivity extends BaseActivity {
         checkUpgrade();
 
         checkTeachPages();
+
+        checkNotice();
     }
 
     @Override
@@ -213,6 +216,39 @@ public class HomeActivity extends BaseActivity {
             View view = LayoutInflater.from(this).inflate(R.layout.teach_page_layout, null, false);
             CommonUtils.addToActivity(this, view);
         }
+    }
+
+
+
+    private void checkNotice() {
+        UserApi.IUser iuser = ServerAPI.getInterface(UserApi.IUser.class);
+
+
+        ClosureMethod cb = new ClosureMethod() {
+            @Override
+            public Object[] run(Object... args) {
+                UserApi.Notice notice = (UserApi.Notice) args[0];
+
+                try {
+                    AlertDialog.Builder ab = new AlertDialog.Builder(HomeActivity.this)
+                            .setTitle(notice.name)
+                            .setMessage(notice.content)
+                            .setPositiveButton("确认", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    dialog.dismiss();
+                                }
+                            });
+                    ab.create().show();
+                } catch (Throwable e) {
+
+                }
+                return null;
+            }
+        };
+        iuser.globalNotice(NoticeController.handler("global", cb));
+        iuser.payNotice(NoticeController.handler("pay", cb));
+
     }
 
 

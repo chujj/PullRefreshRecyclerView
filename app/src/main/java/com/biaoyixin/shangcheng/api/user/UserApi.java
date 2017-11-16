@@ -77,6 +77,13 @@ public class UserApi {
 
         @GET("/broker/customer/list")
         public void getBrokerList(Callback<BrokerListResp> cb);
+
+        @GET("/notice/GLOBAL")
+        public void globalNotice(Callback<NoticeResp> cb);
+
+
+        @GET("/notice/PAY")
+        public void payNotice(Callback<NoticeResp> cb);
     }
 
 
@@ -202,5 +209,17 @@ public class UserApi {
         public String name;
         @SerializedName("mobile")
         public String phone;
+    }
+
+
+    public static class NoticeResp extends BaseModel {
+        public Notice data;
+    }
+
+    public static class Notice extends BaseModel {
+        public long id; // : 1,
+        public String name; // : "系统公告",
+        public String content; // : "这是公告内容",
+        public String viewType; // : "TOP_FLOAT" 公告呈现方式 TOP_FLOAT 顶部浮动 CENTER_ALERT 中间弹出
     }
 }
