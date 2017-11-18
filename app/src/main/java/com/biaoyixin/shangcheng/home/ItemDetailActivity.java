@@ -2,6 +2,7 @@ package com.biaoyixin.shangcheng.home;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -11,6 +12,9 @@ import com.biaoyixin.shangcheng.api.ServerAPI;
 import com.biaoyixin.shangcheng.api.shangcheng.ShangChengAPI;
 import com.biaoyixin.shangcheng.base.BaseActivity;
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.resource.drawable.GlideDrawable;
+import com.bumptech.glide.request.RequestListener;
+import com.bumptech.glide.request.target.Target;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -34,6 +38,8 @@ public class ItemDetailActivity extends BaseActivity {
     TextView mPrice;
     @BindView(R2.id.diliver)
     TextView mDiliver;
+    @BindView(R2.id.images_container)
+    ViewGroup mImagesContainer;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -73,6 +79,34 @@ public class ItemDetailActivity extends BaseActivity {
         mPrice.setText(String.format("¥ %.2f", data.realPrice));
         mDiliver.setText(String.format("快递费： ¥%.2f", data.deliverPrice));
 
+
+        final int screenWidth = getResources().getDisplayMetrics().widthPixels;
+
+        for (int i = 0; i < data.images.size(); i++) {
+            final ImageView imageView = new ImageView(this);
+            imageView.setBackgroundColor(0xffff0000);
+            ViewGroup.LayoutParams lp = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+
+            Glide.with(this).load(data.images.get(i)).listener(new RequestListener<String, GlideDrawable>() {
+                @Override
+                public boolean onException(Exception e, String model, Target<GlideDrawable> target, boolean isFirstResource) {
+                    return false;
+                }
+
+                @Override
+                public boolean onResourceReady(GlideDrawable resource, String model, Target<GlideDrawable> target, boolean isFromMemoryCache, boolean isFirstResource) {
+                    int width = resource.getIntrinsicWidth();
+                    int height = resource.getIntrinsicHeight();
+
+                    int computedHeight = (int) (1f * height / width * screenWidth);
+                    imageView.getLayoutParams().height = computedHeight;
+
+                    return false;
+                }
+            }).into(imageView);
+
+            mImagesContainer.addView(imageView, lp);
+        }
 
     }
 }

@@ -1,5 +1,6 @@
 package com.biaoyixin.shangcheng.home;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
@@ -121,6 +122,17 @@ public class ShangChengCategoryActivity extends BaseActivity {
                         Glide.with(this).load(item.icon).into(img);
                         name.setText(item.name);
                         price.setText("¥" + (int) item.realPrice);
+
+
+                        final int detailId = data.list.get(i + j).goodsDetailsId;
+                        items[j].setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                Intent it = new Intent(ShangChengCategoryActivity.this, ItemDetailActivity.class);
+                                it.putExtra("goodsDetailsId", detailId);
+                                ShangChengCategoryActivity.this.startActivity(it);
+                            }
+                        });
 
                     }
                     mContainer.addView(line);

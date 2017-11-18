@@ -76,6 +76,46 @@
 
             </LinearLayout>
 
+
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:layout_gravity="center_horizontal"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                >
+
+
+                <View
+                    android:layout_width="60dp"
+                    android:layout_height="1dp"
+                    android:background="#000"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:textColor="#000"
+                    android:textSize="16sp"
+                    android:text="酒详情页"/>
+
+                <View
+                    android:layout_width="60dp"
+                    android:layout_height="1dp"
+                    android:background="#000"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/images_container"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+            </LinearLayout>
+
         </LinearLayout>
 
     </ScrollView>
