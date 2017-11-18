@@ -16,14 +16,18 @@
 
     </RelativeLayout>
 
-
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#afafaf"
+        />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="49dp"
         android:orientation="horizontal"
         android:gravity="center_vertical"
-        android:background="#E6181818">
+        android:background="#fafafa">
 
 
 
@@ -44,7 +48,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="3dp"
-                android:text="交易"
+                android:text="商城"
                 android:textColor="@color/home_icon_text"
                 android:textSize="10sp"
                 />
@@ -72,7 +76,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="3dp"
-                android:text="邀请"
+                android:text="优惠券"
                 android:textColor="@color/home_icon_text"
                 android:textSize="10sp"
                 />
@@ -84,7 +88,6 @@
             android:layout_weight="1"/>
 
         <LinearLayout
-            android:visibility="gone"
             android:id="@+id/home_icon_3"
             android:layout_width="74dp"
             android:layout_height="wrap_content"
@@ -101,7 +104,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="3dp"
-                android:text="战队"
+                android:text="交易"
                 android:textColor="@color/home_icon_text"
                 android:textSize="10sp"
                 />
@@ -110,7 +113,6 @@
         <View
             android:layout_width="0dp"
             android:layout_height="1dp"
-            android:visibility="gone"
             android:layout_weight="1"/>
 
         <LinearLayout
@@ -130,7 +132,37 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="3dp"
-                android:text="个人中心"
+                android:text="我"
+                android:textColor="@color/home_icon_text"
+                android:textSize="10sp"
+                />
+        </LinearLayout>
+
+
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_weight="1"/>
+
+        <LinearLayout
+            android:id="@+id/home_icon_5"
+            android:layout_width="74dp"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
+
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/home_icon_4"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="3dp"
+                android:text="帮助"
                 android:textColor="@color/home_icon_text"
                 android:textSize="10sp"
                 />

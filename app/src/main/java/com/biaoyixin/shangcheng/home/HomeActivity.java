@@ -23,8 +23,6 @@ import com.biaoyixin.shangcheng.base.ClosureMethod;
 import com.biaoyixin.shangcheng.base.CommonUtils;
 import com.biaoyixin.shangcheng.base.PreferencesUtil;
 import com.biaoyixin.shangcheng.base.Topbar;
-import com.biaoyixin.shangcheng.login.AccountManager;
-import com.biaoyixin.shangcheng.login.LoginActivity;
 
 import butterknife.BindView;
 import butterknife.BindViews;
@@ -45,17 +43,18 @@ public class HomeActivity extends BaseActivity {
     @BindView(R2.id.ll_main)
     ViewGroup mContainer;
 
-    @BindViews({R2.id.home_icon_1, R2.id.home_icon_2 , R2.id.home_icon_3 , R2.id.home_icon_4})
+    @BindViews({R2.id.home_icon_1, R2.id.home_icon_2 , R2.id.home_icon_3 , R2.id.home_icon_4, R2.id.home_icon_5})
     ViewGroup[] mHomeButtons;
 
 
     public final static String KEY_TEACH_PAGES = "KEY_TEACH_PAGES_showed";
 
     private String[] mFragmentNames = new String[] {
+            ShangChengFragment.class.getName(),
+            EmptyFragment.class.getName(),
             TradeHomeFragment.class.getName(),
-            WebViewFragment.class.getName(),
-            ZhanduiFragment.class.getName(),
             MineFragment.class.getName(),
+            WebViewFragment.class.getName(),
     };
 
     private int mIndex = 0; // default 0
@@ -149,11 +148,11 @@ public class HomeActivity extends BaseActivity {
 
     private String mLastFragmentKey = null;
     private void switchToIndex(int index) {
-        if (index != 0 && !AccountManager.isLogin()) {
-            Intent it = new Intent(this, LoginActivity.class);
-            startActivity(it);
-            return;
-        }
+//        if (index != 0 && !AccountManager.isLogin()) {
+//            Intent it = new Intent(this, LoginActivity.class);
+//            startActivity(it);
+//            return;
+//        }
 
 
         mIndex = index;
@@ -209,6 +208,11 @@ public class HomeActivity extends BaseActivity {
         switchToIndex(3);
     }
 
+
+    @OnClick(R2.id.home_icon_5)
+    public void clickBtn5() {
+        switchToIndex(4);
+    }
 
 
     private void checkTeachPages() {

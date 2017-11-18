@@ -550,7 +550,7 @@ public class TradeHomeFragment extends BaseFragment {
         iUser.account(new Callback<UserApi.AccountResp>() {
             @Override
             public void success(UserApi.AccountResp accountResp, Response response) {
-                if (accountResp.code != 0 && accountResp.data != null) {
+                if (accountResp.code != 0) {
                     ServerAPI.handleCodeError(accountResp);
 
                 } else {
@@ -608,7 +608,7 @@ public class TradeHomeFragment extends BaseFragment {
             @Override
             public void success(UserApi.StatusResp resp, Response response) {
 
-                if (resp.code != 0 && resp.data != null) {
+                if (resp.code != 0) {
                     ServerAPI.handleCodeError(resp);
 
                 } else {
