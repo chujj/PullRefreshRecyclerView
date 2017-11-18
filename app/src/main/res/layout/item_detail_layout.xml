@@ -8,15 +8,14 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="0dp"
+        android:layout_weight="1">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
             >
-
-
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -119,5 +118,79 @@
         </LinearLayout>
 
     </ScrollView>
+
+
+
+    <LinearLayout
+        android:id="@+id/bottom_bar"
+        android:layout_width="match_parent"
+        android:layout_height="44dp"
+        android:orientation="vertical"
+        android:visibility="gone"
+        tools:visibility="visible">
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#fff"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+
+
+            <LinearLayout
+                android:id="@+id/shangcheng"
+                android:layout_width="90dp"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:gravity="center">
+
+                <ImageView
+                    android:layout_width="15dp"
+                    android:layout_height="15dp"
+                    android:src="@drawable/item_detail_shang_cheng_icon"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:textColor="#b2b2b2"
+                    android:textSize="12sp"
+                    android:text="商城首页"
+                    />
+            </LinearLayout>
+
+
+
+            <TextView
+                android:id="@+id/tihuo"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="#62b3f1"
+                android:textSize="16sp"
+                android:text="免费领货"
+                android:textColor="#fff"
+                android:gravity="center"
+                />
+
+
+            <TextView
+                android:id="@+id/buy"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="#2093ec"
+                android:textSize="16sp"
+                android:text="立即购买"
+                android:textColor="#fff"
+                android:gravity="center"
+                />
+
+        </LinearLayout>
+
+    </LinearLayout>
 
 </LinearLayout>

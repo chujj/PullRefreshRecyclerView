@@ -1,7 +1,9 @@
 package com.biaoyixin.shangcheng.home;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -18,6 +20,7 @@ import com.bumptech.glide.request.target.Target;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import retrofit.Callback;
 import retrofit.RetrofitError;
 import retrofit.client.Response;
@@ -40,6 +43,8 @@ public class ItemDetailActivity extends BaseActivity {
     TextView mDiliver;
     @BindView(R2.id.images_container)
     ViewGroup mImagesContainer;
+    @BindView(R2.id.bottom_bar)
+    ViewGroup mBottomBar;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -108,5 +113,31 @@ public class ItemDetailActivity extends BaseActivity {
             mImagesContainer.addView(imageView, lp);
         }
 
+
+        // bottom bar
+
+        mBottomBar.setVisibility(View.VISIBLE);
+
+    }
+
+
+
+    @OnClick(R2.id.shangcheng)
+    public void clickShangCheng(View view) {
+        finish();
+    }
+
+    @OnClick(R2.id.tihuo)
+    public void clickTihuo(View view) {
+//        finish();
+        Intent it = new Intent(this, HomeActivity.class);
+        it.putExtra("index", 2);
+        it.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+        startActivity(it);
+    }
+
+    @OnClick(R2.id.buy)
+    public void clickBuy(View view) {
+        finish();
     }
 }

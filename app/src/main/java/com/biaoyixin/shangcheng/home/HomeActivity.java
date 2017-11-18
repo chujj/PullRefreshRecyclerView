@@ -90,6 +90,16 @@ public class HomeActivity extends BaseActivity {
         }
     }
 
+
+    @Override
+    protected void onNewIntent(Intent intent) {
+        super.onNewIntent(intent);
+
+        int index = intent.getIntExtra("index", mIndex);
+        switchToIndex(index);
+
+    }
+
     private void showUpgradeDialog() {
         if (!mUpgradeDialog.isShowing()) {
             mUpgradeDialog.show();
