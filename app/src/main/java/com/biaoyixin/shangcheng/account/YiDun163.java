@@ -61,7 +61,7 @@ public class YiDun163 {
 
 //                toastMsg("验证成功，validate = " + validate);
             } else {
-                toastMsg("验证失败：result = " + result + ", validate = " + validate + ", message = " + message);
+                toastMsg("验证失败"); // ：result = " + result + ", validate = " + validate + ", message = " + message);
 
             }
         }
@@ -94,7 +94,7 @@ public class YiDun163 {
         public void onReady(boolean ret) {
             //该为调试接口，ret为true表示加载Sdk完成
             if (ret) {
-                toastMsg("验证码sdk加载成功");
+//                toastMsg("验证码sdk加载成功");
             }
         }
 
