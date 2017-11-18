@@ -41,9 +41,16 @@ public class ShangChengCategoryActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
 
 
-        this.setContentView(R.layout.trade_shangcheng_fragment);
+        this.setContentView(R.layout.trade_shangcheng_category_fragment);
 
         ButterKnife.bind(this, this);
+
+        mTopbar.setBackButton(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
 
         loadData();
     }
