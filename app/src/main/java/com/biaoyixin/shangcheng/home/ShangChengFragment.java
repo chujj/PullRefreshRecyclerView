@@ -1,5 +1,6 @@
 package com.biaoyixin.shangcheng.home;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
@@ -26,6 +27,7 @@ import retrofit.client.Response;
  * Created by zhujj on 17-11-18.
  */
 public class ShangChengFragment extends BaseFragment {
+
 
 
 
@@ -111,6 +113,17 @@ public class ShangChengFragment extends BaseFragment {
 
 
                     Glide.with(this).load(data.category.get(i).icon).into(cates[i]);
+                    final int cID = data.category.get(i).categoryId;
+
+
+                    cates[i].setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            Intent it = new Intent(getContext(), ShangChengCategoryActivity.class);
+                            it.putExtra("categoryId", cID);
+                            startActivity(it);
+                        }
+                    });
                 }
 
                 mContainer.addView(line);

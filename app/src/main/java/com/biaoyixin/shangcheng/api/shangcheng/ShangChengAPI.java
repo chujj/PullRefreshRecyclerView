@@ -5,7 +5,10 @@ import com.biaoyixin.shangcheng.model.BaseModel;
 import java.util.List;
 
 import retrofit.Callback;
+import retrofit.http.Field;
+import retrofit.http.FormUrlEncoded;
 import retrofit.http.GET;
+import retrofit.http.POST;
 
 /**
  * Created by zhujj on 17-11-18.
@@ -16,6 +19,10 @@ public class ShangChengAPI {
     public static interface  IShangCheng {
         @GET("/shop/index")
         public void index(Callback<ShangChengResp> cb);
+
+        @FormUrlEncoded
+        @POST("/shop/goods_details_list")
+        void category(@Field("categoryId") int categoryId , Callback<CategoryResp> cb);
     }
 
     public static class ShangChengResp extends BaseModel {
@@ -48,5 +55,16 @@ public class ShangChengAPI {
     }
 
 
+
+    public static class CategoryResp extends BaseModel {
+        public CategoryInfo data;
+    }
+
+
+    public static class CategoryInfo extends BaseModel {
+        public String image;
+        public String title;
+        public List<Item> list;
+    }
 
 }
