@@ -8,10 +8,10 @@ android {
 
     defaultConfig {
 //        applicationId "com.biaoyixin.shangcheng"
-        applicationId "com.shouhuxing.healthassist"
+        applicationId "com.shouhuxing.healthassistdang"
         minSdkVersion 14
         targetSdkVersion 23
-        versionCode 18
+        versionCode 1
         versionName "1.0"
     }
 
@@ -38,15 +38,15 @@ android {
 
     productFlavors {
         ProductServer {
-            applicationId "com.biaoyixin.shangcheng"
+            applicationId "com.xingyiwu.ningjingzhiyuan"
             buildConfigField "boolean", "OnlineServer", "true"
-            resValue "string", "app_name2", "熊猫商贸"
+            resValue "string", "app_name2", "御木轩"
         }
 
         TestServer {
-            applicationId "com.shouhuxing.healthassist"
+            applicationId "com.shouhuxing.healthassistdang"
             buildConfigField "boolean", "OnlineServer", "false"
-            resValue "string", "app_name2", "熊猫商贸-测试版"
+            resValue "string", "app_name2", "御木轩-测试版"
         }
     }
 }

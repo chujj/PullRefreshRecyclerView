@@ -70,7 +70,7 @@ public class HomeActivity extends BaseActivity {
 
         ButterKnife.bind(this, this);
 
-        mTopbar.setTitle("熊猫商贸");
+        mTopbar.setTitle("御木轩");
 
         switchToIndex(mIndex);
 
