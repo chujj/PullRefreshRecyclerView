@@ -23,6 +23,10 @@ public class ShangChengAPI {
         @FormUrlEncoded
         @POST("/shop/goods_details_list")
         void category(@Field("categoryId") int categoryId , Callback<CategoryResp> cb);
+
+        @FormUrlEncoded
+        @POST("/shop/goods_details_image")
+        void detail(@Field("goodsDetailsId") int goodsDetailsId, Callback<DetailResp> cb);
     }
 
     public static class ShangChengResp extends BaseModel {
@@ -52,6 +56,8 @@ public class ShangChengAPI {
         public String name;
         public int goodsDetailsId;
         public float realPrice;
+        public float deliverPrice;
+        public List<String> images;
     }
 
 
@@ -67,4 +73,10 @@ public class ShangChengAPI {
         public List<Item> list;
     }
 
+
+
+    public static class DetailResp extends BaseModel {
+
+        public Item data;
+    }
 }

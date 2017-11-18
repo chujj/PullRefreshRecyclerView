@@ -160,6 +160,17 @@ public class ShangChengFragment extends BaseFragment {
                         name.setText(item.name);
                         price.setText("¥" + (int) item.realPrice);
 
+
+                        final int detailId = data.recommendList.get(i + j).goodsDetailsId;
+                        items[j].setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                Intent it = new Intent(getContext(), ItemDetailActivity.class);
+                                it.putExtra("goodsDetailsId", detailId);
+                                getContext().startActivity(it);
+                            }
+                        });
+
                     }
                     mContainer.addView(line);
                 }

@@ -95,6 +95,9 @@
 
         <activity android:name=".home.ShangChengCategoryActivity"/>
 
+
+        <activity android:name=".home.ItemDetailActivity"/>
+
     </application>
 
 
