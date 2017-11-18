@@ -12,10 +12,12 @@ import android.widget.EditText;
 
 import com.biaoyixin.shangcheng.R;
 import com.biaoyixin.shangcheng.R2;
+import com.biaoyixin.shangcheng.account.YiDun163;
 import com.biaoyixin.shangcheng.api.ServerAPI;
 import com.biaoyixin.shangcheng.api.sms.SmsApi;
 import com.biaoyixin.shangcheng.api.user.UserApi;
 import com.biaoyixin.shangcheng.base.BaseActivity;
+import com.biaoyixin.shangcheng.base.ClosureMethod;
 import com.biaoyixin.shangcheng.base.ToastHelper;
 import com.biaoyixin.shangcheng.login.LoginActivity;
 import com.biaoyixin.shangcheng.model.BaseModel;
@@ -120,34 +122,47 @@ public class ConfirmPwdActivity extends BaseActivity {
 
 
     public static void requireSMSCode(final BaseActivity baseActivity, final Runnable successCB) {
-        baseActivity.showLoadingDialog("加载中", true);
 
-        SmsApi.ISMS iSms = ServerAPI.getInterface(SmsApi.ISMS.class);
-        iSms.requereSMSCode2("5", new Callback<BaseModel>() {
+        ClosureMethod yidunCb = new ClosureMethod() {
             @Override
-            public void success(BaseModel baseModel, Response response) {
-                dissmiss();
+            public Object[] run(Object... args) {
+                final String captchaId = (String) args[0];
+                final String validate = (String) args[1];
 
-                if (baseModel.code == 0) {
+                baseActivity.showLoadingDialog("加载中", true);
+
+                SmsApi.ISMS iSms = ServerAPI.getInterface(SmsApi.ISMS.class);
+                iSms.requereSMSCode2("5",captchaId, validate, new Callback<BaseModel>() {
+                    @Override
+                    public void success(BaseModel baseModel, Response response) {
+                        dissmiss();
+
+                        if (baseModel.code == 0) {
 //                    // success
-                    if (successCB != null) {
-                        successCB.run();
-                    }
+                            if (successCB != null) {
+                                successCB.run();
+                            }
 //                    (this).switchToStep2SMSCode(phoneNum);
-                } else {
-                    ToastHelper.showToast(baseModel.message);
-                }
-            }
+                        } else {
+                            ToastHelper.showToast(baseModel.message);
+                        }
+                    }
 
-            @Override
-            public void failure(RetrofitError error) {
-                ServerAPI.HandlerException(error);
-                dissmiss();
-            }
+                    @Override
+                    public void failure(RetrofitError error) {
+                        ServerAPI.HandlerException(error);
+                        dissmiss();
+                    }
 
-            private void dissmiss() {
-                baseActivity.dismissLoadingDialog();
+                    private void dissmiss() {
+                        baseActivity.dismissLoadingDialog();
+                    }
+                });
+
+                return null;
             }
-        });
+        };
+
+        new YiDun163(baseActivity, yidunCb).start();
     }
 }

@@ -22,7 +22,11 @@ public class SmsApi {
                 Callback<BaseModel> cb);
 
         @GET("/sms/get_sms_code")
-        public void requereSMSCode2(@Query("sms_code_type") String type, Callback<BaseModel> cb);
+        public void requereSMSCode2(
+                @Query("sms_code_type") String type,
+                @Query("captchaId") String captchaId,
+                @Query("validate") String validate,
+                Callback<BaseModel> cb);
 
         @GET("/sms/verify_sms_code")
         public void verifySms(@Query("sms_code_type") String type, @Query("sms_code") String sms_code, Callback<BaseModel> cb);

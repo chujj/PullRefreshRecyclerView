@@ -17,6 +17,7 @@ import android.widget.TextView;
 
 import com.biaoyixin.shangcheng.R;
 import com.biaoyixin.shangcheng.R2;
+import com.biaoyixin.shangcheng.account.YiDun163;
 import com.biaoyixin.shangcheng.api.ServerAPI;
 import com.biaoyixin.shangcheng.api.sms.SmsApi;
 import com.biaoyixin.shangcheng.api.trade.GoodsApi;
@@ -165,26 +166,41 @@ public class TixianActivity extends BaseActivity {
             mRequireSMSCode.setOnClickListener(null);
 
 
-            SmsApi.ISMS isms = ServerAPI.getInterface(SmsApi.ISMS.class);
-            isms.requereSMSCode2("3", new Callback<BaseModel>() {
-                @Override
-                public void success(BaseModel baseModel, Response response) {
-                    dismissLoadingDialog();
-
-                    if (baseModel.code == 0) {//                    // success
-
-                        startCountDown();
-                    } else {
-                        ToastHelper.showToast(baseModel.message);
-                    }
-                }
+            ClosureMethod yidunCb = new ClosureMethod() {
 
                 @Override
-                public void failure(RetrofitError error) {
-                    dismissLoadingDialog();
-                    ServerAPI.HandlerException(error);
+                public Object[] run(Object... args) {
+                    final String captchaId = (String) args[0];
+                    final String validate = (String) args[1];
+
+
+
+                    SmsApi.ISMS isms = ServerAPI.getInterface(SmsApi.ISMS.class);
+                    isms.requereSMSCode2("3", captchaId, validate, new Callback<BaseModel>() {
+                        @Override
+                        public void success(BaseModel baseModel, Response response) {
+                            dismissLoadingDialog();
+
+                            if (baseModel.code == 0) {//                    // success
+
+                                startCountDown();
+                            } else {
+                                ToastHelper.showToast(baseModel.message);
+                            }
+                        }
+
+                        @Override
+                        public void failure(RetrofitError error) {
+                            dismissLoadingDialog();
+                            ServerAPI.HandlerException(error);
+                        }
+                    });
+
+                    return null;
                 }
-            });
+            };
+
+            new YiDun163(TixianActivity.this, yidunCb).start();
         }
 
 
