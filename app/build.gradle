@@ -77,4 +77,6 @@ dependencies {
 
     compile 'com.tencent.mm.opensdk:wechat-sdk-android-without-mta:1.4.0'
 
+    compile 'com.github.yidun:captcha-android-demo:2.0'
+
 }

@@ -88,3 +88,17 @@
 -keep class com.tencent.mm.sdk.** {
    *;
 }
+
+
+# for yidun http://support.dun.163.com/captcha/api/#android
+-keepattributes *Annotation*
+-keep public class com.netease.nis.captcha.**{*;}
+
+-keep public class android.webkit.**
+
+-keepattributes SetJavaScriptEnabled
+-keepattributes JavascriptInterface
+
+-keepclassmembers class * {
+    @android.webkit.JavascriptInterface <methods>;
+}
