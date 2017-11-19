@@ -32,10 +32,10 @@ public class HelperEntryFragment extends BaseFragment {
 
     List<Object[]> mEntriesConfig = new ArrayList() {
         {
-            add(new Object[] {"交易规则", new String[] {"assets://help1.jpg"}});
-            add(new Object[] {"充值流程", new String[] {"assets://help2.jpg"}});
-            add(new Object[] {"操作指南", new String[] {}});
-            add(new Object[] {"注册御木轩", new String[] {}});
+            add(new Object[] {"交易规则", new String[] {"assets://h1.jpg"}});
+            add(new Object[] {"充值流程", new String[] {"assets://h2.jpg"}});
+            add(new Object[] {"操作指南", new String[] {"assets://h3.jpg"}});
+            add(new Object[] {"注册御木轩", new String[] {"assets://h4.jpg"}});
         }};
 
 
