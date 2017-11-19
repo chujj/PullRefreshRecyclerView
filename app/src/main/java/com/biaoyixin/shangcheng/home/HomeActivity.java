@@ -45,7 +45,7 @@ public class HomeActivity extends BaseActivity {
     @BindView(R2.id.ll_main)
     ViewGroup mContainer;
 
-    @BindViews({R2.id.home_icon_1, R2.id.home_icon_2 , R2.id.home_icon_3 , R2.id.home_icon_4})
+    @BindViews({R2.id.home_icon_1, R2.id.home_icon_2 , R2.id.home_icon_3 , R2.id.home_icon_4, R2.id.home_icon_5})
     ViewGroup[] mHomeButtons;
 
 
@@ -56,6 +56,7 @@ public class HomeActivity extends BaseActivity {
             WebViewFragment.class.getName(),
             ZhanduiFragment.class.getName(),
             MineFragment.class.getName(),
+            HelperEntryFragment.class.getName(),
     };
 
     private int mIndex = 0; // default 0
@@ -207,6 +208,11 @@ public class HomeActivity extends BaseActivity {
     @OnClick(R2.id.home_icon_4)
     public void clickBtn4() {
         switchToIndex(3);
+    }
+
+    @OnClick(R2.id.home_icon_5)
+    public void clickBtn5() {
+        switchToIndex(4);
     }
 
 

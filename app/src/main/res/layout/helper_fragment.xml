@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tool="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#1F1F1F">
+
+
+    <include
+        android:id="@+id/entry_1"
+        layout="@layout/help_entry"/>
+
+    <View
+        android:layout_width="15dp"
+        android:layout_height="1dp"
+        android:background="#FF444444"/>
+
+    <include
+        android:id="@+id/entry_2"
+        layout="@layout/help_entry"/>
+
+
+
+</LinearLayout>

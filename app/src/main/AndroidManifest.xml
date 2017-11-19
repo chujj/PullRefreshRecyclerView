@@ -93,6 +93,8 @@
 
         <activity android:name=".home.QinBinDuiActivity"/>
 
+        <activity android:name=".home.ImageListActivity"/>
+
     </application>
 
 
