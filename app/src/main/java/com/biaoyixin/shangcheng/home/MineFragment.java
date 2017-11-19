@@ -180,7 +180,7 @@ public class MineFragment extends BaseFragment {
 
                         }
                     },
-                    R.drawable.mine_fragment_entry_youhuiquan
+                    R.drawable.mine_fragment_entry_tihuo
             });
             add(new Object[] {
                     "我的优惠券",
@@ -226,7 +226,7 @@ public class MineFragment extends BaseFragment {
 
                         }
                     },
-                    R.drawable.mine_fragment_entry_settings
+                    R.drawable.mine_fragment_entry_jinjiren
             });
         }
     };
