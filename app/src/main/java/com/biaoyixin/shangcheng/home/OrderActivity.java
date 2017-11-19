@@ -11,6 +11,7 @@ import com.biaoyixin.shangcheng.R2;
 import com.biaoyixin.shangcheng.api.ServerAPI;
 import com.biaoyixin.shangcheng.api.shangcheng.ShangChengAPI;
 import com.biaoyixin.shangcheng.base.BaseActivity;
+import com.biaoyixin.shangcheng.base.ClosureMethod;
 import com.biaoyixin.shangcheng.model.BaseModel;
 import com.bumptech.glide.Glide;
 
@@ -55,17 +56,17 @@ public class OrderActivity extends BaseActivity {
     TextView mName;
     @BindView(R2.id.price)
     TextView mPrice;
-//@BindView(R2.id.sku_down)
-//TextView mSkudown;
+    @BindView(R2.id.sku_num)
+    TextView mSKUNum;
 
-//R2.id.sku_num
-//R2.id.sku_up
-//R2.id.item_price_total
-//R2.id.yunfei
-//R2.id.youhuiquan
-//R2.id.price_total
-//R2.id.confirm
-
+    @BindView(R2.id.item_price_total)
+    TextView mItemPriceTotal;
+    @BindView(R2.id.yunfei)
+    TextView mYunFei;
+    @BindView(R2.id.youhuiquan)
+    TextView mYouhuiquan;
+    @BindView(R2.id.price_total)
+    TextView mPriceTotal;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -96,7 +97,7 @@ public class OrderActivity extends BaseActivity {
         });
     }
 
-    private void refreshUI(ShangChengAPI.OrderResp resp) {
+    private void refreshUI(final ShangChengAPI.OrderResp resp) {
         mAllContainer.setVisibility(View.VISIBLE);
 
         boolean hasAddr = resp.data.address != null;
@@ -128,10 +129,38 @@ public class OrderActivity extends BaseActivity {
         Glide.with(this).load(resp.data.icon).into(mImage);
         mName.setText(resp.data.name);
         mPrice.setText("￥" + resp.data.realPrice);
+
+
+
+        mSKUNum.setText("1");
+        mSKUNum.setTag(new ClosureMethod() {
+            int mCount = 1;
+            @Override
+            public Object[] run(Object... args) {
+                int change = (int) args[0];
+                int next = mCount + change;
+                if (next <= 0) {
+                    return null;
+                }
+
+
+                mCount = next;
+
+                mSKUNum.setText("" + mCount);
+                mItemPriceTotal.setText("￥" + mCount * resp.data.realPrice);
+
+
+                mPriceTotal.setText("￥" + (mCount * resp.data.realPrice + resp.data.credit));
+                return null;
+            }
+        });
+        ((ClosureMethod)mSKUNum.getTag()).run(0);
+
+
+        mYunFei.setText("￥" + resp.data.deliverPrice);
+        mYouhuiquan.setText("无"); // TODO 优惠券
+
     }
-
-
-
 
     @OnClick(R2.id.tihuo_confirm)
     public void clickTihuoConfirm(View view) {
@@ -172,4 +201,23 @@ public class OrderActivity extends BaseActivity {
                 }
         );
     }
+
+
+    @OnClick(R2.id.sku_down)
+    public void clickSKUDown() {
+        ((ClosureMethod)mSKUNum.getTag()).run(-1);
+    }
+
+    @OnClick(R2.id.sku_up)
+    public void clickSKUUp() {
+        ((ClosureMethod)mSKUNum.getTag()).run(1);
+    }
+
+
+    @OnClick(R2.id.confirm)
+    public void clickConfirm() {
+        
+    }
+
 }
+
