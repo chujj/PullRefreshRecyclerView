@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    >
+    android:layout_height="match_parent">
 
 
 
@@ -26,7 +25,7 @@
                 android:id="@+id/weihebing"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="未合并券: "
+                tools:text="未合并券: "
                 android:textSize="18sp"
                 android:textColor="#fff"
                 />
@@ -36,7 +35,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
-                android:text="已合并券: "
+                tools:text="已合并券: "
                 android:textSize="18sp"
                 android:textColor="#fff"
                 />
@@ -55,6 +54,49 @@
             android:layout_marginBottom="5dp"
             android:text="提示：累计满100元合并，优惠券最大额度300元。\n方可用于提货使用"
             />
+
+    </RelativeLayout>
+
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:background="#f0f0f0">
+
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_centerInParent="true"
+            android:gravity="center_horizontal">
+
+
+
+            <ImageView
+                android:layout_width="90dp"
+                android:layout_height="wrap_content"
+                android:src="@drawable/youhuiquan_empty_img"/>
+
+
+
+            <TextView
+                android:id="@+id/lingqu"
+                android:layout_width="90dp"
+                android:layout_height="27dp"
+                android:layout_marginTop="25dp"
+                android:textColor="#157afb"
+                android:textSize="13sp"
+                android:gravity="center"
+                android:text="立即领取"
+                android:background="@drawable/youhuiquan_empty_button"
+                />
+
+        </LinearLayout>
+
+
 
     </RelativeLayout>
 

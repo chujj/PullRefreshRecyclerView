@@ -84,6 +84,10 @@ public class UserApi {
 
         @GET("/notice/PAY")
         public void payNotice(Callback<NoticeResp> cb);
+
+
+        @GET("/shop/coupon_list")
+        public void getYouHuiQuanV2(Callback<YHQ2Resp> cb);
     }
 
 
@@ -221,5 +225,20 @@ public class UserApi {
         public String name; // : "系统公告",
         public String content; // : "这是公告内容",
         public String viewType; // : "TOP_FLOAT" 公告呈现方式 TOP_FLOAT 顶部浮动 CENTER_ALERT 中间弹出
+    }
+
+
+    public static class YHQ2Resp extends BaseModel {
+        public YHQ2Info data;
+    }
+
+    public static class YHQ2Info  extends BaseModel {
+        public int left;
+        public int used;
+        public List<YHQ2> coupon_list;
+    }
+
+    public static class YHQ2 extends BaseModel {
+
     }
 }
