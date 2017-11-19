@@ -100,6 +100,9 @@
 
         <activity android:name=".home.OrderActivity"/>
 
+
+        <activity android:name=".home.ImageListActivity"/>
+
     </application>
 
 

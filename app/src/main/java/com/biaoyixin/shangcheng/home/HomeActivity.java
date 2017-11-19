@@ -51,10 +51,10 @@ public class HomeActivity extends BaseActivity {
 
     private String[] mFragmentNames = new String[] {
             ShangChengFragment.class.getName(),
-            EmptyFragment.class.getName(),
+            WebViewFragment.class.getName(),
             TradeHomeFragment.class.getName(),
             MineFragment.class.getName(),
-            WebViewFragment.class.getName(),
+            HelperEntryFragment.class.getName(),
     };
 
     private int mIndex = 0; // default 0
