@@ -27,6 +27,22 @@ public class ShangChengAPI {
         @FormUrlEncoded
         @POST("/shop/goods_details_image")
         void detail(@Field("goodsDetailsId") int goodsDetailsId, Callback<DetailResp> cb);
+
+
+        @FormUrlEncoded
+        @POST("/shop/delivery_preview")
+        void order(@Field("goodsDetailsId") int goodsDetailsId, Callback<OrderResp> cb);
+
+        @FormUrlEncoded
+        @POST("/shop/delivery_address_edit")
+        void changeTihuoAddr(
+                @Field("province") String province,
+                @Field("city") String city,
+                @Field("name") String name,
+                @Field("mobile") String mobile,
+                @Field("detail") String detail,
+                Callback<BaseModel> cb
+        );
     }
 
     public static class ShangChengResp extends BaseModel {
@@ -79,4 +95,28 @@ public class ShangChengAPI {
 
         public Item data;
     }
+
+
+    public static class OrderResp extends BaseModel {
+        public OrderInfo data;
+    }
+
+
+    public static class OrderInfo extends BaseModel {
+        public Address address;
+        public int credit;
+        public int deliverPrice;
+        public String icon;
+        public String name;
+        public int realPrice;
+    }
+
+    public static class  Address  extends BaseModel {
+        public String city;
+        public String detail;
+        public String mobile;
+        public String name;
+        public String province;
+    }
+
 }
