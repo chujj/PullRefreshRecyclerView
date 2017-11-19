@@ -98,6 +98,8 @@
 
         <activity android:name=".home.ItemDetailActivity"/>
 
+        <activity android:name=".home.OrderActivity"/>
+
     </application>
 
 

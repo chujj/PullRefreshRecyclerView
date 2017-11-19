@@ -138,6 +138,7 @@ public class ItemDetailActivity extends BaseActivity {
 
     @OnClick(R2.id.buy)
     public void clickBuy(View view) {
-        finish();
+        Intent it = new Intent(this, OrderActivity.class);
+        startActivity(it);
     }
 }
