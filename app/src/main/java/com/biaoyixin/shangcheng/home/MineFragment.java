@@ -14,7 +14,6 @@ import com.biaoyixin.shangcheng.R;
 import com.biaoyixin.shangcheng.R2;
 import com.biaoyixin.shangcheng.api.ServerAPI;
 import com.biaoyixin.shangcheng.api.trade.GoodsApi;
-import com.biaoyixin.shangcheng.base.BaseActivity;
 import com.biaoyixin.shangcheng.base.BaseFragment;
 import com.biaoyixin.shangcheng.base.CommonUtils;
 import com.biaoyixin.shangcheng.login.AccountManager;
@@ -49,7 +48,7 @@ public class MineFragment extends BaseFragment {
     TextView mAccount;
 
 
-    @BindViews({R2.id.entry_1, R2.id.entry_2, R2.id.entry_3, R2.id.entry_4, R2.id.entry_5, R2.id.entry_6, })
+    @BindViews({R2.id.entry_1, R2.id.entry_2, R2.id.entry_3, R2.id.entry_4, R2.id.entry_5, R2.id.entry_6,  R2.id.entry_7,  R2.id.entry_8, })
     View[] mEntrys;
 
     @Nullable
@@ -103,12 +102,12 @@ public class MineFragment extends BaseFragment {
     }
 
     private void loadYinhangkaData() {
-        ((BaseActivity)getActivity()).showLoadingDialog("加载中...", false);
+//        ((BaseActivity)getActivity()).showLoadingDialog("加载中...", false);
         GoodsApi.IGood iGood = ServerAPI.getInterface(GoodsApi.IGood.class);
         iGood.getOutMoneyUIInfo(new Callback<GoodsApi.OutMoneyUIInfoResp>() {
             @Override
             public void success(GoodsApi.OutMoneyUIInfoResp resp, Response response) {
-                ((BaseActivity)getActivity()).dismissLoadingDialog();
+//                ((BaseActivity)getActivity()).dismissLoadingDialog();
                 if (resp.code != 0) {
 
                     ServerAPI.handleCodeError(resp);
@@ -120,7 +119,7 @@ public class MineFragment extends BaseFragment {
             @Override
             public void failure(RetrofitError error) {
                 ServerAPI.HandlerException(error);
-                ((BaseActivity)getActivity()).dismissLoadingDialog();
+//                ((BaseActivity)getActivity()).dismissLoadingDialog();
             }
         });
     }
@@ -174,7 +173,17 @@ public class MineFragment extends BaseFragment {
                     R.drawable.mine_fragment_entry_bill_history
             });
             add(new Object[] {
-                    "优惠券",
+                    "提货记录",
+                    new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+
+                        }
+                    },
+                    R.drawable.mine_fragment_entry_youhuiquan
+            });
+            add(new Object[] {
+                    "我的优惠券",
                     new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
@@ -205,6 +214,16 @@ public class MineFragment extends BaseFragment {
                         public void onClick(View v) {
                             Intent it = new Intent(v.getContext(), SettingActivity.class);
                             v.getContext().startActivity(it);
+                        }
+                    },
+                    R.drawable.mine_fragment_entry_settings
+            });
+            add(new Object[] {
+                    "经纪人",
+                    new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+
                         }
                     },
                     R.drawable.mine_fragment_entry_settings

@@ -4,7 +4,7 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#1F1F1F">
+    android:background="#f0f0f0">
 
 
     <ScrollView
@@ -184,7 +184,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="44dp"
-                android:background="#FF444444"
+                android:background="#fff"
                 android:orientation="horizontal"
                 >
 
@@ -196,7 +196,7 @@
                     android:layout_weight="1"
                     android:gravity="center"
                     android:text="充值"
-                    android:textColor="#FFEBAD33"
+                    android:textColor="#2093ec"
                     android:textSize="18sp"
                     />
 
@@ -205,7 +205,7 @@
                     android:layout_width="1dp"
                     android:layout_height="30dp"
                     android:layout_gravity="center_vertical"
-                    android:background="#1F1F1F"
+                    android:background="#2093ec"
                     />
 
 
@@ -216,7 +216,7 @@
                     android:layout_weight="1"
                     android:gravity="center"
                     android:text="提现"
-                    android:textColor="#FFEBAD33"
+                    android:textColor="#2093ec"
                     android:textSize="18sp"
                     />
 
@@ -245,7 +245,7 @@
             <View
                 android:layout_width="10dp"
                 android:layout_height="1dp"
-                android:background="#FF444444"/>
+                    android:background="#fff"/>
             <include
                 android:id="@+id/entry_3"
                 layout="@layout/mine_entry_layout"
@@ -263,7 +263,7 @@
             <View
                 android:layout_width="10dp"
                 android:layout_height="1dp"
-                android:background="#FF444444"/>
+                android:background="#fff"/>
             <include
                 android:id="@+id/entry_5"
                 layout="@layout/mine_entry_layout"
@@ -275,6 +275,23 @@
 
             <include
                 android:id="@+id/entry_6"
+                layout="@layout/mine_entry_layout"
+                />
+            <View
+                android:layout_width="10dp"
+                android:layout_height="1dp"
+                android:background="#fff"/>
+            <include
+                android:id="@+id/entry_7"
+                layout="@layout/mine_entry_layout"
+                />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="10dp"/>
+
+            <include
+                android:id="@+id/entry_8"
                 layout="@layout/mine_entry_layout"
                 />
 

@@ -512,7 +512,7 @@ public abstract class AbstractRender {
                     matrixTouch.postTranslate(touchValues[Matrix.MTRANS_X], 0);
 
                 } else {
-                    // 
+                    //
                     // 转动屏幕方向导致矩形变化，定位到之前相同比例的滚动位置
                     touchValues[Matrix.MTRANS_X] = touchValues[Matrix.MTRANS_X] / lastMaxScrollOffset * maxScrollOffset;
 
