@@ -295,7 +295,14 @@
                 layout="@layout/mine_entry_layout"
                 />
 
-            <!-- -->
+
+
+            <!-- 底部占位 -->
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="50dp"/>
+
+
 
         </LinearLayout>
 
