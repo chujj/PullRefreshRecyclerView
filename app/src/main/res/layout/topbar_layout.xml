@@ -16,6 +16,7 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="15dp"
         android:visibility="invisible"
+        tools:visibility="visible"
         android:src="@drawable/compat_toolbar_back"/>
 
     <TextView
