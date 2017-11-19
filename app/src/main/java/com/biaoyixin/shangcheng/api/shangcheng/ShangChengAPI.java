@@ -43,6 +43,10 @@ public class ShangChengAPI {
                 @Field("detail") String detail,
                 Callback<BaseModel> cb
         );
+
+        @FormUrlEncoded
+        @POST("/shop/delivery_submit")
+        void tihuo(@Field("goodsDetailsId") String goodsDetailsId, @Field("amount") String amount, Callback<BaseModel> callback);
     }
 
     public static class ShangChengResp extends BaseModel {

@@ -1,7 +1,9 @@
 package com.biaoyixin.shangcheng.home;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -12,6 +14,7 @@ import com.biaoyixin.shangcheng.api.ServerAPI;
 import com.biaoyixin.shangcheng.api.shangcheng.ShangChengAPI;
 import com.biaoyixin.shangcheng.base.BaseActivity;
 import com.biaoyixin.shangcheng.base.ClosureMethod;
+import com.biaoyixin.shangcheng.base.ToastHelper;
 import com.biaoyixin.shangcheng.model.BaseModel;
 import com.bumptech.glide.Glide;
 
@@ -216,7 +219,32 @@ public class OrderActivity extends BaseActivity {
 
     @OnClick(R2.id.confirm)
     public void clickConfirm() {
-        
+        String amount = mSKUNum.getText().toString();
+        String goodsDetailsId = getIntent().getIntExtra("goodsDetailsId", 0) + "";
+
+
+        ShangChengAPI.IShangCheng iShangCheng = ServerAPI.getInterface(ShangChengAPI.IShangCheng.class);
+        iShangCheng.tihuo(goodsDetailsId, amount, new Callback<BaseModel>() {
+            @Override
+            public void success(BaseModel resp, Response response) {
+                if (resp.code != 0) {
+                    ServerAPI.handleCodeError(resp);
+                } else {
+                    if (!TextUtils.isEmpty(resp.message)) {
+                        ToastHelper.showToast(resp.message);
+                    }
+
+                    Intent it = new Intent(OrderActivity.this, HomeActivity.class);
+                    it.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                    startActivity(it);
+                }
+            }
+
+            @Override
+            public void failure(RetrofitError error) {
+                ServerAPI.HandlerException(error);
+            }
+        });
     }
 
 }
