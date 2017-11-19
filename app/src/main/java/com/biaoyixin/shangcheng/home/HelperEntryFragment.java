@@ -54,9 +54,8 @@ public class HelperEntryFragment extends BaseFragment {
 
         for (int i = 0; i < mEntries.length; i++) {
 
-            ((TextView) CommonUtils.findView(mEntries[i], R.id.name)).setText(
-                    (String)mEntriesConfig.get(i)[0]
-            );
+            final String title =(String)mEntriesConfig.get(i)[0];
+            ((TextView) CommonUtils.findView(mEntries[i], R.id.name)).setText(title);
 
 
             final String[] images = (String[]) mEntriesConfig.get(i)[1];
@@ -65,6 +64,7 @@ public class HelperEntryFragment extends BaseFragment {
                 public void onClick(View v) {
                     Intent it = new Intent(getContext(), ImageListActivity.class);
                     it.putExtra("images", images);
+                    it.putExtra("title", title);
                     HelperEntryFragment.this.startActivity(it);
                 }
             });

@@ -4,6 +4,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
@@ -42,8 +43,16 @@ public class ImageListActivity extends BaseActivity {
 
         ButterKnife.bind(this, this);
 
-        for (int i = 0; i < mImages.length; i++) {
 
+        mTopbar.setTitle(getIntent().getStringExtra("title"));
+        mTopbar.setBackButton(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+
+        for (int i = 0; i < mImages.length; i++) {
             if (mImages[i].startsWith("assets://")) {
                 loadFromAssets(mImages[i].substring("assets://".length()));
             }
