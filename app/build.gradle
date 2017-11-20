@@ -79,4 +79,6 @@ dependencies {
 
     compile 'com.github.yidun:captcha-android-demo:2.0'
 
+    compile 'com.umeng.analytics:analytics:6.1.2'
+
 }
