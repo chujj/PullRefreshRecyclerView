@@ -79,7 +79,11 @@ dependencies {
 
     compile 'com.github.yidun:captcha-android-demo:2.0'
 
+
     compile 'com.github.chujj:pullrefreshrecyclerview:0.0.7'
     compile 'com.contrarywind:Android-PickerView:3.2.7'
+
+    compile 'com.umeng.analytics:analytics:6.1.2'
+
 
 }

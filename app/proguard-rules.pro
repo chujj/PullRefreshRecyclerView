@@ -102,3 +102,22 @@
 -keepclassmembers class * {
     @android.webkit.JavascriptInterface <methods>;
 }
+
+
+# for umeng
+-keepclassmembers class * {
+   public <init> (org.json.JSONObject);
+}
+
+-keep public class com.biaoyixin.shangcheng.R$*{
+public static final int *;
+}
+-keep public class com.shouhuxing.healthassist.R$*{
+public static final int *;
+}
+
+-keepclassmembers enum * {
+    public static **[] values();
+    public static ** valueOf(java.lang.String);
+}
+
