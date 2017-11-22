@@ -6,6 +6,7 @@ import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import com.biaoyixin.shangcheng.R;
@@ -30,6 +31,12 @@ public class YouHuiQuanFragment extends BaseFragment {
     TextView mWeiHeBing;
     @BindView(R2.id.yihebing)
     TextView mYiHeBing;
+
+
+    @BindView(R2.id.empty_view)
+    View mEmptyView;
+    @BindView(R2.id.listview)
+    ListView mListView;
 
 
     @Nullable
@@ -71,6 +78,21 @@ public class YouHuiQuanFragment extends BaseFragment {
 
         mWeiHeBing.setText("未合并券: " + resp.data.left + "元");
         mYiHeBing.setText("已合并券: " + resp.data.used + "元");
+
+
+
+        if (resp.data.coupon_list == null || resp.data.coupon_list.size() == 0) {
+            mEmptyView.setVisibility(View.VISIBLE);
+            mListView.setVisibility(View.GONE);
+        } else {
+            mEmptyView.setVisibility(View.GONE);
+            mListView.setVisibility(View.VISIBLE);
+
+
+            DangDangYouHuiQuanAdapter adapter = new DangDangYouHuiQuanAdapter(resp.data.coupon_list);
+            mListView.setAdapter(adapter);
+        }
+
     }
 
 

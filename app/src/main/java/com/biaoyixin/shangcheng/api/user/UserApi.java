@@ -239,6 +239,8 @@ public class UserApi {
     }
 
     public static class YHQ2 extends BaseModel {
+        public String name;
+        public long value;
 
     }
 }
