@@ -73,6 +73,13 @@ public class MineFragment extends BaseFragment {
 
 
         loadYinhangkaData();
+
+        TradeHomeFragment.requireUserInfo(new Runnable() {
+            @Override
+            public void run() {
+                refreshUserInfoUI();
+            }
+        });
     }
 
 

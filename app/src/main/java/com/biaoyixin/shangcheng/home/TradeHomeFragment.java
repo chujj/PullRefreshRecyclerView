@@ -227,7 +227,7 @@ public class TradeHomeFragment extends BaseFragment {
 
         requireGoodsInfo();
 
-        requireUserInfo();
+        requireUserInfo(null);
         getUserStatus();
 
         refreshTradingList();
@@ -545,7 +545,7 @@ public class TradeHomeFragment extends BaseFragment {
         });
     }
 
-    private void requireUserInfo() {
+    public static void requireUserInfo(final Runnable successCB) {
         UserApi.IUser iUser = ServerAPI.getInterface(UserApi.IUser.class);
         iUser.account(new Callback<UserApi.AccountResp>() {
             @Override
@@ -590,6 +590,11 @@ public class TradeHomeFragment extends BaseFragment {
 
                     if (changede) {
                         AccountManager.saveAccount(account);
+                    }
+
+
+                    if (successCB != null) {
+                        successCB.run();
                     }
                 }
             }
