@@ -4,7 +4,7 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FF1F1F1F">
+    android:background="#fff">
 
 
     <include layout="@layout/topbar_layout"/>
@@ -15,7 +15,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:padding="1dp"
-        android:background="#FFEBAD33"
+        android:background="#ff2093ec"
         android:layout_marginTop="7dp"
         android:layout_marginBottom="7dp"
         android:orientation="horizontal">
@@ -60,6 +60,10 @@
     </LinearLayout>
 
 
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#cccccc"/>
 
     <android.support.v4.view.ViewPager
         android:id="@+id/viewpager"
