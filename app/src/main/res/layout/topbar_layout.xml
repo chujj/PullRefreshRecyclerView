@@ -7,7 +7,7 @@
     android:layout_width="match_parent"
     android:layout_height="48dp"
     android:gravity="center_vertical"
-    android:background="#FF1B1B20">
+    android:background="#fff">
 
 
     <ImageView
@@ -27,7 +27,7 @@
         android:gravity="center"
         android:text=""
         tools:text="Title Text"
-        android:textColor="#FFFFFFFF"
+        android:textColor="#000"
         android:textSize="19sp"/>
 
 
