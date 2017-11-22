@@ -20,6 +20,8 @@ import com.squareup.okhttp.OkHttpClient;
 
 import java.net.CookieManager;
 import java.net.CookiePolicy;
+import java.net.HttpCookie;
+import java.net.URI;
 import java.util.HashMap;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ThreadFactory;
@@ -113,6 +115,12 @@ public class ServerAPI {
 ////        cm = new CookieManager();
         okHttpClient.setCookieHandler(cm);
         okHttpClient.networkInterceptors().add(new StethoInterceptor());
+
+        { // 添加测试用cookie
+            HttpCookie injectCookie = new HttpCookie("SESSION", "2a4c75da-ce2c-4e13-903d-7c952b512902");
+            AccountHelper.getCookieStore().add(URI.create(Consts.HOST),
+                    injectCookie);
+        }
 
         return okHttpClient;
     }
