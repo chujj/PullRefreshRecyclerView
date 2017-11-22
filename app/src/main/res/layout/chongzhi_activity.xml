@@ -6,7 +6,7 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FF1F1F1F">
+    android:background="#fff">
 
 
 
@@ -49,7 +49,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="22dp"
                     android:text="充值金额"
-                    android:textColor="#FFCCCCCC"
+                    android:textColor="#000"
                     android:textSize="14sp"
                     />
 
@@ -76,7 +76,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
                     android:text="每笔充值收取 2% 的手续费"
-                    android:textColor="#FFCCCCCC"
+                    android:textColor="#000"
                     android:textSize="14sp"
                     />
 
@@ -88,10 +88,15 @@
                     android:layout_marginTop="20dp"
                     android:gravity="center"
                     android:text="充 值"
-                    android:textColor="#FF000000"
+                    android:textColor="#fff"
                     android:textSize="18sp"
                     android:background="@drawable/round_btn_bg"
                     />
+
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"/>
 
             </LinearLayout>
 
