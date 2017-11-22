@@ -7,7 +7,7 @@
     android:paddingLeft="19dp"
     android:paddingRight="19dp"
     android:gravity="center_vertical"
-    android:background="#FF181818">
+    android:background="#fff">
 
     <ImageView
         android:id="@+id/avatar"
@@ -33,7 +33,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="资产"
-                android:textColor="#FFFFFFFF"
+                android:textColor="#000"
                 android:textSize="16sp"
                 />
 
@@ -43,7 +43,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="9dp"
                 tools:text="10000元"
-                android:textColor="#FFFFFFFF"
+                android:textColor="#000"
                 android:textSize="16sp"
                 />
         </LinearLayout>
@@ -124,7 +124,7 @@
                 android:singleLine="true"
                 android:ellipsize="end"
                 tools:text="可提现金额：99427元"
-                android:textColor="#FFCCCCCC"
+                android:textColor="#000"
                 android:textSize="16sp"
                 tools:visibility="visible"
                 />
@@ -167,7 +167,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="下单时间"
-                android:textColor="#FFCCCCCC"
+                android:textColor="#000"
                 android:textSize="12sp"
                 />
 
@@ -191,7 +191,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
                     tools:text="00:13"
-                    android:textColor="#FFEBAD33"
+                    android:textColor="#2093ec"
                     android:textSize="16sp"
                     />
 
