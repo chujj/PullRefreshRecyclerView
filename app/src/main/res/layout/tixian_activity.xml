@@ -7,7 +7,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:focusableInTouchMode="true"
-    android:background="#FF1F1F1F">
+    android:background="#f2f2f2">
 
     <include layout="@layout/topbar_layout"/>
 
@@ -36,14 +36,14 @@
                 android:paddingLeft="10dp"
                 android:paddingRight="10dp"
                 android:orientation="horizontal"
-                android:background="#FF444444">
+                android:background="#fff">
 
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="提现金额"
-                    android:textColor="#FFCCCCCC"
+                    android:textColor="#000"
                     android:textSize="16sp"
                     />
 
@@ -57,7 +57,7 @@
                     android:focusable="true"
                     android:background="@null"
                     android:inputType="number"
-                    android:textColor="#FFCCCCCC"
+                    android:textColor="#000"
                     android:hint="请输入提现金额"
                     android:textColorHint="#FF999999"
                     android:textSize="16sp"
@@ -100,14 +100,14 @@
                     android:paddingLeft="10dp"
                     android:paddingRight="10dp"
                     android:orientation="horizontal"
-                    android:background="#FF444444">
+                    android:background="#fff">
 
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="银行"
-                        android:textColor="#FFCCCCCC"
+                        android:textColor="#000"
                         android:textSize="16sp"
                         />
 
@@ -120,7 +120,7 @@
                         android:gravity="center_vertical"
                         android:editable="false"
                         android:background="@null"
-                        android:textColor="#FFCCCCCC"
+                        android:textColor="#000"
                         android:hint="银行名称"
                         android:textColorHint="#FF999999"
                         android:textSize="16sp"
@@ -143,14 +143,14 @@
                     android:paddingLeft="10dp"
                     android:paddingRight="10dp"
                     android:orientation="horizontal"
-                    android:background="#FF444444">
+                    android:background="#fff">
 
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="省份"
-                        android:textColor="#FFCCCCCC"
+                        android:textColor="#000"
                         android:textSize="16sp"
                         />
 
@@ -163,7 +163,7 @@
                         android:gravity="center_vertical"
                         android:background="@null"
                         android:editable="false"
-                        android:textColor="#FFCCCCCC"
+                        android:textColor="#000"
                         android:hint="选择开卡省份"
                         android:textColorHint="#FF999999"
                         android:textSize="16sp"
@@ -187,14 +187,14 @@
                     android:paddingLeft="10dp"
                     android:paddingRight="10dp"
                     android:orientation="horizontal"
-                    android:background="#FF444444">
+                    android:background="#fff">
 
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="城市"
-                        android:textColor="#FFCCCCCC"
+                        android:textColor="#000"
                         android:textSize="16sp"
                         />
 
@@ -207,7 +207,7 @@
                         android:gravity="center_vertical"
                         android:background="@null"
                         android:editable="false"
-                        android:textColor="#FFCCCCCC"
+                        android:textColor="#000"
                         android:hint="选择开卡城市"
                         android:textColorHint="#FF999999"
                         android:textSize="16sp"
@@ -231,14 +231,14 @@
                     android:paddingLeft="10dp"
                     android:paddingRight="10dp"
                     android:orientation="horizontal"
-                    android:background="#FF444444">
+                    android:background="#fff">
 
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="卡号"
-                        android:textColor="#FFCCCCCC"
+                        android:textColor="#000"
                         android:textSize="16sp"
                         />
 
@@ -252,7 +252,7 @@
                         android:focusable="true"
                         android:background="@null"
                         android:inputType="number"
-                        android:textColor="#FFCCCCCC"
+                        android:textColor="#000"
                         android:hint="请输入卡号"
                         android:textColorHint="#FF999999"
                         android:textSize="16sp"
@@ -268,14 +268,14 @@
                     android:paddingLeft="10dp"
                     android:paddingRight="10dp"
                     android:orientation="horizontal"
-                    android:background="#FF444444">
+                    android:background="#fff">
 
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="持卡人"
-                        android:textColor="#FFCCCCCC"
+                        android:textColor="#000"
                         android:textSize="16sp"
                         />
 
@@ -288,7 +288,7 @@
                         android:gravity="center_vertical"
                         android:focusable="true"
                         android:background="@null"
-                        android:textColor="#FFCCCCCC"
+                        android:textColor="#000"
                         android:hint="请输入开户人"
                         android:textColorHint="#FF999999"
                         android:textSize="16sp"
@@ -305,14 +305,14 @@
                     android:paddingLeft="10dp"
                     android:paddingRight="10dp"
                     android:orientation="horizontal"
-                    android:background="#FF444444">
+                    android:background="#fff">
 
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="身份证"
-                        android:textColor="#FFCCCCCC"
+                        android:textColor="#000"
                         android:textSize="16sp"
                         />
 
@@ -325,7 +325,7 @@
                         android:gravity="center_vertical"
                         android:focusable="true"
                         android:background="@null"
-                        android:textColor="#FFCCCCCC"
+                        android:textColor="#000"
                         android:hint="请输入身份证号"
                         android:textColorHint="#FF999999"
                         android:textSize="16sp"
@@ -356,14 +356,14 @@
                 android:paddingLeft="10dp"
                 android:paddingRight="10dp"
                 android:orientation="horizontal"
-                android:background="#FF444444">
+                android:background="#fff">
 
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="验证码"
-                    android:textColor="#FFCCCCCC"
+                    android:textColor="#000"
                     android:textSize="16sp"
                     />
 
@@ -378,7 +378,7 @@
                     android:focusable="true"
                     android:background="@null"
                     android:inputType="number"
-                    android:textColor="#FFCCCCCC"
+                    android:textColor="#000"
                     android:hint="请输入验证码"
                     android:textColorHint="#FF999999"
                     android:textSize="16sp"
@@ -390,7 +390,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="获取验证码"
-                    android:textColor="#FFEBAD33"
+                    android:textColor="#2093ec"
                     android:textSize="16sp"
                     />
 
@@ -408,7 +408,7 @@
                 android:layout_marginTop="20dp"
                 android:gravity="center"
                 android:text="提 现"
-                android:textColor="#FF000000"
+                android:textColor="#fff"
                 android:textSize="18sp"
                 android:background="@drawable/round_btn_bg"
                 />
