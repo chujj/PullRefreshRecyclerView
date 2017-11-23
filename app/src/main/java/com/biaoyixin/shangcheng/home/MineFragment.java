@@ -194,9 +194,13 @@ public class MineFragment extends BaseFragment {
                     new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-                            Intent it = new Intent(MineFragment.this.getContext(),
-                                    YouHuiQuanActivity.class);
-                            MineFragment.this.startActivity(it);
+                            Intent it = new Intent(getContext(), HomeActivity.class);
+                            it.putExtra("index", 1);
+                            it.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                            startActivity(it);
+//                            Intent it = new Intent(MineFragment.this.getContext(),
+//                                    YouHuiQuanActivity.class);
+//                            MineFragment.this.startActivity(it);
                         }
                     },
                     R.drawable.mine_fragment_entry_youhuiquan
