@@ -1,7 +1,8 @@
 package com.biaoyixin.shangcheng.api.trade;
 
-import com.google.gson.annotations.SerializedName;
 import com.biaoyixin.shangcheng.model.BaseModel;
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
 
 import java.util.HashMap;
 import java.util.List;
@@ -58,6 +59,9 @@ public class GoodsApi {
 
         @GET("/customer/all_trade_list")
         void getTradeAllList(Callback<TradeAllListResp> cb);
+
+        @GET("/shop/shop_order_list")
+        void tihuoHistory(Callback<TihuoResp> cb);
     }
 
     ///////////////////////// goods /////////////////////
@@ -272,6 +276,59 @@ public class GoodsApi {
 
     public static class TradeAllListResp extends BaseModel {
         public List<BuyTradeData> data;
+    }
+
+
+    public static class TihuoResp extends  BaseModel {
+
+        public List<TihuoRecord> data;
+    }
+    public static class TihuoRecord extends BaseModel {
+        @SerializedName("id")
+        @Expose
+        public long id;
+        @SerializedName("goods_name")
+        @Expose
+        public String goodsName;
+        @SerializedName("goods_icon")
+        @Expose
+        public String goodsIcon;
+        @SerializedName("amount")
+        @Expose
+        public long amount;
+        @SerializedName("real_price")
+        @Expose
+        public long realPrice;
+        @SerializedName("goods_price")
+        @Expose
+        public long goodsPrice;
+        @SerializedName("deliver_price")
+        @Expose
+        public long deliverPrice;
+        @SerializedName("total_price")
+        @Expose
+        public long totalPrice;
+        @SerializedName("credit")
+        @Expose
+        public long credit;
+        @SerializedName("deliver_address")
+        @Expose
+        public String deliverAddress;
+        @SerializedName("deliver_name")
+        @Expose
+        public String deliverName;
+        @SerializedName("deliver_phone")
+        @Expose
+        public String deliverPhone;
+        @SerializedName("delivern_number")
+        @Expose
+        public String delivernNumber;
+        @SerializedName("deliver_status")
+        @Expose
+        public long deliverStatus;
+        @SerializedName("created_on")
+        @Expose
+        public String createdOn;
     }
 }
 

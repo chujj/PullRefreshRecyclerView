@@ -103,6 +103,8 @@
 
         <activity android:name=".home.ImageListActivity"/>
 
+        <activity android:name=".home.TiHuoHistoryActivity"/>
+
     </application>
 
 
