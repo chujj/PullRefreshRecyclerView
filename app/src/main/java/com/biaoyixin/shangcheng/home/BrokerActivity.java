@@ -11,7 +11,6 @@ import com.biaoyixin.shangcheng.R;
 import com.biaoyixin.shangcheng.R2;
 import com.biaoyixin.shangcheng.api.ServerAPI;
 import com.biaoyixin.shangcheng.api.broker.BrokerApi;
-import com.biaoyixin.shangcheng.api.trade.GoodsApi;
 import com.biaoyixin.shangcheng.base.BaseActivity;
 import com.biaoyixin.shangcheng.base.Topbar;
 import com.bumptech.glide.Glide;
@@ -92,9 +91,9 @@ public class BrokerActivity extends BaseActivity {
         name.setText(data.name);
         id_num.setText("经纪人编号：" + data.id);
 
-        fanyong.setText("" + data.totalServeMoney);
-        jiesuan_shouru.setText("" + data.settledServeMoney);
-        weijiesuan_shouru.setText("" + data.unsettledServeMoney);
+        fanyong.setText(String.format("%.2f", data.totalServeMoney / 100f));
+        jiesuan_shouru.setText(String.format("%.2f", data.settledServeMoney / 100f));
+        weijiesuan_shouru.setText(String.format("%.2f", data.unsettledServeMoney / 100f));
     }
 
 
