@@ -100,7 +100,7 @@ public class Step2SMSCodeFragment extends BaseFragment {
                 }
                 int end = sb.length();
                 SpannableString ss = new SpannableString(sb.toString());
-                ss.setSpan(new ForegroundColorSpan(Color.WHITE), start, end, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+                ss.setSpan(new ForegroundColorSpan(Color.BLACK), start, end, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
                 mPhonePromt.setText(ss);
             }
         }
@@ -109,7 +109,7 @@ public class Step2SMSCodeFragment extends BaseFragment {
         {
             // mInput
             if (CommonUtils.isDebugBuild()) {
-                mInput.setTextColor(0xffffffff);
+                mInput.setTextColor(0xff000000);
             } else {
                 mInput.setHeight(1);
                 mInput.setTextColor(0x00ffffff);
