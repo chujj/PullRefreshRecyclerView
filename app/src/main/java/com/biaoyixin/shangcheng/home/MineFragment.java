@@ -235,7 +235,8 @@ public class MineFragment extends BaseFragment {
                     new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-
+                            Intent it = new Intent(v.getContext(), BrokerActivity.class);
+                            v.getContext().startActivity(it);
                         }
                     },
                     R.drawable.mine_fragment_entry_jinjiren

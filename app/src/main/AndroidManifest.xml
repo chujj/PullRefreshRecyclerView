@@ -105,6 +105,9 @@
 
         <activity android:name=".home.TiHuoHistoryActivity"/>
 
+
+        <activity android:name=".home.BrokerActivity"/>
+
     </application>
 
 
