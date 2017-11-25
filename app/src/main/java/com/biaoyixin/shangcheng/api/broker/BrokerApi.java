@@ -16,6 +16,10 @@ public class BrokerApi  {
     public static interface IBroker {
         @GET("/broker/index")
         public void getBroker(Callback<BrokerResp>cb);
+
+
+        @GET("/broker/get_qrcode_url")
+        public void getQRCode(Callback<QRCodeResp>cb);
     }
 
 
@@ -43,5 +47,10 @@ public class BrokerApi  {
         @SerializedName("totalServeMoney")
         @Expose
         public long totalServeMoney;
+    }
+
+
+    public static class QRCodeResp extends BaseModel {
+        public String data;
     }
 }

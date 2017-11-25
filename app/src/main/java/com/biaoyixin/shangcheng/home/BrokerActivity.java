@@ -1,5 +1,6 @@
 package com.biaoyixin.shangcheng.home;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.View;
@@ -10,6 +11,7 @@ import com.biaoyixin.shangcheng.R;
 import com.biaoyixin.shangcheng.R2;
 import com.biaoyixin.shangcheng.api.ServerAPI;
 import com.biaoyixin.shangcheng.api.broker.BrokerApi;
+import com.biaoyixin.shangcheng.api.trade.GoodsApi;
 import com.biaoyixin.shangcheng.base.BaseActivity;
 import com.biaoyixin.shangcheng.base.Topbar;
 import com.bumptech.glide.Glide;
@@ -103,7 +105,8 @@ public class BrokerActivity extends BaseActivity {
 
     @OnClick(R2.id.qrcode_click)
     public void clickQrcode() {
-
+        Intent it = new Intent(this, QRCodeDisplayActivity.class);
+        startActivity(it);
     }
 
     @OnClick(R2.id.fanyong_click)

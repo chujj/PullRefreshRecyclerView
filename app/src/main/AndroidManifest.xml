@@ -108,6 +108,9 @@
 
         <activity android:name=".home.BrokerActivity"/>
 
+
+        <activity android:name=".home.QRCodeDisplayActivity"/>
+
     </application>
 
 
