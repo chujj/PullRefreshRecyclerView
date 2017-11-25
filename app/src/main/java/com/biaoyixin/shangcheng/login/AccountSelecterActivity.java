@@ -85,7 +85,7 @@ public class AccountSelecterActivity extends BaseActivity {
                 Glide.with(this).load(data.headPortrait).into(image);
                 l1.setText(data.orgCode);
                 l2.setText(data.nickname);
-                l3.setText("资金" + data.asset + "元");
+                l3.setText(String.format("资金%.2f元",  (data.asset  / 100f)));
 
 
                 items[j].setOnClickListener(new View.OnClickListener() {
