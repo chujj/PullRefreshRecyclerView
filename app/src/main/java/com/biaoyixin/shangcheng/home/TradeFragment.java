@@ -205,7 +205,7 @@ public class TradeFragment extends BaseFragment {
         // 时间初始化
         for (int i = 0; i < mTimeDetail.length; i++) {
             GoodsApi.GoodName gName = Data.sData.names.get(mKey);
-            mTimeDetail[i].setText(String.format("%s秒", i > (gName.point.length - 1) ? 0 : gName.point[i]));
+            mTimeDetail[i].setText(String.format("%s秒", (gName.point == null || i > (gName.point.length - 1)) ? 0 : gName.point[i]));
         }
 
 
