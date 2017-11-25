@@ -111,6 +111,8 @@
 
         <activity android:name=".home.QRCodeDisplayActivity"/>
 
+        <activity android:name=".home.ZhiShuActivity"/>
+
     </application>
 
 

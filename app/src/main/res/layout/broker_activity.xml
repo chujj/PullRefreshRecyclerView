@@ -124,7 +124,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            tools:text="我的返佣"
+            android:text="我的返佣"
             android:textSize="21sp"
             android:textColor="#000"
             />

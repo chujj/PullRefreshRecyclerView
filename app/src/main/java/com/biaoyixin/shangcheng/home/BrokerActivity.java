@@ -99,6 +99,8 @@ public class BrokerActivity extends BaseActivity {
 
     @OnClick(R2.id.zhishu_click)
     public void clickZhiShu() {
+        Intent it = new Intent(this, ZhiShuActivity.class);
+        startActivity(it);
 
     }
 
