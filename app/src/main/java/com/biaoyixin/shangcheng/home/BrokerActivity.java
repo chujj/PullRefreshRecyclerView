@@ -112,7 +112,9 @@ public class BrokerActivity extends BaseActivity {
 
     @OnClick(R2.id.fanyong_click)
     public void clickFanyong() {
-
+        Intent it = new Intent(this, FanyongActivity.class);
+        it.putExtra("price", fanyong.getText().toString() + "元");
+        startActivity(it);
     }
 
 

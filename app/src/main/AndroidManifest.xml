@@ -113,6 +113,8 @@
 
         <activity android:name=".home.ZhiShuActivity"/>
 
+        <activity android:name=".home.FanyongActivity"/>
+
     </application>
 
 

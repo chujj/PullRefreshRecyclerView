@@ -29,6 +29,13 @@ public class BrokerApi  {
         @FormUrlEncoded
         @POST("/broker/customer/list")
         public void getZhiShu(@Field("page") int page, @Field("size") int size, @Field("mobile") String mobile, Callback<ZhiShuResp>cb);
+
+
+        @FormUrlEncoded
+        @POST("/broker/brokerageDetail/list")
+        public void getFanyong(@Field("page") int page, @Field("size") int size,
+                               @Field("begin") String begine, @Field("end") String end,
+                               Callback<FanyongResp>cb);
     }
 
 
@@ -82,7 +89,7 @@ public class BrokerApi  {
         @SerializedName("totalElements")
         @Expose
         public long totalElements;
-//        @SerializedName("sort")
+        //        @SerializedName("sort")
 //        @Expose
 //        public Object sort;
         @SerializedName("size")
@@ -116,5 +123,57 @@ public class BrokerApi  {
         @SerializedName("createdOn")
         @Expose
         public String createdOn;
+    }
+
+
+    public static class FanyongResp extends BaseModel {
+        public FanyongInfo data;
+    }
+
+    public static class FanyongInfo extends BaseModel {
+        @SerializedName("content")
+        @Expose
+        public List<FanyongItem> content;
+        @SerializedName("last")
+        @Expose
+        public boolean last;
+        @SerializedName("totalPages")
+        @Expose
+        public long totalPages;
+        @SerializedName("totalElements")
+        @Expose
+        public long totalElements;
+        //        @SerializedName("sort")
+//        @Expose
+//        public Object sort;
+        @SerializedName("first")
+        @Expose
+        public boolean first;
+        @SerializedName("numberOfElements")
+        @Expose
+        public long numberOfElements;
+        @SerializedName("size")
+        @Expose
+        public long size;
+        @SerializedName("number")
+        @Expose
+        public long number;
+    }
+
+
+    public static class FanyongItem extends BaseModel {
+
+        @SerializedName("nickname")
+        @Expose
+        public String nickname;
+        @SerializedName("goodsName")
+        @Expose
+        public String goodsName;
+        @SerializedName("closeTime")
+        @Expose
+        public String closeTime;
+        @SerializedName("earnedServeFee")
+        @Expose
+        public long earnedServeFee;
     }
 }
