@@ -29,7 +29,7 @@ public class UserApi {
 
         @FormUrlEncoded
         @POST("/customer/set/broker")
-        public void setBroker(@Field("inviteCode") String phone, Callback<BaseModel> cb);
+        public void setBroker(@Field("inviteCode") String phone, Callback<BrokerResp> cb);
 
 
         @FormUrlEncoded
@@ -221,5 +221,13 @@ public class UserApi {
         public String name; // : "系统公告",
         public String content; // : "这是公告内容",
         public String viewType; // : "TOP_FLOAT" 公告呈现方式 TOP_FLOAT 顶部浮动 CENTER_ALERT 中间弹出
+    }
+
+
+    public static class BrokerResp extends BaseModel {
+        public BrokerInfo data;
+    }
+    public static class BrokerInfo extends BaseModel {
+        public long id;
     }
 }
