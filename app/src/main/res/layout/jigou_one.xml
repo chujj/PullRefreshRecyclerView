@@ -11,6 +11,7 @@
         android:layout_height="140dp"
         android:orientation="vertical"
         android:gravity="center_horizontal"
+        android:background="@drawable/jigou_one_bg"
         >
 
         <View
