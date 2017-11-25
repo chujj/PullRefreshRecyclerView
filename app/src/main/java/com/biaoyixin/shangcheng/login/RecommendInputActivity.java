@@ -15,7 +15,6 @@ import com.biaoyixin.shangcheng.base.BaseActivity;
 import com.biaoyixin.shangcheng.base.CommonUtils;
 import com.biaoyixin.shangcheng.base.ToastHelper;
 import com.biaoyixin.shangcheng.base.Topbar;
-import com.biaoyixin.shangcheng.model.BaseModel;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -67,9 +66,9 @@ public class RecommendInputActivity extends BaseActivity {
 
         showLoadingDialog("加载中...", true);
         UserApi.IUser iUser = ServerAPI.getInterface(UserApi.IUser.class);
-        iUser.setBroker(recommend, new Callback<BaseModel>() {
+        iUser.setBroker(recommend, new Callback<UserApi.SetBrokerResp>() {
             @Override
-            public void success(BaseModel baseModel, Response response) {
+            public void success(UserApi.SetBrokerResp baseModel, Response response) {
 
                 dismissLoadingDialog();
 
@@ -80,6 +79,11 @@ public class RecommendInputActivity extends BaseActivity {
                     if (successCb != null) {
                         successCb.run();
                     }
+
+                    final AccountManager.Account account = AccountManager.getAccount();
+                    account.id = baseModel.data.id + "";
+                    AccountManager.saveAccount(account);
+
                     success = true;
                     finish();
                     openHome();

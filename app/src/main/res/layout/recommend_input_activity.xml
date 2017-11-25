@@ -5,7 +5,7 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FF1F1F1F">
+    android:background="#fff">
 
     <include layout="@layout/topbar_layout"/>
 
@@ -18,13 +18,13 @@
         android:gravity="center_vertical"
         android:paddingLeft="15dp"
         android:paddingRight="15dp"
-        android:background="#FF444444">
+        android:background="#fff">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="推荐码"
-            android:textColor="#FFCCCCCC"
+            android:textColor="#000"
             android:textSize="16sp"
             />
 
@@ -36,11 +36,15 @@
             android:background="@null"
             android:hint="请输入推荐码"
             android:textColorHint="#FF999999"
-            android:textColor="#FFCCCCCC"
+            android:textColor="#000"
             android:textSize="16sp"
             />
 
     </LinearLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#e0e0e0"/>
 
 
     <TextView
@@ -53,7 +57,7 @@
         android:background="@drawable/round_btn_bg"
         android:gravity="center"
         android:text="提交"
-        android:textColor="#FF000000"
+        android:textColor="#fff"
         android:textSize="18sp"/>
 
 

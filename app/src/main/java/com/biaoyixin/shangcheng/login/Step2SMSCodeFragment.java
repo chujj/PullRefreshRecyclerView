@@ -290,26 +290,27 @@ public class Step2SMSCodeFragment extends BaseFragment {
 
         LoginApi.ILogin iLogin = ServerAPI.getInterface(LoginApi.ILogin.class);
 
-        iLogin.login(phone, smsCode,/* phone,*/ new Callback<LoginApi.LoginResp>() {
+        iLogin.preLogin(phone, smsCode,/* phone,*/ new Callback<LoginApi.PreLoginResp>() {
             @Override
-            public void success(LoginApi.LoginResp baseModel, Response response) {
+            public void success(LoginApi.PreLoginResp baseModel, Response response) {
 
                 if (baseModel.code == 0) {
 
-                    final AccountManager.Account account = AccountManager.getAccount();
-                    account.id = baseModel.data.id + "";
+//                    final AccountManager.Account account = AccountManager.getAccount();
+//                    account.id = baseModel.data.id + "";
                     Runnable saveAccount = new Runnable() {
                         @Override
                         public void run() {
-                            AccountManager.saveAccount(account);
+//                            AccountManager.saveAccount(account);
 
                         }
                     };
-
-                    if (baseModel.data.needShowInputBroker()) {
-
+//
+                    if (baseModel.data.needInputRecommendId()) {
                         ((LoginActivity)getActivity()).switchToStep3Recommend(saveAccount);
-                    } else {
+                    } else if(baseModel.data.showJiGouSelector()) {
+                        ((LoginActivity)getActivity()).switchToStep4JigouSelector(saveAccount);
+                    } else if(baseModel.data.justLogin()) {
                         saveAccount.run();
                         SplashActivity.switchToMain(getContext());
                     }

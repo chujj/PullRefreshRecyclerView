@@ -28,8 +28,8 @@ public class UserApi {
 
 
         @FormUrlEncoded
-        @POST("/customer/set/broker")
-        public void setBroker(@Field("inviteCode") String phone, Callback<BaseModel> cb);
+        @POST("/customer/setBroker")
+        public void setBroker(@Field("brokerId") String phone, Callback<SetBrokerResp> cb);
 
 
         @FormUrlEncoded
@@ -242,5 +242,14 @@ public class UserApi {
         public String name;
         public long value;
 
+    }
+
+
+    public static class SetBrokerResp extends BaseModel {
+        public SetBrokerInfo data;
+    }
+
+    public static class SetBrokerInfo extends BaseModel {
+        public int id;
     }
 }

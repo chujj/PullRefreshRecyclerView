@@ -56,4 +56,8 @@ public class LoginActivity extends BaseActivity {
         startActivity(it);
         finish();
     }
+
+    public void switchToStep4JigouSelector(Runnable saveAccount) {
+
+    }
 }

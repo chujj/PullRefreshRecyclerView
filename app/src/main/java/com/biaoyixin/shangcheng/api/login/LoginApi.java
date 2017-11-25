@@ -24,6 +24,12 @@ public class LoginApi {
                           @Field("smsCode") String smsCode,
 //                          @Field("password") String password,
                           Callback<LoginResp> cb);
+
+        @FormUrlEncoded
+        @POST("/customer/login/pre")
+        public void preLogin(@Field("mobile") String mobile,
+                          @Field("smsCode") String smsCode,
+                          Callback<PreLoginResp> cb);
     }
 
 
@@ -42,6 +48,30 @@ public class LoginApi {
 
         public boolean needShowInputBroker () {
             return brokerId == 0;
+        }
+    }
+
+
+    public static class PreLoginResp extends BaseModel {
+
+        public PreLoginInfo data;
+    }
+
+
+    public static class PreLoginInfo extends BaseModel {
+        public int flag; // ":1,//1,2,3三个值
+
+
+        public boolean showJiGouSelector() {
+            return flag == 1;
+        }
+
+        public boolean justLogin() {
+            return flag == 2;
+        }
+
+        public boolean needInputRecommendId() {
+            return flag == 3;
         }
     }
 }
