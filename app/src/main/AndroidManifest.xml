@@ -115,6 +115,8 @@
 
         <activity android:name=".home.FanyongActivity"/>
 
+        <activity android:name=".login.AccountSelecterActivity"/>
+
     </application>
 
 

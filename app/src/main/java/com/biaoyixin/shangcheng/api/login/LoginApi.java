@@ -2,6 +2,8 @@ package com.biaoyixin.shangcheng.api.login;
 
 import com.biaoyixin.shangcheng.model.BaseModel;
 
+import java.util.List;
+
 import retrofit.Callback;
 import retrofit.http.Field;
 import retrofit.http.FormUrlEncoded;
@@ -30,6 +32,14 @@ public class LoginApi {
         public void preLogin(@Field("mobile") String mobile,
                           @Field("smsCode") String smsCode,
                           Callback<PreLoginResp> cb);
+
+
+
+
+        @FormUrlEncoded
+        @POST("/customer/login")
+        public void loginDangdang(@Field("customerId") String id,
+                          Callback<LoginResp> cb);
     }
 
 
@@ -45,6 +55,8 @@ public class LoginApi {
         public int brokerId;
 //        brokerId	long	推荐人ID
 
+        public String orgCode;
+        public long asset;
 
         public boolean needShowInputBroker () {
             return brokerId == 0;
@@ -61,6 +73,7 @@ public class LoginApi {
     public static class PreLoginInfo extends BaseModel {
         public int flag; // ":1,//1,2,3三个值
 
+        public List<LoginData> customers;
 
         public boolean showJiGouSelector() {
             return flag == 1;

@@ -309,8 +309,12 @@ public class Step2SMSCodeFragment extends BaseFragment {
                     if (baseModel.data.needInputRecommendId()) {
                         ((LoginActivity)getActivity()).switchToStep3Recommend(saveAccount);
                     } else if(baseModel.data.showJiGouSelector()) {
-                        ((LoginActivity)getActivity()).switchToStep4JigouSelector(saveAccount);
+                        ((LoginActivity)getActivity()).switchToStep4JigouSelector(baseModel.data);
                     } else if(baseModel.data.justLogin()) {
+                        final AccountManager.Account account = AccountManager.getAccount();
+                        account.id = baseModel.data.customers.get(0).id + "";
+                        AccountManager.saveAccount(account);
+
                         saveAccount.run();
                         SplashActivity.switchToMain(getContext());
                     }

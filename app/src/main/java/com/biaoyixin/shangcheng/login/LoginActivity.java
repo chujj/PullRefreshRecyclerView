@@ -4,8 +4,10 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 
+import com.biaoyixin.shangcheng.api.login.LoginApi;
 import com.biaoyixin.shangcheng.base.BaseActivity;
 import com.biaoyixin.shangcheng.base.FragmentUtils;
+import com.google.gson.Gson;
 
 /**
  * Created by zhujj on 17-10-16.
@@ -57,7 +59,10 @@ public class LoginActivity extends BaseActivity {
         finish();
     }
 
-    public void switchToStep4JigouSelector(Runnable saveAccount) {
-
+    public void switchToStep4JigouSelector(LoginApi.PreLoginInfo saveAccount) {
+        Intent it = new Intent(this, AccountSelecterActivity.class);
+        it.putExtra("accouts", new Gson().toJson(saveAccount.customers));
+        startActivity(it);
     }
+
 }
