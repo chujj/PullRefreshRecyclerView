@@ -3,6 +3,7 @@ package com.biaoyixin.shangcheng.home;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -12,6 +13,7 @@ import com.biaoyixin.shangcheng.R2;
 import com.biaoyixin.shangcheng.api.ServerAPI;
 import com.biaoyixin.shangcheng.api.broker.BrokerApi;
 import com.biaoyixin.shangcheng.base.BaseActivity;
+import com.biaoyixin.shangcheng.base.Topbar;
 import com.ssc.widget.pullrefreshrecyclerview.AutoLoadMoreRecyclerView;
 import com.ssc.widget.pullrefreshrecyclerview.PullRefreshRecyclerView;
 
@@ -35,6 +37,8 @@ public class ZhiShuActivity extends BaseActivity {
     EditText mInput;
     @BindView(R2.id.loadmore_listview)
     AutoLoadMoreRecyclerView mListview;
+    @BindView(R2.id.topbar)
+    Topbar mTopbar;
 
     ZhiShuAdapter mAdapter;
 
@@ -47,6 +51,14 @@ public class ZhiShuActivity extends BaseActivity {
         this.setContentView(R.layout.zhishu_activity);
 
         ButterKnife.bind(this, this);
+
+        mTopbar.setTitle("直属客户");
+        mTopbar.setBackButton(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
 
         mAdapter = new ZhiShuAdapter();
 
