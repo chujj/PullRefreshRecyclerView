@@ -50,9 +50,10 @@ public class LoginActivity extends BaseActivity {
                 Step2SMSCodeFragment.class.getName(), bundle, true);
     }
 
-    public void switchToStep3Recommend(Runnable callback) {
+    public void switchToStep3Recommend(Runnable callback, boolean requiredInviteCode) {
         RecommendInputActivity.successCb = callback;
         Intent it = new Intent(this, RecommendInputActivity.class);
+        it.putExtra("requiredInviteCode", requiredInviteCode);
         startActivity(it);
         finish();
     }

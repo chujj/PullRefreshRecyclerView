@@ -39,6 +39,7 @@ public class LoginApi {
         public int brokerId;
 //        brokerId	long	推荐人ID
 
+        public boolean requiredInviteCode;
 
         public boolean needShowInputBroker () {
             return brokerId == 0;

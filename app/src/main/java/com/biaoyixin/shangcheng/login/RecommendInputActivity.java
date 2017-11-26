@@ -35,6 +35,7 @@ public class RecommendInputActivity extends BaseActivity {
     EditText mPhone;
 
     boolean success = false;
+    private boolean mRequiredinvitecode;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -46,6 +47,8 @@ public class RecommendInputActivity extends BaseActivity {
 
         Topbar topbar = CommonUtils.findView(this, R.id.topbar);
         topbar.setTitle("填写推荐码");
+
+        mRequiredinvitecode = getIntent().getBooleanExtra("requiredInviteCode", false);
     }
 
     @OnClick(R2.id.ignore)
@@ -106,7 +109,7 @@ public class RecommendInputActivity extends BaseActivity {
     protected void onPause() {
         super.onPause();
 
-        if (!success) {
+        if (mRequiredinvitecode && !success) {
             AccountHelper.getCookieStore().removeAll();
 
             AccountManager.Account account = new Gson().fromJson("{}", AccountManager.Account.class);

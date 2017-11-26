@@ -308,7 +308,7 @@ public class Step2SMSCodeFragment extends BaseFragment {
 
                     if (baseModel.data.needShowInputBroker()) {
 
-                        ((LoginActivity)getActivity()).switchToStep3Recommend(saveAccount);
+                        ((LoginActivity)getActivity()).switchToStep3Recommend(saveAccount, baseModel.data.requiredInviteCode);
                     } else {
                         saveAccount.run();
                         SplashActivity.switchToMain(getContext());
