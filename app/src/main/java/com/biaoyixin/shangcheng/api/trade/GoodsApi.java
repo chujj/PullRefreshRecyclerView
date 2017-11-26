@@ -190,6 +190,7 @@ public class GoodsApi {
         public String bank_url;
         public String type;
         public String url;
+        public String cashInFee;
     }
 
 
