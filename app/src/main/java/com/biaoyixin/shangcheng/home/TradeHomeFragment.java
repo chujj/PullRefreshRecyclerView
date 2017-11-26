@@ -439,8 +439,9 @@ public class TradeHomeFragment extends BaseFragment {
                     ToastHelper.showToast(goodsResp.message);
                 } else {
                     updateViewPager(goodsResp.data);
-                    mTradesListLayout.setVisibility(View.VISIBLE);
-                    selectTradeListIndex(0);
+                    mTradesListLayout.setVisibility(View.GONE);
+//                    mTradesListLayout.setVisibility(View.VISIBLE);
+                    selectTradeListIndex(1);
                 }
 
             }

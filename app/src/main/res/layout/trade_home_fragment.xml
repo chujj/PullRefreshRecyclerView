@@ -58,14 +58,16 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
                 android:orientation="vertical"
-                android:visibility="gone"
+                android:visibility="visible"
                 >
 
                 <LinearLayout
                     android:id="@+id/trades_layout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:visibility="gone"
                     android:orientation="horizontal">
 
                     <FrameLayout
@@ -135,7 +137,7 @@
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
-                    android:background="#FF3C3C3C"/>
+                    android:background="#e0e0e0"/>
 
                 <LinearLayout
                     android:id="@+id/trades_mine_view_group"

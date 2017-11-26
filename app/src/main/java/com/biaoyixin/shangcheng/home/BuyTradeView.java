@@ -128,6 +128,7 @@ public class BuyTradeView extends RelativeLayout {
                     mChips.setOnChipSelected(new ChipLabelsLayout.OnChipSelected() {
                         @Override
                         public void onChipSelected(String chipOri, boolean fromCoupon) {
+                            mBuyArgs.put("chip", chipOri);
                         }
                     });
                     mChips.getChildAt(0).performClick();
@@ -140,6 +141,7 @@ public class BuyTradeView extends RelativeLayout {
                     mUpdownSize.setOnChipSelected(new ChipLabelsLayout.OnChipSelected() {
                         @Override
                         public void onChipSelected(String chipOri, boolean fromCoupon) {
+                            mBuyArgs.put("secs", chipOri);
                         }
                     });
                     mUpdownSize.getChildAt(0).performClick();
@@ -257,30 +259,18 @@ public class BuyTradeView extends RelativeLayout {
 
     @OnClick(R2.id.ok)
     public void clickOK() {
-
         int chip = (int) mBuyArgs.get("chip");
-        UserApi.Youhuiquan coupon = (UserApi.Youhuiquan) mBuyArgs.get("coupon");
-        String coupon_type = "";
-        if (coupon != null) {
-            coupon_type = coupon.couponType + "";
-        }
-
-//        if (1 > 0) {
-//            System.out.println(chip + ", " + coupon_type);
-//            return;
-//        }
 
         mBaseActivity.showLoadingDialog("加载中", false);
-
 
         GoodsApi.IGood iGood = ServerAPI.getInterface(GoodsApi.IGood.class);
         iGood.buyTrade(
                 (int) mBuyArgs.get("up_down_type"),
                 (int) mBuyArgs.get("goods_id"),
                 chip,
-                1,
+                mNumCount,
                 (int) mBuyArgs.get("secs"),
-                coupon_type,
+
                 new Callback<GoodsApi.BuyTradeResponse>() {
                     @Override
                     public void success(GoodsApi.BuyTradeResponse baseModel, Response response) {
@@ -315,23 +305,22 @@ public class BuyTradeView extends RelativeLayout {
 
 
     private void showCounterdownText (GoodsApi.BuyTradeResponse resp) {
-        View viewRoot = LayoutInflater.from(getContext()).inflate(R.layout.trading_popup_layout, null, false);
-        TradingPopupView tpv = CommonUtils.findView(viewRoot, R.id.trading_popup_view);
-        tpv.getStatus().trade_id = resp.data.trade_id;
-        tpv.getStatus().label = resp.data.label;
-        tpv.getStatus().chip = resp.data.chip;
-        tpv.getStatus().goods_name = resp.data.goods_name; // Data.sData.names.get(mKey).goods_name;
-        tpv.getStatus().buyUp = resp.data.up_down_type == 0;
-        tpv.getStatus().open_price = resp.data.open_price; // openPrice;
-        tpv.getStatus().close_price = resp.data.open_price; // openPrice + 1;
-        tpv.getStatus().status_finished = false;
-        tpv.getStatus().count_down_secs =  resp.data.leftTime; // (int) mBuyArgs.get("secs");
-        tpv.getStatus().service_fee =  resp.data.serve_price; // ((int) mBuyArgs.get("chip") * Data.sData.names.get(mKey).serviceFee);
-        tpv.updateUI();
-        tpv.startCountDown();
-
-        CommonUtils.addToActivity(mBaseActivity, viewRoot);
-
+//        View viewRoot = LayoutInflater.from(getContext()).inflate(R.layout.trading_popup_layout, null, false);
+//        TradingPopupView tpv = CommonUtils.findView(viewRoot, R.id.trading_popup_view);
+//        tpv.getStatus().trade_id = resp.data.trade_id;
+//        tpv.getStatus().label = resp.data.label;
+//        tpv.getStatus().chip = resp.data.chip;
+//        tpv.getStatus().goods_name = resp.data.goods_name; // Data.sData.names.get(mKey).goods_name;
+//        tpv.getStatus().buyUp = resp.data.up_down_type == 0;
+//        tpv.getStatus().open_price = resp.data.open_price; // openPrice;
+//        tpv.getStatus().close_price = resp.data.open_price; // openPrice + 1;
+//        tpv.getStatus().status_finished = false;
+//        tpv.getStatus().count_down_secs =  resp.data.leftTime; // (int) mBuyArgs.get("secs");
+//        tpv.getStatus().service_fee =  resp.data.serve_price; // ((int) mBuyArgs.get("chip") * Data.sData.names.get(mKey).serviceFee);
+//        tpv.updateUI();
+//        tpv.startCountDown();
+//
+//        CommonUtils.addToActivity(mBaseActivity, viewRoot);
     }
 
     public void setActivity(BaseActivity activity) {
