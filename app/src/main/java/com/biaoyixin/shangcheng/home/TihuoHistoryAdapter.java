@@ -84,10 +84,20 @@ public class TihuoHistoryAdapter extends BaseAdapter {
                     phonenum.setText("联系电话： " + record.deliverPhone);
 
 
-                    r1.setText("状态" + record.deliverStatus); // TODO
+                    String status_str = "未知";
+                    String[] status = new String [] {
+                            "未发货",
+                            "已发货",
+                            "已签收",
+                            "已取消",
+                    };
+                    if (record.deliverStatus >= 0 && record.deliverStatus < status.length) {
+                        status_str = status[(int) record.deliverStatus];
+                    }
+                    r1.setText("状态" + status_str);
                     r2.setText("￥" + record.totalPrice);
                     r3.setText("￥" + record.deliverPrice);
-                    r4.setText("￥" + record.credit); // TODO
+                    r4.setText("￥" + record.credit);
                     r5.setText(record.delivernNumber);
 
                     orderTime.setText("下单时间：" + record.createdOn);
