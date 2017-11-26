@@ -153,7 +153,7 @@ public class OrderActivity extends BaseActivity {
                 mItemPriceTotal.setText("￥" + mCount * resp.data.realPrice);
 
 
-                mPriceTotal.setText("￥" + (mCount * resp.data.realPrice - resp.data.credit));
+                mPriceTotal.setText("￥" + (mCount * resp.data.realPrice + resp.data.deliverPrice - resp.data.credit));
                 return null;
             }
         });
