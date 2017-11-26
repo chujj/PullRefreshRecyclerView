@@ -25,12 +25,12 @@ public class GoodsApi {
         public void goods(Callback<GoodsResp> cb);
 
         @FormUrlEncoded
-        @POST("/yjy_up_down_selling")
+        @POST("/asset/yjy_up_down_selling")
         public void buyTrade(@Field("up_down_type") int up, // up 0; down 1
                              @Field("goods_id") int goods_id,
-                             @Field("chip") int chip,
+                             @Field("chip") String chip,
                              @Field("amount") int amount,
-                             @Field("stop_win_percent") int secs,
+                             @Field("stop_win_percent") String secs,
                              Callback<BuyTradeResponse> cb);
 
         @POST("/customer/account_trade_list")

@@ -259,7 +259,7 @@ public class BuyTradeView extends RelativeLayout {
 
     @OnClick(R2.id.ok)
     public void clickOK() {
-        int chip = (int) mBuyArgs.get("chip");
+        String chip = (String) mBuyArgs.get("chip");
 
         mBaseActivity.showLoadingDialog("加载中", false);
 
@@ -269,7 +269,7 @@ public class BuyTradeView extends RelativeLayout {
                 (int) mBuyArgs.get("goods_id"),
                 chip,
                 mNumCount,
-                (int) mBuyArgs.get("secs"),
+                (String) mBuyArgs.get("secs"),
 
                 new Callback<GoodsApi.BuyTradeResponse>() {
                     @Override
