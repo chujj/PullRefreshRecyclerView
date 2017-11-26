@@ -4,7 +4,7 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#efeff4">
+    android:background="#fff">
 
 
     <include layout="@layout/dangdang_divider_horizontal"/>
@@ -40,6 +40,7 @@
                 android:id="@+id/indicator"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
+                android:background="#efeff4"
                 />
 
 
@@ -53,137 +54,128 @@
 
             <!-- group trades -->
 
+
             <LinearLayout
-                android:id="@+id/trades_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <FrameLayout
-                    android:id="@+id/trade_list1"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    >
-
-
-                    <TextView
-                        android:id="@+id/trade_list1_text"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp"
-                        android:layout_marginBottom="8dp"
-                        android:text="最新成交"
-                        android:layout_gravity="center"
-                        android:textColor="#FFEBAD33"
-                        android:textSize="12sp"
-                        />
-
-
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="2dp"
-                        android:background="#FFEBAD33"
-                        android:layout_gravity="bottom"/>
-
-
-                </FrameLayout>
-
-
-                <FrameLayout
-                    android:id="@+id/trade_list2"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    >
-
-
-                    <TextView
-                        android:id="@+id/trade_list2_text"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp"
-                        android:layout_marginBottom="8dp"
-                        android:text="持仓订单"
-                        android:layout_gravity="center"
-                        android:textColor="#FFCCCCCC"
-                        android:textSize="12sp"
-                        />
-
-
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="2dp"
-                        android:background="#FFEBAD33"
-                        android:layout_gravity="bottom"
-                        android:visibility="invisible"/>
-
-
-                </FrameLayout>
-
-            </LinearLayout>
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:paddingTop="8dp"
-                android:paddingBottom="8dp"
-                android:paddingLeft="10dp"
-                android:paddingRight="10dp"
-                android:text="持仓订单"
-                android:textColor="#FFCCCCCC"
-                android:textSize="12sp"
+                android:orientation="vertical"
                 android:visibility="gone"
-                />
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="#FF3C3C3C"/>
-
-
-
-            <LinearLayout
-                android:id="@+id/trades_mine_view_group"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:minHeight="300dp"
-                android:orientation="vertical">
-
-                <include layout="@layout/trade_trades_header_layout"/>
+                >
 
                 <LinearLayout
-                    android:id="@+id/trades_container"
+                    android:id="@+id/trades_layout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical">
+                    android:orientation="horizontal">
+
+                    <FrameLayout
+                        android:id="@+id/trade_list1"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        >
+
+
+                        <TextView
+                            android:id="@+id/trade_list1_text"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:layout_marginBottom="8dp"
+                            android:text="最新成交"
+                            android:layout_gravity="center"
+                            android:textColor="#FFEBAD33"
+                            android:textSize="12sp"
+                            />
+
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="2dp"
+                            android:background="#FFEBAD33"
+                            android:layout_gravity="bottom"/>
+
+
+                    </FrameLayout>
+
+
+                    <FrameLayout
+                        android:id="@+id/trade_list2"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        >
+
+
+                        <TextView
+                            android:id="@+id/trade_list2_text"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:layout_marginBottom="8dp"
+                            android:text="持仓订单"
+                            android:layout_gravity="center"
+                            android:textColor="#FFCCCCCC"
+                            android:textSize="12sp"
+                            />
+
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="2dp"
+                            android:background="#FFEBAD33"
+                            android:layout_gravity="bottom"
+                            android:visibility="invisible"/>
+
+
+                    </FrameLayout>
 
                 </LinearLayout>
-            </LinearLayout>
 
-
-
-            <LinearLayout
-                android:id="@+id/trades_current_view_group"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:minHeight="300dp"
-                android:orientation="vertical">
-
-
-                <include layout="@layout/trade_all_trades_header_layout"/>
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="#FF3C3C3C"/>
 
                 <LinearLayout
-                    android:id="@+id/trades_all_container"
+                    android:id="@+id/trades_mine_view_group"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:minHeight="300dp"
                     android:orientation="vertical">
+
+                    <include layout="@layout/trade_trades_header_layout"/>
+
+                    <LinearLayout
+                        android:id="@+id/trades_container"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                    </LinearLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/trades_current_view_group"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:minHeight="300dp"
+                    android:orientation="vertical">
+
+
+                    <include layout="@layout/trade_all_trades_header_layout"/>
+
+                    <LinearLayout
+                        android:id="@+id/trades_all_container"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                    </LinearLayout>
 
                 </LinearLayout>
 
             </LinearLayout>
-
-
-
 
         </LinearLayout>
 
