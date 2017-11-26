@@ -84,6 +84,7 @@ public class AccountSelecterActivity extends BaseActivity {
                 final LoginApi.LoginData data = mData.get(i+j);
                 Glide.with(this).load(data.headPortrait).into(image);
                 l1.setText(data.orgCode);
+                l1.setVisibility(View.GONE);
                 l2.setText(data.nickname);
                 l3.setText(String.format("资金%.2f元",  (data.asset  / 100f)));
 
