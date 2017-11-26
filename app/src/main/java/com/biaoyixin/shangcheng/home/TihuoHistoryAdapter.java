@@ -94,7 +94,7 @@ public class TihuoHistoryAdapter extends BaseAdapter {
                     if (record.deliverStatus >= 0 && record.deliverStatus < status.length) {
                         status_str = status[(int) record.deliverStatus];
                     }
-                    r1.setText("状态" + status_str);
+                    r1.setText(status_str);
                     r2.setText("￥" + record.totalPrice);
                     r3.setText("￥" + record.deliverPrice);
                     r4.setText("￥" + record.credit);

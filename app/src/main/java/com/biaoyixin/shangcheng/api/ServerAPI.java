@@ -116,7 +116,7 @@ public class ServerAPI {
 
         { // 添加测试用cookie
             // http://yunpan.168zhibo.cn/recv_wechat/redirect?customerId=27&openid=oeAiVwiHuMngTuW4KeCSu9OPwi9g
-//            HttpCookie injectCookie = new HttpCookie("SESSION", "2a4c75da-ce2c-4e13-903d-7c952b512902");
+//            HttpCookie injectCookie = new HttpCookie("SESSION", "c36e8a44-543a-4d31-b6fa-9ca2452ab41d");
 //            AccountHelper.getCookieStore().add(URI.create(Consts.HOST),
 //                    injectCookie);
         }
