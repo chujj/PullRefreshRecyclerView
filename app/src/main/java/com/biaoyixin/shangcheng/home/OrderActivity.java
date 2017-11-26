@@ -153,7 +153,7 @@ public class OrderActivity extends BaseActivity {
                 mItemPriceTotal.setText("￥" + mCount * resp.data.realPrice);
 
 
-                mPriceTotal.setText("￥" + (mCount * resp.data.realPrice + resp.data.credit));
+                mPriceTotal.setText("￥" + (mCount * resp.data.realPrice - resp.data.credit));
                 return null;
             }
         });
@@ -161,7 +161,11 @@ public class OrderActivity extends BaseActivity {
 
 
         mYunFei.setText("￥" + resp.data.deliverPrice);
-        mYouhuiquan.setText("无"); // TODO 优惠券
+        if (resp.data.credit == 0) {
+            mYouhuiquan.setText("无");
+        } else {
+            mYouhuiquan.setText("- ￥" + resp.data.credit);
+        }
 
     }
 
