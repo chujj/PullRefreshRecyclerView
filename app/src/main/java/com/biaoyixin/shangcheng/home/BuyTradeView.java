@@ -50,6 +50,12 @@ public class BuyTradeView extends RelativeLayout {
     @BindView(R2.id.up_down_size)
     ChipLabelsLayout mUpdownSize;
 
+    @BindView(R2.id.num)
+    TextView mNum;
+    @BindView(R2.id.num_text)
+    TextView mNumPromt;
+
+
     private String mKey;
     private boolean mUp;
 
@@ -60,6 +66,8 @@ public class BuyTradeView extends RelativeLayout {
     private GoodsApi.UpdownSellingUIInfo mUIInfo;
 
     public ClosureMethod mTradeCB;
+
+    public int mNumCount = 1;
 
     public BuyTradeView(Context context) {
         super(context);
@@ -130,6 +138,9 @@ public class BuyTradeView extends RelativeLayout {
                     mUpdownSize.getChildAt(0).performClick();
                 }
 
+                mNumPromt.setText("最大下手单数" + mUIInfo.maxTrades + mUIInfo.tradeUnit);
+
+                mNum.setText("" + mNumCount);
                 return null;
             }
         };
@@ -204,6 +215,32 @@ public class BuyTradeView extends RelativeLayout {
         if (mUIUpdater != null) {
             mUIUpdater.run("newdata");
         }
+    }
+
+
+    @OnClick(R2.id.num_down)
+    public void clickNumDown() {
+        changeNum(-1);
+    }
+
+    @OnClick(R2.id.num_up)
+    public void clickNumUp() {
+        changeNum(1);
+    }
+
+
+    private void changeNum(int change) {
+        int next = mNumCount + change;
+        if (next <= 0) {
+            return;
+        }
+
+        if (next > mUIInfo.maxTrades) {
+            return;
+        }
+
+        mNumCount = next;
+        mNum.setText("" + mNumCount);
     }
 
     @OnClick(R2.id.cancel)
