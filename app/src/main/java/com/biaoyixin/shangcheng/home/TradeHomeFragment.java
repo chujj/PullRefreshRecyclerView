@@ -676,31 +676,31 @@ public class TradeHomeFragment extends BaseFragment {
         @Override
         public void run() {
 
-            System.out.println("zhujj refreshArrTradeList");
-            GoodsApi.IGood iGood = ServerAPI.getInterface(GoodsApi.IGood.class);
-            iGood.getTradeAllList(new Callback<GoodsApi.TradeAllListResp>() {
-
-                @Override
-                public void success(GoodsApi.TradeAllListResp resp, Response response) {
-                    if (resp.code != 0){
-                        ServerAPI.handleCodeError(resp);
-                    } else {
-                        Data.sAllTrading = resp.data;
-                        EventBus.getDefault().post(
-                                Consts.getBoardCastMessage(Consts.BoardCast_TradingAllListChange)
-                        );
-                    }
-
-                    refreshAllTradeList();
-                }
-
-                @Override
-                public void failure(RetrofitError error) {
-                    ServerAPI.HandlerException(error);
-
-                    refreshAllTradeList();
-                }
-            });
+//            System.out.println("zhujj refreshArrTradeList");
+//            GoodsApi.IGood iGood = ServerAPI.getInterface(GoodsApi.IGood.class);
+//            iGood.getTradeAllList(new Callback<GoodsApi.TradeAllListResp>() {
+//
+//                @Override
+//                public void success(GoodsApi.TradeAllListResp resp, Response response) {
+//                    if (resp.code != 0){
+//                        ServerAPI.handleCodeError(resp);
+//                    } else {
+//                        Data.sAllTrading = resp.data;
+//                        EventBus.getDefault().post(
+//                                Consts.getBoardCastMessage(Consts.BoardCast_TradingAllListChange)
+//                        );
+//                    }
+//
+//                    refreshAllTradeList();
+//                }
+//
+//                @Override
+//                public void failure(RetrofitError error) {
+//                    ServerAPI.HandlerException(error);
+//
+//                    refreshAllTradeList();
+//                }
+//            });
         }
     };
 

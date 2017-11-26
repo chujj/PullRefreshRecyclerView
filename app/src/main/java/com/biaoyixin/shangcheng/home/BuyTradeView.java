@@ -55,6 +55,9 @@ public class BuyTradeView extends RelativeLayout {
     @BindView(R2.id.num_text)
     TextView mNumPromt;
 
+    @BindView(R2.id.ok)
+    View mOk;
+
 
     private String mKey;
     private boolean mUp;
@@ -107,6 +110,10 @@ public class BuyTradeView extends RelativeLayout {
         mUIUpdater = new ClosureMethod() {
             @Override
             public Object[] run(Object... args) {
+
+                mOk.setBackgroundResource(mUp ?
+                        R.drawable.trade_fragment_buy_up_bg :
+                        R.drawable.trade_fragment_buy_down_bg);
 
                 mBuyUp.setText(mUp ? "看涨" : "看跌");
                 mBuyUp.setBackgroundResource(mUp ? R.drawable.up_tit : R.drawable.down_tit);
