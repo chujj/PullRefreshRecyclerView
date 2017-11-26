@@ -433,17 +433,7 @@ public class TradeFragment extends BaseFragment {
         btv.setKey(mKey);
         btv.setActivity((BaseActivity) getActivity());
         btv.setUpDown(up);
-        btv.setTimeIntervalProvider(new BuyTradeView.TimeIntervalProvider() {
-            @Override
-            public String timeInterval() {
-                for (int i = 0; i < mTimes.length; i++) {
-                    if (mTimes[i].isSelected()) {
-                        return mTimeDetail[i].getText().toString();
-                    }
-                }
-                return "";
-            }
-        });
+
         btv.mTradeCB = new ClosureMethod() {
             @Override
             public Object[] run(Object... args) {

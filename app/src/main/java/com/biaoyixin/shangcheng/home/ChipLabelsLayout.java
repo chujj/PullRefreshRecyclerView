@@ -34,6 +34,8 @@ public class ChipLabelsLayout extends WrapLabelLayout<String> {
     }
 
 
+    public String mSubfix = "元";
+
     private List<View> toggles = new ArrayList<View>();
 
     @Override
@@ -42,7 +44,7 @@ public class ChipLabelsLayout extends WrapLabelLayout<String> {
         LayoutInflater inflater = LayoutInflater.from(getContext());
         View itemRoot = inflater.inflate(R.layout.trade_buy_chip_item, null, false);
         TextView chip = CommonUtils.findView(itemRoot, R.id.chip);
-        chip.setText(s + "元");
+        chip.setText(s + mSubfix);
 
 
         toggles.add(itemRoot);

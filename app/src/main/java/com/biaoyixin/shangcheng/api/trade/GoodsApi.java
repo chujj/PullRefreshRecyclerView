@@ -62,6 +62,10 @@ public class GoodsApi {
 
         @GET("/shop/shop_order_list")
         void tihuoHistory(Callback<TihuoResp> cb);
+
+        @FormUrlEncoded
+        @POST("/asset/up_down_selling_index")
+        void updownSelliingIndex(@Field("goods_id") String goodsId, Callback<UpdownSellingUIResp> cb);
     }
 
     ///////////////////////// goods /////////////////////
@@ -329,6 +333,46 @@ public class GoodsApi {
         @SerializedName("created_on")
         @Expose
         public String createdOn;
+    }
+
+
+
+    public static class UpdownSellingUIResp extends BaseModel {
+        public UpdownSellingUIInfo data;
+    }
+
+    public static class UpdownSellingUIInfo extends BaseModel {
+
+        @SerializedName("goods_id")
+        @Expose
+        public long goodsId;
+        @SerializedName("up_down_type")
+        @Expose
+        public long upDownType;
+        @SerializedName("goods_tips")
+        @Expose
+        public String goodsTips;
+        @SerializedName("stop_fee")
+        @Expose
+        public float stopFee;
+        @SerializedName("chip")
+        @Expose
+        public List<String> chip = null;
+        @SerializedName("chip_price")
+        @Expose
+        public List<String> chipPrice = null;
+        @SerializedName("trade_unit")
+        @Expose
+        public String tradeUnit;
+        @SerializedName("point")
+        @Expose
+        public List<String> point = null;
+        @SerializedName("max_trades")
+        @Expose
+        public long maxTrades;
+        @SerializedName("random_number")
+        @Expose
+        public long randomNumber;
     }
 }
 
