@@ -44,6 +44,7 @@ public class AccountManager {
         public String lock_asset;
         public String invite_code;
         public String phoneNum;
+        public int broker;
     }
 
 

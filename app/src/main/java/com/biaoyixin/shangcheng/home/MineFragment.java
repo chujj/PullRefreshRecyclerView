@@ -106,6 +106,9 @@ public class MineFragment extends BaseFragment {
             str += ("("+ account.phoneNum + ")");
         }
         mAccount.setText(str);
+
+        ((TextView)CommonUtils.findView(mEntrys[7], R.id.name))
+                .setText(account.broker == 1 ? "经纪人" : "申请经纪人");
     }
 
     private void loadYinhangkaData() {
@@ -235,8 +238,15 @@ public class MineFragment extends BaseFragment {
                     new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-                            Intent it = new Intent(v.getContext(), BrokerActivity.class);
-                            v.getContext().startActivity(it);
+                            AccountManager.Account account = AccountManager.getAccount();
+                            if (account.broker == 1) {
+                                Intent it = new Intent(v.getContext(), BrokerActivity.class);
+                                v.getContext().startActivity(it);
+                            } else {
+                                Intent it = new Intent(v.getContext(), BrokerRegistActivity.class);
+                                v.getContext().startActivity(it);
+                            }
+
                         }
                     },
                     R.drawable.mine_fragment_entry_jinjiren

@@ -117,6 +117,8 @@
 
         <activity android:name=".login.AccountSelecterActivity"/>
 
+        <activity android:name=".home.BrokerRegistActivity"/>
+
     </application>
 
 

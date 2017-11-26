@@ -36,6 +36,10 @@ public class BrokerApi  {
         public void getFanyong(@Field("page") int page, @Field("size") int size,
                                @Field("begin") String begine, @Field("end") String end,
                                Callback<FanyongResp>cb);
+
+        @FormUrlEncoded
+        @POST("/broker/broker_apply")
+        void brokerRegist(@Field("realname") String name, @Field("orgcode") String id, Callback<BaseModel> baseModelCallback);
     }
 
 

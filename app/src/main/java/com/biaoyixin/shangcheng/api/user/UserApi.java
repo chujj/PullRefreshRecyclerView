@@ -121,6 +121,7 @@ public class UserApi {
         public String lock_asset; // ":"0",
         // "broker":0,
         public String head_portrait; // ":"http://wx.qlogo.cn/mmopen/PiajxSqBRaEKYAP4qbkb8Fkn0sn8hstyLmXicXUSeRhVjmzicDjbgYoVt2IkfzIOcRh03qHAVtdF9SwcBoUrUTQyw/0"
+        public int broker = -1;
     }
 
 

@@ -587,6 +587,11 @@ public class TradeHomeFragment extends BaseFragment {
                         account.phoneNum = accountResp.data.mobile;
                     }
 
+                    if (accountResp.data.broker != -1) {
+                        changede = true;
+                        account.broker = accountResp.data.broker;
+                    }
+
 
                     if (changede) {
                         AccountManager.saveAccount(account);
