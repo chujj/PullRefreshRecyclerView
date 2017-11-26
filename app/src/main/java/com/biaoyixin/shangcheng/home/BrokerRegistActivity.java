@@ -64,15 +64,15 @@ public class BrokerRegistActivity extends BaseActivity {
 
     @OnClick(R2.id.confirm)
     public void clickConfirm() {
-        String phone = mPhone.getText().toString();
+//        String phone = mPhone.getText().toString();
         String name = mName.getText().toString();
         String id = mId.getText().toString();
 
 
-        if (TextUtils.isEmpty(phone)) {
-            ToastHelper.showToast("请输入您的号码");
-            return;
-        }
+//        if (TextUtils.isEmpty(phone)) {
+//            ToastHelper.showToast("请输入您的号码");
+//            return;
+//        }
 
         if (TextUtils.isEmpty(name)) {
             ToastHelper.showToast("请输入您的姓名");
