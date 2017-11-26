@@ -148,6 +148,9 @@ public class ChongZhiActivity extends BaseActivity {
 
     private GoodsApi.Channel mSelectedChannel;
     private void onPayChannelClicked(GoodsApi.Channel channel) {
+        if (mFeeUIUpdater != null) {
+            mFeeUIUpdater.run(channel.cashInFee);
+        }
         mSelectedChannel = channel;
         for (Object[] os : mChannelsClosures.values()) {
             ((ClosureMethod)os[0]).run(channel);
@@ -615,6 +618,9 @@ public class ChongZhiActivity extends BaseActivity {
     private GoodsApi.InMoneyUIInfo mInMoneyUIInfo;
     private List<GoodsApi.Channel> mInMoneyChannels;
 
+
+    private ClosureMethod mFeeUIUpdater = null;
+
     private void requireData() {
         final Runnable updateUI = new Runnable() {
             int count = 0;
@@ -641,16 +647,31 @@ public class ChongZhiActivity extends BaseActivity {
                 }
 
 
-                {
-                    String prefix = "每笔充值收取 ";
-                    String subfix = " 的手续费";
-                    SpannableString ss = new SpannableString(prefix + mInMoneyUIInfo.cashInFee + subfix);
-                    ss.setSpan(new ForegroundColorSpan(0xffed5631),
-                            prefix.length(),
-                            (prefix + mInMoneyUIInfo.cashInFee).length(),
-                            Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-                    mServiceFee.setText(ss);
-                }
+                mFeeUIUpdater  = new ClosureMethod() {
+                    @Override
+                    public Object[] run(Object... args) {
+
+                        String fee = (String) args[0];
+
+                        if (TextUtils.isEmpty(fee)) {
+                            mServiceFee.setText("");
+                            return null;
+                        }
+
+//                        fee = mInMoneyUIInfo.cashInFee;
+                        String prefix = "每笔充值收取 ";
+                        String subfix = " 的手续费";
+                        SpannableString ss = new SpannableString(prefix + fee + subfix);
+                        ss.setSpan(new ForegroundColorSpan(0xffed5631),
+                                prefix.length(),
+                                (prefix + fee).length(),
+                                Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+                        mServiceFee.setText(ss);
+
+                        return null;
+                    }
+                };
+
 
 
                 mChannelContainer.removeAllViews();
