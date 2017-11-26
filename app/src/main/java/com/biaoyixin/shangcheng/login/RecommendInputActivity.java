@@ -3,6 +3,7 @@ package com.biaoyixin.shangcheng.login;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.text.TextUtils;
+import android.view.View;
 import android.widget.EditText;
 
 import com.biaoyixin.shangcheng.R;
@@ -33,6 +34,8 @@ public class RecommendInputActivity extends BaseActivity {
     public static Runnable successCb;
     @BindView(R2.id.phone)
     EditText mPhone;
+    @BindView(R2.id.ignore)
+    View mIgnore;
 
     boolean success = false;
     private boolean mRequiredinvitecode;
@@ -49,6 +52,9 @@ public class RecommendInputActivity extends BaseActivity {
         topbar.setTitle("填写推荐码");
 
         mRequiredinvitecode = getIntent().getBooleanExtra("requiredInviteCode", false);
+
+
+        mIgnore.setVisibility(mRequiredinvitecode ? View.GONE : View.VISIBLE);
     }
 
     @OnClick(R2.id.ignore)
