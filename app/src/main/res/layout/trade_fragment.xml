@@ -3,7 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:background="#fff">
 
 
 
@@ -23,7 +24,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="今开：8410.16"
-            android:textColor="#FFCCCCCC"
+            android:textColor="#666666"
             android:textSize="12sp"
             />
 
@@ -37,7 +38,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="最高：8422.49"
-            android:textColor="#FFCCCCCC"
+            android:textColor="#666666"
             android:textSize="12sp"
             />
 
@@ -51,7 +52,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="最低：8369.72"
-            android:textColor="#FFCCCCCC"
+            android:textColor="#666666"
             android:textSize="12sp"
             />
 
@@ -62,6 +63,7 @@
     <!-- group2 -->
 
     <LinearLayout
+        android:visibility="gone"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"

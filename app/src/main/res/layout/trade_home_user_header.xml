@@ -71,15 +71,16 @@
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/trade_home_user_header_tixian"/>
+                    android:layout_marginRight="5.7dp"
+                    android:src="@drawable/trade_home_user_header_tixian"
+                    android:visibility="gone"/>
 
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="5.7dp"
                     android:text="提现"
-                    android:textColor="#FF000000"
+                    android:textColor="#fff"
                     android:textSize="14sp"
                     />
 
@@ -102,6 +103,8 @@
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginRight="5.7dp"
+                    android:visibility="gone"
                     android:src="@drawable/trade_home_user_header_chongzhi"/>
 
 
@@ -109,7 +112,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="充值"
-                    android:textColor="#FF000000"
+                    android:textColor="#fff"
                     android:textSize="14sp"
                     />
 

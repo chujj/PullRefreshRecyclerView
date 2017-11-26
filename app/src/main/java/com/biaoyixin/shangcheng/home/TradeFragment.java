@@ -4,7 +4,10 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.annotation.Nullable;
+import android.text.SpannableString;
+import android.text.Spanned;
 import android.text.TextUtils;
+import android.text.style.ForegroundColorSpan;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -215,9 +218,28 @@ public class TradeFragment extends BaseFragment {
                 // 高低价初始化
                 for (int i = 0; i < Data.sData.goods.size(); i++) {
                     if (TextUtils.equals(Data.sData.goods.get(i).label, mKey)) {
-                        mOpenText.setText(String.format("今开：%.2f", Data.sData.goods.get(i).open));
-                        mHighText.setText(String.format("最高：%.2f", Data.sData.goods.get(i).high));
-                        mLowText.setText(String.format("最低：%.2f", Data.sData.goods.get(i).low));
+
+                        {
+                            String str = String.format("今开：%.2f", Data.sData.goods.get(i).open);
+                            SpannableString ss = new SpannableString(str);
+                            ss.setSpan(new ForegroundColorSpan(0xff333333), "今开：".length(), str.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+                            mOpenText.setText(ss);
+                        }
+
+                        {
+                            String str = String.format("最高：%.2f", Data.sData.goods.get(i).high);
+                            SpannableString ss = new SpannableString(str);
+                            ss.setSpan(new ForegroundColorSpan(0xff333333), "今开：".length(), str.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+                            mHighText.setText(ss);
+                        }
+
+                        {
+                            String str = String.format("最低：%.2f", Data.sData.goods.get(i).low);
+                            SpannableString ss = new SpannableString(str);
+                            ss.setSpan(new ForegroundColorSpan(0xff333333), "今开：".length(), str.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+                            mLowText.setText(ss);
+                        }
+
                         break;
                     }
                 }

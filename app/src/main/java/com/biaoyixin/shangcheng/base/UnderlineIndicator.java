@@ -21,6 +21,7 @@ public class UnderlineIndicator extends LinearLayout implements ViewPager.OnPage
     private int mCount;
     private int mOffset = 0;
     private int mSingleWidth;
+    private Paint mBGPaint;
 
 
     public UnderlineIndicator(Context context) {
@@ -47,7 +48,11 @@ public class UnderlineIndicator extends LinearLayout implements ViewPager.OnPage
         mCacheRect = new Rect();
 
         mIndicatorPaint = new Paint();
-        mIndicatorPaint.setColor(0xFFEBAD33);
+        mIndicatorPaint.setColor(0xff2093ec);
+
+
+        mBGPaint = new Paint();
+        mBGPaint.setColor(0xffeef7fe);
 
 
         this.setWillNotDraw(false);
@@ -74,10 +79,14 @@ public class UnderlineIndicator extends LinearLayout implements ViewPager.OnPage
         if (mCount == 0) return;
 
         mCacheRect.set(mBGRect);
-        mCacheRect.top = mBGRect.bottom - 10;
-
         mCacheRect.left = mOffset;
         mCacheRect.right = mOffset + mSingleWidth;
+
+        canvas.drawRect(mCacheRect, mBGPaint);
+
+
+        mCacheRect.top = mBGRect.bottom - 10;
+
         canvas.drawRect(mCacheRect, mIndicatorPaint);
     }
 

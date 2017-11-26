@@ -4,7 +4,10 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FF181818">
+    android:background="#efeff4">
+
+
+    <include layout="@layout/dangdang_divider_horizontal"/>
 
 
     <ScrollView
@@ -30,15 +33,8 @@
                 </WebView>
             </LinearLayout>
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="#FF000000"/>
+            <include layout="@layout/dangdang_divider_horizontal"/>
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="#FF3C3C3C"/>
 
             <com.biaoyixin.shangcheng.base.UnderlineIndicator
                 android:id="@+id/indicator"
