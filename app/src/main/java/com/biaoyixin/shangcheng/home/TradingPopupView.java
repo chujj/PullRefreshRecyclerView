@@ -158,15 +158,30 @@ public class TradingPopupView extends RelativeLayout {
                 mBuyUpDownType.setTextColor(mStatus.buyUp ? 0xFFF35833: 0xFF20B83E);
 
 
-                boolean priceUp = (mStatus.close_price - mStatus.open_price) > -0.001f;
-                boolean guessUp =(priceUp == mStatus.buyUp);
-                mUpDownGuessType.setText(guessUp ? "赢" : "亏");
-                mUpDownGuessType.setTextColor(guessUp ? 0xFFF35833: 0xFF20B83E);
-                mHeaderBg.setEnabled(guessUp);
+                float diff = (mStatus.close_price - mStatus.open_price);
+                boolean equal = diff < 0.01f && diff > -0.01f;
+                if (equal) {
+                    mUpDownGuessType.setText("平");
+                    mUpDownGuessType.setTextColor(0xffffffff);
+                    mHeaderBg.setEnabled(true);
 
-                if (mStatus.status_finished) {
-                    mStatusPromt.setText((guessUp ? "赢" : "亏")  + mStatus.win_money);
+                    if (mStatus.status_finished) {
+                        mStatusPromt.setText("平"  + mStatus.win_money);
+                    }
+
+                } else {
+                    boolean priceUp = (mStatus.close_price - mStatus.open_price) > -0.001f;
+                    boolean guessUp =(priceUp == mStatus.buyUp);
+                    mUpDownGuessType.setText(guessUp ? "赢" : "亏");
+                    mUpDownGuessType.setTextColor(guessUp ? 0xFFF35833: 0xFF20B83E);
+                    mHeaderBg.setEnabled(guessUp);
+
+                    if (mStatus.status_finished) {
+                        mStatusPromt.setText((guessUp ? "赢" : "亏")  + mStatus.win_money);
+                    }
+
                 }
+
 
             }
         };
