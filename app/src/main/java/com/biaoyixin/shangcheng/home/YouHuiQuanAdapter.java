@@ -57,7 +57,7 @@ public class YouHuiQuanAdapter extends BaseAdapter {
                     UserApi.Youhuiquan youhuiquen = (UserApi.Youhuiquan) args[0];
 
 
-                    type.setText(youhuiquen.couponType == 1 ? "增\n益\n券" : " 体\n验\n券");
+                    type.setText(youhuiquen.couponType == 1 ? "增\n益\n券" : "直\n盈\n券");
                     price.setText(youhuiquen.discount + "");
                     line1.setText(String.format("%s  有效登录时间： %s天",
                             new SimpleDateFormat("yyyy年MM月dd日").format(youhuiquen.gmtCreated),
