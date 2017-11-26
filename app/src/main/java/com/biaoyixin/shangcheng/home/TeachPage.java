@@ -54,10 +54,10 @@ public class TeachPage extends FrameLayout implements View.OnClickListener {
                 R.drawable.teach_step1,
                 R.drawable.teach_step2,
                 R.drawable.teach_step3,
-                R.drawable.teach_step4,
-                R.drawable.teach_step5,
-                R.drawable.teach_step6,
-                R.drawable.teach_step7,
+//                R.drawable.teach_step4,
+//                R.drawable.teach_step5,
+//                R.drawable.teach_step6,
+//                R.drawable.teach_step7,
         };
 
         mWidth = getResources().getDisplayMetrics().widthPixels;
