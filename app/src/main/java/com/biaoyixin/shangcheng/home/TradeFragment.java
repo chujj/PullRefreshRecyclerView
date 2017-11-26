@@ -392,11 +392,13 @@ public class TradeFragment extends BaseFragment {
         for (int i = 0; i < mLinesIndicator.length; i++) {
             for (int j = 0; j < mLinesIndicator[i].getChildCount(); j++) {
                 View view = mLinesIndicator[i].getChildAt(j);
+
+                mLinesIndicator[i].setBackgroundColor(index == i ? 0xffffffff : 0xfff3f3f3);
                 if (view instanceof TextView) {
 
-                    ((TextView)view).setTextColor(index == i ? 0xFFEBAD33 : 0xFFCCCCCC);
+                    ((TextView)view).setTextColor(index == i ? 0xff2093ec : 0xff2093ec);
                 } else if (view instanceof View) {
-                    view.setVisibility( index == i ? View.VISIBLE : View.INVISIBLE);
+                    view.setVisibility( index == i ? View.INVISIBLE : View.INVISIBLE);
                 }
             }
 

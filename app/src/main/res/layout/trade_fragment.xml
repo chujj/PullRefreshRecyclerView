@@ -175,82 +175,17 @@
 
     </LinearLayout>
 
+    <!-- group lines -->
 
-    <!-- group3 -->
-
-    <LinearLayout
+    <FrameLayout
+        android:id="@+id/kline_container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:paddingLeft="10dp"
-        android:paddingRight="10dp"
-        android:orientation="horizontal">
+        android:minHeight="30dp"
+        >
 
-        <LinearLayout
-            android:id="@+id/buy_up"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:paddingTop="7dp"
-            android:paddingBottom="7dp"
-            android:gravity="center"
-            android:orientation="horizontal"
-            android:background="@drawable/trade_fragment_buy_up_bg">
+    </FrameLayout>
 
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="买涨"
-                android:textColor="#FFF35833"
-                android:textSize="18sp"
-                />
-
-            <ImageView
-                android:layout_width="13dp"
-                android:layout_height="13dp"
-                android:layout_marginLeft="4dp"
-                android:visibility="gone"
-                android:background="#FFF35833"/>
-
-        </LinearLayout>
-
-
-        <View
-            android:layout_width="10dp"
-            android:layout_height="1dp"
-            />
-
-        <LinearLayout
-            android:id="@+id/buy_down"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:paddingTop="7dp"
-            android:paddingBottom="7dp"
-            android:gravity="center"
-            android:orientation="horizontal"
-            android:background="@drawable/trade_fragment_buy_down_bg">
-
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="买跌"
-                android:textColor="#FF2CB545"
-                android:textSize="18sp"
-                />
-
-            <ImageView
-                android:layout_width="13dp"
-                android:layout_height="13dp"
-                android:visibility="gone"
-                android:layout_marginLeft="4dp"
-                android:background="#FF2CB545"/>
-
-        </LinearLayout>
-
-    </LinearLayout>
 
 
 
@@ -386,16 +321,83 @@
 
     </LinearLayout>
 
-    <!-- group lines -->
+    <include layout="@layout/dangdang_divider_horizontal"/>
 
-    <FrameLayout
-        android:id="@+id/kline_container"
+    <!-- group3 -->
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        >
+        android:layout_marginTop="8dp"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:orientation="horizontal">
 
-    </FrameLayout>
+        <LinearLayout
+            android:id="@+id/buy_up"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:paddingTop="7dp"
+            android:paddingBottom="7dp"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:background="@drawable/trade_fragment_buy_up_bg">
 
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="买涨"
+                android:textColor="#FFF35833"
+                android:textSize="18sp"
+                />
+
+            <ImageView
+                android:layout_width="13dp"
+                android:layout_height="13dp"
+                android:layout_marginLeft="4dp"
+                android:visibility="gone"
+                android:background="#FFF35833"/>
+
+        </LinearLayout>
+
+
+        <View
+            android:layout_width="10dp"
+            android:layout_height="1dp"
+            />
+
+        <LinearLayout
+            android:id="@+id/buy_down"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:paddingTop="7dp"
+            android:paddingBottom="7dp"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:background="@drawable/trade_fragment_buy_down_bg">
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="买跌"
+                android:textColor="#FF2CB545"
+                android:textSize="18sp"
+                />
+
+            <ImageView
+                android:layout_width="13dp"
+                android:layout_height="13dp"
+                android:visibility="gone"
+                android:layout_marginLeft="4dp"
+                android:background="#FF2CB545"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
 
 
 
