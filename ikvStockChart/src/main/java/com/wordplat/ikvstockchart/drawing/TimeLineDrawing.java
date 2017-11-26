@@ -86,7 +86,7 @@ public class TimeLineDrawing implements IDrawing {
 
         shadowPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
         shadowPaint.setStyle(Paint.Style.FILL);
-        shadowPaint.setColor(0x11ffffff);
+        shadowPaint.setColor(0x1181bceb);
 
 
         mMarkLine1Paint = new Paint(Paint.ANTI_ALIAS_FLAG);
@@ -108,7 +108,7 @@ public class TimeLineDrawing implements IDrawing {
 
         mPointInsidePaint = new Paint(Paint.ANTI_ALIAS_FLAG);
         mPointInsidePaint.setStyle(Paint.Style.FILL);
-        mPointInsidePaint.setColor(0xffa4a4a4);
+        mPointInsidePaint.setColor(0xff81bceb);
 
         mPointOutsidePaint = new Paint(Paint.ANTI_ALIAS_FLAG);
         mPointOutsidePaint.setStyle(Paint.Style.FILL);
