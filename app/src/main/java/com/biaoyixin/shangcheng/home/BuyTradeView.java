@@ -50,12 +50,8 @@ public class BuyTradeView extends RelativeLayout {
     @BindView(R2.id.up_down_size)
     ChipLabelsLayout mUpdownSize;
 
-
-
     private String mKey;
     private boolean mUp;
-    private TimeIntervalProvider mProvider;
-
 
     private Map<String, Object> mBuyArgs = new HashMap<>();
     private BaseActivity mBaseActivity;
@@ -298,11 +294,5 @@ public class BuyTradeView extends RelativeLayout {
         mBaseActivity = activity;
     }
 
-    public static interface  TimeIntervalProvider {
-        public String timeInterval();
-    }
-    public void setTimeIntervalProvider(TimeIntervalProvider provider) {
 
-        mProvider = provider;
-    }
 }
