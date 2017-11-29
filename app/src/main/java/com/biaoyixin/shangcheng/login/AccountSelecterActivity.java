@@ -71,6 +71,7 @@ public class AccountSelecterActivity extends BaseActivity {
             for (int j = 0; j < 2; j++) {
                 if ((i + j) > (mData.size() - 1)) {
                     items[j].setVisibility(View.INVISIBLE);
+                    continue;
                 } else {
                     items[j].setVisibility(View.VISIBLE);
                 }

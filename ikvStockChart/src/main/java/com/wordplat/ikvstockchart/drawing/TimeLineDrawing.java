@@ -46,6 +46,7 @@ public class TimeLineDrawing implements IDrawing {
         public float[] getLine2Y();
 
         public String getLine1Promt();
+        public String getLine2Promt();
     }
 
     private Paint linePaint;
@@ -91,7 +92,7 @@ public class TimeLineDrawing implements IDrawing {
 
         mMarkLine1Paint = new Paint(Paint.ANTI_ALIAS_FLAG);
         mMarkLine1Paint.setPathEffect(new DashPathEffect(new float[] {4,4}, 0));
-        mMarkLine1Paint.setColor(0xff35a64b);
+        mMarkLine1Paint.setColor(0xFFF35833);
         mMarkLine1Paint.setStyle(Paint.Style.STROKE);
         mMarkLine1Paint.setStrokeWidth(sizeColor.getGridSize());
 
@@ -103,7 +104,7 @@ public class TimeLineDrawing implements IDrawing {
 
         mMarkLine1TextPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
         mMarkLine1TextPaint.setTextSize(sizeColor.getYLabelSize());
-        mMarkLine1TextPaint.setColor(0xff35a64b);
+        mMarkLine1TextPaint.setColor(0xFFF35833);
         mMarkLine1TextPaint.getFontMetrics(fontMetrics);
 
         mPointInsidePaint = new Paint(Paint.ANTI_ALIAS_FLAG);
@@ -169,23 +170,39 @@ public class TimeLineDrawing implements IDrawing {
             // draw line
             if (mPriceMarkerProvider != null && mPriceMarkerProvider.needDraw()) {
 
-                float[] line1 = mPriceMarkerProvider.getLine1Y();
-                render.mapPoints(line1);
 
-                path.reset();
-                path.moveTo(chartRect.left, line1[1]);
-                path.lineTo(chartRect.right, line1[1]);
-                canvas.drawPath(path, mMarkLine1Paint);
+                {
+                    float[] line1 = mPriceMarkerProvider.getLine1Y();
+                    render.mapPoints(line1);
+                    path.reset();
+                    path.moveTo(chartRect.left, line1[1]);
+                    path.lineTo(chartRect.right, line1[1]);
+                    mMarkLine1Paint.setColor(0xFFF35833);
+                    canvas.drawPath(path, mMarkLine1Paint);
 
-                canvas.drawText(mPriceMarkerProvider.getLine1Promt(),
-                        lineBuffer[lineBuffer.length -2] - mMarkLine1TextPaint.measureText(mPriceMarkerProvider.getLine1Promt()) - render.getSizeColor().markLine1MarginRight,
-                        line1[1] - fontMetrics.bottom,
-                        mMarkLine1TextPaint);
+                    mMarkLine1TextPaint.setColor(0xFFF35833);
+                    canvas.drawText(mPriceMarkerProvider.getLine1Promt(),
+                            lineBuffer[lineBuffer.length -2] - mMarkLine1TextPaint.measureText(mPriceMarkerProvider.getLine1Promt()) - render.getSizeColor().markLine1MarginRight,
+                            line1[1] - fontMetrics.bottom,
+                            mMarkLine1TextPaint);
+                }
 
-                path.reset();
-                path.moveTo(lineBuffer[lineBuffer.length -2], lineBuffer[lineBuffer.length -1]);
-                path.lineTo(chartRect.left, lineBuffer[lineBuffer.length -1]);
-                canvas.drawPath(path, mMarkLine2Paint);
+                {
+                    float[] line2 = mPriceMarkerProvider.getLine2Y();
+                    render.mapPoints(line2);
+                    path.reset();
+                    path.moveTo(chartRect.left, line2[1]);
+                    path.lineTo(chartRect.right, line2[1]);
+                    mMarkLine1Paint.setColor(0xFF2CB545);
+                    canvas.drawPath(path, mMarkLine1Paint);
+
+                    mMarkLine1TextPaint.setColor(0xFF2CB545);
+                    canvas.drawText(mPriceMarkerProvider.getLine2Promt(),
+                            lineBuffer[lineBuffer.length -2] - mMarkLine1TextPaint.measureText(mPriceMarkerProvider.getLine2Promt()) - render.getSizeColor().markLine1MarginRight,
+                            line2[1] - fontMetrics.bottom,
+                            mMarkLine1TextPaint);
+                }
+
             }
 
             // draw point

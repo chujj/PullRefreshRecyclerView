@@ -167,6 +167,10 @@ public class GoodsApi {
         public String win_money;
         public String open_time;
         public float open_time_interval;
+
+
+        public float stop_loss_percent;
+        public float stop_win_percent;
     }
 
 

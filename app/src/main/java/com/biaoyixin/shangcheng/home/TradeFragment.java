@@ -299,10 +299,10 @@ public class TradeFragment extends BaseFragment {
                             for (int j = 0; j < mChardata.get(i).data.size(); j++) {
                                 List _data = (List) mChardata.get(i).data.get(j);
 
-                                float open = ((Double)_data.get(0)).floatValue();
-                                float close =((Double)_data.get(1)).floatValue();
-                                float low = ((Double)_data.get(2)).floatValue();
-                                float high = ((Double)_data.get(3)).floatValue();
+                                float open = _data.get(0) == null ? 0 : ((Double)_data.get(0)).floatValue();
+                                float close = _data.get(1) == null ? 0 : ((Double)_data.get(1)).floatValue();
+                                float low = _data.get(2) == null ? 0 : ((Double)_data.get(2)).floatValue();
+                                float high = _data.get(3) == null ? 0 : ((Double)_data.get(3)).floatValue();
 
                                 String xLabel = (new SimpleDateFormat("HH:mm")).format(new Date(mChardata.get(i).xAxis.get(j).longValue()));
                                 mEntrySets[i].addEntry(new Entry(open, high, low, close, 0, xLabel));
@@ -454,11 +454,11 @@ public class TradeFragment extends BaseFragment {
 
         mTimeLineRender.getTimeLineDrawing().mPriceMarkerProvider = new TimeLineDrawing.PriceMarkerProvider() {
 
-            float[] open = new float[] {0, trade.open_price};
-            float[ ] ignore = new float[2];
+            float[] win_line = new float[] {0, trade.open_price + (trade.up_down_type == 0 ? trade.stop_win_percent : -trade.stop_win_percent)};
+            float[ ] loss_line = new float[] {0, trade.open_price + (trade.up_down_type == 0 ? -trade.stop_loss_percent : trade.stop_loss_percent)};
             float [] cache = new float[2];
 
-            String promt = "建仓价:" + trade.open_price;
+//            String promt = "建仓价:" + trade.open_price;
 
             @Override
             public boolean needDraw() {
@@ -470,21 +470,26 @@ public class TradeFragment extends BaseFragment {
 
             @Override
             public float[] getLine1Y() {
-                cache[0] = open[0];
-                cache[1] = open[1];
+                cache[0] = win_line[0];
+                cache[1] = win_line[1];
                 return cache;
             }
 
             @Override
             public float[] getLine2Y() {
-                cache[0] = ignore[0];
-                cache[1] = ignore[1];
+                cache[0] = loss_line[0];
+                cache[1] = loss_line[1];
                 return cache;
             }
 
             @Override
             public String getLine1Promt() {
-                return promt;
+                return "止盈";
+            }
+
+            @Override
+            public String getLine2Promt() {
+                return "止损";
             }
         };
     }
