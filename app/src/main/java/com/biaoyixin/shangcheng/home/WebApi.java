@@ -271,7 +271,7 @@ public class WebApi {
 
     @JavascriptInterface
     public void sender(String json, String type) {
-        Log.e(TAG, json + " | " + type);
+//        Log.e(TAG, json + " | " + type);
 
         if (TextUtils.equals("1", type)) {
             Type_1_Model model = mGson.fromJson(json, Type_1_Model.class);
