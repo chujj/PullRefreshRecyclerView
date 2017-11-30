@@ -202,31 +202,6 @@ public class BuyTradeView extends RelativeLayout {
         mUp = up;
     }
 
-
-    @Override
-    protected void onAttachedToWindow() {
-        super.onAttachedToWindow();
-
-        EventBus.getDefault().register(this);
-    }
-
-    @Override
-    protected void onDetachedFromWindow() {
-        super.onDetachedFromWindow();
-
-        EventBus.getDefault().unregister(this);
-    }
-
-    public void onEventMainThread(Message msg) {
-        if (msg.what != Consts.BoardCast_PriceMsg &&
-                msg.what != Consts.BoardCast_TradeClose) return;
-
-        if (mUIUpdater != null) {
-            mUIUpdater.run("newdata");
-        }
-    }
-
-
     @OnClick(R2.id.num_down)
     public void clickNumDown() {
         changeNum(-1);
