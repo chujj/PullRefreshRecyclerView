@@ -8,13 +8,13 @@ import android.widget.EditText;
 import com.biaoyixin.shangcheng.R;
 import com.biaoyixin.shangcheng.R2;
 import com.biaoyixin.shangcheng.SplashActivity;
-import com.biaoyixin.shangcheng.account.AccountHelper;
 import com.biaoyixin.shangcheng.api.ServerAPI;
 import com.biaoyixin.shangcheng.api.user.UserApi;
 import com.biaoyixin.shangcheng.base.BaseActivity;
 import com.biaoyixin.shangcheng.base.CommonUtils;
 import com.biaoyixin.shangcheng.base.ToastHelper;
 import com.biaoyixin.shangcheng.base.Topbar;
+import com.biaoyixin.shangcheng.home.SettingActivity;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -106,7 +106,7 @@ public class RecommendInputActivity extends BaseActivity {
         super.onPause();
 
         if (!success) {
-            AccountHelper.getCookieStore().removeAll();
+            SettingActivity.clearAccount();
         }
     }
 

@@ -16,6 +16,7 @@ import com.biaoyixin.shangcheng.api.login.LoginApi;
 import com.biaoyixin.shangcheng.base.BaseActivity;
 import com.biaoyixin.shangcheng.base.CommonUtils;
 import com.biaoyixin.shangcheng.base.Topbar;
+import com.biaoyixin.shangcheng.home.SettingActivity;
 import com.bumptech.glide.Glide;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -40,6 +41,8 @@ public class AccountSelecterActivity extends BaseActivity {
     ViewGroup mContainer;
 
     List<LoginApi.LoginData> mData = null;
+    private boolean success = false;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -115,6 +118,7 @@ public class AccountSelecterActivity extends BaseActivity {
                     final AccountManager.Account account = AccountManager.getAccount();
                     account.id = resp.data.id + "";
                     AccountManager.saveAccount(account);
+                    success  = true;
 
                     SplashActivity.switchToMain(AccountSelecterActivity.this);
                 }
@@ -126,5 +130,15 @@ public class AccountSelecterActivity extends BaseActivity {
                 ServerAPI.HandlerException(error);
             }
         });
+    }
+
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+
+        if (!success) {
+            SettingActivity.clearAccount();
+        }
     }
 }

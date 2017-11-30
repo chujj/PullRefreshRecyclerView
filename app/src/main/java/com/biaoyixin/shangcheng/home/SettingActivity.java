@@ -56,6 +56,12 @@ public class SettingActivity extends BaseActivity {
         this.startActivity(it);
     }
 
+    public static void clearAccount() {
+        AccountHelper.getCookieStore().removeAll();
+
+        AccountManager.Account account = new Gson().fromJson("{}", AccountManager.Account.class);
+        AccountManager.saveAccount(account);
+    }
 
     @OnClick(R2.id.logout)
     public void clickLogout() {
@@ -64,10 +70,7 @@ public class SettingActivity extends BaseActivity {
             @Override
             public void run() {
 
-                AccountHelper.getCookieStore().removeAll();
-
-                AccountManager.Account account = new Gson().fromJson("{}", AccountManager.Account.class);
-                AccountManager.saveAccount(account);
+                clearAccount();
 
                 Intent it = new Intent(BaseApp.getApp(), LoginActivity.class);
                 it.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
