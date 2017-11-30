@@ -306,7 +306,7 @@ public class WebApi {
                     chartData.xAxis.add(Long.valueOf(model.time));
                     chartData.data.add(Double.valueOf(model.newPrice));
 
-                    Log.e("zjj", String.format("%s size: %d", model.label, chartData.data.size()));
+//                    Log.e("zjj", String.format("%s size: %d", model.label, chartData.data.size()));
                 }
 
                 if (chart.list.size() > 1 && model.d2 != null) { // chart2
