@@ -83,10 +83,10 @@ public class AccountSelecterActivity extends BaseActivity {
                 TextView l3 = CommonUtils.findView(items[j], R.id.l3);
 
                 final LoginApi.LoginData data = mData.get(i+j);
-                Glide.with(this).load(data.headPortrait).into(image);
+                Glide.with(this).load(data.headPortrait).error(R.drawable.selector_phone_holder).into(image);
                 l1.setText(data.orgCode);
                 l1.setVisibility(View.GONE);
-                l2.setText(data.nickname);
+                l2.setText(data.wechatName);
                 l3.setText(String.format("资金%.2f元",  (data.asset  / 100f)));
 
 

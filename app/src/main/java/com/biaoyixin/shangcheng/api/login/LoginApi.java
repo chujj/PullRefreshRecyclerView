@@ -57,6 +57,7 @@ public class LoginApi {
 
         public String orgCode;
         public long asset;
+        public String wechatName;
 
         public boolean needShowInputBroker () {
             return brokerId == 0;
