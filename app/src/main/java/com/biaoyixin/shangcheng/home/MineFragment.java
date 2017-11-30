@@ -107,6 +107,7 @@ public class MineFragment extends BaseFragment {
         }
         mAccount.setText(str);
 
+        mEntrys[5].setVisibility(account.broker == 1 ? View.VISIBLE : View.GONE);
         ((TextView)CommonUtils.findView(mEntrys[7], R.id.name))
                 .setText(account.broker == 1 ? "经纪人" : "申请经纪人");
     }
