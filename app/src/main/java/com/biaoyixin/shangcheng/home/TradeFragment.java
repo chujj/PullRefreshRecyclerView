@@ -271,6 +271,8 @@ public class TradeFragment extends BaseFragment {
 
                         if (mChardata.get(i).data.size() == 0) continue;
 
+
+                        if (mLineIndex != i) continue;
                         // load data into set
 
                         boolean isTimelineChart = (mChardata.get(i).data.get(0) instanceof Double);
@@ -368,6 +370,7 @@ public class TradeFragment extends BaseFragment {
         }
     }
 
+    private int mLineIndex ;
     @OnClick(R2.id.line_1)
     public void clickLine1() {
         selectLineIndex(0);
@@ -413,6 +416,11 @@ public class TradeFragment extends BaseFragment {
             } else {
                 mHandler.removeCallbacks(redrawTimeLineViewRunnable);
             }
+        }
+
+        mLineIndex  = index;
+        for(ClosureMethod call : mUIUpdates) {
+            call.run();
         }
 
     }

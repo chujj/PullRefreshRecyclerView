@@ -5,6 +5,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.Drawable;
 import android.text.TextUtils;
+import android.util.Log;
 import android.webkit.JavascriptInterface;
 import android.widget.Toast;
 
@@ -304,6 +305,8 @@ public class WebApi {
 
                     chartData.xAxis.add(Long.valueOf(model.time));
                     chartData.data.add(Double.valueOf(model.newPrice));
+
+                    Log.e("zjj", String.format("%s size: %d", model.label, chartData.data.size()));
                 }
 
                 if (chart.list.size() > 1 && model.d2 != null) { // chart2
