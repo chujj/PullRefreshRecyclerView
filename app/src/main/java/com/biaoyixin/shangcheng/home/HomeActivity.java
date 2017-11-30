@@ -57,7 +57,7 @@ public class HomeActivity extends BaseActivity {
             HelperEntryFragment.class.getName(),
     };
 
-    private int mIndex = 0;
+    private int mIndex = 2;
     private boolean needShowUpgradeDialog = false;
     private Dialog mUpgradeDialog = null;
 
