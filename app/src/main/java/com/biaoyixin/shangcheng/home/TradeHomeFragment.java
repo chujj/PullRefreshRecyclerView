@@ -292,9 +292,11 @@ public class TradeHomeFragment extends BaseFragment {
 
         mTradesContainer.removeAllViews();
         for(GoodsApi.BuyTradeData btd : Data.sTradings) {
-//            if (TextUtils.equals(btd.label, mKey)) {
+            LayoutInflater inflater = LayoutInflater.from(getContext());
+            inflater.inflate(R.layout.dangdang_divider_horizontal, mTradesContainer, true);
+
             View root =
-                    LayoutInflater.from(getContext()).inflate(R.layout.trade_trades_header_layout, mTradesContainer, false);
+                    inflater.inflate(R.layout.trade_trades_header_layout, mTradesContainer, false);
 
             TextView name = CommonUtils.findView(root, R.id.name);
             TextView buyType = CommonUtils.findView(root, R.id.buy_type);
@@ -302,6 +304,14 @@ public class TradeHomeFragment extends BaseFragment {
             TextView openPrice = CommonUtils.findView(root, R.id.open_price);
             final TextView newPrice = CommonUtils.findView(root, R.id.new_price);
             TextView dingJin = CommonUtils.findView(root, R.id.ding_jin);
+            {
+                name.setTextColor(0xff000000);
+                buyType.setTextColor(0xff000000);
+                openTime.setTextColor(0xff000000);
+                openPrice.setTextColor(0xff000000);
+                newPrice.setTextColor(0xff000000);
+                dingJin.setTextColor(0xff000000);
+            }
 
             name.setText(btd.goods_name);
             buyType.setText(btd.up_down_type == 0 ? "买涨" : "买跌");

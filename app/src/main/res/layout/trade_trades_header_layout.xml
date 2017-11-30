@@ -14,7 +14,7 @@
         android:layout_marginLeft="10dp"
         android:layout_weight="1"
         android:text="合约"
-        android:textColor="#FFCCCCCC"
+        android:textColor="#999999"
         android:textSize="12sp"
         />
 
@@ -25,7 +25,7 @@
         android:layout_marginLeft="10dp"
         android:layout_weight="1"
         android:text="方向"
-        android:textColor="#FFCCCCCC"
+        android:textColor="#999999"
         android:textSize="12sp"
         />
 
@@ -35,7 +35,7 @@
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:text="开仓时间"
-        android:textColor="#FFCCCCCC"
+        android:textColor="#999999"
         android:textSize="12sp"
         />
 
@@ -45,7 +45,7 @@
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:text="开仓价格"
-        android:textColor="#FFCCCCCC"
+        android:textColor="#999999"
         android:textSize="12sp"
         />
 
@@ -55,7 +55,7 @@
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:text="当前价格"
-        android:textColor="#FFCCCCCC"
+        android:textColor="#999999"
         android:textSize="12sp"
         />
 
@@ -65,7 +65,7 @@
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:text="定金"
-        android:textColor="#FFCCCCCC"
+        android:textColor="#999999"
         android:textSize="12sp"
         />
 
