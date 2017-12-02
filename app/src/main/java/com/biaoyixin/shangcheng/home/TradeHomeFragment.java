@@ -177,8 +177,10 @@ public class TradeHomeFragment extends BaseFragment {
                 call.run();
             }
         } else if (msg.what == Consts.BoardCast_TradeClose) {
+            requireUserInfo();
             getUserStatus();
         } else if (msg.what == Consts.BoardCast_ChongZhi_Refresh) {
+            requireUserInfo();
             getUserStatus();
         } else if (msg.what == Consts.BoardCast_TradingListChange) {
             refreshTradingList();
@@ -468,13 +470,8 @@ public class TradeHomeFragment extends BaseFragment {
 
         Data.sData = data;
 
+        final List<GoodsApi.Good> goods = data.goods;
         final Map<String, GoodsApi.GoodName> names = data.names;
-        Object[] temp = names.keySet().toArray();
-
-        final String[] keys = new String[temp.length];
-        for (int i = 0; i < temp.length; i++) {
-            keys[i] = (String) temp[i];
-        }
 
         mViewPager.setOffscreenPageLimit(3);
         mViewPager.setAdapter(new FragmentPagerAdapter(getChildFragmentManager()) {
@@ -482,18 +479,18 @@ public class TradeHomeFragment extends BaseFragment {
             @Override
             public Fragment getItem(int position) {
                 Bundle args = new Bundle();
-                args.putString("key", keys[position]);
+                args.putString("key", goods.get(position).label);
                 return Fragment.instantiate(getContext(), TradeFragment.class.getName(), args);
             }
 
             @Override
             public CharSequence getPageTitle(int position) {
-                return names.get(keys[position]).goods_name;
+                return names.get(goods.get(position).label).goods_name;
             }
 
             @Override
             public int getCount() {
-                return keys.length;
+                return goods.size();
             }
         });
 
@@ -501,7 +498,7 @@ public class TradeHomeFragment extends BaseFragment {
             @Override
             public Object[] run(Object... args) {
                 return new Object[] {
-                        keys[mViewPager.getCurrentItem()],
+                        goods.get(mViewPager.getCurrentItem()).label
                 };
             }
         };
@@ -521,7 +518,7 @@ public class TradeHomeFragment extends BaseFragment {
 
                 ClosureMethod update = new ClosureMethod() {
 
-                    String label_name =  keys[position];
+                    String label_name =  goods.get(position).label;
 
                     @Override
                     public Object[] run(Object... args) {
@@ -764,6 +761,7 @@ public class TradeHomeFragment extends BaseFragment {
     public void onHiddenChanged(boolean hidden) {
         super.onHiddenChanged(hidden);
         if (!hidden) {
+            requireUserInfo();
             getUserStatus();
         }
     }
