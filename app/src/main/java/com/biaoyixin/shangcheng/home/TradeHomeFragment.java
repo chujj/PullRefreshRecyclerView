@@ -177,10 +177,10 @@ public class TradeHomeFragment extends BaseFragment {
                 call.run();
             }
         } else if (msg.what == Consts.BoardCast_TradeClose) {
-            requireUserInfo();
+            requireUserInfo(null);
             getUserStatus();
         } else if (msg.what == Consts.BoardCast_ChongZhi_Refresh) {
-            requireUserInfo();
+            requireUserInfo(null);
             getUserStatus();
         } else if (msg.what == Consts.BoardCast_TradingListChange) {
             refreshTradingList();
@@ -761,7 +761,7 @@ public class TradeHomeFragment extends BaseFragment {
     public void onHiddenChanged(boolean hidden) {
         super.onHiddenChanged(hidden);
         if (!hidden) {
-            requireUserInfo();
+            requireUserInfo(null);
             getUserStatus();
         }
     }
