@@ -29,7 +29,7 @@ public class UserApi {
 
         @FormUrlEncoded
         @POST("/customer/setBroker")
-        public void setBroker(@Field("brokerId") String phone, Callback<SetBrokerResp> cb);
+        public void setBroker(@Field("inviteCode") String phone, Callback<SetBrokerResp> cb);
 
 
         @FormUrlEncoded
