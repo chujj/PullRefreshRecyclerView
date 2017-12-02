@@ -110,17 +110,15 @@ public class RecommendInputActivity extends BaseActivity {
 
     }
 
-
     @Override
-    protected void onPause() {
-        super.onPause();
-
+    protected void onDestroy() {
         if (mRequiredinvitecode && !success) {
             AccountHelper.getCookieStore().removeAll();
 
             AccountManager.Account account = new Gson().fromJson("{}", AccountManager.Account.class);
             AccountManager.saveAccount(account);
         }
+        super.onDestroy();
     }
 
     private long mLastClick;
