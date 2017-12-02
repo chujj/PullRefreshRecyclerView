@@ -45,7 +45,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 tools:text="名称"
-                android:textSize="21sp"
+                android:textSize="16sp"
                 android:textColor="#000"
                 />
 
@@ -55,7 +55,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 tools:text="经纪人编号："
-                android:textSize="21sp"
+                android:textSize="16sp"
                 android:textColor="#000"
                 />
 
@@ -111,7 +111,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             tools:text="59.15"
-            android:textSize="21sp"
+            android:textSize="16sp"
             android:textColor="#000"
             />
 
@@ -125,7 +125,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="我的返佣"
-            android:textSize="21sp"
+            android:textSize="16sp"
             android:textColor="#000"
             />
 
@@ -165,7 +165,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="已结算收入"
-                android:textSize="18sp"
+                android:textSize="15sp"
                 android:textColor="#666666"/>
 
 
@@ -175,7 +175,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="3dp"
                 tools:text="59.15"
-                android:textSize="21sp"
+                android:textSize="16sp"
                 android:textColor="#000"
                 />
 
@@ -202,7 +202,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="未结算收入"
-                android:textSize="18sp"
+                android:textSize="15sp"
                 android:textColor="#666666"/>
 
 
@@ -212,7 +212,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="3dp"
                 tools:text="59.15"
-                android:textSize="21sp"
+                android:textSize="16sp"
                 android:textColor="#000"
                 />
 
@@ -250,7 +250,7 @@
             android:layout_marginTop="3dp"
             android:layout_marginLeft="9dp"
             android:text="直属客户"
-            android:textSize="21sp"
+            android:textSize="16sp"
             android:textColor="#000"
             />
 
@@ -269,7 +269,7 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="12dp"
         android:layout_marginTop="20dp"
-        android:textSize="15sp"
+        android:textSize="14sp"
         android:textColor="#f35833"
         android:text="*实际收入以交易日结算完成后为准"
         />

@@ -59,8 +59,18 @@ public class FanyongAdapter extends RecyclerView.Adapter{
         public void updateUI(BrokerApi.FanyongItem s) {
             ts[0].setText(s.nickname);
             ts[1].setText(s.goodsName);
-            ts[2].setText("" + s.earnedServeFee);
+            ts[2].setText(String.format("+%.2f", (s.earnedServeFee / 100f)));
             ts[3].setText(s.closeTime);
+//
+//            itemView.setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View v) {
+//                    Intent it = new Intent(v.getContext(),
+//                            TradeHistoryActivity.class);
+//                    it.putExtra("customerId", broker.id);
+//                    v.getContext().startActivity(it);
+//                }
+//            });
         }
     }
 }
