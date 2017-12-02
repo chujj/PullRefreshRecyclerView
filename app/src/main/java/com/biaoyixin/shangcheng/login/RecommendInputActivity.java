@@ -100,14 +100,13 @@ public class RecommendInputActivity extends BaseActivity {
 
     }
 
-
     @Override
-    protected void onPause() {
-        super.onPause();
 
+    protected void onDestroy() {
         if (!success) {
             SettingActivity.clearAccount();
         }
+        super.onDestroy();
     }
 
     private long mLastClick;
