@@ -1,5 +1,6 @@
 package com.biaoyixin.shangcheng.home;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -21,6 +22,8 @@ import com.biaoyixin.shangcheng.base.BaseActivity;
 import com.biaoyixin.shangcheng.base.BaseFragment;
 import com.biaoyixin.shangcheng.base.ClosureMethod;
 import com.biaoyixin.shangcheng.base.CommonUtils;
+import com.biaoyixin.shangcheng.login.AccountManager;
+import com.biaoyixin.shangcheng.login.LoginActivity;
 import com.wordplat.ikvstockchart.InteractiveKLineView;
 import com.wordplat.ikvstockchart.drawing.TimeLineDrawing;
 import com.wordplat.ikvstockchart.entry.Entry;
@@ -427,11 +430,21 @@ public class TradeFragment extends BaseFragment {
 
     @OnClick(R2.id.buy_up)
     public void clickBuyUp() {
+        if (!AccountManager.isLogin()) {
+            Intent it = new Intent(this.getContext(), LoginActivity.class);
+            this.startActivity(it);
+            return;
+        }
         showBuyLayout(true);
     }
 
     @OnClick(R2.id.buy_down)
     public void clickBuyDown() {
+        if (!AccountManager.isLogin()) {
+            Intent it = new Intent(this.getContext(), LoginActivity.class);
+            this.startActivity(it);
+            return;
+        }
         showBuyLayout(false);
     }
 

@@ -13,6 +13,8 @@ import com.biaoyixin.shangcheng.R2;
 import com.biaoyixin.shangcheng.api.ServerAPI;
 import com.biaoyixin.shangcheng.api.shangcheng.ShangChengAPI;
 import com.biaoyixin.shangcheng.base.BaseActivity;
+import com.biaoyixin.shangcheng.login.AccountManager;
+import com.biaoyixin.shangcheng.login.LoginActivity;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.drawable.GlideDrawable;
 import com.bumptech.glide.request.RequestListener;
@@ -138,6 +140,12 @@ public class ItemDetailActivity extends BaseActivity {
 
     @OnClick(R2.id.buy)
     public void clickBuy(View view) {
+        if (!AccountManager.isLogin()) {
+            Intent it = new Intent(this, LoginActivity.class);
+            this.startActivity(it);
+            return;
+        }
+
         Intent it = new Intent(this, OrderActivity.class);
         it.putExtra("goodsDetailsId", getIntent().getIntExtra("goodsDetailsId", 0));
         startActivity(it);

@@ -631,7 +631,11 @@ public class TradeHomeFragment extends BaseFragment {
 
                 } else {
 
-                    Data.sTradings = resp.data.trades;
+                    if (resp.data.trades == null) {
+                        Data.sTradings = new ArrayList<GoodsApi.BuyTradeData>();
+                    } else {
+                        Data.sTradings = resp.data.trades;
+                    }
 
                     EventBus.getDefault().post(
                             Consts.getBoardCastMessage(Consts.BoardCast_TradingListChange)

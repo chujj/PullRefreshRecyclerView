@@ -24,6 +24,8 @@ import com.biaoyixin.shangcheng.base.CommonUtils;
 import com.biaoyixin.shangcheng.base.PreferencesUtil;
 import com.biaoyixin.shangcheng.base.ToastHelper;
 import com.biaoyixin.shangcheng.base.Topbar;
+import com.biaoyixin.shangcheng.login.AccountManager;
+import com.biaoyixin.shangcheng.login.LoginActivity;
 
 import butterknife.BindView;
 import butterknife.BindViews;
@@ -159,11 +161,11 @@ public class HomeActivity extends BaseActivity {
 
     private String mLastFragmentKey = null;
     private void switchToIndex(int index) {
-//        if (index != 0 && !AccountManager.isLogin()) {
-//            Intent it = new Intent(this, LoginActivity.class);
-//            startActivity(it);
-//            return;
-//        }
+        if ((index == 3) && !AccountManager.isLogin()) {
+            Intent it = new Intent(this, LoginActivity.class);
+            startActivity(it);
+            return;
+        }
 
 
         mIndex = index;

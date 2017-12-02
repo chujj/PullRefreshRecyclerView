@@ -17,6 +17,7 @@ import com.biaoyixin.shangcheng.api.trade.GoodsApi;
 import com.biaoyixin.shangcheng.base.BaseFragment;
 import com.biaoyixin.shangcheng.base.CommonUtils;
 import com.biaoyixin.shangcheng.login.AccountManager;
+import com.biaoyixin.shangcheng.login.LoginActivity;
 import com.bumptech.glide.Glide;
 
 import java.util.ArrayList;
@@ -255,10 +256,14 @@ public class MineFragment extends BaseFragment {
         }
     };
 
-
-
     @OnClick(R2.id.chongzhi)
     public void clickChongZhi() {
+        if (!AccountManager.isLogin()) {
+            Intent it = new Intent(this.getContext(), LoginActivity.class);
+            this.startActivity(it);
+            return;
+        }
+
         Intent it = new Intent(getContext(), ChongZhiActivity.class);
         startActivity(it);
     }
@@ -266,6 +271,12 @@ public class MineFragment extends BaseFragment {
 
     @OnClick(R2.id.tixian)
     public void clickTixian() {
+        if (!AccountManager.isLogin()) {
+            Intent it = new Intent(this.getContext(), LoginActivity.class);
+            this.startActivity(it);
+            return;
+        }
+
         Intent it = new Intent(getContext(), TixianActivity.class);
         startActivity(it);
     }
