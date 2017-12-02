@@ -186,8 +186,8 @@ public class HomeActivity extends BaseActivity {
 
         mLastFragmentKey = key;
 
-        ft.commitAllowingStateLoss();
-        fg.executePendingTransactions();
+        ft.commitNow();
+//        fg.executePendingTransactions();
     }
 
 
