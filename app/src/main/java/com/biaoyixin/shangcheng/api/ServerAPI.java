@@ -149,7 +149,7 @@ public class ServerAPI {
             }
             BaseApp.getApp().startActivity(it);
 
-        } else if (baseModel.code == 5) {
+        } else if (baseModel.code == 3001) {
             Intent it = new Intent(BaseApp.getApp(), ConfirmPwdActivity.class);
             BaseApp.getApp().startActivity(it);
         }
