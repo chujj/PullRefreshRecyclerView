@@ -11,8 +11,8 @@ android {
         applicationId "com.shouhuxing.healthassistdang"
         minSdkVersion 14
         targetSdkVersion 23
-        versionCode 6
-        versionName "1.4"
+        versionCode 7
+        versionName "1.5"
     }
 
     signingConfigs {
@@ -38,7 +38,7 @@ android {
 
     productFlavors {
         ProductServer {
-            applicationId "com.xingyiwu.ningjingzhiyuan"
+            applicationId "com.ssc.yunshangcheng"
             buildConfigField "boolean", "OnlineServer", "true"
             resValue "string", "app_name2", "御木轩"
         }
