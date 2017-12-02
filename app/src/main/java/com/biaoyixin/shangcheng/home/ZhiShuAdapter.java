@@ -1,5 +1,6 @@
 package com.biaoyixin.shangcheng.home;
 
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -61,8 +62,20 @@ public class ZhiShuAdapter extends RecyclerView.Adapter{
         public void updateUI(BrokerApi.ZhiShuItem s) {
             ts[0].setText(s.nickname);
             ts[1].setText(s.mobile);
-            ts[2].setText("" + s.asset);
+            ts[2].setText(String.format("%.2f", (s.asset / 100f)));
             ts[3].setText(s.createdOn);
+
+            final long id = s.id;
+
+             itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent it = new Intent(v.getContext(),
+                            TradeHistoryActivity.class);
+                    it.putExtra("customerId", id);
+                    v.getContext().startActivity(it);
+                }
+            });
         }
     }
 
