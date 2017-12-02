@@ -22,6 +22,7 @@ import com.biaoyixin.shangcheng.base.BaseActivity;
 import com.biaoyixin.shangcheng.base.ClosureMethod;
 import com.biaoyixin.shangcheng.base.CommonUtils;
 import com.biaoyixin.shangcheng.base.PreferencesUtil;
+import com.biaoyixin.shangcheng.base.ToastHelper;
 import com.biaoyixin.shangcheng.base.Topbar;
 import com.biaoyixin.shangcheng.login.AccountManager;
 import com.biaoyixin.shangcheng.login.LoginActivity;
@@ -257,5 +258,19 @@ public class HomeActivity extends BaseActivity {
 
     }
 
+
+    private long mLastClick;
+    @Override
+    public void onBackPressed() {
+
+        long current = System.currentTimeMillis();
+        if (current - mLastClick > 1000) {
+            mLastClick = current;
+            ToastHelper.showToast("再按一次退出");
+            return;
+        }
+
+        super.onBackPressed();
+    }
 
 }
