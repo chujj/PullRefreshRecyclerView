@@ -58,7 +58,7 @@ public class AccountManager {
     }
 
 
-    public static void saveAccount(Account account) {
+    public static synchronized void saveAccount(Account account) {
         PreferencesUtil.putString(BaseApp.getApp(), PREF_USER_ACCOUNT, sGson.toJson(account));
 
         sAccount = null;
