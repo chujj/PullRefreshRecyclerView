@@ -186,7 +186,7 @@ public class HomeActivity extends BaseActivity {
 
         mLastFragmentKey = key;
 
-        ft.commitNow();
+        ft.commit();
 //        fg.executePendingTransactions();
     }
 
