@@ -19,6 +19,7 @@
 package com.wordplat.ikvstockchart.drawing;
 
 import android.graphics.Canvas;
+import android.graphics.DashPathEffect;
 import android.graphics.Paint;
 import android.graphics.RectF;
 import android.util.Log;
@@ -74,12 +75,32 @@ public class CandleDrawing implements IDrawing {
         kLineRect.set(contentRect);
 
         extremumToRight = kLineRect.right - 150;
+
+        _temp_paint = new Paint(Paint.ANTI_ALIAS_FLAG);
+        _temp_paint.setPathEffect(new DashPathEffect(new float[] {4,4}, 0));
+        _temp_paint.setColor(0xFFEBAD33);
+        _temp_paint.setStyle(Paint.Style.STROKE);
+        _temp_paint.setStrokeWidth(sizeColor.getGridSize());
+
+
+        _temp_text_paint = new Paint(Paint.ANTI_ALIAS_FLAG);
+        _temp_text_paint.setTextSize(sizeColor.getYLabelSize());
+        _temp_text_paint.setColor(0xFFEBAD33);
+        _temp_text_paint.getFontMetrics(fontMetrics);
+
+
     }
 
     @Override
     public void computePoint(int minIndex, int maxIndex, int currentIndex) {
 
     }
+
+    private Paint _temp_text_paint = new Paint();
+    private final Paint.FontMetrics fontMetrics = new Paint.FontMetrics(); // 用于 labelPaint 计算文字位置
+    private Paint _temp_paint= new Paint();
+    float[] _temp  = new float[4];
+    private String _temp_str;
 
     @Override
     public void onComputeOver(Canvas canvas, int minIndex, int maxIndex, float minY, float maxY) {
@@ -94,9 +115,19 @@ public class CandleDrawing implements IDrawing {
 //                    + ", minYIndex = " + entrySet.getMinYIndex() + ", maxYIndex = " + entrySet.getMaxYIndex());
 //        }
 
-        for (int i = minIndex; i < maxIndex; i++) {
+        for (int i = minIndex + 4; i < maxIndex; i++) {
             Entry entry = ViewUtils.setUpCandlePaint(candlePaint, entrySet, i, sizeColor);
 
+            boolean drawLine = false;
+
+            if (i == (maxIndex - 1)) {
+                _temp_str = Float.toString(entry.getClose());
+                drawLine = true;
+                _temp[0] = minIndex;
+                _temp[1] = entry.getClose();
+                _temp[2] = i;
+                _temp[3] = entry.getClose();
+            }
             // 绘制 影线
             candleLineBuffer[0] = i + 0.5f;
             candleLineBuffer[2] = i + 0.5f;
@@ -186,6 +217,15 @@ public class CandleDrawing implements IDrawing {
 //                    highlightPoint[1] = (candleRectBuffer[1] + candleRectBuffer[3]) / 2;
                     entrySet.setHighlightIndex(i);
                 }
+            }
+
+            if (drawLine) {
+                render.mapPoints(_temp);
+                _temp[0] = kLineRect.left;
+                _temp[2] = kLineRect.right;
+                canvas.drawLines(_temp, _temp_paint);
+
+                canvas.drawText(_temp_str, _temp[0], _temp[1] - fontMetrics.bottom, _temp_text_paint);
             }
         }
 
