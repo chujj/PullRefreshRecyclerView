@@ -136,6 +136,7 @@ public class ServerAPI {
         if (baseModel.code == 3000) {
 
             Intent it = new Intent(BaseApp.getApp(), PasswordSetupActivity.class);
+            it.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             BaseApp.getApp().startActivity(it);
         } else if (baseModel.code == 1000 || baseModel.code == 2000) {
             showToast = false;
@@ -151,6 +152,7 @@ public class ServerAPI {
 
         } else if (baseModel.code == 3001) {
             Intent it = new Intent(BaseApp.getApp(), ConfirmPwdActivity.class);
+            it.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             BaseApp.getApp().startActivity(it);
         }
 
