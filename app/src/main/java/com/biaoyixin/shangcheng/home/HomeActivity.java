@@ -66,7 +66,7 @@ public class HomeActivity extends BaseActivity {
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
-        savedInstanceState = null;
+            savedInstanceState = null;
         super.onCreate(savedInstanceState);
 
         this.setContentView(R.layout.home_activity);
@@ -162,7 +162,7 @@ public class HomeActivity extends BaseActivity {
 
     private String mLastFragmentKey = null;
     private void switchToIndex(int index) {
-        if ((index == 3) && !AccountManager.isLogin()) {
+        if ((index == 3 || index == 1) && !AccountManager.isLogin()) {
             Intent it = new Intent(this, LoginActivity.class);
             startActivity(it);
             return;
