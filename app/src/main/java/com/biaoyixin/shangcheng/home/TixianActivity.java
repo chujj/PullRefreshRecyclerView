@@ -6,7 +6,10 @@ import android.os.CountDownTimer;
 import android.os.Handler;
 import android.os.Looper;
 import android.support.annotation.Nullable;
+import android.text.SpannableString;
+import android.text.Spanned;
 import android.text.TextUtils;
+import android.text.style.ForegroundColorSpan;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -101,6 +104,8 @@ public class TixianActivity extends BaseActivity {
     TextView mMobilePromot;
 
 
+    @BindView(R2.id.name)
+    TextView mName;
     @BindView(R2.id.avatar)
     ImageView mAvatar;
     @BindView(R2.id.assets)
@@ -135,7 +140,9 @@ public class TixianActivity extends BaseActivity {
         AccountManager.Account account = AccountManager.getAccount();
 
         Glide.with(this).load(account.avatar).into(mAvatar);
-        mAssets.setText(account.asset + "元");
+        mAssets.setText(""); // account.asset + "元");
+        mName.setText(account.nickName);
+//        mName.setTypeface(Typeface.DEFAULT_BOLD);
 
         mTopbar.setTitle("提现");
         mTopbar.setBackButton(new View.OnClickListener() {
@@ -244,10 +251,19 @@ public class TixianActivity extends BaseActivity {
 
 
 
+                {
+                    int start, end;
+                    StringBuilder sb = new StringBuilder("可提现金额：");
+                    start = sb.length();
+                    sb.append("" + mUIInfo.free_asset);
+                    end = sb.length();
+                    sb.append("元");
+                    SpannableString ss = new SpannableString(sb.toString());
+                    ss.setSpan(new ForegroundColorSpan(0xffaf3036), start, end, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+                    mHeaderPromt.setText(ss);
+                }
 
-                mHeaderPromt.setText(String.format("可提现金额：%s元", mUIInfo.free_asset ));
-                mMobilePromot.setText(String.format("已验证手机  %s", mUIInfo.mobile));
-
+                mMobilePromot.setText(mUIInfo.mobile);
 
                 if (!TextUtils.isEmpty(mUIInfo.id_card)) {
                     mCardOwnerId.setText(mUIInfo.id_card);
