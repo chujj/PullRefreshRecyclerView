@@ -45,6 +45,7 @@ public class AccountManager {
         public String invite_code;
         public String phoneNum;
         public int broker;
+        public String orgCode;
     }
 
 

@@ -58,8 +58,15 @@ public class BrokerRegistActivity extends BaseActivity {
         });
 
 
-        mPhone.setText(AccountManager.getAccount().phoneNum);
+        AccountManager.Account account = AccountManager.getAccount();
+        mPhone.setText(account.phoneNum);
         mPhone.setEnabled(false);
+
+
+        if (!TextUtils.isEmpty(account.orgCode)) {
+            mId.setText(account.orgCode);
+            mId.setEnabled(false);
+        }
     }
 
     @OnClick(R2.id.confirm)

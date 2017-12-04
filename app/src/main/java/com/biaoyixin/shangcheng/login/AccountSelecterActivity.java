@@ -2,6 +2,7 @@ package com.biaoyixin.shangcheng.login;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -117,6 +118,10 @@ public class AccountSelecterActivity extends BaseActivity {
                 } else {
                     final AccountManager.Account account = AccountManager.getAccount();
                     account.id = resp.data.id + "";
+                    if (!TextUtils.isEmpty(resp.data.orgCode)) {
+                        account.orgCode = resp.data.orgCode;
+                    }
+
                     AccountManager.saveAccount(account);
                     success  = true;
 

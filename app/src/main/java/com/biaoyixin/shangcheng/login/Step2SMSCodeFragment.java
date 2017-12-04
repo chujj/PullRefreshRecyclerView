@@ -313,6 +313,9 @@ public class Step2SMSCodeFragment extends BaseFragment {
                     } else if(baseModel.data.justLogin()) {
                         final AccountManager.Account account = AccountManager.getAccount();
                         account.id = baseModel.data.customers.get(0).id + "";
+                        if (!TextUtils.isEmpty(baseModel.data.customers.get(0).orgCode)) {
+                            account.orgCode = baseModel.data.customers.get(0).orgCode;
+                        }
                         AccountManager.saveAccount(account);
 
                         saveAccount.run();
