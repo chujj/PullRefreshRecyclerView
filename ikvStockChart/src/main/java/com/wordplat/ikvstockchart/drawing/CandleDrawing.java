@@ -20,6 +20,7 @@ package com.wordplat.ikvstockchart.drawing;
 
 import android.graphics.Canvas;
 import android.graphics.Paint;
+import android.graphics.Rect;
 import android.graphics.RectF;
 import android.util.Log;
 
@@ -189,8 +190,96 @@ public class CandleDrawing implements IDrawing {
             }
         }
 
+        if (render.isHighlight()) {
+            final float[] highlightPoint = render.getHighlightPoint();
+            pointBuffer[0] = highlightPoint[0];
+            render.invertMapPoints(pointBuffer);
+            final int highlightIndex = pointBuffer[0] < 0 ? 0 : (int) pointBuffer[0];
+            try {
+                Entry entry = entrySet.getEntryList().get(highlightIndex);
+                drawHighLinePoint(canvas, highlightPoint, entry);
+            } catch (Exception e ) {
+
+            }
+
+        }
+
         canvas.restore();
     }
+
+
+    private Paint mBgStrokePaint;
+    private Paint mBgSolidPaint;
+    private Rect mBgRect;
+    private Paint mTextPaint;
+    private void drawHighLinePoint(Canvas canvas, float[] pointBuffer, Entry entry) {
+        if (mBgStrokePaint == null) {
+            mBgStrokePaint = new Paint();
+            mBgStrokePaint.setStyle(Paint.Style.STROKE);
+            mBgStrokePaint.setStrokeWidth(5);
+            mBgStrokePaint.setColor(0xaaff0000);
+        }
+
+        if (mBgSolidPaint == null) {
+            mBgSolidPaint = new Paint();
+            mBgSolidPaint.setStyle(Paint.Style.FILL);
+            mBgSolidPaint.setColor(0xccffffff);
+        }
+
+        if (mTextPaint == null) {
+            mTextPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
+            mTextPaint.setTextSize(render.getSizeColor().getYLabelSize());
+            mTextPaint.setColor(0xff000000);
+        }
+
+        if (mBgRect == null ) {
+            mBgRect = new Rect();
+        }
+
+        int width = (int) mTextPaint.measureText("开盘价:" + Float.toString(entry.getOpen()) + "    ");
+        int singleHeight = (int) render.getSizeColor().getYLabelSize();
+        int height = (int) (singleHeight * 7);
+
+
+
+        int left = (int) pointBuffer[0];
+
+        if (left > (kLineRect.left + kLineRect.width() / 2)) {
+            left = left - width - 50;
+        } else {
+            left += 50;
+        }
+
+        int top = (int ) (kLineRect.top + kLineRect.height() / 2 - height / 2);
+        mBgRect.set(left, top,left + width, top + height);
+
+        canvas.drawRect(mBgRect, mBgSolidPaint);
+        canvas.drawRect(mBgRect, mBgStrokePaint);
+
+
+        float gap =  (height -  (render.getSizeColor().getYLabelSize() * 5)) / 6;
+        float startY = top + singleHeight + gap;
+        String[] strs = new String [] {
+                entry.getXLabel(),
+                "开盘价:" + entry.getOpen(),
+                "最高价:" + entry.getHigh(),
+                "最低价:" + entry.getLow(),
+                "收盘价:" + entry.getClose(),
+        };
+
+        for (int i = 0; i < strs.length; i++) {
+            drawCenterText(canvas, strs[i], left, startY, width, mTextPaint);
+            startY += gap + singleHeight;
+        }
+
+    }
+
+
+    private void drawCenterText(Canvas canves ,String text, float left, float top, int width, Paint paint) {
+        canves.drawText(text, left + ((width - paint.measureText(text)) / 2) , top, paint);
+    }
+
+    private float[] pointBuffer = new float[2];
 
     @Override
     public void onDrawOver(Canvas canvas) {
