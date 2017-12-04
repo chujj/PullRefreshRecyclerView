@@ -17,10 +17,14 @@
         >
 
 
-        <LinearLayout
+        <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="40dp"
-            android:background="#fff">
+            android:orientation="horizontal">
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="36dp"
+                android:background="#fff"/>
 
             <TextView
                 android:id="@+id/up_down_type"
@@ -33,7 +37,9 @@
                 tools:text="看跌"
                 />
 
-        </LinearLayout>
+
+
+        </FrameLayout>
 
 
         <LinearLayout
