@@ -7,6 +7,8 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.os.Message;
 import android.support.annotation.Nullable;
 import android.text.SpannableString;
@@ -57,6 +59,13 @@ public class ChongZhiActivity extends BaseActivity {
     @BindView(R2.id.topbar)
     Topbar mTopbar;
 
+    @BindView(R2.id.name)
+    TextView mName;
+    @BindView(R2.id.avatar)
+    ImageView mAvatar;
+    @BindView(R2.id.assets)
+    TextView mAssets;
+
     @BindViews({R2.id.chongzhi, R2.id.tixian})
     View[] mView2hide;
     @BindView(R2.id.container)
@@ -67,10 +76,8 @@ public class ChongZhiActivity extends BaseActivity {
     ViewGroup mChannelContainer;
     @BindView(R2.id.service_fee)
     TextView mServiceFee;
-    @BindView(R2.id.avatar)
-    ImageView mAvatar;
-    @BindView(R2.id.assets)
-    TextView mAssets;
+
+
 
 
     @Override
@@ -98,6 +105,7 @@ public class ChongZhiActivity extends BaseActivity {
 
         AccountManager.Account account = AccountManager.getAccount();
 
+        mName.setText(account.nickName);
         Glide.with(this).load(account.avatar).into(mAvatar);
         mAssets.setText(account.asset + "元");
 
@@ -339,7 +347,16 @@ public class ChongZhiActivity extends BaseActivity {
 
                                 private void getPayBank(final String brank_url) {
 
-                                    showLoadingDialog("加载中", false);
+                                    final Runnable showDialog = new Runnable() {
+                                        @Override
+                                        public void run() {
+                                            showLoadingDialog("加载中", false);
+                                        }
+                                    };
+                                    final Handler dialogHandler = new Handler(Looper.getMainLooper());
+                                    dialogHandler.postDelayed(showDialog, 1000);
+
+
                                     new AsyncTask<Void, Void, Void>() {
 
                                         com.squareup.okhttp.Response response;
@@ -364,6 +381,7 @@ public class ChongZhiActivity extends BaseActivity {
                                         protected void onPostExecute(Void aVoid) {
                                             super.onPostExecute(aVoid);
 
+                                            dialogHandler.removeCallbacks(showDialog);
                                             dismissLoadingDialog();
                                             if (wcpr == null) {
                                                 ToastHelper.showToast("数据错误");
@@ -711,9 +729,25 @@ public class ChongZhiActivity extends BaseActivity {
                                     inflater, mChannelContainer, mInMoneyChannels.get(i));
 
                     mChannelContainer.addView((View) retval[0]);
+
+
+                    if (i < mInMoneyChannels.size() - 1) {
+                        inflater.inflate(R.layout.in_money_channel_divider, mChannelContainer, true);
+                    }
                 }
 
                 mContainer.setVisibility(View.VISIBLE);
+
+
+                if (mInMoneyChannels.size() > 0) {
+                    new Handler(Looper.getMainLooper()).postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            onPayChannelClicked(mInMoneyChannels.get(0));
+                        }
+                    }, 200);
+
+                }
             }
         };
 

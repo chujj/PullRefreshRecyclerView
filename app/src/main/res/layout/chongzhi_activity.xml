@@ -6,13 +6,15 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#fff">
+    android:background="#f2f2f2">
 
 
 
 
 
     <include layout="@layout/topbar_layout"/>
+
+
 
     <include layout="@layout/dangdang_divider_horizontal"/>
 
@@ -31,56 +33,126 @@
             <include layout="@layout/trade_home_user_header"/>
 
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="#cccccc"/>
-
 
             <LinearLayout
                 android:id="@+id/container"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingLeft="10dp"
-                android:paddingRight="10dp"
-                android:orientation="vertical"
-                >
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="22dp"
-                    android:text="充值金额"
-                    android:textColor="#000"
-                    android:textSize="14sp"
-                    />
+                android:orientation="vertical">
 
 
-                <com.biaoyixin.shangcheng.home.ChipLabelsLayout
-                    android:id="@+id/chips"
-                    android:layout_marginTop="10dp"
+                <View
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"/>
+                    android:layout_height="1dp"
+                    android:background="#cacaca"/>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_marginTop="10dp"
+                    android:layout_height="1dp"
+                    android:background="#cacaca"/>
 
 
                 <LinearLayout
-                    android:id="@+id/channel_container"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
-                    android:orientation="vertical">
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
+                    android:orientation="vertical"
+                    android:background="#fff"
+                    >
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="12dp"
+                        android:text="充值金额"
+                        android:textColor="#000"
+                        android:textSize="14sp"
+                        />
+
+
+                    <com.biaoyixin.shangcheng.home.ChipLabelsLayout
+                        android:id="@+id/chips"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginBottom="12dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"/>
 
                 </LinearLayout>
 
-                <TextView
-                    android:id="@+id/service_fee"
-                    android:layout_width="wrap_content"
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="#cacaca"/>
+
+
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="10dp"
+                    android:background="#cacaca"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
+                    android:orientation="vertical"
+                    android:background="#fff"
+                    >
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:text="充值方式"
+                        android:textColor="#000"
+                        android:textSize="14sp"
+                        />
+
+                    <LinearLayout
+                        android:id="@+id/channel_container"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:orientation="vertical">
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
-                    tools:text="每笔充值收取 2% 的手续费"
-                    android:textColor="#000"
-                    android:textSize="14sp"
-                    />
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical">
+
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/chongzhi_service_fee_icon"/>
+
+                    <TextView
+                        android:id="@+id/service_fee"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="5dp"
+                        tools:text="每笔充值收取 0% 的手续费"
+                        android:textColor="#000"
+                        android:textSize="14sp"
+                        />
+
+                </LinearLayout>
+
 
 
                 <TextView
@@ -88,6 +160,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="38.5dp"
                     android:layout_marginTop="20dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
                     android:gravity="center"
                     android:text="充 值"
                     android:textColor="#fff"
