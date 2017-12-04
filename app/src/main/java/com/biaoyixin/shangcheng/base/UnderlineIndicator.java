@@ -85,7 +85,7 @@ public class UnderlineIndicator extends LinearLayout implements ViewPager.OnPage
         canvas.drawRect(mCacheRect, mBGPaint);
 
 
-        mCacheRect.top = mBGRect.bottom - 10;
+        mCacheRect.top = mBGRect.bottom - CommonUtils.dip2px(getContext(), 1f);
 
         canvas.drawRect(mCacheRect, mIndicatorPaint);
     }

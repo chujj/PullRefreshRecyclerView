@@ -9,12 +9,33 @@
     android:gravity="center_vertical"
     android:background="#fff">
 
-    <ImageView
-        android:id="@+id/avatar"
-        android:layout_width="64dp"
-        android:layout_height="64dp"
-        android:scaleType="centerCrop"/>
 
+    <FrameLayout
+        android:layout_width="64dp"
+        android:layout_height="64dp">
+
+        <ImageView
+            android:id="@+id/avatar"
+            android:layout_width="64dp"
+            android:layout_height="64dp"
+            android:scaleType="centerCrop"/>
+
+
+        <TextView
+            android:id="@+id/avatar_foreground"
+            android:layout_width="64dp"
+            android:layout_height="20dp"
+            android:layout_gravity="bottom"
+            android:gravity="center"
+            android:text="个人中心"
+            android:textSize="12sp"
+            android:textColor="#fff"
+            android:visibility="gone"
+            tools:visibility="visible"
+            android:background="@drawable/user_avanar_subline_bg"
+            />
+
+    </FrameLayout>
 
 
     <LinearLayout
@@ -52,19 +73,17 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginRight="13dp"
             android:layout_marginTop="13dp"
             android:orientation="horizontal">
 
 
             <LinearLayout
                 android:id="@+id/tixian"
-                android:layout_width="80dp"
-                android:layout_height="30dp"
-                android:paddingLeft="14dp"
-                android:paddingRight="14dp"
-                android:paddingTop="5dp"
-                android:paddingBottom="5dp"
+                android:layout_width="0dp"
+                android:layout_height="25dp"
+                android:layout_weight="1"
                 android:gravity="center"
                 android:background="@drawable/trade_home_user_header_btn_bg"
                 >
@@ -82,7 +101,7 @@
                     android:layout_height="wrap_content"
                     android:text="提现"
                     android:textColor="#fff"
-                    android:textSize="14sp"
+                    android:textSize="13sp"
                     />
 
             </LinearLayout>
@@ -90,13 +109,10 @@
 
             <LinearLayout
                 android:id="@+id/chongzhi"
-                android:layout_width="80dp"
-                android:layout_height="30dp"
+                android:layout_width="0dp"
+                android:layout_height="25dp"
+                android:layout_weight="1"
                 android:layout_marginLeft="10dp"
-                android:paddingLeft="14dp"
-                android:paddingRight="14dp"
-                android:paddingTop="5dp"
-                android:paddingBottom="5dp"
                 android:gravity="center"
                 android:background="@drawable/trade_home_user_header_btn_bg"
                 >
@@ -114,7 +130,7 @@
                     android:layout_height="wrap_content"
                     android:text="充值"
                     android:textColor="#fff"
-                    android:textSize="14sp"
+                    android:textSize="13sp"
                     />
 
             </LinearLayout>
@@ -130,7 +146,6 @@
                 tools:text="可提现金额：99427元"
                 android:textColor="#000"
                 android:textSize="16sp"
-                tools:visibility="visible"
                 />
 
         </LinearLayout>

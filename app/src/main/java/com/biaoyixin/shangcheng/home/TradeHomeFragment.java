@@ -64,6 +64,9 @@ public class TradeHomeFragment extends BaseFragment {
     @BindView(R2.id.assets)
     TextView mAssets;
 
+    @BindView(R2.id.avatar_foreground)
+    View mAvatar_foreground;
+
 
     @BindView(R2.id.count_down_layout)
     ViewGroup mCountDownLayout;
@@ -224,6 +227,8 @@ public class TradeHomeFragment extends BaseFragment {
 
 
         ButterKnife.bind(this, view);
+
+        mAvatar_foreground.setVisibility(View.VISIBLE);
 
         setupWebView();
 
