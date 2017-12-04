@@ -66,6 +66,7 @@ public class HomeActivity extends BaseActivity {
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
+        savedInstanceState = null;
         super.onCreate(savedInstanceState);
 
         this.setContentView(R.layout.home_activity);
