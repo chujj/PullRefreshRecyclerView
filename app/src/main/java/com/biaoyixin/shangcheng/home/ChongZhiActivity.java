@@ -553,6 +553,7 @@ public class ChongZhiActivity extends BaseActivity {
 
                                         com.squareup.okhttp.Response response;
                                         GoodsApi.WeChatPayResp wcpr = null;
+                                        String originBody = null;
 
                                         @Override
                                         protected Void doInBackground(Void... params) {
@@ -562,7 +563,8 @@ public class ChongZhiActivity extends BaseActivity {
                                                 Call call = ServerAPI.getInstance().mOKClient.newCall(request);
                                                 response = call.execute();
 
-                                                wcpr = new Gson().fromJson(response.body().string(), GoodsApi.WeChatPayResp.class);
+                                                originBody = response.body().string();
+                                                wcpr = new Gson().fromJson(originBody, GoodsApi.WeChatPayResp.class);
 
                                             } catch (Exception e) {
                                                 ServerAPI.HandlerException(RetrofitError.unexpectedError(f_url, e));
@@ -584,8 +586,32 @@ public class ChongZhiActivity extends BaseActivity {
                                             if (wcpr.code != 0) {
                                                 ServerAPI.handleCodeError(wcpr);
                                             } else {
+
+                                                String url = wcpr.data.gateway;
+                                                try {
+                                                    Map data = (Map) new Gson().fromJson(originBody, Map.class).get("data");
+                                                    for(Object entry : data.keySet()) {
+                                                        if (TextUtils.equals(entry.toString(), "gateway")) {
+
+                                                        } else {
+
+                                                            if (data.get(entry) == null) {
+                                                                continue;
+                                                            }
+
+                                                            if (!url.contains("?")) {
+                                                                url += "?" + entry.toString() + "=" + URLEncoder.encode(data.get(entry).toString());
+                                                            } else {
+                                                                url += "&" + entry.toString() + "=" + URLEncoder.encode(data.get(entry).toString());
+                                                            }
+                                                        }
+                                                    }
+                                                } catch (Exception e) {
+
+                                                }
+
                                                 needShowPayResultPromt = true;
-                                                Uri uri = Uri.parse(wcpr.data.gateway);
+                                                Uri uri = Uri.parse(url);
                                                 Intent intent = new Intent(Intent.ACTION_VIEW, uri);
                                                 ChongZhiActivity.this.startActivity(intent);
                                             }
