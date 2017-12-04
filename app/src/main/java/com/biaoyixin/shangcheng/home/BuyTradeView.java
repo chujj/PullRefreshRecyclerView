@@ -147,7 +147,7 @@ public class BuyTradeView extends RelativeLayout {
                     mUpdownSize.getChildAt(0).performClick();
                 }
 
-                mNumPromt.setText("最大下手单数" + mUIInfo.maxTrades + "手"/*mUIInfo.tradeUnit*/);
+                mNumPromt.setText("最大下手单数" + mUIInfo.maxTrades + mUIInfo.tradeUnit);
 
                 mNum.setText("" + mNumCount);
                 return null;
