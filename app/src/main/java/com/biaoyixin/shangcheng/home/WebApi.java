@@ -5,7 +5,6 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.Drawable;
 import android.text.TextUtils;
-import android.util.Log;
 import android.webkit.JavascriptInterface;
 import android.widget.Toast;
 
@@ -457,7 +456,9 @@ public class WebApi {
         public float newPrice; // ": 352,
         public int dm; // ": 1,
 
+        @SerializedName("d15")
         public D2 d2;
+        @SerializedName("d60")
         public D3 d3;
         public D4 d4;
     }
