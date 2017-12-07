@@ -597,8 +597,8 @@ public class TixianActivity extends BaseActivity {
         final String realname = mCardOwnerName.getText().toString(); // 开户名
         final String id_card	= mCardOwnerId.getText().toString(); // 是	string	身份证
         final String bank_account = mCardId.getText().toString()	; // 是	string	银行账户
-        final String bank_province = mSelectedProvince == null ? "" : mSelectedProvince.code; // 是	string	省份
-        final String bank_city  = mSelectedCity == null ? "" : mSelectedCity.code; // 	是	string	城市
+        final String bank_province = mSelectedProvince == null ? "" : mSelectedProvince.name; // 是	string	省份
+        final String bank_city  = mSelectedCity == null ? "" : mSelectedCity.name; // 	是	string	城市
         final String bank_code = mSelectedBank == null ? "" : mSelectedBank.bankCode; // 	是	string	银行的编码
         final String sms_code = mSMSCode.getText().toString() ; // 	是	string	提现短信验证码
         final String money = mTiXianPrice.getText().toString(); // 	是	string	金额（元）
