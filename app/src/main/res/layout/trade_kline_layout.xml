@@ -16,6 +16,7 @@
         app:xLabelSize="8dp"
         app:yLabelSize="8sp"
         app:gridColor="#6C6C6c"
+        app:neutralColor="#e05959"
         />
 
 </LinearLayout>
