@@ -261,10 +261,10 @@ public class CandleDrawing implements IDrawing {
         float startY = top + singleHeight + gap;
         String[] strs = new String [] {
                 entry.getXLabel(),
-                "开盘价:" + entry.getOpen(),
-                "最高价:" + entry.getHigh(),
-                "最低价:" + entry.getLow(),
-                "收盘价:" + entry.getClose(),
+                "开盘价:" + trimFloat(entry.getOpen()),
+                "最高价:" + trimFloat(entry.getHigh()),
+                "最低价:" + trimFloat(entry.getLow()),
+                "收盘价:" + trimFloat(entry.getClose()),
         };
 
         for (int i = 0; i < strs.length; i++) {
@@ -274,6 +274,25 @@ public class CandleDrawing implements IDrawing {
 
     }
 
+
+    public static String trimFloat(float value) {
+        long _tmp = (long) (value * 100);
+        String str = Long.toString(_tmp / 100);;
+
+        _tmp = _tmp % 100;
+        long _shiwei = _tmp / 10;
+        long _baiwei = _tmp % 10;
+        if (_baiwei > 0 || _shiwei > 0) {
+            str += ".";
+            if (_baiwei <= 0) {
+                str += Long.toString(_shiwei);
+            } else {
+                str += Long.toString(_shiwei) + Long.toString(_baiwei);
+            }
+        }
+
+        return str;
+    }
 
     private void drawCenterText(Canvas canves ,String text, float left, float top, int width, Paint paint) {
         canves.drawText(text, left + ((width - paint.measureText(text)) / 2) , top, paint);

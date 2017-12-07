@@ -58,4 +58,23 @@ public class CommonUtils {
             return 0;
         }
     }
+
+    public static String trimFloat(float value) {
+        long _tmp = (long) (value * 100);
+        String str = Long.toString(_tmp / 100);;
+
+        _tmp = _tmp % 100;
+        long _shiwei = _tmp / 10;
+        long _baiwei = _tmp % 10;
+        if (_baiwei > 0 || _shiwei > 0) {
+            str += ".";
+            if (_baiwei <= 0) {
+                str += Long.toString(_shiwei);
+            } else {
+                str += Long.toString(_shiwei) + Long.toString(_baiwei);
+            }
+        }
+
+        return str;
+    }
 }

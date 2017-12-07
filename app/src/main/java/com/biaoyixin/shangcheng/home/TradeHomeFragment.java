@@ -530,7 +530,7 @@ public class TradeHomeFragment extends BaseFragment {
 
                         for (GoodsApi.Good good : Data.sData.goods) {
                             if (TextUtils.equals(good.label,label_name)) {
-                                price.setText("" + good.newPrice);
+                                price.setText(CommonUtils.trimFloat(good.newPrice));
                                 price.setTextColor( (good.newPrice - good.open) > 0 ? 0xFFF35833 : 0xFF2CB545);
                             }
                         }

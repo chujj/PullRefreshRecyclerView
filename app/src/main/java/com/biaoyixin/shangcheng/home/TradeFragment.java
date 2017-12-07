@@ -223,23 +223,23 @@ public class TradeFragment extends BaseFragment {
                     if (TextUtils.equals(Data.sData.goods.get(i).label, mKey)) {
 
                         {
-                            String str = String.format("今开：%.2f", Data.sData.goods.get(i).open);
+                            String str = "今开：" + CommonUtils.trimFloat(Data.sData.goods.get(i).open);
                             SpannableString ss = new SpannableString(str);
-                            ss.setSpan(new ForegroundColorSpan(0xff333333), "今开：".length(), str.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+                            ss.setSpan(new ForegroundColorSpan(0xff333333), 3, str.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
                             mOpenText.setText(ss);
                         }
 
                         {
-                            String str = String.format("最高：%.2f", Data.sData.goods.get(i).high);
+                            String str = "最高：" + CommonUtils.trimFloat(Data.sData.goods.get(i).high);
                             SpannableString ss = new SpannableString(str);
-                            ss.setSpan(new ForegroundColorSpan(0xff333333), "今开：".length(), str.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+                            ss.setSpan(new ForegroundColorSpan(0xff333333), 3, str.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
                             mHighText.setText(ss);
                         }
 
                         {
-                            String str = String.format("最低：%.2f", Data.sData.goods.get(i).low);
+                            String str = "最低：" + CommonUtils.trimFloat(Data.sData.goods.get(i).low);
                             SpannableString ss = new SpannableString(str);
-                            ss.setSpan(new ForegroundColorSpan(0xff333333), "今开：".length(), str.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+                            ss.setSpan(new ForegroundColorSpan(0xff333333), 3, str.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
                             mLowText.setText(ss);
                         }
 
