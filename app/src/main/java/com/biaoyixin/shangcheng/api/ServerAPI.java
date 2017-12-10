@@ -1,6 +1,8 @@
 package com.biaoyixin.shangcheng.api;
 
 import android.content.Intent;
+import android.os.Handler;
+import android.os.Looper;
 import android.os.Process;
 import android.text.TextUtils;
 
@@ -79,6 +81,14 @@ public class ServerAPI {
                 }
 
                 sInstance = null;
+
+
+                new Handler(Looper.getMainLooper()).post(new Runnable() {
+                    @Override
+                    public void run() {
+                        ToastHelper.showToast("已为您重新准备网络环境，请退出重试");
+                    }
+                });
 
             }
         };
