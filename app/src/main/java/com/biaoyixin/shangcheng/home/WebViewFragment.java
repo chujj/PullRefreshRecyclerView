@@ -11,7 +11,6 @@ import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
-import com.biaoyixin.shangcheng.Consts;
 import com.biaoyixin.shangcheng.R;
 import com.biaoyixin.shangcheng.R2;
 import com.biaoyixin.shangcheng.account.AccountHelper;
@@ -91,12 +90,12 @@ public class WebViewFragment extends BaseFragment {
 
 
 
-        String url = Consts.HOST + "#/invitation";
+        String url = ServerAPI.getHost() + "#/invitation";
 //        url = "http://192.168.43.242:9004/#/invitation";
         String domian = URI.create(url).getHost();
 
 
-        List<HttpCookie> cookies = AccountHelper.getCookieStore().get(URI.create(ServerAPI.HOST));
+        List<HttpCookie> cookies = AccountHelper.getCookieStore().get(URI.create(ServerAPI.getHost()));
         CookieManager cookieManager = CookieManager.getInstance();
         cookieManager.removeAllCookie();
         for(HttpCookie cookie : cookies) {

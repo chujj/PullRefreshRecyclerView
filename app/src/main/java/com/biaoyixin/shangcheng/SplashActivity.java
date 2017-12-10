@@ -6,7 +6,10 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
+import android.text.TextUtils;
 
+import com.biaoyixin.shangcheng.api.ServerAPI;
+import com.biaoyixin.shangcheng.base.PreferencesUtil;
 import com.biaoyixin.shangcheng.home.HomeActivity;
 import com.biaoyixin.shangcheng.login.AccountManager;
 import com.biaoyixin.shangcheng.login.LoginActivity;
@@ -27,6 +30,10 @@ public class SplashActivity extends AppCompatActivity {
                 Message.obtain(mHandler, AccountManager.isLogin() ? 0x13d : 0x14d),
                 1000);
 
+
+        if (TextUtils.isEmpty(PreferencesUtil.getString(this, ServerAPI.BACKUP_DOMAIN, ""))) {
+            ServerAPI.fetchDomain(false);
+        }
     }
 
     private void initHandler() {
