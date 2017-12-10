@@ -27,7 +27,7 @@ public class AccountManager {
     private static Gson sGson = new Gson();
 
     public static boolean isLogin() {
-        List<HttpCookie> cookie = AccountHelper.getCookieStore().get(URI.create(ServerAPI.HOST + LoginApi.LOGIN_PATH));
+        List<HttpCookie> cookie = AccountHelper.getCookieStore().get(URI.create(ServerAPI.getHost() + LoginApi.LOGIN_PATH));
 
         String userId = getAccount().id;
         return cookie.size() > 0 && !TextUtils.isEmpty(userId);

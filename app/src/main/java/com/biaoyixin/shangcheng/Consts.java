@@ -8,7 +8,7 @@ import android.os.Message;
 public class Consts {
 
 
-    public final static String HOST = BuildConfig.OnlineServer ? "http://time.jhhbkj.cn/" : "http://yunpan.168zhibo.cn/";
+    public final static String HOST = BuildConfig.OnlineServer ? "http://ymx.byx666.com/" : "http://yunpan.168zhibo.cn/";
 //    public static final String HOST = ;
 
     public final static int BoardCast_PriceMsg = 0x13d;

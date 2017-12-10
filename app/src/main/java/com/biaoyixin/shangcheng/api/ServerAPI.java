@@ -2,11 +2,14 @@ package com.biaoyixin.shangcheng.api;
 
 import android.content.Intent;
 import android.os.Process;
+import android.text.TextUtils;
 
 import com.biaoyixin.shangcheng.Consts;
 import com.biaoyixin.shangcheng.account.AccountHelper;
+import com.biaoyixin.shangcheng.account.PersistentCookieStore;
 import com.biaoyixin.shangcheng.base.BaseApp;
 import com.biaoyixin.shangcheng.base.CommonUtils;
+import com.biaoyixin.shangcheng.base.PreferencesUtil;
 import com.biaoyixin.shangcheng.base.ToastHelper;
 import com.biaoyixin.shangcheng.home.ConfirmPwdActivity;
 import com.biaoyixin.shangcheng.home.PasswordSetupActivity;
@@ -16,11 +19,17 @@ import com.biaoyixin.shangcheng.model.BaseModel;
 import com.facebook.stetho.okhttp.StethoInterceptor;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.squareup.okhttp.Call;
 import com.squareup.okhttp.OkHttpClient;
+import com.squareup.okhttp.Request;
+import com.squareup.okhttp.Response;
 
 import java.net.CookieManager;
 import java.net.CookiePolicy;
+import java.net.HttpCookie;
+import java.net.URI;
 import java.util.HashMap;
+import java.util.List;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ThreadFactory;
 import java.util.concurrent.TimeUnit;
@@ -34,6 +43,8 @@ import retrofit.converter.GsonConverter;
 
 public class ServerAPI {
     //    public final static String HOST = "http://m.weixl.org/xlcl-counselor-api";
+    private final static String USE_BACKUP_DOMAIN = "use_backup_domain";
+    public final static String BACKUP_DOMAIN = "backup_domain";
     public final static String HOST = Consts.HOST; // "http://time.168zhibo.cn/";
     public final static String HOST_DOMAIN = "168zhibo.cn";
     private static ServerAPI sInstance;
@@ -42,6 +53,88 @@ public class ServerAPI {
     private RestAdapter mRestAdapter;
 
     public OkHttpClient mOKClient;
+
+
+    public static String getHost() {
+        String _host = HOST;
+        if (PreferencesUtil.getBoolean(BaseApp.getApp(), USE_BACKUP_DOMAIN, false)) {
+            _host = PreferencesUtil.getString(BaseApp.getApp(), BACKUP_DOMAIN);
+        }
+        return _host;
+    }
+
+
+    public static void fetchDomain(final boolean shouldSwitch) {
+        final String old_host = getHost();
+        final Runnable switchDomain = new Runnable() {
+            @Override
+            public void run() {
+                String new_domain = getHost();
+                PersistentCookieStore pcs = AccountHelper.getCookieStore();
+                List<HttpCookie> cookies = pcs.get(URI.create(old_host));
+
+                for (HttpCookie cookie: cookies) {
+                    HttpCookie injectCookie = new HttpCookie(cookie.getName(), cookie.getValue());
+                    pcs.add(URI.create(new_domain), injectCookie);
+                }
+
+                sInstance = null;
+
+            }
+        };
+
+
+        boolean useBackup = PreferencesUtil.getBoolean(BaseApp.getApp(), USE_BACKUP_DOMAIN, false);
+        boolean hasBackup = !TextUtils.isEmpty(PreferencesUtil.getString(BaseApp.getApp(), BACKUP_DOMAIN, ""));
+        if (shouldSwitch && !useBackup && hasBackup) {
+            PreferencesUtil.putBoolean(BaseApp.getApp(), USE_BACKUP_DOMAIN, true);
+            switchDomain.run();
+            return;
+        }
+
+
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    Request request = new Request.Builder().url(HOST + "dynamicDomain").get().build();
+                    OkHttpClient client = new OkHttpClient();
+                    Call call = client.newCall(request);
+                    Response response = call.execute();
+                    if (response.isSuccessful()) {
+                        DynamicResp resp = new Gson().fromJson(response.body().string(), DynamicResp.class);
+
+                        if (resp.code == 0 && !TextUtils.isEmpty(resp.data)) {
+                            String _domainFormat = resp.data;
+                            if (!_domainFormat.startsWith("http://")) {
+                                _domainFormat = "http://" + _domainFormat;
+                            }
+                            if (!_domainFormat.endsWith("/")) {
+                                _domainFormat = _domainFormat + "/";
+                            }
+
+                            PreferencesUtil.putString(BaseApp.getApp(), BACKUP_DOMAIN, _domainFormat);
+
+
+                            if (shouldSwitch) {
+                                PreferencesUtil.putBoolean(BaseApp.getApp(), USE_BACKUP_DOMAIN, true);
+                                switchDomain.run();
+                            }
+                        }
+
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        }).start();
+    }
+
+
+    public static class DynamicResp extends BaseModel {
+        public String data;
+    }
+
 
     public static synchronized <T> T cacheInsterface(Class<T> aInterface) {
         return getInstance().getCachedInterface(aInterface.getName(),
@@ -84,7 +177,7 @@ public class ServerAPI {
                 .create();
 
         mOKClient = createDumpContentOKClient();
-        mRestAdapter = new RestAdapter.Builder().setEndpoint(HOST)
+        mRestAdapter = new RestAdapter.Builder().setEndpoint(getHost())
                 .setLogLevel(CommonUtils.isDebugBuild() ? LogLevel.FULL : LogLevel.NONE)
                 // .setClient(new TrustAllSSLConnectionClient())
                 .setConverter(new GsonConverter(gson))
@@ -160,4 +253,5 @@ public class ServerAPI {
             ToastHelper.showToast(baseModel.message);
         }
     }
+
 }

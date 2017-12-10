@@ -441,7 +441,7 @@ public class TradeHomeFragment extends BaseFragment {
 
 
 
-        mWSWebview.loadUrl(Consts.HOST + "customer/futures_trade/internal");
+        mWSWebview.loadUrl(ServerAPI.getHost() + "customer/futures_trade/internal");
 //        mWSWebview.loadUrl("http://192.168.43.242:9004/customer/futures_trade/internal");
 //        mWSWebview.loadUrl("http://192.168.43.124:8000/test.html");
     }
@@ -465,7 +465,7 @@ public class TradeHomeFragment extends BaseFragment {
 
             @Override
             public void failure(RetrofitError error) {
-
+                ServerAPI.fetchDomain(true);
             }
         });
     }
