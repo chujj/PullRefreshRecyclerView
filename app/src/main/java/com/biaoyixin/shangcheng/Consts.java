@@ -9,7 +9,7 @@ public class Consts {
 
 
 
-    public final static String HOST = BuildConfig.OnlineServer ? "http://time.aofeng666.com/" : "http://time.168zhibo.cn/";
+    public final static String HOST = BuildConfig.OnlineServer ? "http://time.byx666.com/" : "http://time.168zhibo.cn/";
 
 //    public static final String HOST = ;
 
