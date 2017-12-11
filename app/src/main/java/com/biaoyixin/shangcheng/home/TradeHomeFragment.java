@@ -9,7 +9,10 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.text.SpannableString;
+import android.text.Spanned;
 import android.text.TextUtils;
+import android.text.style.ForegroundColorSpan;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -153,7 +156,12 @@ public class TradeHomeFragment extends BaseFragment {
 
     public void onEventMainThread(AccountManager.Account account) {
         Glide.with(TradeHomeFragment.this).load(account.avatar).into(mAvatar);
-        mAssets.setText((TextUtils.isEmpty(account.asset) ? 0 : account.asset) + "元");
+
+
+        String str = TextUtils.isEmpty(account.asset) ? "0" : account.asset;
+        SpannableString ss = new SpannableString(str + "元");
+        ss.setSpan(new ForegroundColorSpan(0xffeb7d12), 0, str.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+        mAssets.setText(ss);
     }
 
 
