@@ -30,7 +30,7 @@ public class AccountManager {
         List<HttpCookie> cookie = AccountHelper.getCookieStore().get(URI.create(ServerAPI.getHost() + LoginApi.LOGIN_PATH));
 
         String userId = getAccount().id;
-        return cookie.size() > 0 && !TextUtils.isEmpty(userId);
+        return cookie.size() > 0 && !TextUtils.isEmpty(userId) && Integer.parseInt(userId) != 0;
     }
 
     private static Account sAccount;

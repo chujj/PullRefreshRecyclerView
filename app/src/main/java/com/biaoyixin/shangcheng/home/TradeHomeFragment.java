@@ -673,10 +673,10 @@ public class TradeHomeFragment extends BaseFragment {
                     }
 
 
-                    if (resp.data.id != 0 ) {
+//                    if (resp.data.id != 0 ) {
                         changede = true;
                         account.id = resp.data.id + "";
-                    }
+//                    }
 
 
                     if (changede) {
