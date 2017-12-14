@@ -6,6 +6,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
@@ -672,6 +673,10 @@ public class ChongZhiActivity extends BaseActivity {
             public void run() {
                 count++;
                 if (count < 2) {
+                    return;
+                }
+
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1 && ChongZhiActivity.this.isDestroyed()) {
                     return;
                 }
 
