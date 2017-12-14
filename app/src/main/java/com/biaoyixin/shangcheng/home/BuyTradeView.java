@@ -180,6 +180,14 @@ public class BuyTradeView extends RelativeLayout {
                     if (resp.code != 0) {
                         ServerAPI.handleCodeError(resp);
                     } else {
+                        if (resp.data.chipPrice == null) {
+                            SettingActivity.clearAccount();
+                            close();
+                            return;
+                        }
+
+
+
                         mUIInfo = resp.data;
                         ButterKnife.bind(BuyTradeView.this, BuyTradeView.this);
                         mUIUpdater.run("init");
