@@ -11,6 +11,7 @@ import com.biaoyixin.shangcheng.api.user.UserApi;
 import com.biaoyixin.shangcheng.base.CommonUtils;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -98,7 +99,7 @@ public class MessagesAdapter extends BaseAdapter {
     public void getData() {
         mInited = true;
         mNow = MessagesCenter.sNow;
-        mMessages = MessagesCenter.sMessages;
+        mMessages = new ArrayList<>(MessagesCenter.sMessages);
         if (mMessages.size() == 0) {
             UserApi.PushItem pushItem = new UserApi.PushItem();
             pushItem._local_type = TYPE_EMPTY;

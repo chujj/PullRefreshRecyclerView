@@ -83,6 +83,7 @@ public class HomeActivity extends BaseActivity {
         checkTeachPages();
 
         checkNotice();
+
     }
 
     @Override
@@ -92,6 +93,8 @@ public class HomeActivity extends BaseActivity {
         if (needShowUpgradeDialog) {
             showUpgradeDialog();
         }
+
+        MessagesCenter.fetchData(false, true);
     }
 
 
