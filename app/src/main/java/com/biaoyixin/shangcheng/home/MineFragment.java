@@ -49,7 +49,7 @@ public class MineFragment extends BaseFragment {
     TextView mAccount;
 
 
-    @BindViews({R2.id.entry_1, R2.id.entry_2, R2.id.entry_3, R2.id.entry_4, R2.id.entry_5, R2.id.entry_6,  R2.id.entry_7,  R2.id.entry_8, R2.id.entry_9})
+    @BindViews({R2.id.entry_1, R2.id.entry_2, R2.id.entry_3, R2.id.entry_4, R2.id.entry_5, R2.id.entry_6,  R2.id.entry_7,  R2.id.entry_8, R2.id.entry_9, R2.id.entry_10})
     View[] mEntrys;
 
     @Nullable
@@ -264,6 +264,18 @@ public class MineFragment extends BaseFragment {
                     },
                     R.drawable.mine_fragment_entry_jinjiren
             });
+            add(new Object[] {
+                    "消息中心",
+                    new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            Intent it = new Intent(v.getContext(), MessagesActivity.class);
+                            v.getContext().startActivity(it);
+                        }
+                    },
+                    R.drawable.mine_fragment_entry_jinjiren
+            });
+
         }
     };
 
