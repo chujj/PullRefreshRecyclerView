@@ -709,7 +709,7 @@ public class ChongZhiActivity extends BaseActivity {
 
 //                        fee = mInMoneyUIInfo.cashInFee;
                         String prefix = "每笔充值收取 ";
-                        String subfix = " 的手续费";
+                        String subfix = " 的手续费，充值1000元以上建议使用银联直付(推荐)";
                         SpannableString ss = new SpannableString(prefix + fee + subfix);
                         ss.setSpan(new ForegroundColorSpan(0xffed5631),
                                 prefix.length(),
