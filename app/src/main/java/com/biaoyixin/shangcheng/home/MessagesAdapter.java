@@ -1,5 +1,6 @@
 package com.biaoyixin.shangcheng.home;
 
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -56,6 +57,11 @@ public class MessagesAdapter extends BaseAdapter {
     }
 
     @Override
+    public int getViewTypeCount() {
+        return 3;
+    }
+
+    @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         int type = getItemViewType(position);
         switch (type) {
@@ -65,8 +71,23 @@ public class MessagesAdapter extends BaseAdapter {
             case TYPE_EMPTY:
                 convertView = getViewEmpty(position, convertView, parent);
                 break;
+            case TYPE_DIVIDER:
+                convertView = getViewDivider(position, convertView, parent);
+                break;
             default:
         }
+        return convertView;
+    }
+
+    private View getViewDivider(int position, View convertView, ViewGroup parent) {
+        if (convertView == null) {
+            convertView = LayoutInflater.from(parent.getContext()).inflate(R.layout.message_list_item_divider, parent, false);
+
+        }
+        TextView tv = CommonUtils.findView(convertView, R.id.text);
+        UserApi.PushItem item = ((UserApi.PushItem)getItem(position));
+        tv.setText(item.message);
+
         return convertView;
     }
 
@@ -99,12 +120,50 @@ public class MessagesAdapter extends BaseAdapter {
     public void getData() {
         mInited = true;
         mNow = MessagesCenter.sNow;
-        mMessages = new ArrayList<>(MessagesCenter.sMessages);
-        if (mMessages.size() == 0) {
+        List<UserApi.PushItem> _temp = new ArrayList<>(MessagesCenter.sMessages);
+        if (_temp .size() == 0) {
             UserApi.PushItem pushItem = new UserApi.PushItem();
             pushItem._local_type = TYPE_EMPTY;
-            mMessages.add(pushItem);
+            _temp .add(pushItem);
+        } else {
+            boolean hasToday = false;
+            boolean hasBefor = false;
+            int lastTodayPos = 0;
+
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+            String todayf = sdf.format(new Date(System.currentTimeMillis()));
+            for (int i = 0; i < _temp .size(); i++) {
+                UserApi.PushItem item = _temp .get(i);
+
+                if (TextUtils.equals(sdf.format(item.gmtCreated), todayf )) {
+                    hasToday = true;
+                    lastTodayPos = i;
+                } else {
+                    hasBefor = true;
+                }
+            }
+
+
+            if (hasBefor) {
+                UserApi.PushItem before = new UserApi.PushItem();
+                before ._local_type = TYPE_DIVIDER;
+                before .message = "更早";
+                _temp .add(lastTodayPos + (hasToday ? 1 : 0), before);
+            }
+
+            if (hasToday) {
+                UserApi.PushItem today = new UserApi.PushItem();
+                today._local_type = TYPE_DIVIDER;
+                today.message = "今日";
+                _temp .add(0, today);
+            }
+
+
+
         }
+
+
+        mMessages  = _temp;
     }
 
 
