@@ -84,6 +84,11 @@ public class UserApi {
 
         @GET("/notice/PAY")
         public void payNotice(Callback<NoticeResp> cb);
+
+        @FormUrlEncoded
+        @POST("/complain")
+        public void feedback(@Field("content") String content, Callback<BaseModel> cb);
+
     }
 
 

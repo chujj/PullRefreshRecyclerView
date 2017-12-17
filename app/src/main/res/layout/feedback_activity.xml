@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#1F1F1F">
+
+
+
+    <include layout="@layout/topbar_layout"/>
+
+
+
+    <EditText
+        android:id="@+id/edittext"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="12dp"
+        android:layout_marginRight="12dp"
+        android:layout_marginTop="15dp"
+        android:padding="8dp"
+        android:minHeight="220dp"
+        android:hint="您的意见是我们进度的动力！"
+        android:background="@drawable/feedback_edittext_bg"
+        android:gravity="left|top"
+        android:textColorHint="#999"
+        android:textSize="14sp"
+        android:textColor="#fff"
+        android:backgroundTint="#404040"
+        />
+
+
+
+    <TextView
+        android:id="@+id/confirm"
+        android:layout_width="match_parent"
+        android:layout_marginLeft="12dp"
+        android:layout_marginRight="12dp"
+        android:layout_marginBottom="53.5dp"
+        android:layout_height="38.5dp"
+        android:layout_marginTop="20dp"
+        android:gravity="center"
+        android:text="提 交"
+        android:textColor="#fff"
+        android:textSize="16sp"
+        android:background="@drawable/round_btn_bg"
+        />
+
+
+
+
+
+</LinearLayout>

@@ -277,6 +277,16 @@
                 android:id="@+id/entry_6"
                 layout="@layout/mine_entry_layout"
                 />
+            <View
+                android:layout_width="10dp"
+                android:layout_height="1dp"
+                android:background="#FF444444"/>
+
+            <include
+                android:id="@+id/entry_7"
+                layout="@layout/mine_entry_layout"
+                />
+
 
             <!-- -->
 
