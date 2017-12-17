@@ -88,6 +88,11 @@ public class UserApi {
 
         @GET("/shop/coupon_list")
         public void getYouHuiQuanV2(Callback<YHQ2Resp> cb);
+
+
+        @FormUrlEncoded
+        @POST("/complain")
+        public void feedback(@Field("content") String content, Callback<BaseModel> cb);
     }
 
 

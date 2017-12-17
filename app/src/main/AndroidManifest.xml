@@ -126,6 +126,9 @@
 
         <activity android:name=".home.BrokerRegistActivity"/>
 
+
+        <activity android:name=".home.FeedbackActivity"/>
+
     </application>
 
 

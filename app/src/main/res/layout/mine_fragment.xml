@@ -294,6 +294,14 @@
                 android:id="@+id/entry_8"
                 layout="@layout/mine_entry_layout"
                 />
+            <View
+                android:layout_width="10dp"
+                android:layout_height="1dp"
+                android:background="#fff"/>
+            <include
+                android:id="@+id/entry_9"
+                layout="@layout/mine_entry_layout"
+                />
 
 
 
