@@ -58,6 +58,15 @@ public class ItemDetailActivity extends BaseActivity {
 
 
         loadData();
+
+
+        { // block buy button
+            TextView  buyButton = (TextView) findViewById(R.id.buy);
+            buyButton.setBackgroundColor(0xff999999);
+            buyButton.setTextColor(0xff000000);
+            buyButton.setText("暂时无货");
+            buyButton.setEnabled(false);
+        }
     }
 
     private void loadData() {
