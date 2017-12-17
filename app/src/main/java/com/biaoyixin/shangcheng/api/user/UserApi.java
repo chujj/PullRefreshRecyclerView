@@ -89,6 +89,12 @@ public class UserApi {
         @POST("/complain")
         public void feedback(@Field("content") String content, Callback<BaseModel> cb);
 
+
+
+
+        @GET("/customer/myPush")
+        public void getPush(Callback<PushResp> cb);
+
     }
 
 
@@ -234,5 +240,22 @@ public class UserApi {
     }
     public static class BrokerInfo extends BaseModel {
         public long id;
+    }
+
+
+    public static class PushResp extends BaseModel {
+        public PushData data;
+    }
+
+    public static class PushData extends BaseModel {
+        public long now;
+        public List<PushItem> pushList;
+    }
+
+    public static class PushItem extends BaseModel {
+        public long id;
+        public long gmtCreated;
+
+        public int _local_type = 0;
     }
 }

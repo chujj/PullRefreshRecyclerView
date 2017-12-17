@@ -105,6 +105,9 @@
         <activity android:name=".home.FeedbackActivity"/>
 
 
+
+        <activity android:name=".home.MessagesActivity"/>
+
     </application>
 
 
