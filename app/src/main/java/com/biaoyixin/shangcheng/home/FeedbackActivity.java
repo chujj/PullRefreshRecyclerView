@@ -63,8 +63,9 @@ public class FeedbackActivity extends BaseActivity {
             return ;
         }
 
+        content = ("意见反馈@" + content);
         UserApi.IUser iUser = ServerAPI.getInterface(UserApi.IUser.class);
-        iUser.feedback(content, new Callback<BaseModel>() {
+        iUser.feedback(content, "1000", new Callback<BaseModel>() {
             @Override
             public void success(BaseModel resp, Response response) {
                 if (resp.code != 0) {
