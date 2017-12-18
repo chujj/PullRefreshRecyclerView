@@ -1,6 +1,7 @@
 package com.biaoyixin.shangcheng.home;
 
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.View;
@@ -82,6 +83,10 @@ public class BrokerActivity extends BaseActivity {
     }
 
     private void refreshUI(BrokerApi.Broker data) {
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1 && BrokerActivity.this.isDestroyed()) {
+            return;
+        }
 
         ButterKnife.bind(this, this);
 
